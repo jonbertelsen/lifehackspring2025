@@ -1,0 +1,14 @@
+h1 {
+
+    font-size: 3rem;
+
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-evenly;
+
+
+}
