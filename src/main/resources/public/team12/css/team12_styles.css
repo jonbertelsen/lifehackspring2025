@@ -1,0 +1,134 @@
+/* Stylesheet for the application */
+
+h1, h2, h3, h4, h5, h6, p {
+    color: #c3c3c3;
+}
+
+/* For editing purposes, delete when done */
+header {
+    border: solid red 1px;
+    padding: 5px;
+}
+
+main {
+    border: solid white 1px;
+    padding: 5px;
+}
+
+footer {
+    border: solid orange 1px;
+    padding: 5px;
+
+}
+
+
+.bg-custom {
+    background-color: #1e2363;
+}
+
+.text-custom {
+    color:#c3c0d6;
+}
+
+.footer-app {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #101a4d;
+    color: #c3c0d6;
+    padding: 10px;
+}
+
+.footer-btn {
+    background-color: #c3c0d6; /* Same as other buttons */
+    color: #c3c0d6;
+    padding: 15px 15px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* Removes underline */
+    display: inline-block;
+}
+
+.footer-btn:hover {
+    background-color: #a0a0c8; /* Slightly darker color on hover */
+}
+
+.header-app {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #101a4d;
+    color: white;
+    padding: 10px;
+}
+
+/* *** body styles ***/
+body {
+    background-color: #323a9e;
+    font-family: "Times New Roman", Times, serif;
+}
+
+/* Stylesheet for the application */
+
+.logo {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    max-width: 150px;
+}
+
+/* container styles */
+
+.page-container {
+    font-family: "Times New Roman", Times, serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #323a9e;
+}
+
+/**** login styles *****/
+.generic-form{
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+.generic-form [type=text], .generic-form [type=password] {
+    padding: 10px;
+    font-size: 1.2rem;
+    border: #c3c0d6;
+    color: #c3c0d6;
+}
+
+.generic-form button {
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #535ce1;
+    color: white;
+    border: #c3c0d6;
+}
+
+/**** create and logout styles *****/
+.logout-create {
+    color: white;
+
+}
+

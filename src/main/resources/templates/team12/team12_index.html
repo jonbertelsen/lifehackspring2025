@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<title>Newsletters</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../../public/team12/css/team12_styles.css" th:href="@{/team12/css/team12_styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="page-container">
+    <header> this is my header
+        <h1>Wellcome to Sleep tracker</h1>
+        <a href="team12_index.html" th:href="@{/}">
+            <img class="logo" src="../public/images/SleepTracker_logo.png" alt="Sleep Tracker Logo">
+        </a>
+    </header>
+
+    <main>
+        <p> this is my main</p>
+
+        <form class="generic-form" method="post">
+            <input type="text" name="username" placeholder="Enter username"/>
+            <input type="password" name="password" placeholder="Enter password"/>
+
+            <button type="submit" formaction="/login">Get access to your sleep track</button>
+
+            <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
+        </form>
+    </main>
+
+    <footer>
+        <p> this is my footer</p>
+        <div>
+            <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/logout}" class="logout-create"> Log out </a>
+            <span th:if="${session.currentUser != null}"> |  </span>
+            <a href="createuser.html" th:href="@{/createuser}" class="logout-create">Create user </a>
+        </div>
+    </footer>
+
+</div>
+</body>
+</html>

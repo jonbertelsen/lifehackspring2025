@@ -11,6 +11,6 @@ public class TeamTeacherController {
     };
 
     private static void teamTeacherFrontHome(@NotNull Context ctx) {
-        ctx.render("team-teacher/index.html");
+        ctx.render("team-teacher/team12_index.html");
     }
 }
