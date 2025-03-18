@@ -5,22 +5,14 @@ import java.util.Date;
 public class WorkoutLog {
     private int id;
     private String email;
-    private int typeId;
+    private int type_id;
     private int duration;
     private Date date;
 
-    public WorkoutLog(int id, String email, int typeId, int duration, Date date) {
+    public WorkoutLog(int id, String email, int type_id, int duration, Date date) {
         this.id = id;
         this.email = email;
-        this.typeId = typeId;
-        this.duration = duration;
-        this.date = date;
-    }
-
-    public WorkoutLog(String email, int typeId, int duration, Date date) {
-        this.id = id;
-        this.email = email;
-        this.typeId = typeId;
+        this.type_id = type_id;
         this.duration = duration;
         this.date = date;
     }
@@ -33,8 +25,8 @@ public class WorkoutLog {
         return email;
     }
 
-    public int getTypeId() {
-        return typeId;
+    public int getType_id() {
+        return type_id;
     }
 
     public int getDuration() {
@@ -50,7 +42,7 @@ public class WorkoutLog {
         return "WorkoutLog{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
-                ", typeId=" + typeId +
+                ", type_id=" + type_id +
                 ", duration=" + duration +
                 ", date=" + date +
                 '}';
