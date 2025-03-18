@@ -12,7 +12,7 @@ public class TeamTeacherMapper {
     public static List<Integer> getKeyWordIDs(String input, ConnectionPool connectionPool){
         List<Integer> keywordIDs = new ArrayList<>();
         String[] words = input.toLowerCase().split("\\s+");
-        String query = "SELECT keyword FROM keywords";
+        String query = "SELECT keyword, keyword_id FROM keywords";
         try (Connection conn = connectionPool.getConnection()){
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery();
@@ -31,5 +31,7 @@ public class TeamTeacherMapper {
         }
         return keywordIDs;
     }
+
+
 
 }
