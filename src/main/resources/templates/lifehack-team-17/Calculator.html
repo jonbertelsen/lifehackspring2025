@@ -5,6 +5,11 @@
     <title>Calculator</title>
 </head>
 <body>
-delete later
+/*This here should allow for a dropdown list with all our soda's from the database*/
+<option th:each="soda : ${sodas}"
+        th:value="${soda.name}"
+        th:text="${soda.name} + ' - ' + ${soda.liter} + 'L'">
+
+</option>
 </body>
 </html>
