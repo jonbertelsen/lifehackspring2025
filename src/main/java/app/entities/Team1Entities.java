@@ -1,5 +1,7 @@
 package app.entities;
 
+import java.util.List;
+
 public class Team1Entities {
     public class Questions {
         private int id;
@@ -66,17 +68,17 @@ public class Team1Entities {
     public class Categories {
         private int id;
         private String categoryName;
-        private int quizId;
+        private List<Questions> questions;
 
-        public Categories(int id, String categoryName, int quizId) {
+        public Categories(int id, String categoryName, List<Questions> questions) {
             this.id = id;
             this.categoryName = categoryName;
-            this.quizId = quizId;
+            this.questions = questions;
         }
 
-        public Categories(String categoryName, int quizId) {
+        public Categories(String categoryName, List<Questions> questions) {
             this.categoryName = categoryName;
-            this.quizId = quizId;
+            this.questions = questions;
         }
 
         public int getId() {
@@ -95,12 +97,12 @@ public class Team1Entities {
             this.categoryName = categoryName;
         }
 
-        public int getQuizId() {
-            return quizId;
+        public List<Questions> getQuestions() {
+            return questions;
         }
 
-        public void setQuizId(int quizId) {
-            this.quizId = quizId;
+        public void setQuestions(List<Questions> questions) {
+            this.questions = questions;
         }
 
         @Override
@@ -108,7 +110,7 @@ public class Team1Entities {
             return "Categories{" +
                     "id=" + id +
                     ", categoryName='" + categoryName + '\'' +
-                    ", quizId=" + quizId +
+                    ", questions=" + questions +
                     '}';
         }
     }
@@ -116,13 +118,16 @@ public class Team1Entities {
     public class Quiz {
         private int id;
         private String title;
+        private List<Categories> categories;
 
-        public Quiz(int id, String title) {
+        public Quiz(int id, String title, List<Categories> categories) {
             this.id = id;
             this.title = title;
+            this.categories = categories;
         }
 
-        public Quiz(String title) {
+        public Quiz(List<Categories> categories, String title) {
+            this.categories = categories;
             this.title = title;
         }
 
@@ -142,11 +147,20 @@ public class Team1Entities {
             this.title = title;
         }
 
+        public List<Categories> getCategories() {
+            return categories;
+        }
+
+        public void setCategories(List<Categories> categories) {
+            this.categories = categories;
+        }
+
         @Override
         public String toString() {
             return "Quiz{" +
                     "id=" + id +
                     ", title='" + title + '\'' +
+                    ", categories=" + categories +
                     '}';
         }
     }
@@ -155,16 +169,19 @@ public class Team1Entities {
         private int id;
         private String name;
         private String password;
+        private List<Quiz> quizzes;
 
-        public Users(int id, String name, String password) {
+        public Users(int id, String name, String password, List<Quiz> quizzes) {
             this.id = id;
             this.name = name;
             this.password = password;
+            this.quizzes = quizzes;
         }
 
-        public Users(String name, String password) {
+        public Users(String name, String password, List<Quiz> quizzes) {
             this.name = name;
             this.password = password;
+            this.quizzes = quizzes;
         }
 
         public int getId() {
@@ -191,12 +208,21 @@ public class Team1Entities {
             this.password = password;
         }
 
+        public List<Quiz> getQuizzes() {
+            return quizzes;
+        }
+
+        public void setQuizzes(List<Quiz> quizzes) {
+            this.quizzes = quizzes;
+        }
+
         @Override
         public String toString() {
             return "Users{" +
                     "id=" + id +
                     ", name='" + name + '\'' +
                     ", password='" + password + '\'' +
+                    ", quizzes=" + quizzes +
                     '}';
         }
     }
