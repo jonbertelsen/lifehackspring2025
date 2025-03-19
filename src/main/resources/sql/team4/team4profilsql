@@ -25,6 +25,6 @@ INSERT INTO public.profile (color, species, bio, name, age, image, email, passwo
 (1, 2, 'Very loyal, I wait like a good boi for my human every day', 'DoggyStyle', 4, 'Dog.jpg', 'Dog@dog.com', '1234'),
 (2, 3, 'Just hopping from one dandylion to the next', 'Thumper', 3, 'Rabbit.jpg', 'Rabbit@rabbit.com', '1234'),
 (3, 4, 'I Like to store treats in my cheeks and save my friends in trouble', 'Hamtaro', 3, 'Hamster.jpg', 'Hamster@hamster.com', '1234'),
-(6 ,5, 'Not into any shorties, I am a queen and will only be treated as such!', 'Dumbo', 69, 'Elephant.jpg', 'Elephant@elephant.com', '1234')
+(6 ,5, 'Not into any shorties, I am a queen and will only be treated as such!', 'Dumbo', 69, 'Elephant.jpg', 'Elephant@elephant.com', '1234');
 
 

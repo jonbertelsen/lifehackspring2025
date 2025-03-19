@@ -1,6 +1,6 @@
 package app.entities;
 
-public class Team4ProfilEntity {
+public class Team4ProfileEntity {
 
     private int color;
     private int species;
@@ -12,7 +12,7 @@ public class Team4ProfilEntity {
     private String password;
     private int id;
 
-    public Team4ProfilEntity(int color, int species, String bio, String name, int age, String image, String email, String password, int id)
+    public Team4ProfileEntity(int color, int species, String bio, String name, int age, String image, String email, String password, int id)
     {
         this.color = color;
         this.species = species;
@@ -25,6 +25,13 @@ public class Team4ProfilEntity {
         this.id = id;
     }
 
+    public Team4ProfileEntity(int color, int species, String bio, String name, int age) {
+        this.color = color;
+        this.species = species;
+        this.bio = bio;
+        this.name = name;
+        this.age = age;
+    }
 
     //Getter methods
     public int getColor() {
