@@ -38,6 +38,8 @@ public class Main {
 
         //app.get("/", ctx ->  ctx.render("index.html"));
         app.get("/", ctx -> lifeHack_team_17_controller.home(ctx));
+        app.get("/calculator", ctx -> lifeHack_team_17_controller.home(ctx));
+
 
         TeamTeacherController.routes(app);
         LifeHack_Team_17_Controller.routes(app);
