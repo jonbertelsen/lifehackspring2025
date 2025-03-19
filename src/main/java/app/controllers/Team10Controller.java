@@ -1,11 +1,19 @@
 package app.controllers;
 
+import app.entities.team10.Team10Exercise;
+import app.entities.team10.Team10TrainingSession;
 import app.entities.team10.Team10User;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
+import app.persistence.team10.Team10ExerciseMapper;
+import app.persistence.team10.Team10TrainingSessionExerciseMapper;
+import app.persistence.team10.Team10TrainingSessionMapper;
 import app.persistence.team10.Team10UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+
+import java.util.List;
+import java.util.Map;
 
 public class Team10Controller {
 
@@ -18,7 +26,44 @@ public class Team10Controller {
         app.post("/create-user", ctx -> handleCreateUser(ctx,connectionPool));
         app.get("/homepage", ctx -> ctx.render("team10/homepage.html"));
 
+        app.get("/start-workout", ctx -> startWorkout(ctx, connectionPool));
+        app.get("/workout-history", ctx -> workoutHistory(ctx, connectionPool));
+
+        app.post("/start-workout/{exerciseId}", ctx -> {
+            String exerciseId = ctx.pathParam("exerciseId");  // Get the exerciseId from the path
+
+
+            // Process the workout logic here
+            ctx.json(Map.of("message", "Workout started for exercise " + exerciseId));
+        });
+
+
     }
+
+
+private static void startWorkout(Context ctx, ConnectionPool connectionPool) {
+    try {
+        List<Team10Exercise> exercises = Team10ExerciseMapper.getAllExercises(connectionPool);
+        ctx.attribute("exercises", exercises);  // Pass exercises to the template
+        ctx.render("team10/start-workout.html");  // Render start workout page with exercises
+    } catch (DatabaseException e) {
+        ctx.attribute("message", "Error fetching exercises: " + e.getMessage());
+        ctx.render("team10/homepage.html");
+    }
+}
+
+    private static void workoutHistory(Context ctx, ConnectionPool connectionPool) {
+        Integer userId = ctx.sessionAttribute("user_id");  // Retrieve the logged-in user's ID from the session
+        try {
+            List<Team10Exercise> exerciseHistory = Team10TrainingSessionMapper.getExercisesByUserId(userId, connectionPool);
+            ctx.attribute("exerciseHistory", exerciseHistory);  // Pass exercise history to the template
+            ctx.render("team10/workout-history.html");  // Render the workout history page
+        } catch (DatabaseException e) {
+            ctx.attribute("message", "Error fetching workout history: " + e.getMessage());
+            ctx.render("team10/homepage.html");
+        }
+    }
+
 
     public static void home(Context ctx) throws DatabaseException {
         ctx.render("team10/index.html");
@@ -33,6 +78,7 @@ public class Team10Controller {
         //Check if the user is in the database and check what their role is
         try {
             Team10User user = Team10UserMapper.login(email, password, connectionPool);
+            ctx.sessionAttribute("user_id",user.getUserId());
             ctx.redirect("/homepage");
         }catch (DatabaseException e){
             ctx.attribute("message",e.getMessage());

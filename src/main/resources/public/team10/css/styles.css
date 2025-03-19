@@ -86,3 +86,43 @@ header {
 }
 
 
+.exercises-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.exercise-item {
+    width: 300px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.exercise-item h3 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.exercise-item p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.start-workout-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.start-workout-btn:hover {
+    background-color: #45a049;
+}
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Workout History</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/team10/css/styles.css" th:href="@{/team10/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body class="login-page">
+<div class="logo-background"></div>
+<header>
+    <img src="/team10/images/trainnow.png" class="logo">
+</header>
+
+<h1>Your Workout History</h1>
+
+<div th:if="${#lists.isEmpty(exerciseHistory)}">
+    <p>You haven't completed any workouts yet.</p>
+</div>
+
+<div th:if="${not #lists.isEmpty(exerciseHistory)}">
+    <table>
+        <thead>
+        <tr>
+            <th>Exercise Name</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Loop through exerciseHistory and display each exercise -->
+        <tr th:each="exercise : ${exerciseHistory}">
+            <td th:text="${exercise.name}"></td>
+            <td th:text="${exercise.description}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<a href="/homepage">Back to Homepage</a>
+</body>
+
+</html>
