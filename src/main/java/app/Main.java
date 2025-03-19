@@ -2,6 +2,7 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
+import app.controllers.Team2Controller;
 import app.controllers.TeamTeacherController;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
@@ -31,10 +32,13 @@ public class Main {
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
         }).start(7070);
 
+        Team2Controller.setConnectionPool(connectionPool);
+
         // Routing
 
-        app.get("/", ctx ->  ctx.render("index.html"));
+        app.get("/", ctx ->  ctx.render("team2/index.html"));
         TeamTeacherController.routes(app);
+        Team2Controller.routes(app);
 
     }
 

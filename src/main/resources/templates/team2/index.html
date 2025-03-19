@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<title>ExcuseGenerator</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../public/team2/css/styles.css" th:href="@{/team2/css/styles.css}" rel="stylesheet"/>
+<link rel="stylesheet" href="../../public/team2/css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<div id="page-wrapper">
+<header>
+    <a href="team2/index.html">
+        <img id="top-banner" src="../../public/team2/images/ExcuseGenerator_HEADER.jpg"/>
+    </a>
+</header>
+
+<!-- Denne linje skulle gerne smide ud på siden hvad error er -->
+<div th:if="${error}" class="error-message" th:text="${error}"></div>
+
+    <form action="/team2/index" method="post" style="display: flex; flex-direction: column; align-items: center;">
+<!--        <label for="excuse-field">Your Random Excuse:</label><br>-->
+        <input type="text" placeholder="Here is your excuse" id="excuse-field" th:value="${excuse}" readonly><br><br>
+    </form>
+
+    <p id="instruction">Press the thing you need an excuse for</p>
+    <div class="button-container">
+    <button type="submit" name="category" value="1">School</button>
+    <button type="submit" name="category" value="2">Work</button>
+    <button type="submit" name="category" value="3">Family Arrangement</button>
+    <button type="submit" name="category" value="4">Funeral</button>
+    <button type="submit" name="category" value="5">General</button>
+    </div>
+
+
+    <img id="quote" src="../../public/team2/images/ExcuseGenerator_Quote.png"/></div>
+
+
+</body>
+</html>

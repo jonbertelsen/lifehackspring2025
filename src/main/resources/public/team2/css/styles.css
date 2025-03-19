@@ -1,0 +1,63 @@
+#top-banner {
+    width: 100%;
+}
+
+#quote {
+    display: block;
+    margin: auto;
+    width: 50%;
+}
+
+#page-wrapper {
+    overflow: hidden;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1400px;
+}
+
+#excuse-field {
+    width: 20%;
+    height: 100px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #FFFAFA;
+    resize: none;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    margin-top: 50px;
+    overflow: auto;
+    font-family: Roboto, serif;
+}
+
+#instruction {
+    text-align: center;
+    font-family: Roboto, serif;
+}
+
+
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Centers buttons horizontally */
+    gap: 10px; /* Adds space between buttons */
+    margin-top: 20px; /* Moves buttons down */
+}
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: black;
+    border-radius: 10px; /* Adjust the value for more or less rounding */
+    border: none; /* Optional: Removes default button border */
+}
+
+button:hover {
+    background-color: #FFE5E5; /* Darker blue on hover */
+    color: black;
+    stroke-width: 0;
+}
+
+
