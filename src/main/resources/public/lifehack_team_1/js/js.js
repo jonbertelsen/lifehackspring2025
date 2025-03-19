@@ -1,4 +1,4 @@
-function loadallplayers() {
+function loadAllPlayers() {
     if (window.sessionStorage.teamcount) {
         for (let i = 0; i < window.sessionStorage.teamcount; i++) {
             var div = document.createElement('div');
@@ -7,19 +7,19 @@ function loadallplayers() {
                         <p class="team_name">${"team" + (i+1)}</p>
                         <div class="flex-box">
                             <!--wrong variable-->
-                            <button onclick="updatepoint(1, '${"team" + (i+1)}')">+</button>
-                            <h2 id="${"team" + (i+1) + "_points"}"> ${getpoints(i+1)}</h2>
+                            <button onclick="updatePoints(1, '${"team" + (i+1)}')">+</button>
+                            <h2 id="${"team" + (i+1) + "_points"}"> ${getPointsByNumber(i+1)}</h2>
                             <!--wrong variable-->
-                            <button onclick="updatepoint(-1, '${"team" + (i+1)}')">-</button>
+                            <button onclick="updatePoints(-1, '${"team" + (i+1)}')">-</button>
                         </div>
                 `;
             document.getElementById('fields').insertBefore(div,document.getElementById('addplayer_field'));
         }
     }
 }
-window.onload = loadallplayers;
+window.onload = loadAllPlayers;
 
-function getpoints(p1){
+function getPointsByNumber(p1){
     var point = Number(sessionStorage.getItem('team' + p1));
     if (point == null || point == 0) {
         return 0;
@@ -29,7 +29,7 @@ function getpoints(p1){
     }
 }
 
-function updatepoint(p1, team) {
+function updatePoints(p1, team) {
     var point = Number(sessionStorage.getItem(team));
     if (point == null || point == 0) {
         window.sessionStorage.setItem(team,p1);
@@ -52,10 +52,10 @@ function addplayer() {
                         <p class="team_name">${"team" + window.sessionStorage.teamcount}</p>
                         <div class="flex-box">
                             <!--wrong variable-->
-                            <button onclick="updatepoint(1, '${"team" + window.sessionStorage.teamcount}')">+</button>
+                            <button onclick="updatePoints(1, '${"team" + window.sessionStorage.teamcount}')">+</button>
                             <h2 id="${"team" + window.sessionStorage.teamcount + "_points"}">0</h2>
                             <!--wrong variable-->
-                            <button onclick="updatepoint(-1, '${"team" + window.sessionStorage.teamcount}')">-</button>
+                            <button onclick="updatePoints(-1, '${"team" + window.sessionStorage.teamcount}')">-</button>
                         </div>
                 `;
     document.getElementById('fields').insertBefore(div,document.getElementById('addplayer_field'));
