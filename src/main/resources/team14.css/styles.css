@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: white;
+    display: flex;
+}
+
+header {
+    display: flex;
+    background: mediumpurple;
+    align-items: center;
+    padding: 10px 0;
+    border: 3px solid red;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+}
+
+main {
+    padding: 2px;
+    font-weight: bolder;
+    font-size: 20px;
+    color: rebeccapurple;
+    display: flex;
+}
+
+.checkbox-container {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-end;
+}
+
+label {
+    display: flex;
+}
+
+input[type="checkbox"] {
+    margin-left: 20px;
+}
+
+.quiz-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    align-self: center;
+    top: 50%;
+    left: 50%;
+    justify-self: center;
+    position: absolute;
+}
+
+.question {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.buttons button:hover {
+    background-color: #45a049;
+}
+
+#results {
+    display: none;
+    font-size: 18px;
+}

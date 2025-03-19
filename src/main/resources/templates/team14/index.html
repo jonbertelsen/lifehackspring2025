@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieMatch</title>
+    <link rel="stylesheet" href="/src/main/resources/team14.css/styles.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the new CSS file -->
+</head>
+<body>
+<!-- Existing content -->
+
+<header>
+    <h1>Welcome to MovieMatch</h1>
+</header>
+<main>
+
+
+    <div class="quiz-container">
+        <div id="question-container">
+            <div class="question" id="question"></div>
+            <div class="buttons" id="answer-buttons"></div>
+        </div>
+        <div id="results">
+            <p>Your movie genre is: <span id="result-genre"></span></p>
+        </div>
+    </div>
+
+
+</main>
+
+
+
+<script>
+    const questions = [
+        { question: "How are you feeling today?", answers: ["Like a superhero", "Like a couch potato"] },
+        { question: "What’s your vibe right now?", answers: ["Ready to laugh", "Ready to cry (in a fun way)"] },
+        { question: "Do you want to believe in magic?", answers: ["Yes, please", "No, just good CGI"] },
+        { question: "Need a rollercoaster or a nap?", answers: ["Fast-paced action", "Slow-motion relaxation"] },
+        { question: "How should it end?", answers: ["With fireworks", "With a plot twist that ruins your life"] },
+        { question: "What’s your level of bravery?", answers: ["Ready for horror", "Just want to giggle"] },
+        { question: "Want to time travel?", answers: ["To the past to wear a corset", "To the future to meet robots"] },
+        { question: "Serious or silly?", answers: ["Drama queen", "Meme king"] },
+        { question: "Feeling like an explorer or a detective?", answers: ["Let’s adventure", "Figure out who did it"] },
+        { question: "Need a hug or a scream?", answers: ["Heartwarming", "Spine-chilling"] },
+    ];
+
+    let currentQuestionIndex = 0;
+    let answers = [];
+
+    function showQuestion(questionIndex) {
+        const question = questions[questionIndex];
+        document.getElementById("question").textContent = question.question;
+
+        const buttons = document.getElementById("answer-buttons");
+        buttons.innerHTML = ''; // Clear any existing buttons
+        question.answers.forEach((answer, index) => {
+            const button = document.createElement("button");
+            button.textContent = answer;
+            button.onclick = () => handleAnswer(index);
+            buttons.appendChild(button);
+        });
+    }
+
+    function handleAnswer(answerIndex) {
+        answers.push(questions[currentQuestionIndex].answers[answerIndex]);
+        currentQuestionIndex++;
+
+        if (currentQuestionIndex < questions.length) {
+            showQuestion(currentQuestionIndex);
+        } else {
+            showResults();
+        }
+    }
+
+    function showResults() {
+        document.getElementById("question-container").style.display = "none";
+        const genre = determineGenre(answers);
+        document.getElementById("results").style.display = "block";
+        document.getElementById("result-genre").textContent = genre;
+    }
+
+    function determineGenre(answers) {
+        if (answers.includes("Like a superhero") || answers.includes("Ready to laugh") || answers.includes("Fast-paced action")) {
+            return "Action/Adventure";
+        } else if (answers.includes("Ready to cry (in a fun way)") || answers.includes("Heartwarming")) {
+            return "Drama/Comedy";
+        } else if (answers.includes("Ready for horror") || answers.includes("Spine-chilling")) {
+            return "Horror";
+        } else if (answers.includes("Yes, please") || answers.includes("To the future to meet robots")) {
+            return "Sci-Fi/Fantasy";
+        } else {
+            return "Mystery/Thriller";
+        }
+    }
+
+    showQuestion(currentQuestionIndex);
+</script>
+
+<div class="checkbox-container">
+    <p><strong>Select Your Movies</strong></p>
+    <label for="movie1">Action <input type="checkbox" id="movie1"></label>
+    <label for="movie2">Comedy <input type="checkbox" id="movie2"></label>
+    <label for="movie3">Drama <input type="checkbox" id="movie3"></label>
+    <label for="movie4">Horror <input type="checkbox" id="movie4"></label>
+    <label for="movie5">Sci-Fi <input type="checkbox" id="movie5"></label>
+</div>
+</body>
+</html>
