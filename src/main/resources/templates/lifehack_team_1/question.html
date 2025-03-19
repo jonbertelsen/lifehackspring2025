@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--fix variables-->
     <link href="../../public/lifehack_team_1/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
-    <title>Title</title>
+    <title>question</title>
 </head>
 <body>
 <header>
@@ -21,31 +20,23 @@
     <h2 class="category" th:text="${category.title}">category</h2>
     <h2 class="point" th:text="${category.title}">0</h2>
     <div class="qa">
-        <H1 class="question" th:text="${category.title}">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-            in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</H1>
+        <!--demo text-->
+        <H1 class="question" th:text="${category.title}">question</H1>
 
-        <!--demo title-->
+        <div class="line"></div>
         <button id="answer_button" onclick="revealAnswer()">reveal answer</button>
-        <H1 class="answer" th:text="${category.title}">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-            in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</H1>
+        <!--demo text-->
+        <H1 id="answer" class="hide" th:text="${category.title}">answer</H1>
+
         <!--move to another place?-->
         <script>
             function revealAnswer() {
-                var x = document.getElementById("answer_button");
-                var y = document.getElementById("answer");
-                if (x.style.display === "none") {
-                    x.style.display = "block";
-                    y.style.display = "none";
-                } else {
-                    x.style.display = "none";
-                    y.style.display = "block";
-                }
+                var element = document.getElementById("answer_button");
+                element.style.display = "none";
+
+                element = document.getElementById("answer");
+                element.classList.toggle("show");
+
             }
         </script>
     </div>

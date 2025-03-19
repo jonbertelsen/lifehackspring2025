@@ -83,10 +83,16 @@ header{
     padding: 2em;
     padding-top: 1em;
 }
-.qa > div{
+.qa > .line{
     background: black;
     height: 0.1em;
     margin: 1em;
+}
+.hide{
+    display:none;
+}
+.show{
+    display: block;
 }
 
 footer{
