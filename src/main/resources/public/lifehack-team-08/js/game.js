@@ -1,4 +1,4 @@
-let eggs = 10000000000;
+let eggs = 1000;
 let chickenFeedTier = 0;
 let predatorTier = 0;
 let eggGainInterval = null;
@@ -43,7 +43,7 @@ function startEggGain() {
     if (eggGainInterval) clearInterval(eggGainInterval);
 
     // Calculate eggs gained per second
-    let gainPerSecond = predatorTier > 0 ? Math.pow(2, predatorTier - 1) : 0;
+    let gainPerSecond = predatorTier > 0 ? Math.pow(4, predatorTier - 1) : 0;
 
     if (gainPerSecond > 0) {
         eggGainInterval = setInterval(() => {
