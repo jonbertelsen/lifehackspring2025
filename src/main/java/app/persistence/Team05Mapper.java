@@ -56,7 +56,7 @@ public class Team05Mapper {
         }
     }
 
-    public static int signUp(String email, ConnectionPool connectionPool) throws DatabaseException {
+    public static int signUp(String email, int password, ConnectionPool connectionPool) throws DatabaseException {
 
         String sql = "INSERT INTO users (email, name,password) VALUES (?,?,?) ON CONFLICT (email) DO NOTHING";
         try (
@@ -72,8 +72,9 @@ public class Team05Mapper {
         }
     }
 
-    public static int login(String email, int password, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "SELECT email, password FROM users WHERE email = ? AND password = ?";
+    public static String login(String email, int password, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT email FROM users WHERE email = ? AND password = ?";
+
         try (
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
@@ -83,9 +84,9 @@ public class Team05Mapper {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                return rs.getInt("email"); // Returner brugerens ID ved succesfuldt login
+                return rs.getString("email"); // Returnerer brugerens email ved succesfuldt login
             } else {
-                return -1; // Indikerer fejl (forkert email eller password)
+                throw new DatabaseException("Incorrect email or password. Please try again.");
             }
         } catch (SQLException e) {
             throw new DatabaseException("Login-error: try again", e.getMessage());
@@ -112,8 +113,8 @@ public class Team05Mapper {
 
     public static void editWorkoutLog(int workoutId, int typeId, int duration, String extraNotes, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "UPDATE workoutlog" +
-                "SET typed_id = ?, duration = ?, extra_notes = ?" +
-                "WHERE workout_id = ?";
+                "SET type_id = ?, duration = ?, extra_notes = ?" +
+                "WHERE id = ?";
 
         try(
                 Connection connection = connectionPool.getConnection();
