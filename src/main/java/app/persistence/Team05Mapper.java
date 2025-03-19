@@ -2,6 +2,7 @@ package app.persistence;
 
 import app.entities.Team05.Workout;
 import app.exceptions.DatabaseException;
+import app.persistence.ConnectionPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Team05Mapper {
+public class Team05Mapper{
+
     public static List<Workout> getAllWorkoutLog(ConnectionPool ConnectionPool) throws DatabaseException {
         List<Workout> workouts = new ArrayList<>();
         String sql = "SELECT * FROM workoutlog";
