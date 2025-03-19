@@ -2,8 +2,10 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
+import app.controllers.LifeHack_Team_17_Controller;
 import app.controllers.TeamTeacherController;
 import app.persistence.ConnectionPool;
+import app.persistence.LifeHackTeam17Mapper;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
@@ -33,8 +35,10 @@ public class Main {
 
         // Routing
 
-        app.get("/", ctx ->  ctx.render("index.html"));
+        //app.get("/", ctx ->  ctx.render("index.html"));
+        app.get("/", ctx -> ctx.render("lifehack-team-17/calculator.html"));
         TeamTeacherController.routes(app);
+        LifeHack_Team_17_Controller.routes(app);
 
     }
 
