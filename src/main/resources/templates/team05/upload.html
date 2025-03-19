@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload workout</title>
+    <link href="/public/team05/css05/styles05.css" th:href="@{/public/team05/css05/styles05.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="uploadheader">
+<h1>Log your workout</h1>
+</div>
+<div class="add-workout-form">
+<form class="" method="post" enctype="multipart/form-data">
+    <label for="type_of_workout">Type of workout</label>
+    <div id="type_of_workout" name ="type_of_workout">
+        <select>
+            <option value="cardio">Cardio</option>
+            <option value="interval">Interval</option>
+            <option value="strength">Strength</option>
+            <option value="pilates">Pilates</option>
+            <option value="yoga">Yoga</option>
+            <option value="calisthenics">Calisthenics</option>
+            <option value="powerlifting">Powerlifting</option>
+            <option value="cycling">Cycling</option>
+            <option value="walk_hike">Walk or Hike</option>
+        </select>
+    </div>
+
+    <label for="published_date">Date of workout:</label>
+    <input type="date" id="published_date" name="published_date" required>
+
+    <label for="duration">Duration:</label>
+    <input type="number" id="duration" name="duration" min="1" step="1" required>
+
+    <label for="extra_notes">Extra notes (intensity, location, etc?) </label>
+    <<textarea id="extra_notes" name="extra_notes" rows="3" required></textarea>
+
+    <button class="button" type="submit" ><a href="../templates/admin/add-newsletter.html" th:href="@{/admin/newsletters/add}"></a>Add workout to my log</button>
+</form>
+</div>
+
+</body>
+</html>
