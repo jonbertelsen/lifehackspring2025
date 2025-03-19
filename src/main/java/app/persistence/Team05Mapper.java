@@ -103,15 +103,29 @@ public class Team05Mapper {
             int rowsAffected = ps.executeUpdate();
 
             if (rowsAffected == 0) {
-                throw new DatabaseException("Fejl: Workoutlog med ID " + workoutId + " blev ikke fundet.");
+                throw new DatabaseException("Error: Workoutlog with ID " + workoutId + " blev ikke fundet.");
             }
         } catch (SQLException e) {
             throw new DatabaseException("Fejl ved sletning af workoutlog", e.getMessage());
         }
     }
 
-    public static void editWorkoutLog(){
+    public static void editWorkoutLog(int workoutId, int typeId, int duration, String extraNotes, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "UPDATE workoutlog" +
+                "SET typed_id = ?, duration = ?, extra_notes = ?" +
+                "WHERE workout_id = ?";
 
+        try(
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+                ){
+                ps.setInt(1, typeId);
+                ps.setInt(2, duration);
+                ps.setString(3, extraNotes);
+                ps.setInt(4, workoutId);
+
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl ved redigering af workoutlog", e.getMessage());
+        }
     }
-
 }
