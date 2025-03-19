@@ -1,28 +1,76 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<title>Sleeptracker</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../../public/team12/css/team12_styles.css" th:href="@{/team12/css/team12_styles.css}" rel="stylesheet"/>
-
+<head>
+    <title>Sleeptracker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../public/team12/css/team12_styles.css" th:href="@{/team12/css/team12_styles.css}" rel="stylesheet"/>
 </head>
-
-<header class="header-app">
-    <h1 class="text-custom">Sleep Tracker</h1>
-</header>
-
 <body class="bg-custom">
-    <h1 class="text-custom">Sleep Tracker</h1>
-    <p class="text-custom">Keep a track on your sleep</p>
+<div class="page-container">
+    <header class="header-app">
+        <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png" alt="Sleep Tracker Logo">
+    </header>
+
+    <div class="calculate-container">
+        <h2>Time Duration Calculator</h2>
+        <label class="goingToSleep" for="start-time">Going to sleep at:</label>
+        <input type="datetime-local" id="start-time" step="60">
+        <label class="wakingUpAt" for="end-time">Waking up at:</label>
+        <input type="datetime-local" id="end-time" step="60">
+        <button formaction="/calculate"  onclick="calculateDuration()">Calculate Duration</button>
+        <button onclick="clearForm()">Clear</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function formatDateTime(dateTime) {
+            const date = dateTime.toISOString().split('T')[0];
+            const time = dateTime.toTimeString().split(' ')[0];
+            return `${date} ${time}`;
+        }
+
+        function calculateDuration() {
+            const startTime = document.getElementById('start-time').value;
+            const endTime = document.getElementById('end-time').value;
+
+            if (!startTime || !endTime) {
+                document.getElementById('result').innerHTML = "<p style='color:red;'>Please enter both times.</p>";
+                return;
+            }
+
+            const startDate = new Date(startTime);
+            const endDate = new Date(endTime);
+
+            if (endDate <= startDate) {
+                document.getElementById('result').innerHTML = "<p style='color:red;'>End time must be after start time.</p>";
+                return;
+            }
+
+            const durationMs = endDate - startDate;
+            const hours = Math.floor(durationMs / (1000 * 60 * 60));
+            const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
+
+            const result = document.getElementById('result');
+            result.innerHTML = `
+                <p>The time between <strong>${formatDateTime(startDate)}</strong> and <strong>${formatDateTime(endDate)}</strong> is:</p>
+
+                    <p>${hours} hours, ${minutes} minutes</p>
+
+            `;
+        }
+
+        function clearForm() {
+            document.getElementById('start-time').value = '';
+            document.getElementById('end-time').value = '';
+            document.getElementById('result').innerHTML = '';
+        }
+    </script>
+
+    <footer class="footer-app">
+        <a href="#" class="footer-btn">Logout</a>
+        <a href="#" class="footer-btn">Dashboard</a>
+    </footer>
+</div>
 </body>
-
-
-<footer class="footer-app">
-    <a href="#" class="footer-btn">Login</a>
-    <a href="#" class="footer-btn">prof</a>
-    <a href="#" class="footer-btn">Dash</a>
-    <a href="#" class="footer-btn">Dash</a>
-</footer>
-
-
 </html>

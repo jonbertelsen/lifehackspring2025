@@ -5,19 +5,19 @@ import java.time.LocalDateTime;
 public class Team12SleepRecords {
     private int recordId;
     private int userId;
-    private LocalDateTime sleepDate;
-    private LocalDateTime sleepStart;
-    private LocalDateTime sleepEnd;
-    private double totalSleep;
-    private LocalDateTime createAt;
+    private String sleepDate;
+    private String sleepStart;
+    private String sleepEnd;
+    private double sleepDuration;
+    private String createAt;
 
-    public Team12SleepRecords(int recordId, int userId, LocalDateTime sleepDate, LocalDateTime sleepStart, LocalDateTime sleepEnd, double totalSleep, LocalDateTime createAt) {
+    public Team12SleepRecords(int recordId, int userId, String sleepDate, String sleepStart, String sleepEnd, double sleepDuration, String createAt) {
         this.recordId = recordId;
         this.userId = userId;
         this.sleepDate = sleepDate;
         this.sleepStart = sleepStart;
         this.sleepEnd = sleepEnd;
-        this.totalSleep = totalSleep;
+        this.sleepDuration = sleepDuration;
         this.createAt = createAt;
     }
 
@@ -37,56 +37,43 @@ public class Team12SleepRecords {
         this.userId = userId;
     }
 
-    public LocalDateTime getSleepDate() {
+    public String getSleepDate() {
         return sleepDate;
     }
 
-    public void setSleepDate(LocalDateTime sleepDate) {
+    public void setSleepDate(String sleepDate) {
         this.sleepDate = sleepDate;
     }
 
-    public LocalDateTime getSleepStart() {
+    public String getSleepStart() {
         return sleepStart;
     }
 
-    public void setSleepStart(LocalDateTime sleepStart) {
+    public void setSleepStart(String sleepStart) {
         this.sleepStart = sleepStart;
     }
 
-    public LocalDateTime getSleepEnd() {
+    public String getSleepEnd() {
         return sleepEnd;
     }
 
-    public void setSleepEnd(LocalDateTime sleepEnd) {
+    public void setSleepEnd(String sleepEnd) {
         this.sleepEnd = sleepEnd;
     }
 
-    public double getTotalSleep() {
-        return totalSleep;
+    public double getSleepDuration() {
+        return sleepDuration;
     }
 
-    public void setTotalSleep(double totalSleep) {
-        this.totalSleep = totalSleep;
+    public void setSleepDuration(double sleepDuration) {
+        this.sleepDuration = sleepDuration;
     }
 
-    public LocalDateTime getCreateAt() {
+    public String getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(LocalDateTime createAt) {
+    public void setCreateAt(String createAt) {
         this.createAt = createAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Team12SleepRecords{" +
-                "recordId=" + recordId +
-                ", userId=" + userId +
-                ", sleepDate=" + sleepDate +
-                ", sleepStart=" + sleepStart +
-                ", sleepEnd=" + sleepEnd +
-                ", totalSleep=" + totalSleep +
-                ", createAt=" + createAt +
-                '}';
     }
 }

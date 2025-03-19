@@ -3,10 +3,10 @@ package app.controllers;
 import app.entitites.Team12User;
 import app.exceptions.Team12DatabaseException;
 import app.persistence.ConnectionPool;
+import app.persistence.Team12SleepMapper;
 import app.persistence.Team12UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
-import org.jetbrains.annotations.NotNull;
 
 public class Team12Controller {
 
@@ -17,6 +17,8 @@ public class Team12Controller {
         app.get("/logout", ctx -> logout(ctx));
         app.get("/createuser", ctx -> ctx.render("/team12/team12_createuser.html"));
         app.post("/createuser", ctx -> createUser(ctx, connectionPool));
+
+        app.post("/calculate", ctx -> sleep(ctx, connectionPool));
     }
 
     private static void createUser(Context ctx, ConnectionPool connectionPool) {
@@ -26,7 +28,7 @@ public class Team12Controller {
 
         if (password1.equals(password2)) {
             try {
-                Team12UserMapper.createuser(username, password1, connectionPool);
+                Team12UserMapper.createUser(username, password1, connectionPool);
                 ctx.attribute("message", "You are now created " + username + ". Now you have to log in.");
                 ctx.render("/team12/team12_index.html");
             } catch (Team12DatabaseException e) {
@@ -71,4 +73,22 @@ public class Team12Controller {
             ctx.render("/team12/team12_index.html");
         }
     }
+
+    private static void sleep(Context ctx, ConnectionPool connectionPool) {
+        ctx.sessionAttribute("currentUser", ctx.sessionAttribute("currentUser"));
+        String sleepStart = ctx.formParam("sleep_start");
+        String sleepEnd = ctx.formParam("sleep_end");
+        String sleepDuration = ctx.formParam("sleep_duration");
+
+        try {
+            Team12SleepMapper.sleep(sleepStart, sleepEnd, sleepDuration, connectionPool);
+            ctx.attribute("message", "You are now created " + Team12User.getUsername() + ". Now you have to log in.");
+            ctx.render("/team12/team12_index.html");
+        } catch (Team12DatabaseException e) {
+            ctx.attribute("message", "User already exists, try again or log in.");
+            ctx.render("/team12/team12_createuser.html");
+        }
+    }
 }
+
+

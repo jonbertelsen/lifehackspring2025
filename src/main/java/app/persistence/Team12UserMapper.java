@@ -3,12 +3,10 @@ package app.persistence;
 import app.entitites.Team12User;
 import app.exceptions.Team12DatabaseException;
 
-import java.security.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Team12UserMapper {
@@ -36,7 +34,7 @@ public class Team12UserMapper {
         }
     }
 
-    public static void createuser(String userName, String password, ConnectionPool connectionPool) throws Team12DatabaseException {
+    public static void createUser(String userName, String password, ConnectionPool connectionPool) throws Team12DatabaseException {
         String sql = "insert into team12_users (username, password_hash) values (?,?)";
 
         try (

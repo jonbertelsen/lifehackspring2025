@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Team12User {
     private int userId;
-    private String username;
+    private static String username;
     private String password;
     private LocalDateTime createdAt;
 
@@ -23,7 +23,7 @@ public class Team12User {
         this.userId = userId;
     }
 
-    public String getUsername() {
+    public static String getUsername() {
         return username;
     }
 
