@@ -10,8 +10,7 @@ class Team4ProfileEntityTest {
                                                                                         "bio",
                                                                                         1,
                                                                                         2,
-                                                                                        3,
-                                                                                        1);
+                                                                                        3);
 
     private Team4ProfileEntity team4ProfileEntity = new Team4ProfileEntity( animal,
                                                                             "image",

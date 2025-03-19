@@ -2,7 +2,6 @@ package app.config;
 
 import jakarta.servlet.SessionTrackingMode;
 import org.eclipse.jetty.server.session.SessionHandler;
-
 import java.util.EnumSet;
 
 public class SessionConfig

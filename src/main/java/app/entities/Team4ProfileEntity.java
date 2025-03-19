@@ -14,6 +14,7 @@ public class Team4ProfileEntity {
     private String email;
     private String password;
     private int id;
+    private AnimalClass animal;
 
     public Team4ProfileEntity(AnimalClass animal, String image, String email, String password, int id)
     {
@@ -26,6 +27,7 @@ public class Team4ProfileEntity {
         this.email = email;
         this.password = password;
         this.id = id;
+        this.animal = animal;
     }
 
 
@@ -48,6 +50,10 @@ public class Team4ProfileEntity {
 
     public int getSpecies() {
         return this.species;
+    }
+
+    public AnimalClass getAnimal() {
+        return this.animal;
     }
 
     public String getBio() {
@@ -90,16 +96,14 @@ public class Team4ProfileEntity {
         private ColorTeam4 color;
         private SpeciesTeam4 species ;
         private int age;
-        private int id;
         private String bio;
 
-        public AnimalClass(String name, String bio, int age, int color, int species, int id)
+        public AnimalClass(String name, String bio, int age, int color, int species)
         {
             this.name = name;
             this.age = age;
             this.color = ColorTeam4.int2Enum(color);
             this.species = SpeciesTeam4.int2Enum(species);
-            this.id = id;
             this.bio = bio;
         }
 
@@ -132,11 +136,6 @@ public class Team4ProfileEntity {
         public int getSpeciesInt()
         {
             return species.getCode();
-        }
-
-        public int getId()
-        {
-            return this.id;
         }
     }
 }
