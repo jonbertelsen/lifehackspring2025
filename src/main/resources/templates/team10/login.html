@@ -10,23 +10,26 @@
 
 </head>
 
-<body class="start-page">
+<body class="login-page">
 <div class="logo-background"></div>
 <header>
     <img src="../../public/team10/images/trainnow.png" alt="trainnow.png" class="logo">
 
 </header>
 
-<h1>Welcome to Train Now</h1>
+<h1>Welcome, please login!</h1>
 
-<!-- ✅ Show if user is logged in -->
-<div th:if="${username}">
-    <h2>Ready to start your workout?</h2>
-</div>
+<form method="post">
 
-<!-- ✅ Show login link if user is NOT logged in -->
-<div th:unless="${username}">
-    <a th:href="@{/login}" class="login-link">Login</a>
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" placeholder="username"/>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="password"/>
+    <button type="submit" formaction="/">Login</button>
+
+</form>
+
+
 
 </div>
 
