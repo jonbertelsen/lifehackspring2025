@@ -29,6 +29,18 @@ public class Team4ProfileEntity {
     }
 
 
+    public Team4ProfileEntity(int color, int species, String bio, String name, int age, String image, String email, String password, int id) {
+        this.color = color;
+        this.species = species;
+        this.bio = bio;
+        this.name = name;
+        this.age = age;
+        this.image = image;
+        this.email = email;
+        this.password = password;
+        this.id = id;
+    }
+
     //Getter methods
     public int getColor() {
         return this.color;
