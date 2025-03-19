@@ -11,15 +11,15 @@ public class Team1Entities {
 
         public Questions(int id, String question, String answer, int points) {
             this.id = id;
-            this.question = question;
-            this.answer = answer;
-            this.points = points;
+            setQuestion(question);
+            setAnswer(answer);
+            setPoints(points);
         }
 
         public Questions(int points, String answer, String question) {
-            this.points = points;
-            this.answer = answer;
-            this.question = question;
+            setPoints(points);
+            setAnswer(answer);
+            setQuestion(question);
         }
 
         public int getId() {
@@ -35,6 +35,15 @@ public class Team1Entities {
         }
 
         public void setQuestion(String question) {
+            if (question == null) {
+                throw new NullPointerException("Question cannot be null");
+            }
+            else if (question.isEmpty() || question.isBlank()) {
+                throw new IllegalArgumentException("Question cannot be empty or blank");
+            }
+            else if (question.length() > 1000) {
+                throw new IllegalArgumentException("Question cannot greater than 1000 characters");
+            }
             this.question = question;
         }
 
@@ -43,6 +52,15 @@ public class Team1Entities {
         }
 
         public void setAnswer(String answer) {
+            if (answer == null) {
+                throw new NullPointerException("Answer cannot be null");
+            }
+            else if (answer.isEmpty() || answer.isBlank()) {
+                throw new IllegalArgumentException("Answer cannot be empty or blank");
+            }
+            else if (answer.length() > 256) {
+                throw new IllegalArgumentException("Answer cannot greater than 256 characters");
+            }
             this.answer = answer;
         }
 
@@ -51,7 +69,15 @@ public class Team1Entities {
         }
 
         public void setPoints(int points) {
-            this.points = points;
+            switch (points) {
+                case 100:
+                case 200:
+                case 300:
+                case 400:
+                case 500:
+                    this.points = points;
+                default: throw new IllegalArgumentException("Invalid point value");
+            }
         }
 
         @Override
@@ -72,13 +98,17 @@ public class Team1Entities {
 
         public Categories(int id, String categoryName, List<Questions> questions) {
             this.id = id;
-            this.categoryName = categoryName;
+            setCategoryName(categoryName);
             this.questions = questions;
         }
 
         public Categories(String categoryName, List<Questions> questions) {
-            this.categoryName = categoryName;
+            setCategoryName(categoryName);
             this.questions = questions;
+        }
+
+        public Categories(String categoryName) {
+            setCategoryName(categoryName);
         }
 
         public int getId() {
@@ -94,6 +124,15 @@ public class Team1Entities {
         }
 
         public void setCategoryName(String categoryName) {
+            if (categoryName == null) {
+                throw new NullPointerException("Category name cannot be null");
+            }
+            else if (categoryName.isEmpty() || categoryName.isBlank()) {
+                throw new IllegalArgumentException("Category name cannot be empty or blank");
+            }
+            else if (categoryName.length() > 64) {
+                throw new IllegalArgumentException("Category name cannot be greater than 64 characters");
+            }
             this.categoryName = categoryName;
         }
 
@@ -122,13 +161,13 @@ public class Team1Entities {
 
         public Quiz(int id, String title, List<Categories> categories) {
             this.id = id;
-            this.title = title;
+            setTitle(title);
             this.categories = categories;
         }
 
         public Quiz(List<Categories> categories, String title) {
             this.categories = categories;
-            this.title = title;
+            setTitle(title);
         }
 
         public int getId() {
@@ -144,6 +183,15 @@ public class Team1Entities {
         }
 
         public void setTitle(String title) {
+            if (title == null) {
+                throw new NullPointerException("Title cannot be null");
+            }
+            else if (title.isEmpty() || title.isBlank()) {
+                throw new IllegalArgumentException("Title cannot be empty or blank");
+            }
+            else if (title.length() > 256) {
+                throw new IllegalArgumentException("Title cannot be greater than 256 characters");
+            }
             this.title = title;
         }
 
@@ -173,14 +221,14 @@ public class Team1Entities {
 
         public Users(int id, String name, String password, List<Quiz> quizzes) {
             this.id = id;
-            this.name = name;
-            this.password = password;
+            setName(name);
+            setPassword(password);
             this.quizzes = quizzes;
         }
 
         public Users(String name, String password, List<Quiz> quizzes) {
-            this.name = name;
-            this.password = password;
+            setName(name);
+            setPassword(password);
             this.quizzes = quizzes;
         }
 
@@ -197,6 +245,18 @@ public class Team1Entities {
         }
 
         public void setName(String name) {
+            if (name == null) {
+                throw new NullPointerException("Name cannot be null");
+            }
+            else if (name.isEmpty() || name.isBlank()) {
+                throw new IllegalArgumentException("Name cannot be empty or blank");
+            }
+            else if (name.length() < 2) {
+                throw new IllegalArgumentException("Name cannot be shorter than 2 characters");
+            }
+            else if (name.length() > 64) {
+                throw new IllegalArgumentException("Name cannot be greater than 64 characters");
+            }
             this.name = name;
         }
 
@@ -205,6 +265,18 @@ public class Team1Entities {
         }
 
         public void setPassword(String password) {
+            if (password == null) {
+                throw new NullPointerException("Password cannot be null");
+            }
+            else if (password.isEmpty() || password.isBlank()) {
+                throw new IllegalArgumentException("Password cannot be empty or blank");
+            }
+            else if (password.length() < 10) {
+                throw new IllegalArgumentException("Password cannot be shorter than 10 characters");
+            }
+            else if (password.length() > 64) {
+                throw new IllegalArgumentException("Password cannot be greater than 64 characters");
+            }
             this.password = password;
         }
 
