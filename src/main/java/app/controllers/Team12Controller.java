@@ -11,68 +11,64 @@ import org.jetbrains.annotations.NotNull;
 public class Team12Controller {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
-        app.get("/", ctx ->  ctx.render("/team12/team12_index.html"));
-        app.post("login", ctx -> login(ctx, connectionPool));
-        app.get("logout", ctx -> logout(ctx));
+        app.get("/", ctx -> ctx.render("/team12/team12_index.html"));
+        app.post("/login", ctx -> login(ctx, connectionPool));
+        app.get("/team12_main", ctx -> ctx.render("/team12/team12_main.html"));
+        app.get("/logout", ctx -> logout(ctx));
         app.get("/createuser", ctx -> ctx.render("/team12/team12_createuser.html"));
-        app.post("/createuser", ctx -> createUser(ctx,connectionPool));
+        app.post("/createuser", ctx -> createUser(ctx, connectionPool));
     }
 
     private static void createUser(Context ctx, ConnectionPool connectionPool) {
-        //hent form parametre
         String username = ctx.formParam("username");
         String password1 = ctx.formParam("password1");
         String password2 = ctx.formParam("password2");
 
-        if(password1.equals(password2))
-        {
-
-            try
-            {
-                Team12UserMapper.createuser(username,password1,connectionPool);
-                ctx.attribute("message", "You are now created" + username
-                        + ". Now you have to login");
+        if (password1.equals(password2)) {
+            try {
+                Team12UserMapper.createuser(username, password1, connectionPool);
+                ctx.attribute("message", "You are now created " + username + ". Now you have to log in.");
                 ctx.render("/team12/team12_index.html");
+            } catch (Team12DatabaseException e) {
+                ctx.attribute("message", "User already exists, try again or log in.");
+                ctx.render("/team12/team12_createuser.html");
             }
-            catch (Team12DatabaseException e) {
-                ctx.attribute("message", "Passwords already exists, try again or login");
-                ctx.render("/team12_createuser.html");
-            }
-        }
-        else {
-            ctx.attribute("message", "Passwords do not match, try again");
-            ctx.render("/team12_createuser.html");
+        } else {
+            ctx.attribute("message", "Passwords do not match, try again.");
+            ctx.render("/team12/team12_createuser.html");
         }
     }
-
-
 
     private static void logout(Context ctx) {
         ctx.req().getSession().invalidate();
         ctx.redirect("/");
     }
 
-
-
-    // todo ændre metode til at vide ens specifikke sleeps records
     public static void login(Context ctx, ConnectionPool connectionPool) {
-        //hent form parametre
         String username = ctx.formParam("username");
         String password = ctx.formParam("password");
+
+        System.out.println("Login attempt for user: " + username);
+
         try {
             Team12User user = Team12UserMapper.login(username, password, connectionPool);
+
+            if (user == null) {
+                System.out.println("User not found in database.");
+                ctx.attribute("message", "Invalid username or password.");
+                ctx.render("/team12/team12_index.html");
+                return;
+            }
+
             ctx.sessionAttribute("currentUser", user);
-            // hvis ja, send videre til task siden
+            System.out.println("User logged in successfully: " + user.getUsername());
 
-            ctx.render("team12_main.html");
+            ctx.redirect("/team12_main");
+
         } catch (Team12DatabaseException e) {
-            // hvis nej, send tilbage til login side med fejl besked
-            ctx.attribute("message", e.getMessage());
-            ctx.render("team12_index.html");
+            System.out.println("Database error: " + e.getMessage());
+            ctx.attribute("message", "Login failed. Please try again.");
+            ctx.render("/team12/team12_index.html");
         }
-
-        // tjek om bruger findes i databaser med de angivne username og password
-
     }
-
 }
