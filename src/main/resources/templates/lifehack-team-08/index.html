@@ -20,13 +20,15 @@
 <body>
 
 <div class="shopContainer">
-    <img src="../../public/lifehack-team-08/images/shop.png" class="shopsign">
+    <img src="../../public/lifehack-team-08/images/shop.png" class="shopsign" alt="Shop Sign">
 </div>
 
 
 <div class="egg-counter">Clicks: <span id="egg-counter">0</span></div>
 
-<div class="chicken-box" onclick="incrementCounter()"></div>
+<div class="chicken-box" onclick="incrementCounter()">
+
+</div>
 
 <div class="shop-box" onclick="openShop()"></div>
 
@@ -43,9 +45,11 @@
         <span id="upgrade-text-2" class="upgrade-info">Upgrade 0/5 - 100 eggs</span>
         <button id="buy-predator" onclick="buyItem('predator')">Buy</button>
     </div>
-
-
     <button onclick="closeShop()">Close</button>
+</div>
+
+<div>
+    <img src="../../public/lifehack-team-08/images/chicken.png" class="chickenImg" id="chicken-img">
 </div>
 
 <script>
@@ -56,6 +60,28 @@
     function incrementCounter() {
         eggs++;
         document.getElementById("egg-counter").textContent = eggs;
+
+        let egg = document.createElement('div');
+        egg.classList.add('egg');
+
+        // Egg falling
+        let chickenBox = document.querySelector('.chicken-box');
+        egg.style.left = `${chickenBox.offsetLeft + chickenBox.offsetWidth / 2 - 25}px`;
+        egg.style.top = `px`;
+
+        document.body.appendChild(egg);
+
+        egg.addEventListener('animationend', () => {
+            egg.remove();
+        });
+
+        // Chicken jump
+        let chickenImg = document.getElementById('chicken-img');
+        chickenImg.classList.add('jump');
+
+        chickenImg.addEventListener('animationend', () => {
+            chickenImg.classList.remove('jump');
+        });
     }
 
     function openShop() {
