@@ -28,11 +28,9 @@
   <div class="content">
     <label for="sodas">Tilføj en sodavand:</label>
 
-    <select class="dropdown" id="sodas">
-      <option>Fanta</option>
-      <option>CocaCola</option>
-      <option>Pepsi</option>
-      <option>Faxekondi</option>
+    <select class="dropdown" id="sodas" name="sodas">
+      <option th:each="sodas : ${sodas}" th:value="${sodas.name}" th:text="${sodas.name}"></option>
+
     </select>
 
     <button>Tilføj</button>

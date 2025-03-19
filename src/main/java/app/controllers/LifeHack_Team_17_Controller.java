@@ -13,11 +13,15 @@ public class LifeHack_Team_17_Controller {
 
     private static ConnectionPool connectionPool;
 
+    public LifeHack_Team_17_Controller(ConnectionPool connectionPool) {
+        LifeHack_Team_17_Controller.connectionPool = connectionPool;
+    }
+
     public static void home(Context ctx) {
         LifeHackTeam17Mapper lifeHackTeam17Mapper = new LifeHackTeam17Mapper();
         List<Soda> sodas = lifeHackTeam17Mapper.getSodaFromDataBase(connectionPool);
         ctx.attribute("sodas", sodas);
-        ctx.render("calculator.html");
+        ctx.render("lifehack-team-17/calculator.html");
     }
 
     //
