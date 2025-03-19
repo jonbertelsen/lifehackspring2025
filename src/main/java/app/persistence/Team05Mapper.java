@@ -36,7 +36,7 @@ public class Team05Mapper {
         return workouts;
     }
     public static void creatWorkout(Workout workout, ConnectionPool myConnectionPool) throws DatabaseException {
-        String sql = "INSERT INTO workoutlog (email, type_id, duration, date) VALUES (?, ?, ?, CURRENT_DATE)";
+        String sql = "INSERT INTO workoutlog (email, type_id, duration, date, extra_notes) VALUES (?, ?, ?, CURRENT_DATE)";
 
         try (
                 Connection connection = myConnectionPool.getConnection();  // Brug connection poolen
