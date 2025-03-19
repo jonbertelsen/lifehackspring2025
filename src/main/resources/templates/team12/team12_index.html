@@ -22,7 +22,7 @@
             <input type="text" name="username" placeholder="Enter username"/>
             <input type="password" name="password" placeholder="Enter password"/>
 
-            <button type="submit" formaction="/login">Get access to your sleep track</button>
+            <button type="submit" formaction="/login" >Get access to your sleep track</button>
 
             <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
         </form>

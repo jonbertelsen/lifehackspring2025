@@ -16,6 +16,7 @@ public class Team12Controller {
         app.get("logout", ctx -> logout(ctx));
         app.get("/createuser", ctx -> ctx.render("/team12/team12_createuser.html"));
         app.post("/createuser", ctx -> createUser(ctx,connectionPool));
+        app.get("/team12_main", ctx -> ctx.render("/team12/team12_main.html"));
     }
 
     private static void createUser(Context ctx, ConnectionPool connectionPool) {
@@ -64,11 +65,11 @@ public class Team12Controller {
             ctx.sessionAttribute("currentUser", user);
             // hvis ja, send videre til task siden
 
-            ctx.render("team12_main.html");
+            ctx.render("/team12_main.html");
         } catch (Team12DatabaseException e) {
             // hvis nej, send tilbage til login side med fejl besked
             ctx.attribute("message", e.getMessage());
-            ctx.render("team12_index.html");
+            ctx.render("team12/team12_index.html");
         }
 
         // tjek om bruger findes i databaser med de angivne username og password
