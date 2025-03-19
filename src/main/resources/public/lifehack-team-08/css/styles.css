@@ -59,13 +59,14 @@
 
 .chicken-box {
     position: absolute;
-    width: 200px;
-    height: 200px;
-    background-color: red;
+    width: 250px;
+    height: 400px;
+    background-color: transparent;
     cursor: pointer;
     border: none;
-    top: 50px;
-    left: 50px;
+    top: 150px;
+    left: 180px;
+    z-index: 1;
 }
 
 
@@ -89,11 +90,52 @@
     text-align: center;
     padding: 20px;
 }
-
 .shop-window button {
     padding: 10px;
     cursor: pointer;
     background-color: lightgreen;
     border: none;
     margin-top: 10px;
+}
+
+.chickenImg{
+    position: relative;
+    left: 150px;
+    top: 80px;
+    height: auto;
+    max-width: 300px;
+    transition: transform 0.3s ease;
+}
+
+.egg{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url('../images/egg.png');
+    background-size: cover;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(100vh);
+    }
+    }
+
+.jump{
+    animation: jump 0.3s ease forwards;
+}
+@keyframes jump {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); / Move up slightly */
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
