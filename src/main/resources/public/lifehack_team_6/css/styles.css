@@ -1,5 +1,67 @@
 body    {
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../images/IMDb_FeaturedImage.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+
+.header-bar {
+    width: 100%;
+    background-color: #deb522;
+    margin: 0px;
+    top: 0px;
+    padding: 10px;
+}
+
+.header-text    {
+    padding: 8px;
+    text-align: center;
+    font-size: 42px;
+}
+
+.button-container   {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+
+.start-button   {
+    background-color: #deb522;
+    color: black;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 45px;
+    cursor: pointer;
+    margin: 8px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 10px;
+
+}
+.start-button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: goldenrod;
+}
+
+.container-header   {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.container-header img   {
+    width: 100px;
+    height: auto;
 }
 
 .container  {
@@ -9,6 +71,13 @@ body    {
     align-items: center;
     margin: 15px;
     float: right;
+}
+
+.wojak-image    {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    width: 35%;
 }
 
 .digit  {
@@ -50,8 +119,4 @@ body    {
 
 #reset {
     background-color: #c91400;
-}
-
-.red    {
-    color: red;
 }
