@@ -11,21 +11,21 @@ import java.time.LocalDateTime;
 
 public class Team12UserMapper {
 
-    public static Team12User login(String userName, String password, ConnectionPool connectionPool) throws Team12DatabaseException {
+    public static Team12User login(String username, String password, ConnectionPool connectionPool) throws Team12DatabaseException {
         String sql = "select * from team12_users where username=? and password_hash=?";
 
         try (
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
         ) {
-            ps.setString(1, userName);
+            ps.setString(1, username);
             ps.setString(2, password);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 int id = rs.getInt("user_id");
                 LocalDateTime createdAt = rs.getTimestamp("created_at").toLocalDateTime();
-                return new Team12User(id, userName, password, createdAt);
+                return new Team12User(id, username, password, createdAt);
             } else {
                 throw new Team12DatabaseException("Fejl i login. Prøv igen");
             }
@@ -34,14 +34,14 @@ public class Team12UserMapper {
         }
     }
 
-    public static void createUser(String userName, String password, ConnectionPool connectionPool) throws Team12DatabaseException {
+    public static void createUser(String username, String password, ConnectionPool connectionPool) throws Team12DatabaseException {
         String sql = "insert into team12_users (username, password_hash) values (?,?)";
 
         try (
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
         ) {
-            ps.setString(1, userName);
+            ps.setString(1, username);
             ps.setString(2, password);
 
             int rowsAffected = ps.executeUpdate();

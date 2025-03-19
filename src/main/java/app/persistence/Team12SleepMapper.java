@@ -8,13 +8,14 @@ import java.sql.SQLException;
 
 public class Team12SleepMapper {
 
-    public static void sleep(String sleepStart, String sleepEnd, String sleepDuration, ConnectionPool connectionPool) throws Team12DatabaseException {
+    public static void saveSleepData(int userId,String sleepStart, String sleepEnd, String sleepDuration, ConnectionPool connectionPool) throws Team12DatabaseException {
         String sql = "insert into team12_sleep_records (sleep_start, sleep_end, sleep_date) values (?,?,?)";
 
         try (
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
         ) {
+            ps.setInt(1,userId);
             ps.setString(1, sleepStart);
             ps.setString(2, sleepEnd);
             ps.setString(3, sleepDuration);

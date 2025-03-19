@@ -75,13 +75,14 @@ public class Team12Controller {
     }
 
     private static void sleep(Context ctx, ConnectionPool connectionPool) {
-        ctx.sessionAttribute("currentUser", ctx.sessionAttribute("currentUser"));
+        Team12User currentUser = ctx.sessionAttribute("currentUser");
         String sleepStart = ctx.formParam("sleep_start");
         String sleepEnd = ctx.formParam("sleep_end");
         String sleepDuration = ctx.formParam("sleep_duration");
 
         try {
-            Team12SleepMapper.sleep(sleepStart, sleepEnd, sleepDuration, connectionPool);
+            assert currentUser != null;
+            Team12SleepMapper.saveSleepData(currentUser.getUserId(),sleepStart, sleepEnd, sleepDuration, connectionPool);
             ctx.attribute("message", "You are now created " + Team12User.getUsername() + ". Now you have to log in.");
             ctx.render("/team12/team12_index.html");
         } catch (Team12DatabaseException e) {

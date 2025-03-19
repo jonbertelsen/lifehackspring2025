@@ -11,18 +11,20 @@
     <header class="header-app">
         <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png" alt="Sleep Tracker Logo">
     </header>
+    <form method="post">
+        <div class="calculate-container">
+            <h2>Time Duration Calculator</h2>
 
-    <div class="calculate-container">
-        <h2>Time Duration Calculator</h2>
-        <label class="goingToSleep" for="start-time">Going to sleep at:</label>
-        <input type="datetime-local" id="start-time" step="60">
-        <label class="wakingUpAt" for="end-time">Waking up at:</label>
-        <input type="datetime-local" id="end-time" step="60">
-        <button formaction="/calculate"  onclick="calculateDuration()">Calculate Duration</button>
-        <button onclick="clearForm()">Clear</button>
-        <div id="result"></div>
-    </div>
+            <label for="sleep_start">Going to sleep at:</label>
+            <input type="datetime-local" name="sleep_start" id="sleep_start" step="60" required>
 
+            <label for="sleep_end">Waking up at:</label>
+            <input type="datetime-local" name="sleep_end" id="sleep_end" step="60" required>
+
+            <button type="submit" formaction="/calculate">Calculate Duration</button>
+            <button type="reset">Clear</button>
+        </div>
+    </form>
     <script>
         function formatDateTime(dateTime) {
             const date = dateTime.toISOString().split('T')[0];
