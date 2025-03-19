@@ -13,9 +13,12 @@ public class Team6Controller {
     private static int correctGuessCount = 0; // Counter variable
 
     public static void routes(Javalin app, ConnectionPool pool) {
-        app.post("begin", ctx -> getMovieList(ctx, pool));
-        app.get("/game", ctx -> ctx.render("lifehack_team_6/game.html"));
-        app.post("/game", ctx -> checkGuess(ctx, pool));
+        app.post("/list", ctx -> getMovieList(ctx, pool)); // Ensure correct route
+        app.get("/startgame", ctx -> {
+            getMovieList(ctx, pool);  // Populate movie list when game starts
+            ctx.render("lifehack_team_6/game.html");
+        });
+        app.post("/guess", ctx -> checkGuess(ctx, pool)); // Ensure correct route
     }
 
     private static void getMovieList(Context ctx, ConnectionPool pool) {
@@ -25,6 +28,13 @@ public class Team6Controller {
 
     public static void checkGuess(Context ctx, ConnectionPool pool) {
         String guess = ctx.formParam("user-input");
+        System.out.println("User guess: " + guess);  // Debugging user input
+        if (allMovies == null || allMovies.isEmpty()) {
+            ctx.attribute("message", "No movies available to guess.");
+            ctx.render("lifehack_team_6/game.html");
+            return;
+        }
+
         int indexToRemove = -1;
         for (int i = 0; i < allMovies.size(); i++) {
             if (fixed(allMovies.get(i).getTitle()).equals(fixed(guess))) {
@@ -42,6 +52,8 @@ public class Team6Controller {
             if (allMovies.isEmpty()) {
                 winner(ctx);
             }
+        } else {
+            ctx.attribute("message", "Incorrect guess! Try again.");
         }
         ctx.render("lifehack_team_6/game.html");
     }
@@ -52,7 +64,7 @@ public class Team6Controller {
     }
 
     private static void rightAnswerMovie(Context ctx, Team6Movie team6Movie) {
-        ctx.attribute("message", team6Movie.toString());
+        ctx.attribute("message", "Correct guess! Movie: " + team6Movie.toString());
         top100counter(ctx); // Ensure counter is updated
         ctx.render("lifehack_team_6/game.html");
     }
@@ -69,3 +81,4 @@ public class Team6Controller {
                 .trim();
     }
 }
+
