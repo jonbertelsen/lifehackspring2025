@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    display: flex;
+    justify-content: center; /* Centrerer alt horisontalt */
+    align-items: center; /* Centrerer alt vertikalt */
+    height: 100vh; /* Sørger for at body fylder hele viewporten */
+}
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centerer alt i containeren vertikalt */
+    justify-content: center; /* Centerer alt i containeren horisontalt */
+    height: 100vh; /* Sørger for at containeren fylder hele viewporten */
+}
+.logo-frontpage {
+    width: 130px;
+    height: auto;
+    padding-top: 100px; /* Øg luft over logoet */
+    margin-top: 0;  /* Sørger for, at logoet ikke bliver forskubbet fra toppen */
+}
+.subtitle {
+    font-size: 14px;
+    max-width: 300px;
+    text-align: center;
+    margin: 0 auto 20px auto;
+    color: #333;
+}
+.login-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-box input {
+    width: 300px;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+    outline: none;
+    border: 1px solid black
+}
+.forgot {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 10px;
+}
+.cta-button {
+    background: #ff00c8;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+.image-grid img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
