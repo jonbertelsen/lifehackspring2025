@@ -32,4 +32,7 @@ Enum: Colour
 Enum: Species
 }
 
+Species <|-- Profile
+Colour <|-- Profile
+User *-- Profile
 @enduml

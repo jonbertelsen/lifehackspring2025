@@ -1,11 +1,30 @@
 package app.enums;
 
 public enum SpeciesTeam4 {
-    CAT,
-    DOG,
-    RABBIT,
-    HAMSTER,
-    ASIANELEPHANT
+    CAT(1),
+    DOG(2),
+    RABBIT(3),
+    HAMSTER(4),
+    ASIANELEPHANT(5);
+
+    private final int code;
+
+    SpeciesTeam4(int code) {
+        this.code = code;
+    }
+
+    public int getCode(){
+        return this.code;
+    }
+
+    public static SpeciesTeam4 fromCode(int code){
+        for(SpeciesTeam4 species : values()){
+            if(species.getCode() == code){
+                return species;
+            }
+        }
+        throw new IllegalArgumentException("SpeciesTeam4 code not found" + code);
+    }
 }
 
 /*
