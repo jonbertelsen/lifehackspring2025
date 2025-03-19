@@ -82,21 +82,70 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 300px;
+    width: 400px; /* Adjust based on your image */
     height: 600px;
-    background-color: blue;
-    border: 2px solid black;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    background-image: url('../images/openShop.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none; /* Remove border */
+    box-shadow: none; /* Remove shadow if not needed */
     text-align: center;
-    padding: 20px;
+    padding: 50px;
+    z-index: 1000; /* Keep it above other elements */
 }
-.shop-window button {
+
+.shop-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.shop-content p {
+    font-size: 20px;
+    font-weight: bold;
     padding: 10px;
-    cursor: pointer;
+}
+
+.upgrade-info {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.shop-window button {
     background-color: lightgreen;
     border: none;
-    margin-top: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
 }
+
+#close-button {
+    position: absolute;
+    bottom: 80px; /* Adjust this to match the scroll image */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px; /* Adjust width based on your image */
+    height: 40px; /* Adjust height based on your image */
+    background-image: url('../images/closeShop.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px white;
+}
+
 
 .chickenImg{
     position: relative;
@@ -116,12 +165,7 @@
     animation: fall 3s linear forwards;
 }
 
-#predator-container{
-    position: absolute;
-    left: 750px;
-    top: 180px;
-    height: auto;
-}
+
 
 @keyframes fall {
     from {

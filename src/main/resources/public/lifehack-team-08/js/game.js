@@ -99,7 +99,41 @@ function buyItem(item) {
                 document.getElementById("buy-predator").style.display = "none";
             }
 
-            updatePredatorImage(predatorTier);
+            // Remove previous predator image (if any)
+            let existingPredator = document.getElementById("predator-img");
+            if (existingPredator) {
+                existingPredator.remove();
+            }
+
+            // Create a new predator image
+            let predator = document.createElement("img");
+            predator.src = `../../public/lifehack-team-08/images/predator${predatorTier}.png`;
+            predator.id = "predator-img";
+            predator.classList.add("predatorImg");
+
+            // Set custom sizes based on tier
+            let sizes = [600, 300, 750, 900, 500]; // Define sizes for each tier
+            predator.style.width = `${sizes[predatorTier - 1]}px`;
+            predator.style.height = "auto"; // Keep aspect ratio
+
+            // Assign different positions based on predatorTier
+            let positions = [
+                { top: "365px", left: "600px" },
+                { top: "275px", right: "350px" },
+                { bottom: "-180px", left: "550px" },
+                { bottom: "-255px", right: "50px" },
+                { bottom: "-245px", left: "750px" }
+            ];
+
+            let pos = positions[predatorTier - 1]; // Get position for the current tier
+            predator.style.position = "absolute";
+            if (pos.top) predator.style.top = pos.top;
+            if (pos.bottom) predator.style.bottom = pos.bottom;
+            if (pos.left) predator.style.left = pos.left;
+            if (pos.right) predator.style.right = pos.right;
+
+            // Add predator to the page
+            document.body.appendChild(predator);
             startEggGain();
         } else {
             alert("Not enough eggs!");
@@ -107,16 +141,6 @@ function buyItem(item) {
     }
 }
 
-function updatePredatorImage(tier) {
-    let predatorContainer = document.getElementById("predator-container");
-    predatorContainer.innerHTML = ""; // Clear previous predator image
 
-    let predatorImg = document.createElement("img");
-    predatorImg.classList.add("predatorImg");
 
-    predatorImg.src = `../../public/lifehack-team-08/images/predator${tier}.png`;
-    predatorImg.alt = `Predator Level ${tier}`;
-
-    predatorContainer.appendChild(predatorImg);
-}
 
