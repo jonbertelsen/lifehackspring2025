@@ -3,6 +3,7 @@ package app;
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
 import app.controllers.TeamTeacherController;
+import app.controllers.LifehackTeam3Controller;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -21,8 +22,6 @@ public class Main {
 
     public static void main(String[] args)
     {
-
-
         // Initializing Javalin and Jetty webserver
 
         Javalin app = Javalin.create(config -> {
@@ -34,7 +33,9 @@ public class Main {
         // Routing
 
         app.get("/", ctx ->  ctx.render("index.html"));
-        TeamTeacherController.routes(app);
+        //TeamTeacherController.routes(app);
+        LifehackTeam3Controller.routes(app);
+
 
     }
 

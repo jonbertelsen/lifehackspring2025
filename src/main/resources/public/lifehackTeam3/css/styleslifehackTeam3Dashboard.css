@@ -1,0 +1,101 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: #f0f2f5;
+}
+
+.dashboard-page {
+    display: block;
+    background: #f0f2f5;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-page .top-nav {
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-page .logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-page .logo-container img {
+    width: 100px;
+    margin: 0;
+}
+
+.dashboard-page .user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dashboard-page .Logout {
+    background: #7b828a;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.dashboard-page .Logout:hover {
+    opacity: 0.9;
+}
+
+.dashboard-page .content {
+    margin-top: 2rem;
+    max-width: 600px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.dashboard-page .content h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.dashboard-page .reminder-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f7f7f7;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+}
+
+.dashboard-page .reminder-item span {
+    font-size: 1rem;
+    color: #333;
+}
+
+.dashboard-page .tilmeld-btn {
+    background: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+.dashboard-page .tilmeld-btn:hover {
+    background: #43a047;
+}
