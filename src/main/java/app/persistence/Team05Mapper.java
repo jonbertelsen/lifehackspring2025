@@ -34,4 +34,41 @@ public class Team05Mapper {
         }
         return workoutLogs;
     }
+    public static void creatWorkout(WorkoutLog workoutLog, ConnectionPool myConnectionPool) throws DatabaseException {
+        String sql = "INSERT INTO workoutlog (email, type_id, duration, date) VALUES (?, ?, ?, CURRENT_DATE)";
+
+        try (
+                Connection connection = myConnectionPool.getConnection();  // Brug connection poolen
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setString(1, workoutLog.getEmail());
+            ps.setInt(2, workoutLog.getType_id());
+            ps.setInt(3, workoutLog.getDuration());
+            ps.setDate(4, new java.sql.Date(workoutLog.getDate().getTime()));
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1) {
+                throw new DatabaseException("Fejl ved oprettelse af nyhedsbrev");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl ved indsættelse af nyhedsbrev: " + e.getMessage());
+        }
+    }
+
+    public static int signUp(String email, ConnectionPool connectionPool) throws DatabaseException {
+
+        String sql = "INSERT INTO user (email, name,password) VALUES (?,?,?) ON CONFLICT (email) DO NOTHING";
+        try (
+                Connection connection = connectionPool.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setString(1, email);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected;
+        }
+        catch (SQLException e) {
+            String msg = "Der er sket en fejl under din signUp til workout log. Prøv igen";
+            throw new DatabaseException(msg, e.getMessage());
+        }
+    }
+
 }
