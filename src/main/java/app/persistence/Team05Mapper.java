@@ -92,6 +92,23 @@ public class Team05Mapper {
         }
     }
 
+    public static void deleteWorkoutLog(int workoutId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "DELETE FROM workoutlog WHERE id = ?";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setInt(1, workoutId);
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected == 0) {
+                throw new DatabaseException("Fejl: Workoutlog med ID " + workoutId + " blev ikke fundet.");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl ved sletning af workoutlog", e.getMessage());
+        }
+    }
 
 
 }
