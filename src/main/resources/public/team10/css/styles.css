@@ -39,11 +39,15 @@ a.login-link:hover {
 
 .logo {
     display: block;
-    margin: 10px ;
+    margin: 10px auto;
     width: 150px;
     height: auto;
     position: relative;
-    top: -80px;
+    top: -50px;
+}
+
+header {
+    text-align: center; /* Center everything inside the header */
 }
 
 
