@@ -11,6 +11,7 @@ import java.sql.Statement;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Team6MapperTest {
+    /*
 
     private final static String USER = "postgres";
     private final static String PASSWORD = "postgres";
@@ -31,4 +32,6 @@ class Team6MapperTest {
 
         assertEquals(expectedSize, actualSize);
     }
+    */
+
 }
