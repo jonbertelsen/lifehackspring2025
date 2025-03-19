@@ -155,7 +155,7 @@ public class Team1Entities {
         }
     }
 
-    public class Quiz {
+    public static class Quiz {
         private int id;
         private String title;
         private List<Categories> categories;
@@ -214,7 +214,7 @@ public class Team1Entities {
         }
     }
 
-    public class Users {
+    public static class Users {
         private int id;
         private String name;
         private String password;

@@ -9,12 +9,12 @@ import java.sql.SQLException;
 
 public class Team1QuestionMapper {
 
-    public static void createAnswer(ConnectionPool connectionPool, Team1Entities.Questions questions, Team1Entities.Categories category) throws DatabaseException {
+    public static void createQuestion(ConnectionPool connectionPool, Team1Entities.Questions questions, Team1Entities.Categories category) throws DatabaseException {
+        //A method which can create a question, answer, point with a category id
         String sql = "INSERT INTO lifehack_team_1_questions (question, answer, point, category_id) VALUES (?, ?, ?, ?)";
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
-
 
             ps.setString(1, questions.getQuestion());
             ps.setString(2, questions.getAnswer());
@@ -31,16 +31,17 @@ public class Team1QuestionMapper {
         }
     }
 
-    public static void updateQuestion(ConnectionPool connectionPool, Team1Entities.Questions questions, Team1Entities.Categories category) throws DatabaseException {
-        String sql = "UPDATE lifehack_team_1_questions SET answer = ? WHERE id = ?";
+    public static void updateQuestion(ConnectionPool connectionPool, Team1Entities.Questions questions) throws DatabaseException {
+        //A method which can update the question
+        String sql = "UPDATE lifehack_team_1_questions SET question = ?, answer = ?, point = ?  WHERE id = ?";
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setInt(1,questions.getPoints());
-            ps.setString(2, questions.getQuestion());
-            ps.setString(3, questions.getAnswer());
-            ps.setInt(4, category.getId());
+            ps.setString(1,questions.getQuestion());
+            ps.setString(2, questions.getAnswer());
+            ps.setInt(3,questions.getPoints());
+            ps.setInt(4, questions.getId());
 
             int rowsUpdated = ps.executeUpdate();
 

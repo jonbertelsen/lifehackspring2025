@@ -6,8 +6,9 @@ import app.controllers.TeamTeacherController;
 import app.entities.Team1Entities;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
-import app.persistence.Team1AnswerMapper;
+import app.persistence.Team1CategoriesMapper;
 import app.persistence.Team1QuestionMapper;
+import app.persistence.Team1UsersMapper;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
@@ -24,9 +25,9 @@ public class Main {
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
     public static void main(String[] args) throws DatabaseException {
-        Team1QuestionMapper questionMapper = new Team1QuestionMapper();
+        Team1CategoriesMapper categoriesMapper = new Team1CategoriesMapper();
 
-        questionMapper.createAnswer(connectionPool, new Team1Entities.Questions(100,"spg","svar"),new Team1Entities.Categories(1,"Java", null));
+        categoriesMapper.updateCategory(connectionPool, new Team1Entities.Categories("Frontend", null), new Team1Entities.Quiz(8,"Programming", null));
 
 
         // Initializing Javalin and Jetty webserver
