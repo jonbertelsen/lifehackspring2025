@@ -65,6 +65,7 @@ public class Team05Mapper{
                 Connection connection = connectionPool.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)
         ) {
             ps.setString(1, email);
+            ps.setInt(2,password);
             int rowsAffected = ps.executeUpdate();
             return rowsAffected;
         }
