@@ -11,7 +11,7 @@
     <header> this is my header
         <h1>Wellcome to Sleep tracker</h1>
         <a href="team12_index.html" th:href="@{/}">
-            <img class="logo" src="../public/images/SleepTracker_logo.png" alt="Sleep Tracker Logo">
+            <img class="logo" src="../../public/team12/images/SleepTracker_logo.png" alt="Sleep Tracker Logo">
         </a>
     </header>
 
@@ -33,7 +33,7 @@
         <div>
             <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/logout}" class="logout-create"> Log out </a>
             <span th:if="${session.currentUser != null}"> |  </span>
-            <a href="createuser.html" th:href="@{/createuser}" class="logout-create">Create user </a>
+            <a href="team12_createuser.html" th:href="@{/createuser}" class="logout-create">Create user </a>
         </div>
     </footer>
 
