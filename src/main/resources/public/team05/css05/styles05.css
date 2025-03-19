@@ -19,9 +19,15 @@ footer{
 
 }
 
+.uploadheader{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
 body{
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -35,4 +41,86 @@ body{
     width: 100%;
     max-width: 800px;
 
+}
+
+/* Reset some default styles */
+body, h1, form, input, textarea, button {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background-color: #e8c16c;
+    padding: 15px;
+}
+
+header img {
+    max-width: 200px;
+}
+
+/* Form container */
+.add-workout-form {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-workout-form label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+
+.add-workout-form input,
+.add-workout-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.add-workout-form textarea {
+    resize: none;
+}
+
+.button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.button:hover {
+    background-color: #002244;
+}
+
+/* Back link */
+.back-link {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #e48f0e;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    text-decoration: underline;
 }
