@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 class Team6MapperTest {
+    /*
 
     BeforeEach
     void setUp() {
@@ -16,4 +17,6 @@ class Team6MapperTest {
     @org.junit.jupiter.api.Test
     void getTop100Movies() {
     }
+    */
+
 }

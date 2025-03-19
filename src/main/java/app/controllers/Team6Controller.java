@@ -2,16 +2,15 @@ package app.controllers;
 
 import app.entities.Team6Movie;
 import app.persistence.ConnectionPool;
+import app.persistence.Team6Mapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
-import org.jetbrains.annotations.NotNull;
-
 import java.text.Normalizer;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
+
 
 public class Team6Controller {
-    private static ArrayList<Team6Movie> allMovies = new ArrayList<>();
+    private static List<Team6Movie> allMovies;
 
     public static void routes(Javalin app, ConnectionPool pool) {
     app.post("begin", ctx -> getMovieList(ctx, pool));
@@ -20,24 +19,29 @@ public class Team6Controller {
     }
 
     private static void getMovieList(Context ctx, ConnectionPool pool) {
-        // kalder på mapper metoden og sætter den til arraylisten
+        allMovies = Team6Mapper.getTop100Movies(pool);
     }
 
-    private static void checkGuess(Context ctx, ConnectionPool pool) {
+    public static void checkGuess(Context ctx, ConnectionPool pool) {
         String guess = ctx.formParam("guess");
 
-        Optional<Team6Movie> guessedMovie = allMovies.stream()
-                .filter(movie -> movie.getTitle().equals(fixed(guess)))
-                .findFirst();
+        int indexToRemove = -1;
+        for (int i = 0; i < allMovies.size(); i++) {
+            if (fixed(allMovies.get(i).getTitle()).equals(fixed(guess))) {
+                indexToRemove = i;
+                break;
+            }
+        }
 
-        if(guessedMovie.isPresent()) {
-            allMovies.remove(guessedMovie.get());
+        if (indexToRemove != -1) {
             //bruger ctx attribute til at sende et besked til html. Måske ny metode.
-            rightAnswerMovie(ctx, guessedMovie.get());
+            rightAnswerMovie(ctx, allMovies.get(indexToRemove));
+            allMovies.remove(indexToRemove);
             if(allMovies.isEmpty()) {
                 // Sender winner conditions. Måske ny metode
                 winner(ctx);
             }
+
         }
     }
 
