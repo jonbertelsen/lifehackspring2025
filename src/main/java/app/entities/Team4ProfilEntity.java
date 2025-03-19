@@ -8,15 +8,21 @@ public class Team4ProfilEntity {
     private String name;
     private int age;
     private String image;
+    private String email;
+    private String password;
+    private int id;
 
-
-    public Team4ProfilEntity(int color, int species, String bio, String name, int age, String image) {
+    public Team4ProfilEntity(int color, int species, String bio, String name, int age, String image, String email, String password, int id)
+    {
         this.color = color;
         this.species = species;
         this.bio = bio;
         this.name = name;
         this.age = age;
         this.image = image;
+        this.email = email;
+        this.password = password;
+        this.id = id;
     }
 
 
@@ -45,13 +51,22 @@ public class Team4ProfilEntity {
         return this.image;
     }
 
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
 
     @Override
     public String toString() {
         return "Color: " + this.color + " Species: " + this.species + " Bio: " + this.bio +
-                " Name: " + this.name + " Age: " + this.age + " Image: " + this.image;
+                " Name: " + this.name + " Age: " + this.age + " Image: " + this.image + " Email: " + this.email + " ID: " + this.id;
     }
-
-
-
 }
