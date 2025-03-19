@@ -1,0 +1,104 @@
+:root {
+    --rounded_corner_size: 1em;
+}
+
+
+* {
+    margin: 0;
+    font-family: Arial;
+    text-align: center;
+}
+body{background: antiquewhite;}
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+}
+
+.flex-box{
+    display: flex;
+    justify-content: center;
+}
+
+.player_block{
+    margin-right: 3vw;
+    margin-left: 3vw;
+
+    background: cyan;
+    width: 100%;
+    max-width: 10em;
+    height: 5em;
+    border-radius: 0 0 var(--rounded_corner_size) var(--rounded_corner_size);
+}
+.player_block > p {
+    padding: 0.5em;
+}
+
+.game_position{
+    margin: auto;
+    margin-top: 20vh;
+
+}
+.question_columns {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    margin: 5%;
+    flex: 1;
+}
+.question_columns > div {
+    margin: 1em;
+    width: 100%;
+    max-width: 20em;
+}
+
+.question_rows {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+
+    height: 49vh;
+    flex: 1;
+}
+.question_rows > a  {
+    background: cyan;
+    border-radius: var(--rounded_corner_size);
+
+    margin: 3%;
+    height: 100%;
+    max-height: 4em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.question_rows > a > h1 {
+    font-size: 1.5em;
+}
+
+.qa{
+    padding: 2em;
+    padding-top: 1em;
+}
+.qa > .line{
+    background: black;
+    height: 0.1em;
+    margin: 1em;
+}
+.hide{
+    display:none;
+}
+.show{
+    display: block;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1em;
+}

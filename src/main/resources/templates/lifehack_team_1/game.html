@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--fix variables-->
+    <link href="../../public/lifehack_team_1/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <title>game</title>
+</head>
+<body>
+<header>
+    <div class="flex-box" id="fields">
+        <script src="../../public/lifehack_team_1/js/js.js"></script>
+        <div class="player_block" id="addplayer_field">
+            <p>add new team</p>
+            <button onclick="addPlayer()">+</button>
+        </div>
+    </div>
+</header>
+<div class="game_position">
+    <div class=question_columns>
+        <!--variables may differ-->
+        <div th:each="category : ${category_list}">
+            <h1 class="title" th:text="${category.title}">title</h1>
+            <div class=question_rows>
+                <a th:each="question : ${category.title + '_list'}">
+                    <h1 th:text="${question.points}">0</h1>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <!--placeholder name-->
+    <h1> not jeopardy</h1>
+</footer>
+</body>
+</html>

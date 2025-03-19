@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="../../public/lifehack_team_1/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <title>question</title>
+</head>
+<body>
+<header>
+    <div class="flex-box" id="fields">
+        <script src="../../public/lifehack_team_1/js/js.js"></script>
+        <div class="player_block" id="addplayer_field">
+            <p>add new team</p>
+            <button onclick="addplayer()">+</button>
+        </div>
+    </div>
+</header>
+<div class="game_position">
+    <!--fix variables-->
+    <h2 class="category" th:text="${category.title}">category</h2>
+    <h2 class="point" th:text="${category.title}">0</h2>
+    <div class="qa">
+        <H1 class="question" th:text="${category.title}">question</H1>
+        <div class="line"></div>
+        <button id="answer_button" onclick="revealAnswer()">reveal answer</button>
+        <H1 id="answer" class="hide" th:text="${category.title}">answer</H1>
+        <script>
+            function revealAnswer() {
+                var element = document.getElementById("answer_button");
+                element.style.display = "none";
+
+                element = document.getElementById("answer");
+                element.classList.toggle("show");
+            }
+        </script>
+    </div>
+</div>
+<footer>
+    <!--placeholder name-->
+    <h1> not jeopardy</h1>
+</footer>
+</body>
+</html>
