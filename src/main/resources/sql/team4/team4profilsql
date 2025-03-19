@@ -2,7 +2,7 @@
 -- Please log an issue at https://github.com/pgadmin-org/pgadmin4/issues/new/choose if you find any bugs, including reproduction steps.
 BEGIN;
 
-
+DROP TABLE IF EXISTS public.profil;
 DROP TABLE IF EXISTS public.profile;
 
 CREATE TABLE IF NOT EXISTS public.profile
