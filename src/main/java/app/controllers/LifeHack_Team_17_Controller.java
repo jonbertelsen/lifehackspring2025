@@ -20,9 +20,11 @@ public class LifeHack_Team_17_Controller {
         ctx.render("calculator.html");
     }
 
+    //
     public static void routes(Javalin app) {
-        app.get("lifehack-team-17/calculator", ctx -> team17Calculator(ctx));
+        app.get("calculator", ctx -> team17Calculator(ctx));
         app.get("consequence", ctx -> team17Consequence(ctx));
+
     };
 
     private static void team17Calculator(@NotNull Context ctx) {

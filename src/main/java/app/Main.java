@@ -37,6 +37,7 @@ public class Main {
 
         //app.get("/", ctx ->  ctx.render("index.html"));
         app.get("/", ctx -> ctx.render("lifehack-team-17/calculator.html"));
+
         TeamTeacherController.routes(app);
         LifeHack_Team_17_Controller.routes(app);
 
