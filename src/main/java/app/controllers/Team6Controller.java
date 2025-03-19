@@ -14,16 +14,18 @@ public class Team6Controller {
 
     public static void routes(Javalin app, ConnectionPool pool) {
     app.post("begin", ctx -> getMovieList(ctx, pool));
-    app.get("game", ctx -> ctx.render("game.html"));
-    app.post("guess", ctx -> checkGuess(ctx, pool));
+    app.get("/game", ctx -> ctx.render("lifehack_team_6/game.html"));
+    app.post("/game", ctx -> checkGuess(ctx, pool));
     }
+
 
     private static void getMovieList(Context ctx, ConnectionPool pool) {
         allMovies = Team6Mapper.getTop100Movies(pool);
     }
 
     public static void checkGuess(Context ctx, ConnectionPool pool) {
-        String guess = ctx.formParam("guess");
+        allMovies = Team6Mapper.getTop100Movies(pool);
+        String guess = ctx.formParam("user-input");
 
         int indexToRemove = -1;
         for (int i = 0; i < allMovies.size(); i++) {
@@ -50,8 +52,8 @@ public class Team6Controller {
     }
 
     private static void rightAnswerMovie(Context ctx, Team6Movie team6Movie) {
-        ctx.attribute("rightanswer", team6Movie);
-        ctx.render("game.html");
+        ctx.attribute("message", team6Movie.toString());
+        ctx.render("lifehack_team_6/game.html");
     }
 
 

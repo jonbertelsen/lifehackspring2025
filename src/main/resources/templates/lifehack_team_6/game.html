@@ -14,7 +14,7 @@
 <div class="main-content">
     <form method="post">
         <div>
-            <input type="text" id="user-input" placeholder="Type your guess here">
+            <input type="text" id="user-input" name="user-input" placeholder="Type your guess here">
             <button type="submit">Submit guess</button>
         </div>
     </form>
@@ -23,6 +23,6 @@
     </div>
 
 </div>
-
+<div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"> </p></div>
 </body>
 </html>

@@ -37,11 +37,7 @@ public class Team6Movie {
 
     @Override
     public String toString() {
-        return "Team6Movie{" +
-                "title='" + title + '\'' +
-                ", rating=" + rating +
-                ", releaseYear=" + releaseYear +
-                ", imageFilename='" + imageFilename + '\'' +
-                '}';
+        return title + " (" + releaseYear + "). " + rating + "☆" ;
+
     }
 }

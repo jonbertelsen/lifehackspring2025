@@ -34,7 +34,7 @@ public class Main {
 
         // Routing
 
-        app.get("/", ctx ->  ctx.render("index.html"));
+        app.get("/", ctx ->  ctx.render("lifehack_team_6/index.html"));
 
         Team6Controller.routes(app, connectionPool);
 
