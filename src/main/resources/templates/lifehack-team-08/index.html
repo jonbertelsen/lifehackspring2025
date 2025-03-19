@@ -14,9 +14,6 @@
             background-position: center;
             background-size: cover;
         }
-    </style>
-    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
-    <style>
 
         @media (max-width: 768px) {
             .chicken-box, .shop-box {
@@ -102,8 +99,15 @@
             gap: 10px; /* Adds space between text and button */
         }
 
+        .upgrade-info {
+            margin-left: 20px;
+            font-size: 16px;
+        }
 
-
+        .disabled-button {
+            background-color: grey;
+            cursor: not-allowed;
+        }
 
     </style>
 </head>
@@ -124,22 +128,23 @@
     <h2>Welcome to the shop!</h2>
     <div class="shop-content">
         <p>Buy chicken feed</p>
-        <button onclick="buyItem('chickenFeed')">Buy</button>
-
+        <span id="upgrade-text-1" class="upgrade-info">Upgrade 0/5 - 50 eggs</span>
+        <button id="buy-chicken-feed" onclick="buyItem('chickenFeed')">Buy</button>
     </div>
 
     <div class="shop-content">
         <p>Buy predator</p>
-        <button onclick="buyItem('predator')">Buy</button>
-
+        <span id="upgrade-text-2" class="upgrade-info">Upgrade 0/5 - 100 eggs</span>
+        <button id="buy-predator" onclick="buyItem('predator')">Buy</button>
     </div>
-
 
     <button onclick="closeShop()">Close</button>
 </div>
 
 <script>
-    let eggs = 0;
+    let eggs = 10000000000;
+    let chickenFeedTier = 0;
+    let predatorTier = 0;
 
     function incrementCounter() {
         eggs++;
@@ -155,7 +160,41 @@
     }
 
     function buyItem(item) {
+        if (item === 'chickenFeed') {
+            if (chickenFeedTier >= 4) {
+                document.getElementById("buy-chicken-feed").classList.add("disabled-button");
+                document.getElementById("buy-chicken-feed").disabled = true;
+                document.getElementById("upgrade-text-1").textContent = "Max level reached!";
+                return;
+            }
 
+            let cost = Math.pow(chickenFeedTier + 1, 2) * 50; // Increase cost with each level
+            if (eggs >= cost) {
+                eggs -= cost; // Deduct the cost from the eggs
+                chickenFeedTier++; // Upgrade the chicken feed level
+                document.getElementById("egg-counter").textContent = eggs;
+                document.getElementById("upgrade-text-1").textContent = `Upgrade ${chickenFeedTier}/5 - ${Math.pow(chickenFeedTier + 1, 2) * 50} eggs`;
+            } else {
+                alert("Not enough eggs!");
+            }
+        } else if (item === 'predator') {
+            if (predatorTier >= 4) {
+                document.getElementById("buy-predator").classList.add("disabled-button");
+                document.getElementById("buy-predator").disabled = true;
+                document.getElementById("upgrade-text-2").textContent = "Max level reached!";
+                return;
+            }
+
+            let cost = Math.pow(predatorTier + 1, 2) * 100; // Increase cost with each level
+            if (eggs >= cost) {
+                eggs -= cost; // Deduct the cost from the eggs
+                predatorTier++; // Upgrade the predator level
+                document.getElementById("egg-counter").textContent = eggs;
+                document.getElementById("upgrade-text-2").textContent = `Upgrade ${predatorTier}/5 - ${Math.pow(predatorTier + 1, 2) * 100} eggs`;
+            } else {
+                alert("Not enough eggs!");
+            }
+        }
     }
 </script>
 
