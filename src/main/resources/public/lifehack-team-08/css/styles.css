@@ -18,11 +18,82 @@
 
 .shopsign{
     position: absolute;
-    width: 50%;
-    max-width: 200px;
+    width: 15%;
+    max-width: 15%;
     height: auto;
     right: 0;
     top: 10px;
     margin-right: 200px;
     margin-top: 50px;
+
+}
+
+.shop-box {
+    position: fixed;
+    width: 15%;
+    max-width: 15%;
+    height: 15%;
+    max-height: 15%;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    top: 50px;
+    right: 0;
+    margin-right: 205px;
+    margin-top: 25px;
+
+
+}
+
+@media (max-width: 768px) {
+    .chicken-box, .shop-box {
+        width: 150px;
+        height: 150px;
+    }
+
+    .shop-window {
+        width: 80%;
+        height: 70%;
+    }
+}
+
+.chicken-box {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    cursor: pointer;
+    border: none;
+    top: 50px;
+    left: 50px;
+}
+
+
+.egg-counter {
+    font-size: 24px;
+    margin: 20px;
+    user-select: none;
+}
+
+.shop-window {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 600px;
+    background-color: blue;
+    border: 2px solid black;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    padding: 20px;
+}
+
+.shop-window button {
+    padding: 10px;
+    cursor: pointer;
+    background-color: lightgreen;
+    border: none;
+    margin-top: 10px;
 }
