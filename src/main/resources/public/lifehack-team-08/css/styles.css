@@ -18,7 +18,6 @@
 
 .shopsign{
     position: absolute;
-
-    width: 50%;
-    height: auto;
+    width: 10000px;
+    right: 0;
 }
