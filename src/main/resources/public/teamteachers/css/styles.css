@@ -1,6 +1,209 @@
 /* Teacher css goes here */
-
-h1 {
-    color: orange;
+:root {
+    /* Set base font and colors */
+    --font-family: sans-serif;
+    --font-size: 16px;
+    --text-color: #333;
+    --bg-color: #fff;
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
 }
 
+/* CSS Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: var(--font-size);
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    scroll-behavior: smooth;
+}
+
+body {
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+textarea {
+    font-family: inherit;
+    border: none;
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 1fr;
+    grid-template-rows: 0.5fr 1fr;   /* 2 equal rows */
+    gap: 20px; /* Space between squares */
+    max-width: 800px;
+    margin: 50px auto; /* Centering */
+}
+
+.grid-item {
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #007bff;
+}
+
+.middle-row {
+    grid-row: span 2; /* Span across both rows */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.middle-column {
+    grid-column: span 2; /* Span across both columns */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.page-wrapper {
+    padding-top: 40px;
+    max-width: 800px;
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ask-form {
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid orange;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.ask-form textarea {
+    width: 100%; /* Adjust width to fit container */
+    max-width: 350px; /* Optional: limit max width */
+    height: 100px; /* Adjust height */
+    resize: none; /* Prevent resizing (optional) */
+    padding: 20px;
+
+}
+
+.ask-form button {
+    padding: 10px;
+    margin-top: 20px;
+    border: 1px solid silver;
+    border-radius: 8px;
+    background-color: var(--bg-color);
+}
+
+.words-of-wisdom {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    grid-template-rows: repeat(2, 1fr); /* Two rows */
+    gap: 10px; /* Space between cells */
+}
+
+.words-of-wisdom-quote {
+    font-style: italic;
+    font-size: var(--font-size);
+}
+
+.words-of-wisdom-quote::before {
+    content: "“ "; /* Left double quotation mark */
+    font-size: 1.5em;
+    color: gray;
+}
+
+.words-of-wisdom-quote::after {
+    content: " ”"; /* Right double quotation mark */
+    font-size: 1.5rem;
+    color: gray;
+}
+
+.quote-wrapper {
+    padding: 20px;
+}
+
+.philosopher-image {
+    justify-self: flex-end;
+}
+
+.speech-container {
+    position: relative;
+    width: 280px;  /* Match SVG width */
+    height: 160px; /* Match SVG height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Position SVG in the background */
+.speech-bubble-left {
+    position: absolute;
+    opacity: 50%;
+    top: 0;
+    left: 0;
+    z-index: 0; /* SVG stays behind */
+}
+
+/* Position textarea on top of SVG */
+.speech-textarea {
+    position: absolute;
+    width: 220px;
+    height: 100px;
+    padding: 10px;
+    top: 15px;
+    background: transparent; /* Keep transparent to show SVG */
+    border: none;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    z-index: 1; /* Ensure textarea is above the SVG */
+    resize: none;
+    outline: none;
+    text-align: center;
+}
+
+/* Optional: Adjust text color for visibility */
+.speech-textarea::placeholder {
+    position: absolute;
+    top: 0px;
+    left: 90px;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}
