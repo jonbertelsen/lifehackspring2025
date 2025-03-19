@@ -25,16 +25,15 @@ public class UserMapper {
             try(PreparedStatement ps = connection.prepareStatement(query)){
 
 
-                 ps.setString(1, username);
-                 ps.setString(2, password);
+                ps.setString(1, username);
+                ps.setString(2, password);
+                int userId = ps.executeQuery().getInt("user_id");
 
-                 ps.executeQuery();
-                 User user = new User(username, password);
-                 return user;
+                User user = new User(userId, username, password);
+                return user;
             }
         } catch (SQLException e) {
             throw new DatabaseException("Could not get user " + e);
         }
-        return null;
     }
 }
