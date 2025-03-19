@@ -1,0 +1,13 @@
+.shopContainer{
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+}
+
+.shopsign{
+    position: absolute;
+
+    width: 50%;
+    height: auto;
+}
