@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 /***
  * Singleton pattern applied to handling a Hikari ConnectionPool
  */
-public class ConnectionPool {
+public class  ConnectionPool {
 
     private static volatile ConnectionPool instance = null;
     private static HikariDataSource ds = null;

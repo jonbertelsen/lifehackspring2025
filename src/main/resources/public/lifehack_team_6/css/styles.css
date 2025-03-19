@@ -5,3 +5,15 @@ body    {
 .red    {
     color: red;
 }
+
+.header{
+    display: flex;
+    flex-direction: row;
+}
+
+.timer{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 40px;
+}
