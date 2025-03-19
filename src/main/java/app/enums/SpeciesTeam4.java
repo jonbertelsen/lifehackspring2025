@@ -1,5 +1,7 @@
 package app.enums;
 
+import app.exceptions.IllegalSpeciesException;
+
 public enum SpeciesTeam4 {
     CAT(1),
     DOG(2),
@@ -9,21 +11,24 @@ public enum SpeciesTeam4 {
 
     private final int code;
 
-    SpeciesTeam4(int code) {
+    SpeciesTeam4(int code)
+    {
         this.code = code;
     }
 
-    public int getCode(){
+    public int getCode()
+    {
         return this.code;
     }
 
-    public static SpeciesTeam4 enumFromCode(int code){
+    public static SpeciesTeam4 int2Enum (int code)
+    {
         for(SpeciesTeam4 species : values()){
             if(species.getCode() == code){
                 return species;
             }
         }
-        throw new IllegalArgumentException("SpeciesTeam4 code not found\nYour input needs to be between 1 and " + SpeciesTeam4.values().length + "\n" + code);
+        throw new IllegalSpeciesException("SpeciesTeam4 code not found\nYour input needs to be between 1 and " + SpeciesTeam4.values().length + "\n" + code);
     }
 }
 
