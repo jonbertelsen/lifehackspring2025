@@ -1,0 +1,74 @@
+/********* header *********/
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 2px solid black;
+    min-width: 400px;
+    min-height: 300px;
+}
+
+header a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid blue;
+    max-width: 400px;
+}
+
+header a img {
+    width: 50px;
+}
+
+/********* body *********/
+
+.redirect_button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 2px solid green;
+    gap: 20px;
+    max-width: 400px;
+}
+
+.redirect_button a {
+    color: black;
+    text-decoration: none;
+}
+
+.content {
+    display: flex;
+    border: 2px solid purple;
+    max-width: 400px;
+    max-height: 300px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.content button {
+    max-width: 50px;
+    background: green;
+    color: white;
+    border: 2px solid black;
+    margin-left: 5px;
+}
+
+.content button:hover {
+    background: lightgreen;
+    cursor: pointer;
+
+}
+
+.dropdown {
+    max-width: 100px;
+}
+.footer {
+    border: 2px solid chocolate ;
+}
+
+
+
+/********* footer *********/
+
