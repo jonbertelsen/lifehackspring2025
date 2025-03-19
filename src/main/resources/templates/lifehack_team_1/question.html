@@ -22,13 +22,10 @@
     <div class="qa">
         <!--demo text-->
         <H1 class="question" th:text="${category.title}">question</H1>
-
         <div class="line"></div>
         <button id="answer_button" onclick="revealAnswer()">reveal answer</button>
         <!--demo text-->
         <H1 id="answer" class="hide" th:text="${category.title}">answer</H1>
-
-        <!--move to another place?-->
         <script>
             function revealAnswer() {
                 var element = document.getElementById("answer_button");
@@ -36,7 +33,6 @@
 
                 element = document.getElementById("answer");
                 element.classList.toggle("show");
-
             }
         </script>
     </div>
