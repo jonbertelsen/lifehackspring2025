@@ -19,16 +19,10 @@
 
 <h1>Welcome to Train Now</h1>
 
-<!-- ✅ Show if user is logged in -->
-<div th:if="${username}">
     <h2>Ready to start your workout?</h2>
-</div>
 
-<!-- ✅ Show login link if user is NOT logged in -->
-<div th:unless="${username}">
-    <a th:href="@{/login}" class="login-link">Login</a>
+<a th:href="@{/login}" class="login-link">Login</a>
 
-</div>
 
 </body>
 </html>
