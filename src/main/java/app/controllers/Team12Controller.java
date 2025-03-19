@@ -14,9 +14,8 @@ public class Team12Controller {
         app.get("/", ctx ->  ctx.render("/team12/team12_index.html"));
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("logout", ctx -> logout(ctx));
-        app.get("createuser", ctx -> ctx.render("team12_createuser.html"));
-        app.post("createuser", ctx -> createUser(ctx,connectionPool));
-
+        app.get("/createuser", ctx -> ctx.render("/team12/team12_createuser.html"));
+        app.post("/createuser", ctx -> createUser(ctx,connectionPool));
     }
 
     private static void createUser(Context ctx, ConnectionPool connectionPool) {
@@ -33,16 +32,16 @@ public class Team12Controller {
                 Team12UserMapper.createuser(username,password1,connectionPool);
                 ctx.attribute("message", "You are now created" + username
                         + ". Now you have to login");
-                ctx.render("index.html");
+                ctx.render("/team12/team12_index.html");
             }
             catch (Team12DatabaseException e) {
                 ctx.attribute("message", "Passwords already exists, try again or login");
-                ctx.render("createuser.html");
+                ctx.render("/team12_createuser.html");
             }
         }
         else {
             ctx.attribute("message", "Passwords do not match, try again");
-            ctx.render("createuser.html");
+            ctx.render("/team12_createuser.html");
         }
     }
 
@@ -69,7 +68,7 @@ public class Team12Controller {
         } catch (Team12DatabaseException e) {
             // hvis nej, send tilbage til login side med fejl besked
             ctx.attribute("message", e.getMessage());
-            ctx.render("index.html");
+            ctx.render("team12_index.html");
         }
 
         // tjek om bruger findes i databaser med de angivne username og password
