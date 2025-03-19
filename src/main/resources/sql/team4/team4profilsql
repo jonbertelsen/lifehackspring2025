@@ -3,6 +3,8 @@
 BEGIN;
 
 
+DROP TABLE IF EXISTS public.profil;
+
 CREATE TABLE IF NOT EXISTS public.profil
 (
     color integer NOT NULL,
@@ -10,6 +12,10 @@ CREATE TABLE IF NOT EXISTS public.profil
     bio character varying NOT NULL,
     name character varying NOT NULL,
     age integer NOT NULL,
-    image character varying NOT NULL
+    image character varying NOT NULL,
+    email character varying NOT NULL,
+    id serial NOT NULL,
+    password character varying NOT NULL,
+    PRIMARY KEY (id)
 );
 END;
