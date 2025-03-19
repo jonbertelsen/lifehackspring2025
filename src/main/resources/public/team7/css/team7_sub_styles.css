@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.header {
+    background-color: #eaffd4;
+    padding: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+h1 {
+    margin: 0;
+    font-size: 3rem;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    gap: 50px;
+}
+
+.emoji {
+    width: 300px;
+    height: auto;
+}
+
+.login-box {
+    background: #f3f3f3;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input {
+    width: 200px;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    margin-top: 20px;
+    background-color: #eaffd4;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #d4ffb3;
+}
+
+.forgot-password {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: gray;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
