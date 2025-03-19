@@ -1,0 +1,62 @@
+package app.persistence;
+
+import app.entitites.Team12User;
+import app.exceptions.Team12DatabaseException;
+
+import java.security.Timestamp;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+public class Team12UserMapper {
+
+    public static Team12User login(String userName, String password, ConnectionPool connectionPool) throws Team12DatabaseException {
+        String sql = "select * from users where username=? and password=?";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setString(1, userName);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("user_id");
+                LocalDateTime createdAt = rs.getTimestamp("created_at").toLocalDateTime();
+                return new Team12User(id, userName, password, createdAt );
+            } else {
+                throw new Team12DatabaseException("Fejl i login. Prøv igen");
+            }
+        } catch (SQLException e) {
+            throw new Team12DatabaseException("DB fejl", e.getMessage());
+        }
+    }
+
+    public static void createuser(String userName, String password, ConnectionPool connectionPool) throws Team12DatabaseException {
+        String sql = "insert into users (username, password) values (?,?)";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setString(1, userName);
+            ps.setString(2, password);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1) {
+                throw new Team12DatabaseException("Fejl ved oprettelse af ny bruger");
+            }
+        } catch (SQLException e) {
+            String msg = "Der er sket en fejl. Prøv igen";
+            if (e.getMessage().startsWith("ERROR: duplicate key value ")) {
+                msg = "Brugernavnet findes allerede. Vælg et andet";
+            }
+            throw new Team12DatabaseException(msg, e.getMessage());
+        }
+    }
+}
+

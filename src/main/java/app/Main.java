@@ -33,7 +33,7 @@ public class Main {
 
         // Routing
 
-        app.get("/", ctx ->  ctx.render("team12_index.html"));
+        //app.get("/", ctx ->  ctx.render("team12_index.html"));
         TeamTeacherController.routes(app);
 
     }
