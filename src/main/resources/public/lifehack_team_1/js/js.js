@@ -6,10 +6,8 @@ function loadAllPlayers() {
             div.innerHTML = `
                         <p class="team_name">${"team" + (i+1)}</p>
                         <div class="flex-box">
-                            <!--wrong variable-->
                             <button onclick="updatePoints(1, '${"team" + (i+1)}')">+</button>
                             <h2 id="${"team" + (i+1) + "_points"}"> ${getPointsByNumber(i+1)}</h2>
-                            <!--wrong variable-->
                             <button onclick="updatePoints(-1, '${"team" + (i+1)}')">-</button>
                         </div>
                 `;
@@ -51,10 +49,8 @@ function addPlayer() {
     div.innerHTML = `
                         <p class="team_name">${"team" + window.sessionStorage.teamcount}</p>
                         <div class="flex-box">
-                            <!--wrong variable-->
                             <button onclick="updatePoints(1, '${"team" + window.sessionStorage.teamcount}')">+</button>
                             <h2 id="${"team" + window.sessionStorage.teamcount + "_points"}">0</h2>
-                            <!--wrong variable-->
                             <button onclick="updatePoints(-1, '${"team" + window.sessionStorage.teamcount}')">-</button>
                         </div>
                 `;
