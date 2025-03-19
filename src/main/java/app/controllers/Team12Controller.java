@@ -11,18 +11,12 @@ import org.jetbrains.annotations.NotNull;
 public class Team12Controller {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
-        app.get("/", ctx -> team12FrontHome(ctx,connectionPool));
-        /*
+        app.get("/", ctx ->  ctx.render("/team12/team12_index.html"));
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("logout", ctx -> logout(ctx));
         app.get("createuser", ctx -> ctx.render("team12_createuser.html"));
         app.post("createuser", ctx -> createUser(ctx,connectionPool));
 
-         */
-    }
-
-    private static void team12FrontHome(@NotNull Context ctx, ConnectionPool connectionPool) {
-        ctx.render("team12/team12_index.html");
     }
 
     private static void createUser(Context ctx, ConnectionPool connectionPool) {
