@@ -72,3 +72,79 @@ header a img {
 
 /********* footer *********/
 
+
+/* Settings to make the top bar look better */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Standard settings for body */
+body {
+    font-family: Arial, sans-serif;
+    color: #000;
+}
+
+/* Baggrundsbilledet */
+.background-image {
+    position: fixed; /*bliver samme sted selv når der scrolles*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Billedet er bagerst */
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #800000; /* Mørkerød farve */
+    padding: 10px 20px;
+}
+
+.top-button {
+    flex: 1; /* Gør at begge knapper fylder lige meget */
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 0;
+    background-color: #800000;
+    border: none;
+}
+
+.top-button:hover {
+    background-color: #a00000; /* Mørkere rød ved hover */
+}
+
+/* Container til konsekvensbokse */
+.content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* LAver 2 kolonner (Altså overskrift og tekst) */
+    gap: 20px;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Styling for hver enkelt boks */
+.box {
+    background-color: rgba(128, 0, 0, 0.8);
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px; /* Fjerner spidse hjørner på boksene */
+}
+
+.box h2 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.box p {
+    line-height: 1.4;
+}
