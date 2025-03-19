@@ -8,19 +8,11 @@
 </head>
 <body>
 <header>
-    <div class="flex-box">
-        <div class="player_block">
-            <p>team 1</p>
-            <div class="flex-box">
-                <button>+</button>
-                <!--wrong variable-->
-                <h2 th:text="${demo.points}">0</h2>
-                <button>-</button>
-            </div>
-        </div>
-        <div class="player_block">
+    <div class="flex-box" id="fields">
+        <script src="../../public/lifehack_team_1/js/js.js"></script>
+        <div class="player_block" id="addplayer_field">
             <p>add new team</p>
-            <button>+</button>
+            <button onclick="addplayer()">+</button>
         </div>
     </div>
 </header>
@@ -36,8 +28,6 @@
             proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</H1>
 
         <!--demo title-->
-        <div></div>
-
         <button id="answer_button" onclick="revealAnswer()">reveal answer</button>
         <H1 class="answer" th:text="${category.title}">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
