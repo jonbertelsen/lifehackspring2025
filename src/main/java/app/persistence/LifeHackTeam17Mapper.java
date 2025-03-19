@@ -14,7 +14,7 @@ public class LifeHackTeam17Mapper {
     public ArrayList<Soda> getSodaFromDataBase(ConnectionPool connectionPool) {
         ArrayList<Soda> sodaList = new ArrayList<>();
 
-        String sql = "SELECT * FROM Soda ORDER BY name";//TODO: Check in later if you need to add ASC or DECS
+        String sql = "SELECT * FROM \"Lifehack_Team_17_Soda\" ORDER BY name";//TODO: Check in later if you need to add ASC or DECS
         //Creates the connection between server and software
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)){
