@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <Link rel="stylesheet" th:href="@{css/SignIn.css}" href="public.lifehack_team_16/css/SignIn.css">
+</head>
+<body>
+<div class="signIn-box">
+    <div class="signIn-items">
+        <h2>Sign in</h2>
+        <p th:if="${error}" style="color: red;">[[${error}]]</p>
+        <form th:action="@{/user/signIn}" method="post">
+            <label for="username">Username</label>:
+            <input type="text" id="username" name="username" autofocus="autofocus"/><br/>
+            <label for="password">Password</label>:
+            <input type="password" id="password" name="password"/><br/>
+            <input class="button" href="HomePage.html" th:href="@{HomePage}" type="submit" value="Log in"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

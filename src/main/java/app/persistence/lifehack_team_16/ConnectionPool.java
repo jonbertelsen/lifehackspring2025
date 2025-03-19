@@ -1,4 +1,4 @@
-package app.persistence;
+package app.persistence.lifehack_team_16;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
