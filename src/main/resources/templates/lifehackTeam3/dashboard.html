@@ -12,10 +12,10 @@
     </div>
 
     <div class="user-info">
-        <span>Logged ind: {user}</span>
+        <p>Logged in as: <span th:text="${username}"></span></p>
 
         <div class="logout-button">
-            <form method="post" th:action="@{/logout}">
+            <form method="post" th:action="@{/lifehackTeam3/logout}">
                 <button type="submit" class="Logout">Logout</button>
             </form>
 
