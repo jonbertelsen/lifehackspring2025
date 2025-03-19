@@ -29,14 +29,15 @@
     <label for="sodas">Tilføj en sodavand:</label>
 
     <select class="dropdown" id="sodas" name="sodas">
-      <option th:each="sodas : ${sodas}" th:value="${sodas.name}" th:text="${sodas.name}"></option>
+      <option th:each="sodas : ${sodas}" th:value="${sodas.name}" th:text="${sodas.name + ' - ' + sodas.liter}"></option>
 
     </select>
 
-    <button>Tilføj</button>
+    <button id="addButton">Tilføj</button>
 
     <p>Tilføjet sodavande</p>
-    <p>Total kalorier: 1050 kcal</p>
+    <ul id="addedSodasList"></ul>
+    <p id="totalCalories">Total kalorier: 0 kcal</p>
   </div>
 
 
