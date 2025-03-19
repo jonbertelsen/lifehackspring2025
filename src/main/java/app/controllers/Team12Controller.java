@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 public class Team12Controller {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
-        app.get("/team12/index", ctx -> team12FrontHome(ctx,connectionPool));
+        app.get("/", ctx -> team12FrontHome(ctx,connectionPool));
         /*
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("logout", ctx -> logout(ctx));
