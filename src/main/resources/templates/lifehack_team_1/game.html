@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--fix variables-->
+    <link href="../../public/lifehack_team_1/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <title>game</title>
+</head>
+<body>
+<header>
+    <div class="flex-box">
+        <div class="player_block">
+            <p>team 1</p>
+            <div class="flex-box">
+                <button>+</button>
+                <!--wrong variable-->
+                <h2 th:text="${demo.points}">0</h2>
+                <button>-</button>
+            </div>
+        </div>
+        <div class="player_block">
+            <p>add new team</p>
+            <button>+</button>
+        </div>
+    </div>
+</header>
+<div class="game_position">
+    <div class=question_columns>
+        <!--variables may differ-->
+        <div th:each="category : ${category_list}">
+            <h1 class="title" th:text="${category.title}">title</h1>
+            <div class=question_rows>
+                <a th:each="question : ${category.title + '_list'}">
+                    <h1 th:text="${question.points}">0</h1>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <!--placeholder name-->
+    <h1> not jeopardy</h1>
+</footer>
+</body>
+</html>
