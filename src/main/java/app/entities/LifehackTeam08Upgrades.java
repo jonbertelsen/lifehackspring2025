@@ -46,4 +46,9 @@ public class LifehackTeam08Upgrades {
     public void setTier(int tier) {
         this.tier = tier;
     }
+
+    @Override
+    public String toString(){
+        return "LifehackTeam08Upgrades{" + "id=" + id + ", name=" + name + ", tier=" + tier + ", cost=" + cost + '}';
+    }
 }
