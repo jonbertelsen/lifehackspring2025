@@ -110,4 +110,8 @@ public class Team05Mapper {
         }
     }
 
+    public static void editWorkoutLog(){
+
+    }
+
 }
