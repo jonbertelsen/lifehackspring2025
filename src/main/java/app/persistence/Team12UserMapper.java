@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class Team12UserMapper {
 
     public static Team12User login(String userName, String password, ConnectionPool connectionPool) throws Team12DatabaseException {
-        String sql = "select * from users where username=? and password=?";
+        String sql = "select * from team12_users where username=? and password_hash=?";
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -27,7 +27,7 @@ public class Team12UserMapper {
             if (rs.next()) {
                 int id = rs.getInt("user_id");
                 LocalDateTime createdAt = rs.getTimestamp("created_at").toLocalDateTime();
-                return new Team12User(id, userName, password, createdAt );
+                return new Team12User(id, userName, password, createdAt);
             } else {
                 throw new Team12DatabaseException("Fejl i login. Prøv igen");
             }
@@ -37,7 +37,7 @@ public class Team12UserMapper {
     }
 
     public static void createuser(String userName, String password, ConnectionPool connectionPool) throws Team12DatabaseException {
-        String sql = "insert into users (username, password) values (?,?)";
+        String sql = "insert into team12_users (username, password_hash) values (?,?)";
 
         try (
                 Connection connection = connectionPool.getConnection();
