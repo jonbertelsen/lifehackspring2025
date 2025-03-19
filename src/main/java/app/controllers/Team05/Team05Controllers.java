@@ -33,7 +33,7 @@
             }
         }
 
-        public void addNewsletter(Context ctx) {
+        public void addWorkoutlog(Context ctx) {
             try {
                 // Opret nødvendige mapper, hvis de ikke eksisterer
                 Path workoutDir = Path.of("files");
