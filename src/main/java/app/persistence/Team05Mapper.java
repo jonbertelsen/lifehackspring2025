@@ -110,5 +110,4 @@ public class Team05Mapper {
         }
     }
 
-
 }
