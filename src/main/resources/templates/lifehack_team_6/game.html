@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Lifehack team 6 - IMDBGuessr frontpage</title>
     <link href="../../public/lifehack_team_6/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
-
 </head>
 <body>
 
@@ -23,6 +22,26 @@
     <button class="btn" id="stop">Stop</button>
     <button class="btn" id="reset">Reset</button>
 </div>
+
 <script src="../../public/lifehack_team_6/javascript/script.js"></script>
+<header>
+    <p>IMDB GUESSR - Top 100 Movies</p>
+    <p class="timer">00:00</p>
+    <p class="counter" th:text="${counter}">0/100</p> <!-- Display the counter -->
+</header>
+
+<div class="main-content">
+    <form method="post">
+        <div>
+            <input type="text" id="user-input" name="user-input" placeholder="Type your guess here">
+            <button type="submit">Submit guess</button>
+        </div>
+    </form>
+    <div class="correct-guess-message">
+        <p>Movie details here! How?</p>
+    </div>
+
+</div>
+<div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"> </p></div>
 </body>
 </html>

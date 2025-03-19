@@ -13,6 +13,12 @@ public class Team6Movie {
         this.imageFilename = imageFilename;
     }
 
+    public Team6Movie(String title, double rating, int releaseYear) {
+        this.title = title;
+        this.rating = rating;
+        this.releaseYear = releaseYear;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -31,11 +37,7 @@ public class Team6Movie {
 
     @Override
     public String toString() {
-        return "Team6Movie{" +
-                "title='" + title + '\'' +
-                ", rating=" + rating +
-                ", releaseYear=" + releaseYear +
-                ", imageFilename='" + imageFilename + '\'' +
-                '}';
+        return title + " (" + releaseYear + "). " + rating + "☆" ;
+
     }
 }
