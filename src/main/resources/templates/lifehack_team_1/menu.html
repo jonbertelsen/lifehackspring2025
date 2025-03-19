@@ -2,28 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--fix variables-->
     <link href="../../public/lifehack_team_1/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
     <title>Title</title>
 </head>
 <body>
-<header>
-    <div class="flex-box">
-        <div class="player_block">
-            <p>team 1</p>
-            <div class="flex-box">
-                <button>+</button>
-                <!--wrong variable-->
-                <h2 th:text="${demo.points}">0</h2>
-                <button>-</button>
-            </div>
-        </div>
-        <div class="player_block">
-            <p>add new team</p>
-            <button>+</button>
-        </div>
-    </div>
-</header>
 <div class="game_position">
 
     <!--refer to new page-->

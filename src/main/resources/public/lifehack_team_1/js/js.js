@@ -40,7 +40,7 @@ function updatePoints(p1, team) {
     document.getElementById(team + "_points").innerHTML = sessionStorage.getItem(team);
 }
 
-function addplayer() {
+function addPlayer() {
     if (window.sessionStorage.teamcount) {
         window.sessionStorage.teamcount = Number(window.sessionStorage.teamcount) + 1;
     } else {
