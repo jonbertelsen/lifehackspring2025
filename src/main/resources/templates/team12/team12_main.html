@@ -11,6 +11,8 @@
     <header class="header-app">
         <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png" alt="Sleep Tracker Logo">
     </header>
+
+
     <form method="post">
         <div class="calculate-container">
             <h2>Time Duration Calculator</h2>
@@ -22,14 +24,19 @@
             <input type="datetime-local" name="sleep_end" id="sleep_end" step="60" required>
 
             <button type="submit" formaction="/calculate">Calculate Duration</button>
+
             <button type="reset">Clear</button>
+
+
+            <div id="result"></div>
         </div>
     </form>
+
     <script>
         function formatDateTime(dateTime) {
             const date = dateTime.toISOString().split('T')[0];
             const time = dateTime.toTimeString().split(' ')[0];
-            return `${date} ${time}`;
+            return ${date} ${time};
         }
 
         function calculateDuration() {
@@ -54,12 +61,12 @@
             const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
 
             const result = document.getElementById('result');
-            result.innerHTML = `
+            result.innerHTML =
                 <p>The time between <strong>${formatDateTime(startDate)}</strong> and <strong>${formatDateTime(endDate)}</strong> is:</p>
 
-                    <p>${hours} hours, ${minutes} minutes</p>
+            <p>${hours} hours, ${minutes} minutes</p>
 
-            `;
+            ;
         }
 
         function clearForm() {
@@ -70,8 +77,8 @@
     </script>
 
     <footer class="footer-app">
-        <a href="#" class="footer-btn">Logout</a>
-        <a href="#" class="footer-btn">Dashboard</a>
+        <a href="/logout" class="footer-btn">Logout</a>
+        <a href="/team12_main" class="footer-btn">Dashboard</a>
     </footer>
 </div>
 </body>
