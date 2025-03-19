@@ -18,12 +18,12 @@ public enum ColorTeam4 {
         return this.code;
     }
 
-    public static ColorTeam4 fromCode(int code){
+    public static ColorTeam4 enumFromCode(int code){
         for(ColorTeam4 color : values()){
             if(color.getCode() == code){
                 return color;
             }
         }
-        throw new IllegalArgumentException("ColorTeam4 code not found" + code);
+        throw new IllegalArgumentException("ColorTeam4 code not found\nYou input needs to be between 1 and "+ ColorTeam4.values().length +  "\n" + code);
     }
 }

@@ -17,13 +17,13 @@ public enum SpeciesTeam4 {
         return this.code;
     }
 
-    public static SpeciesTeam4 fromCode(int code){
+    public static SpeciesTeam4 enumFromCode(int code){
         for(SpeciesTeam4 species : values()){
             if(species.getCode() == code){
                 return species;
             }
         }
-        throw new IllegalArgumentException("SpeciesTeam4 code not found" + code);
+        throw new IllegalArgumentException("SpeciesTeam4 code not found\nYour input needs to be between 1 and " + SpeciesTeam4.values().length + "\n" + code);
     }
 }
 
