@@ -1,17 +1,18 @@
 package app.entitites;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Team12SleepRecords {
     private int recordId;
     private int userId;
-    private String sleepDate;
-    private String sleepStart;
-    private String sleepEnd;
+    private Timestamp sleepDate;
+    private Timestamp sleepStart;
+    private Timestamp sleepEnd;
     private double sleepDuration;
     private String createAt;
 
-    public Team12SleepRecords(int recordId, int userId, String sleepDate, String sleepStart, String sleepEnd, double sleepDuration, String createAt) {
+    public Team12SleepRecords(int recordId, int userId, Timestamp sleepDate, Timestamp sleepStart, Timestamp sleepEnd, double sleepDuration, String createAt) {
         this.recordId = recordId;
         this.userId = userId;
         this.sleepDate = sleepDate;
@@ -37,27 +38,27 @@ public class Team12SleepRecords {
         this.userId = userId;
     }
 
-    public String getSleepDate() {
+    public Timestamp getSleepDate() {
         return sleepDate;
     }
 
-    public void setSleepDate(String sleepDate) {
+    public void setSleepDate(Timestamp sleepDate) {
         this.sleepDate = sleepDate;
     }
 
-    public String getSleepStart() {
+    public Timestamp getSleepStart() {
         return sleepStart;
     }
 
-    public void setSleepStart(String sleepStart) {
+    public void setSleepStart(Timestamp sleepStart) {
         this.sleepStart = sleepStart;
     }
 
-    public String getSleepEnd() {
+    public Timestamp getSleepEnd() {
         return sleepEnd;
     }
 
-    public void setSleepEnd(String sleepEnd) {
+    public void setSleepEnd(Timestamp sleepEnd) {
         this.sleepEnd = sleepEnd;
     }
 

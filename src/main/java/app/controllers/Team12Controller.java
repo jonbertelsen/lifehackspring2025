@@ -8,6 +8,8 @@ import app.persistence.Team12UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
+import java.sql.Timestamp;
+
 public class Team12Controller {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
@@ -76,20 +78,23 @@ public class Team12Controller {
 
     private static void sleep(Context ctx, ConnectionPool connectionPool) {
         Team12User currentUser = ctx.sessionAttribute("currentUser");
-        String sleepStart = ctx.formParam("sleep_start");
-        String sleepEnd = ctx.formParam("sleep_end");
-        String sleepDuration = ctx.formParam("sleep_duration");
+        String sleepStartString = ctx.formParam("sleep_start").replace('T', ' ') + ":00"; // Add seconds
+        String sleepEndString = ctx.formParam("sleep_end").replace('T', ' ') + ":00"; // Add seconds
 
         try {
             assert currentUser != null;
-            Team12SleepMapper.saveSleepData(currentUser.getUserId(),sleepStart, sleepEnd, sleepDuration, connectionPool);
-            ctx.attribute("message", "You are now created " + Team12User.getUsername() + ". Now you have to log in.");
-            ctx.render("/team12/team12_index.html");
+            Timestamp sleepStart = Timestamp.valueOf(sleepStartString);
+            Timestamp sleepEnd = Timestamp.valueOf(sleepEndString);
+
+            Team12SleepMapper.saveSleepData(currentUser.getUserId(), sleepStart, sleepEnd, connectionPool);
+            ctx.attribute("message", "Sleep data recorded for " + currentUser.getUsername());
+            ctx.render("/team12/team12_main.html");
         } catch (Team12DatabaseException e) {
-            ctx.attribute("message", "User already exists, try again or log in.");
-            ctx.render("/team12/team12_createuser.html");
+            ctx.attribute("message", "Failed to record sleep data, please try again.");
+            ctx.render("/team12/team12_main.html");
+        } catch (IllegalArgumentException e) {
+            ctx.attribute("message", "Invalid date format. Please use the correct format.");
+            ctx.render("/team12/team12_main.html");
         }
     }
 }
-
-
