@@ -8,6 +8,8 @@ import io.javalin.http.Context;
 import java.text.Normalizer;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 
 public class Team6Controller {
     private static List<Team6Movie> allMovies;
@@ -62,6 +64,11 @@ public class Team6Controller {
                 .replaceAll("[^a-zA-Z0-9 ]", "")
                 .toLowerCase()
                 .trim();
+    }
+
+    private static void top100counter(Context ctx){
+        String counter = Integer.toString(100 - allMovies.size())+"/100";
+        ctx.attribute("counter", counter);
     }
 
     ;
