@@ -31,7 +31,7 @@ public class Team05Mapper {
                 workouts.add(workout);
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Fejl ved hentning af nyhedsbreve", e.getMessage());
+            throw new DatabaseException("Error retrieving newsletters", e.getMessage());
         }
         return workouts;
     }
@@ -49,7 +49,7 @@ public class Team05Mapper {
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 1) {
-                throw new DatabaseException("Fejl ved oprettelse af nyhedsbrev");
+                throw new DatabaseException("Error during newsletter insertion:");
             }
         } catch (SQLException e) {
             throw new DatabaseException("Fejl ved indsættelse af nyhedsbrev: " + e.getMessage());
@@ -67,7 +67,7 @@ public class Team05Mapper {
             return rowsAffected;
         }
         catch (SQLException e) {
-            String msg = "Der er sket en fejl under din signUp til workout log. Prøv igen";
+            String msg = "There was an error during your sign-up for the workout log. Please try again.";
             throw new DatabaseException(msg, e.getMessage());
         }
     }
@@ -88,7 +88,7 @@ public class Team05Mapper {
                 return -1; // Indikerer fejl (forkert email eller password)
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Login-fejl: Prøv igen", e.getMessage());
+            throw new DatabaseException("Login-error: try again", e.getMessage());
         }
     }
 
@@ -103,10 +103,10 @@ public class Team05Mapper {
             int rowsAffected = ps.executeUpdate();
 
             if (rowsAffected == 0) {
-                throw new DatabaseException("Error: Workoutlog with ID " + workoutId + " blev ikke fundet.");
+                throw new DatabaseException("Error: Workoutlog with ID " + workoutId + " was not found.");
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Fejl ved sletning af workoutlog", e.getMessage());
+            throw new DatabaseException("Error deleting workout log.", e.getMessage());
         }
     }
 
@@ -125,7 +125,7 @@ public class Team05Mapper {
                 ps.setInt(4, workoutId);
 
         } catch (SQLException e) {
-            throw new DatabaseException("Fejl ved redigering af workoutlog", e.getMessage());
+            throw new DatabaseException("Error editing workout log.", e.getMessage());
         }
     }
 }
