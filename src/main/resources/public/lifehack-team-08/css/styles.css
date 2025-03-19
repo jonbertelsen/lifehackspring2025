@@ -1,0 +1,11 @@
+.shop-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px; /* Adds space between text and button */
+}
+
+.shop-content p {
+    margin: 0; /* Removes default paragraph margin */
+    white-space: nowrap; /* Prevents text from wrapping */
+}

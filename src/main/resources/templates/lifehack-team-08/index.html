@@ -3,8 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <style>
+
+        @media (max-width: 768px) {
+            .chicken-box, .shop-box {
+                width: 150px;
+                height: 150px;
+            }
+
+            .shop-window {
+                width: 80%;
+                height: 70%;
+            }
+        }
+
+        .chicken-box {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            cursor: pointer;
+            border: none;
+            top: 50px;
+            left: 50px;
+        }
+
+        .shop-box {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+            cursor: pointer;
+            border: none;
+            top: 50px;
+            right: 50px;
+        }
+
+        .egg-counter {
+            font-size: 24px;
+            margin: 20px;
+            user-select: none;
+        }
+
+        .shop-window {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 600px;
+            background-color: blue;
+            border: 2px solid black;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .shop-window button {
+            padding: 10px;
+            cursor: pointer;
+            background-color: lightgreen;
+            border: none;
+            margin-top: 10px;
+        }
+
+    </style>
 </head>
 <body>
+
+<div class="egg-counter">Clicks: <span id="egg-counter">0</span></div>
+
+<div class="chicken-box" onclick="incrementCounter()"></div>
+
+<div class="shop-box" onclick="openShop()"></div>
+
+<div id="shop-window" class="shop-window">
+    <h2>Welcome to the shop!</h2>
+    <div class="shop-content">
+        <p>Buy chicken feed</p>
+        <button onclick="buyItem('chickenFeed')">Buy</button>
+
+        <p>Buy predator</p>
+        <button onclick="buyItem('predator')">Buy</button>
+    </div>
+
+    <button onclick="closeShop()">Close</button>
+</div>
+
+<script>
+    let eggs = 0;
+
+    function incrementCounter() {
+        eggs++;
+        document.getElementById("egg-counter").textContent = eggs;
+    }
+
+    function openShop() {
+        document.getElementById("shop-window").style.display = "block";
+    }
+
+    function closeShop() {
+        document.getElementById("shop-window").style.display = "none";
+    }
+
+    function buyItem(item) {
+
+    }
+</script>
 
 </body>
 </html>
