@@ -2,10 +2,10 @@
 -- Please log an issue at https://github.com/pgadmin-org/pgadmin4/issues/new/choose if you find any bugs, including reproduction steps.
 BEGIN;
 
-
 DROP TABLE IF EXISTS public.profil;
+DROP TABLE IF EXISTS public.profile;
 
-CREATE TABLE IF NOT EXISTS public.profil
+CREATE TABLE IF NOT EXISTS public.profile
 (
 
     color integer NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS public.profil
     PRIMARY KEY (id)
 );
 
-INSERT INTO public.profil (color, species, bio, name, age, image, email, password) VALUES
+INSERT INTO public.profile (color, species, bio, name, age, image, email, password) VALUES
 (5, 1, 'Loves napping in the sun and chasing birds in the garden', 'Garfield', 14, 'Cat.jpg', 'Cat@cat.com', '1234'),
 (1, 2, 'Very loyal, I wait like a good boi for my human every day', 'DoggyStyle', 4, 'Dog.jpg', 'Dog@dog.com', '1234'),
 (2, 3, 'Just hopping from one dandylion to the next', 'Thumper', 3, 'Rabbit.jpg', 'Rabbit@rabbit.com', '1234'),
