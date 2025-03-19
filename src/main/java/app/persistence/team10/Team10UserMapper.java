@@ -14,7 +14,7 @@ public class Team10UserMapper
 
     public static Team10User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException
     {
-        String sql = "SELECT * FROM users WHERE email=?"; // Assuming 'email' is the username
+        String sql = "SELECT * FROM team10_users WHERE email=? and password=?"; // Assuming 'email' is the username
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -43,7 +43,7 @@ public class Team10UserMapper
 
     public static void createUser(String email, String password, ConnectionPool connectionPool) throws DatabaseException
     {
-        String sql = "insert into users (email, password) values (?,?)";
+        String sql = "insert into team10_users (email, password, role) values (?,?,?)";
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -52,6 +52,7 @@ public class Team10UserMapper
         {
             ps.setString(1, email);
             ps.setString(2, password);
+            ps.setString(3,"user");
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 1)

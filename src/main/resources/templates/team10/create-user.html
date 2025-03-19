@@ -17,7 +17,7 @@
 
 </header>
 
-<h1>Welcome, please login!</h1>
+<h1>Welcome, please create an user!</h1>
 
 <form method="post">
 
@@ -25,13 +25,21 @@
     <input type="text" id="email" name="email" placeholder="email"/>
     <label for="password">Password</label>
     <input type="password" id="password" name="password" placeholder="password"/>
-    <button type="submit" formaction="/login">Login</button>
+    <button type="submit" formaction="/create-user">Register</button>
 
 </form>
-
-
-
+<!-- Display message if it exists -->
+<div>
+    <p th:text="${message}"></p> <!-- Show message here -->
 </div>
+
+<!-- Add Back to Login button -->
+<div>
+    <a href="/login" class="back-to-login">Back to Login</a>
+</div>
+
+
+
 
 </body>
 </html>

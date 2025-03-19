@@ -11,38 +11,39 @@ public class Team10Controller {
 
     //Routing
     public static void routes(Javalin app,ConnectionPool connectionPool) {
-        app.get("/", ctx -> home(ctx));
-        app.get("/login", ctx -> ctx.render("login.html"));
+        app.get("/team10", ctx -> home(ctx));
+        app.get("/login", ctx -> ctx.render("team10/login.html"));
         app.post("/login", ctx -> handleLogin(ctx,connectionPool));
-        app.get("/create-user", ctx-> ctx.render("create-user.html"));
+        app.get("/create-user", ctx-> ctx.render("team10/create-user.html"));
         app.post("/create-user", ctx -> handleCreateUser(ctx,connectionPool));
+        app.get("/homepage", ctx -> ctx.render("team10/homepage.html"));
 
     }
 
     public static void home(Context ctx) throws DatabaseException {
-        ctx.render("index.html");
+        ctx.render("team10/index.html");
     }
 
     // Login method
     private static void handleLogin(Context ctx, ConnectionPool connectionPool) {
-        String username = ctx.formParam("username");
+        String email = ctx.formParam("email");
         String password = ctx.formParam("password");
 
 
         //Check if the user is in the database and check what their role is
         try {
-            Team10User user = Team10UserMapper.login(username, password, connectionPool);
-            ctx.redirect("homepage.html");
+            Team10User user = Team10UserMapper.login(email, password, connectionPool);
+            ctx.redirect("/homepage");
         }catch (DatabaseException e){
             ctx.attribute("message",e.getMessage());
-            ctx.redirect("login.html");
+            ctx.redirect("/login");
         }
     }
     private static void handleCreateUser(Context ctx, ConnectionPool connectionPool) {
         // Retrieve user information from the form
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
-        String role = "user";
+        String role = "user"; // Standard role
 
         try {
             // Create the new user in the database
@@ -50,8 +51,16 @@ public class Team10Controller {
             ctx.attribute("message", "User created successfully!");
             ctx.redirect("/login"); // Redirect to login page after successful user creation
         } catch (DatabaseException e) {
-            ctx.attribute("message", "Error creating user: " + e.getMessage());
-            ctx.redirect("create-user.html");
+            // If the email is already in use, display an error message
+            String errorMessage = e.getMessage();
+            if (errorMessage.contains("Email already in use")) {
+                ctx.attribute("message", "This email is already in use. Please login or use another email.");
+            } else {
+                ctx.attribute("message", "Error creating user: " + e.getMessage());
+            }
+            // Stay on the create-user page if there is an error
+            ctx.render("team10/create-user.html");
         }
     }
+
 }
