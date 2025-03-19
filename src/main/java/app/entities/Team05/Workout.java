@@ -2,14 +2,15 @@ package app.entities.Team05;
 
 import java.util.Date;
 
-public class WorkoutLog {
+public class Workout {
     private int id;
     private String email;
     private int type_id;
     private int duration;
     private Date date;
+    private String extraNotes;
 
-    public WorkoutLog(int id, String email, int type_id, int duration, Date date) {
+    public Workout(int id, String email, int type_id, int duration, Date date, String extraNotes) {
         this.id = id;
         this.email = email;
         this.type_id = type_id;
@@ -35,6 +36,10 @@ public class WorkoutLog {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getExtraNotes() {
+        return extraNotes;
     }
 
     @Override

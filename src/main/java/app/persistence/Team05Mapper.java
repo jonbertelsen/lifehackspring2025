@@ -1,6 +1,6 @@
 package app.persistence;
 
-import app.entities.Team05.WorkoutLog;
+import app.entities.Team05.Workout;
 import app.exceptions.DatabaseException;
 
 import java.sql.Connection;
@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Team05Mapper {
-    public static List<WorkoutLog> getAllWorkoutLog(ConnectionPool ConnectionPool) throws DatabaseException {
-        List<WorkoutLog> workoutLogs = new ArrayList<>();
+    public static List<Workout> getAllWorkoutLog(ConnectionPool ConnectionPool) throws DatabaseException {
+        List<Workout> workouts = new ArrayList<>();
         String sql = "SELECT * FROM workoutlog";
 
         try (Connection conn = ConnectionPool.getConnection();  // Sørg for, at connection poolen er korrekt brugt
@@ -20,31 +20,32 @@ public class Team05Mapper {
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                WorkoutLog workoutLog = new WorkoutLog(
+                Workout workout = new Workout(
                         rs.getInt("id"),
                         rs.getString("email"),
                         rs.getInt("type_id"),
                         rs.getInt("duration"),
-                        rs.getDate("date")
+                        rs.getDate("date"),
+                        rs.getString("extra_Notes")
                 );
-                workoutLogs.add(workoutLog);
+                workouts.add(workout);
             }
         } catch (SQLException e) {
             throw new DatabaseException("Fejl ved hentning af nyhedsbreve", e.getMessage());
         }
-        return workoutLogs;
+        return workouts;
     }
-    public static void creatWorkout(WorkoutLog workoutLog, ConnectionPool myConnectionPool) throws DatabaseException {
+    public static void creatWorkout(Workout workout, ConnectionPool myConnectionPool) throws DatabaseException {
         String sql = "INSERT INTO workoutlog (email, type_id, duration, date) VALUES (?, ?, ?, CURRENT_DATE)";
 
         try (
                 Connection connection = myConnectionPool.getConnection();  // Brug connection poolen
                 PreparedStatement ps = connection.prepareStatement(sql)
         ) {
-            ps.setString(1, workoutLog.getEmail());
-            ps.setInt(2, workoutLog.getType_id());
-            ps.setInt(3, workoutLog.getDuration());
-            ps.setDate(4, new java.sql.Date(workoutLog.getDate().getTime()));
+            ps.setString(1, workout.getEmail());
+            ps.setInt(2, workout.getType_id());
+            ps.setInt(3, workout.getDuration());
+            ps.setDate(4, new java.sql.Date(workout.getDate().getTime()));
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 1) {
@@ -57,7 +58,7 @@ public class Team05Mapper {
 
     public static int signUp(String email, ConnectionPool connectionPool) throws DatabaseException {
 
-        String sql = "INSERT INTO user (email, name,password) VALUES (?,?,?) ON CONFLICT (email) DO NOTHING";
+        String sql = "INSERT INTO users (email, name,password) VALUES (?,?,?) ON CONFLICT (email) DO NOTHING";
         try (
                 Connection connection = connectionPool.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)
         ) {
@@ -70,5 +71,27 @@ public class Team05Mapper {
             throw new DatabaseException(msg, e.getMessage());
         }
     }
+
+    public static int login(String email, int password, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT email, password FROM users WHERE email = ? AND password = ?";
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setString(1, email);
+            ps.setInt(2, password);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("email"); // Returner brugerens ID ved succesfuldt login
+            } else {
+                return -1; // Indikerer fejl (forkert email eller password)
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Login-fejl: Prøv igen", e.getMessage());
+        }
+    }
+
+
 
 }
