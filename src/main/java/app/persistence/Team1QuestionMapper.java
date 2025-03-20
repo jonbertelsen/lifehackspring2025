@@ -21,7 +21,7 @@ public class Team1QuestionMapper {
 
             ps.setString(1, questions.getQuestion());
             ps.setString(2, questions.getAnswer());
-            ps.setInt(3,questions.getPoints());
+            ps.setInt(3, questions.getPoints());
             ps.setInt(4, category.getId());
 
             int rowsCreated = ps.executeUpdate();
@@ -41,9 +41,9 @@ public class Team1QuestionMapper {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setString(1,questions.getQuestion());
+            ps.setString(1, questions.getQuestion());
             ps.setString(2, questions.getAnswer());
-            ps.setInt(3,questions.getPoints());
+            ps.setInt(3, questions.getPoints());
             ps.setInt(4, questions.getId());
 
             int rowsUpdated = ps.executeUpdate();
@@ -56,17 +56,17 @@ public class Team1QuestionMapper {
         }
     }
 
-    public static List<Team1Entities.Questions> listOfQuestions(ConnectionPool connectionPool, int id) throws DatabaseException, SQLException {
+    public static List<Team1Entities.Questions> listOfQuestions(ConnectionPool connectionPool, int id) throws DatabaseException{
         //A method that returns a list of questions with a category id
         List<Team1Entities.Questions> questionsList = new ArrayList<>();
         String sql = "SELECT * FROM lifehack_team_1_questions WHERE category_id = ?";
 
-        try(Connection connection = connectionPool.getConnection()){
-            try (PreparedStatement ps = connection.prepareStatement(sql)){
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, id);
                 ResultSet rs = ps.executeQuery();
 
-                while(rs.next()){
+                while (rs.next()) {
                     int question_id = rs.getInt("id");
                     String question = rs.getString("question");
                     String answer = rs.getString("answer");
@@ -75,7 +75,33 @@ public class Team1QuestionMapper {
                     questionsList.add(questions);
                 }
             }
+        } catch (SQLException e) {
+            throw new DatabaseException(e.getMessage());
         }
         return questionsList;
+    }
+
+    public static Team1Entities.Questions getQuestionById(ConnectionPool connectionPool, int id )throws DatabaseException{
+        //A method that returns a list of questions with a category id
+        String sql = "SELECT * FROM lifehack_team_1_questions WHERE id = ?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    int question_id = rs.getInt("id");
+                    String question = rs.getString("question");
+                    String answer = rs.getString("answer");
+                    int point = rs.getInt("point");
+                    Team1Entities.Questions questions = new Team1Entities.Questions(question_id, question, answer, point);
+                    return questions;
+                }
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e.getMessage());
+        }
+        return null;
     }
 }
