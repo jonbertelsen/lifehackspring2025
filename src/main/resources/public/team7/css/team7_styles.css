@@ -2,6 +2,15 @@
 
 
 /****** frontpage ******/
+#JokeField{
+    margin-bottom: 30px;
+    margin-top: 30px;
+    padding: 10px;
+    font-size: 1.9rem;
+    width: 25%;
+}
+
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -78,16 +87,12 @@ body {
     border-radius: 50%;
     border: 5px solid black;
     background: conic-gradient(
-            red 0deg 36deg,
-            blue 36deg 72deg,
-            yellow 72deg 108deg,
-            green 108deg 144deg,
-            orange 144deg 180deg,
-            red 180deg 216deg,
-            blue 216deg 252deg,
-            yellow 252deg 288deg,
-            green 288deg 324deg,
-            orange 324deg 360deg
+            red 0deg 60deg,
+            blue 60deg 120deg,
+            yellow 120deg 180deg,
+            green 180deg 240deg,
+            orange 240deg 300deg,
+            hotpink 300deg 360deg
     );
     position: relative;
     transition: transform 4s ease-out; /* Gør rotationen jævn og gradvist langsommere */
@@ -121,5 +126,62 @@ body {
 /* Ændrer farven på knappen, når musen holdes over */
 .spin-btn:hover {
     background-color: darkgray;
+}
+
+.info-box {
+    position: fixed; /* Gør boksen fast på skærmen */
+    top: 20%; /* Juster placeringen op eller ned */
+    right: 20px; /* Placer boksen i højre side af skærmen */
+    width: 250px; /* Fast bredde til boksen */
+    padding: 20px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    background-color: #fff;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-box h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.info-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-box li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 1px solid #000;
+}
+
+.color-box.red {
+    background-color: red;
+}
+.color-box.blue {
+    background-color: blue;
+}
+.color-box.yellow {
+    background-color: yellow;
+}
+.color-box.green {
+    background-color: green;
+}
+.color-box.orange {
+    background-color: orange;
+}
+.color-box.pink {
+    background-color: hotpink;
 }
 

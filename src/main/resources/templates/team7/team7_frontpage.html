@@ -8,16 +8,16 @@
 <body>
 
 <div class="header">Dagens Dårlige Jokes</div>
-<div class="joke-box" id="joke-box">Her kommer din joke...</div>
+<input type="text" id="JokeField" placeholder="press the button for a joke" readonly>
 
-<div class="categories">
-    <button class="category-button">Far Jokes</button>
-    <button class="category-button">Mor Jokes</button>
-    <button class="category-button">Jesper Jokes</button>
-    <button class="category-button">Prøv lykken</button>
-    <button class="category-button">National Jokes</button>
-    <button class="category-button">Blondine Jokes</button>
-    <button class="category-button">Datamatikker Jokes</button>
-</div>
+    <form method="post">
+        <button class="category-button" formaction="/DadJokes" onclick="getJoke('far')">Far Jokes</button>
+        <button class="category-button" formaction="/MomJokes" onclick="getJoke('mor')">Mor Jokes</button>
+        <button class="category-button" formaction="/JesperJokes" onclick="getJoke('jesper')">Jesper Jokes</button>
+        <button class="category-button" formaction="/TryLuck" onclick="getJoke('prøv lykken')">Prøv Lykken</button>
+        <button class="category-button" formaction="/NationalJokes" onclick="getJoke('national')">National Jokes</button>
+        <button class="category-button" formaction="/BlondeJokes" onclick="getJoke('blonde')">Blonde Jokes</button>
+        <button class="category-button" formaction="/DatamatikerJokes" onclick="getJoke('datamatiker')">Datamatiker Jokes</button>
+    </form>
 </body>
 </html>
