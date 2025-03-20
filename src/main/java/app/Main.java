@@ -52,9 +52,11 @@ public class Main {
             ctx.render("team05/upload.html");  // Sørg for at filen er i den rigtige mappe
         });
 
-        // Register routes for Team05Controllers
+        app.post("/add-workout", ctx -> Team05Controllers.addWorkoutlog(ctx, connectionPool));
         app.get("/workoutlog", team05Controllers::viewWorkoutlog);
-        app.post("/add-workout", ctx -> Team05Controllers.addWorkoutlog(ctx,connectionPool));
+
+
+        // Register routes for Team05Controllers
         app.delete("/deleteworkoutlog", team05Controllers::deleteWorkoutLog);
         app.put("/editworkoutlog", team05Controllers::editWorkoutLog);
     }

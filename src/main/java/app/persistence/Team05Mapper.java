@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Team05Mapper {
+    //Retrieves all workout logs from the workoutlog table.
     public static List<Workout> getAllWorkoutLog(ConnectionPool ConnectionPool) throws DatabaseException {
         List<Workout> workouts = new ArrayList<>();
         String sql = "SELECT * FROM workoutlog";
@@ -35,17 +36,18 @@ public class Team05Mapper {
         }
         return workouts;
     }
+    //Inserts a new workout log into the workoutlog table.
     public static void creatWorkout(Workout workout, ConnectionPool myConnectionPool) throws DatabaseException {
-        String sql = "INSERT INTO workoutlog (email, type_id, duration, date, extra_notes) VALUES (?, ?, ?, CURRENT_DATE)";
+        String sql = "INSERT INTO workoutlog (type_id, duration, date, extra_notes) VALUES (?, ?,CURRENT_DATE,?)";
 
         try (
                 Connection connection = myConnectionPool.getConnection();  // Brug connection poolen
                 PreparedStatement ps = connection.prepareStatement(sql)
         ) {
-            ps.setString(1, workout.getEmail());
-            ps.setInt(2, workout.getType_id());
-            ps.setInt(3, workout.getDuration());
-            ps.setDate(4, new java.sql.Date(workout.getDate().getTime()));
+
+            ps.setInt(1, workout.getType_id());
+            ps.setInt(2, workout.getDuration());
+            ps.setDate(3, new java.sql.Date(workout.getDate().getTime()));
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 1) {
@@ -55,6 +57,9 @@ public class Team05Mapper {
             throw new DatabaseException("Fejl ved indsættelse af nyhedsbrev: " + e.getMessage());
         }
     }
+
+    //signUp and login: Methods for user authentication.
+    // Users can sign up and log in using their email and password.
 
     public static int signUp(String email, int password, ConnectionPool connectionPool) throws DatabaseException {
 
@@ -73,6 +78,7 @@ public class Team05Mapper {
         }
     }
 
+    //Checks if a user exists in the database based on the email provided.
     public static String login(String email, int password, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "SELECT email , password FROM users WHERE email = ? AND password = ?";
 
@@ -94,6 +100,7 @@ public class Team05Mapper {
         }
     }
 
+    //Deletes a workout log based on the ID.
     public static void deleteWorkoutLog(int workoutId, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "DELETE FROM workoutlog WHERE id = ?";
 

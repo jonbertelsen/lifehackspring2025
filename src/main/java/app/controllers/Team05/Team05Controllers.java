@@ -22,17 +22,20 @@
             this.connectionPool = connectionPool;
         }
 
+        //This method fetches all workout logs from the database and sends them to the view (team05/log.html).
         public void viewWorkoutlog(Context ctx) {
             try {
                 List<Workout> workoutLog = Team05Mapper.getAllWorkoutLog(connectionPool);
                 ctx.attribute("workout", workoutLog);
-                ctx.render("index05.html");
+                ctx.render("team05/log.html");
             } catch (DatabaseException e) {
                 LOGGER.severe("Error retrieving workout log: " + e.getMessage());
                 ctx.result("An error occurred while retrieving the workout log.");
             }
         }
 
+        //This method adds a new workout log. It validates the incoming data,
+        // handles directory creation for file storage (if necessary),and inserts the workout log into the database.
         public static void addWorkoutlog(Context ctx, ConnectionPool connectionPool) {
             try {
                 // Opret nødvendige mapper, hvis de ikke eksisterer
@@ -68,7 +71,7 @@
                 // Indsæt i databasen
                 Team05Mapper.creatWorkout(newWorkout, connectionPool);
 
-                ctx.status(200).result("Workout successfully added!");
+                ctx.redirect("team05/log.html");
             } catch (IOException e) {
                 ctx.status(500).result("Server error while creating directory.");
             } catch (DatabaseException e) {
@@ -76,6 +79,7 @@
             }
         }
 
+        //This method deletes a workout log based on the ID passed in the URL.
         public void deleteWorkoutLog(Context ctx) {
             try {
                 int workoutId = Integer.parseInt(ctx.pathParam("id"));
@@ -87,6 +91,7 @@
             }
         }
 
+        // This method updates an existing workout log with new details (type, duration, and extra notes).
         public void editWorkoutLog(Context ctx) {
             try {
                 int workoutId = Integer.parseInt(ctx.pathParam("id"));
@@ -101,6 +106,4 @@
                 ctx.status(500).result("Error editing workout log.");
             }
         }
-
-
     }
