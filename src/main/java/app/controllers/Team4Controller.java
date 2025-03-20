@@ -13,7 +13,17 @@ public class Team4Controller {
 
 private static ConnectionPool connectionPool;
 
-    public static void searchProfile(Context ctx){
+
+    public static void routes(Javalin app, ConnectionPool connectionPool) {
+        app.get("/team4", ctx -> team4Home(ctx));
+        app.post("/team4", ctx -> searchProfile(ctx, connectionPool));
+    }
+
+    private static void team4Home(@NotNull Context ctx) {
+        ctx.render("teat4/index.html");
+    }
+
+    public static void searchProfile(Context ctx, ConnectionPool connectionPool) {
         String query = ctx.queryParam("query");
         if (query == null || query.trim().isEmpty()){
             String msg = "Søgefeltet må ikke være tomt!";
