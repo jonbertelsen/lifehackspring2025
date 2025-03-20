@@ -16,10 +16,10 @@ public class TeamTeacherMapper {
     public static TeamTeacherEntitiy getPhilosophicalAnswer(String input, ConnectionPool connectionPool) {
         List<Integer> keywordIDs = getKeyWordIDs(input, connectionPool);
         if (keywordIDs.isEmpty()) {
-            return new TeamTeacherEntitiy("Kierkegaard", "Af alle latterlige Ting forekommer det mig at være det allerlatterligste at have travlt");
+            return new TeamTeacherEntitiy("Kierkegaard", "Af alle latterlige Ting forekommer det mig at være det allerlatterligste at have travlt", "kierkegaard.png");
         }
 
-        String query = "SELECT p.name, a.quote FROM keywords_answers ka " +
+        String query = "SELECT p.name, p.picture, a.quote FROM keywords_answers ka " +
                 "JOIN answers a ON ka.answer_id = a.id " +
                 "JOIN philosophers p ON a.philosopher_id = p.id " +
                 "WHERE ka.keyword_id IN (" + keywordIDs.stream().map(String::valueOf).collect(Collectors.joining(",")) + ") " +
@@ -30,14 +30,14 @@ public class TeamTeacherMapper {
              ResultSet rs = stmt.executeQuery()){
 
             if (rs.next()) {
-                return new TeamTeacherEntitiy(rs.getString("name"),rs.getString("quote"));
+                return new TeamTeacherEntitiy(rs.getString("name"),rs.getString("quote"), rs.getString("picture"));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return new TeamTeacherEntitiy("Kierkegaard", "Af alle latterlige Ting forekommer det mig at være det allerlatterligste at have travlt");
+        return new TeamTeacherEntitiy("Kierkegaard", "Af alle latterlige Ting forekommer det mig at være det allerlatterligste at have travlt", "kierkegaard.png");
     }
 
 
