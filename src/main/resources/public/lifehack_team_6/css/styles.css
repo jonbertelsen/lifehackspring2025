@@ -25,9 +25,20 @@ body    {
 
 .button-container   {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 60vh;
+}
+
+.instructions-txt   {
+    font-size: 60px;
+    background: linear-gradient(to right, #deb522, #fcf7f7, #deb522);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    border: solid #fcf7f7;
+    border-radius: 10px;
+
 }
 
 .start-button   {
@@ -121,34 +132,6 @@ body    {
     font-size: 16px;
     margin: 8px;
     color: white;
-}
-#stopwatch-buttons{
-    margin-top: 50px;
-}
-
-.btn    {
-    width: 50px;
-    padding: 10px 10px;
-    margin: 10px 20px;
-    float: right;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.5s;
-    color: white;
-    font-weight: 500;
-}
-
-#start {
-    background-color: #009779;
-}
-
-#stop {
-    background-color: #0e85fc;
-}
-
-#reset {
-    background-color: #c91400;
 }
 
 p {
