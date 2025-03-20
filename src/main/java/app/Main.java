@@ -2,6 +2,7 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
+import app.controllers.Team14Controller;
 import app.controllers.TeamTeacherController;
 import app.persistence.ConnectionPool;
 import app.persistence.Team14Mapper;
@@ -36,5 +37,7 @@ public class Main {
 
         app.get("/", ctx ->  ctx.render("index.html"));
         TeamTeacherController.routes(app);
+
+        Team14Controller.registerRoutes(app);
     }
 }

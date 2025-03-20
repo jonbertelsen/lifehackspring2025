@@ -1,8 +1,8 @@
 package app.entities;
 
 public class Team14Entity {
-    private String title = "Blinkende lygter";
-    private int duration = 123;
+    private String title;
+    private int duration;
     private String director;
     private String platform;
 
