@@ -18,22 +18,17 @@ public class Team6Controller {
             getMovieList(ctx, pool);  // Populate movie list when game starts
             ctx.render("lifehack_team_6/game.html");
         });
-        app.post("/guess", ctx -> checkGuess(ctx, pool)); // Ensure correct route
+        app.post("/guess", ctx -> checkGuess(ctx, pool));
     }
 
     private static void getMovieList(Context ctx, ConnectionPool pool) {
         allMovies = Team6Mapper.getTop100Movies(pool);
-        correctGuessCount = 0; // Reset counter when a new game starts
+        correctGuessCount = 0;
     }
 
     public static void checkGuess(Context ctx, ConnectionPool pool) {
         String guess = ctx.formParam("user-input");
-        System.out.println("User guess: " + guess);  // Debugging user input
-        if (allMovies == null || allMovies.isEmpty()) {
-            ctx.attribute("message", "No movies available to guess.");
-            ctx.render("lifehack_team_6/game.html");
-            return;
-        }
+
 
         int indexToRemove = -1;
         for (int i = 0; i < allMovies.size(); i++) {
@@ -53,9 +48,12 @@ public class Team6Controller {
                 winner(ctx);
             }
         } else {
+            top100counter(ctx);
             ctx.attribute("message", "Incorrect guess! Try again.");
+            ctx.render("lifehack_team_6/game.html");
+
         }
-        ctx.render("lifehack_team_6/game.html");
+
     }
 
     private static void winner(Context ctx) {
@@ -65,13 +63,13 @@ public class Team6Controller {
 
     private static void rightAnswerMovie(Context ctx, Team6Movie team6Movie) {
         ctx.attribute("message", "Correct guess! Movie: " + team6Movie.toString());
-        top100counter(ctx); // Ensure counter is updated
         ctx.render("lifehack_team_6/game.html");
     }
 
     private static void top100counter(Context ctx) {
         String counterText = correctGuessCount + "/100";
         ctx.attribute("counter", counterText);
+        ctx.render("lifehack_team_6/game.html");
     }
 
     private static String fixed(String input) {
