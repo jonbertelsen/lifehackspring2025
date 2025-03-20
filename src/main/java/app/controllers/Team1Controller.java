@@ -24,7 +24,7 @@ public class Team1Controller {
     public static void routes(Javalin app) {
         app.get("/lifehack_team_1/showMenu", ctx -> showMenu(ctx));
         app.get("/lifehack_team_1/quiz", ctx -> showGame(ctx));
-        app.post("/lifehack_team_1/question", ctx -> showQuestion(ctx));
+        app.get("/lifehack_team_1/question/{id}", ctx -> showQuestion(ctx));
     }
 
     // Renders the index page
@@ -133,7 +133,8 @@ public class Team1Controller {
     // Displays a question page with a specific question
     public static void showQuestion(Context ctx) {
         try {
-            Team1Entities.Questions questions = Team1QuestionMapper.getQuestionById(connectionPool, 1);
+            int questionId = Integer.parseInt(ctx.pathParam("id"));
+            Team1Entities.Questions questions = Team1QuestionMapper.getQuestionById(connectionPool, questionId);
             ctx.attribute("question", questions);
             ctx.render("lifehack_team_1/question.html");
         } catch (Exception ex) {

@@ -83,7 +83,7 @@ public class Team1QuestionMapper {
 
     public static Team1Entities.Questions getQuestionById(ConnectionPool connectionPool, int id )throws DatabaseException{
         //A method that returns a list of questions with a category id
-        String sql = "SELECT * FROM lifehack_team_1_questions WHERE id = ?";
+        String sql = "SELECT * FROM lifehack_team_1_questions WHERE id = (?)";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
