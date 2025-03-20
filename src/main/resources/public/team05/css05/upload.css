@@ -1,0 +1,38 @@
+header{
+border: 1px solid green;
+background-color: #d0ae81;
+}
+
+
+main{
+border: 1px solid blue;
+background-color: #7a4a4a;
+padding: 30px;
+margin-top: 10px;
+}
+
+
+footer{
+border: 1px solid green;
+margin-top: 10px;
+padding: 30px;
+
+}
+
+
+body{
+display: flex;
+justify-content: center;
+}
+
+#page{
+border: 10px solid cyan;
+width: 100%;
+max-width: 800px;
+}
+
+.header-image{
+width: 100%;
+max-width: 800px;
+
+}
