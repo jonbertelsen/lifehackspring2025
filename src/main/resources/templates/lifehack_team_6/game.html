@@ -28,10 +28,10 @@
 
 <br><br><br><br><br><br><br>
 
-<form method="post" action="/guess">
+<form method="post" action="/guess" autocomplete="off">
     <div class="game-box">
         <h3 class="counter" th:text="${counter}">0/100</h3> <!-- Display the counter -->
-        <input type="text" id="user-input" name="user-input" placeholder="Type your guess here">
+        <input type="text" id="user-input" name="user-input" placeholder="Type your guess here" autocomplete="off">
         <button type="submit" name = "user-input" formaction="/guess">Submit guess</button>
     </div>
 </form>
