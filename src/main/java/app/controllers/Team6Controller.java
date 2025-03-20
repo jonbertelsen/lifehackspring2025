@@ -17,7 +17,7 @@ public class Team6Controller {
     public static void routes(Javalin app, ConnectionPool pool) {
         //app.post("/list", ctx -> getMovieList(ctx, pool)); // Ensure correct route
         app.get("/startgame", ctx -> {
-            getMovieList(ctx, pool);  // Populate movie list when game starts
+            getMovieList(ctx, pool);
             ctx.render("lifehack_team_6/game.html");
         });
         app.post("/guess", ctx -> checkGuess(ctx, pool));
@@ -37,16 +37,9 @@ public class Team6Controller {
             if (fixed(allMovies.get(i).getTitle()).equals(fixed(guess))) {
                 indexToRemove = i;
                 break;
-            } /*else {
-                for (int g = 0; g < guessedMovies.size(); i++) {
-                    if (fixed(guessedMovies.get(i).getTitle()).equals(fixed(guess))) {
-                        ctx.attribute("message", "You have already guessed that movie!");
-                        ctx.render("lifehack_team_6/game.html");
-                    }
-                    break;
-                }
-            }*/
+            }
         }
+
         for (int i = 0; i < guessedMovies.size(); i++) {
             if (fixed(guessedMovies.get(i).getTitle()).equals(fixed(guess))) {
                 top100counter(ctx);
