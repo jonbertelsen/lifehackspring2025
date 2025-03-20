@@ -204,3 +204,51 @@
         transform: translateY(0);
     }
 }
+
+#saveButton {
+    background-color: #ffbb33;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+#saveButton::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease-in-out;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+}
+
+#saveButton:hover {
+    background-color: #ff8c00;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+#saveButton:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+#saveButton:active {
+    transform: scale(0.98);
+}
+
+#saveButton:focus {
+    outline: none;
+}

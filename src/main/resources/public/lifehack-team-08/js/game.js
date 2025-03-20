@@ -146,6 +146,53 @@ function buyItem(item) {
     }
 }
 
+document.getElementById("saveButton").addEventListener("click", function() {
+    // Update the hidden input fields with current values
+    document.getElementById("eggs").value = eggs;
+    document.getElementById("chickenFeedTier").value = chickenFeedTier;
+    document.getElementById("predatorTier").value = predatorTier;
+
+    // Send data asynchronously using fetch
+    fetch('/lifehack-team-08/save', {
+        method: 'POST',
+        body: new FormData(document.getElementById("saveForm"))
+    })
+        .then(response => response.text())
+        .then(data => {
+            // Show an alert after the game is saved
+            alert("Game saved successfully!");
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Failed to save game. Please try again.");
+        });
+});
+
+window.addEventListener('load', function() {
+    fetch('/lifehack-team-08/load-game')
+        .then(response => response.json())
+        .then(data => {
+            // Set the game state with the saved values
+            eggs = data.eggs;
+            chickenFeedTier = data.chickenFeedTier;
+            predatorTier = data.predatorTier;
+
+            // Update the egg counter display
+            document.getElementById("egg-counter").textContent = eggs;
+
+            // Update the upgrade text for chicken feed and predator tiers
+            document.getElementById("upgrade-text-1").textContent = `Upgrade ${chickenFeedTier}/5 - ${Math.pow(chickenFeedTier + 1, 2) * 50} eggs`;
+            document.getElementById("upgrade-text-2").textContent = `Upgrade ${predatorTier}/5 - ${Math.pow(predatorTier + 1, 2) * 100} eggs`;
+
+            // Optionally, start egg gain if the predator tier is greater than 0
+            if (predatorTier > 0) {
+                startEggGain();
+                loadPredatorImage(predatorTier); // Load the predator image based on the saved tier
+            }
+        })
+        .catch(error => console.error('Error loading game data:', error));
+});
+
 
 
 

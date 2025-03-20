@@ -22,7 +22,7 @@ public class LifehackTeam08GameController {
 
     public static void Routes(Javalin app) {
 
-        app.before(ctx -> controller.loadUserDataOnStartup(ctx));
+        app.get("/lifehack-team-08/load-game", LifehackTeam08GameController::loadUserData);
 
 
         app.get("/", ctx ->  ctx.render("lifehack-team-08/login.html"));
@@ -33,9 +33,7 @@ public class LifehackTeam08GameController {
         app.get("/lifehack-team-08/index", LifehackTeam08GameController::gamePage);
         app.get("/lifehack-team-08/logout", LifehackTeam08GameController::logout);
 
-        app.events(event -> {
-            event.serverStopping(() -> controller.shutdownUpdate());
-        });
+        app.post("/lifehack-team-08/save", LifehackTeam08GameController::saveUserData);
     }
 
     public static void loginPage(Context ctx) {
@@ -93,37 +91,62 @@ public class LifehackTeam08GameController {
         ctx.redirect("/login");
     }
 
-    public void shutdownUpdate() {
-        System.out.println("⚠️ Server shutting down. Updating all user data...");
 
-        List<LifehackTeam08User> users = userMapper.getAllUsers(); // Get all users from DB
-        for (LifehackTeam08User user : users) {
-            userMapper.updateUserStats(user.getId(), user.getEggs(), user.getChickenFeedTier(), user.getPredatorTier());
-            System.out.println("✅ Saved user: " + user.getUsername() + " - Eggs: " + user.getEggs());
-        }
-
-        System.out.println("✅ All user data has been saved successfully!");
-    }
-
-
-
-
-    public void loadUserDataOnStartup(Context ctx) {
+    public static void loadUserData(Context ctx) {
         LifehackTeam08User user = ctx.sessionAttribute("user");
 
         if (user != null) {
+            // Retrieve the user data (including eggs, chickenFeedTier, predatorTier)
             LifehackTeam08User updatedUser = userMapper.getUserById(user.getId());
 
             if (updatedUser != null) {
-                ctx.sessionAttribute("user", updatedUser);
-                System.out.println("✅ User loaded: " + updatedUser.getUsername() + " - Eggs: " + updatedUser.getEggs());
+                // Send the data to the front-end as JSON
+                ctx.json(new Object() {
+                    public final BigInteger eggs = updatedUser.getEggs();
+                    public final int chickenFeedTier = updatedUser.getChickenFeedTier();
+                    public final int predatorTier = updatedUser.getPredatorTier();
+                });
             } else {
-                System.out.println("❌ ERROR: User ID not found in database.");
+                // If no user data is found, send empty values
+                ctx.json(new Object() {
+                    public final BigInteger eggs = BigInteger.ZERO;
+                    public final int chickenFeedTier = 0;
+                    public final int predatorTier = 0;
+                });
             }
-        } else {
-            System.out.println("⚠ No user in session on startup.");
         }
     }
 
 
+    public static void saveUserData(Context ctx) {
+        LifehackTeam08User user = ctx.sessionAttribute("user");
+
+        if (user != null) {
+            // Retrieve form parameters
+            int eggs = Integer.parseInt(ctx.formParam("eggs"));
+            int chickenFeedTier = Integer.parseInt(ctx.formParam("chickenFeedTier"));
+            int predatorTier = Integer.parseInt(ctx.formParam("predatorTier"));
+
+            // Update user data
+            user.setEggs(BigInteger.valueOf(eggs));
+            user.setChickenFeedTier(chickenFeedTier);
+            user.setPredatorTier(predatorTier);
+
+            // Save to the database
+            userMapper.updateUser(user);
+
+            // Respond with a success message
+            ctx.result("Game saved successfully!");
+        } else {
+            ctx.result("User not logged in.");
+        }
+    }
+
+
+
+
+
 }
+
+
+

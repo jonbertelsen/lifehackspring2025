@@ -59,6 +59,15 @@
 
 <div id="predator-container"></div>
 
+<!-- Save Game Button -->
+<button id="saveButton">Save Game</button>
+
+<!-- Hidden Form -->
+<form id="saveForm" action="/lifehack-team-08/save" method="POST" style="display:none;">
+    <input type="hidden" id="eggs" name="eggs" value="0">
+    <input type="hidden" id="chickenFeedTier" name="chickenFeedTier" value="0">
+    <input type="hidden" id="predatorTier" name="predatorTier" value="0">
+</form>
 
 <script src="/lifehack-team-08/js/game.js"></script>
 
