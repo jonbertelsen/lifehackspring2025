@@ -43,18 +43,12 @@
                 }
 
                 // Hent og valider formular-data
-                String email = ctx.formParam("email");
                 String type_id = ctx.formParam("type_id");
                 String duration = ctx.formParam("duration");
                 String date = ctx.formParam("date");
                 String extraNotes = ctx.formParam("extra_notes");
-                String password = ctx.formParam("password");
 
-                if (password == null || !password.equals("1234")) {
-                    ctx.status(403).result("Wrong password!");
-                    return;
-                }
-                if (email == null || type_id == null || date == null || duration == null) {
+                if (type_id == null || date == null || duration == null) {
                     ctx.status(400).result("Missing required fields.");
                     return;
                 }
@@ -69,7 +63,7 @@
                 }
 
                 // Opret workout objekt
-                Workout newWorkout = new Workout(0, email, Integer.parseInt(type_id), Integer.parseInt(duration), java.sql.Date.valueOf(publishedDate), extraNotes);
+                Workout newWorkout = new Workout(0, Integer.parseInt(type_id), Integer.parseInt(duration), java.sql.Date.valueOf(publishedDate), extraNotes);
 
                 // Indsæt i databasen
                 Team05Mapper.creatWorkout(newWorkout, connectionPool);

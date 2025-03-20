@@ -16,6 +16,14 @@ public class Workout {
         this.type_id = type_id;
         this.duration = duration;
         this.date = date;
+        this.extraNotes = extraNotes;
+    }
+
+    public Workout(int id, int type_id, int duration, Date date, String extraNotes) {
+        this.id = id;
+        this.type_id = type_id;
+        this.duration = duration;
+        this.date = date;
     }
 
     public int getId() {
