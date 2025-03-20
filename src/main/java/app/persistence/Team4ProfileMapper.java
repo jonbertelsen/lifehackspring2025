@@ -81,8 +81,4 @@ public static Team4ProfileEntity addProfile(ConnectionPool connectionPool ,Team4
         throw new DatabaseException(msg, e.getMessage());
     }
 }
-
-
-
-
 }
