@@ -4,36 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../../public/team12/css/team12_styles.css" th:href="@{/team12/css/team12_styles.css}" rel="stylesheet"/>
+
 </head>
 
 <body>
-<div class="page-container">
-    <header>
-        <a href="team12_index.html" th:href="@{/}"> </a>
-            <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png" th:href="@{//public/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
-        <h1>Welcome to your dashboard, <span th:text="${session.currentUser.username}"></span> </h1>
-    </header>
+<form>
+    <div class="page-container">
+        <header>
+            <a href="team12_index.html" th:href="@{/}"> </a>
+            <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png"
+                 th:href="@{/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
+            <h1>Welcome to your dashboard, <span th:text="${session.currentUser.username}"></span></h1>
+            <h2> Det var meningen vi skulle have graf med data fra databasen</h2>
+        </header>
 
-    <main>
+        <main>
+            <div class="dashboard">
+                <img src="../../public/team12/images/sleepGraphEks.png"
+                     th:href="@{//public/team12/images/sleepGraphEks.png}" alt="Sleep Graph Eks">
 
-        <form class="generic-form" method="post">
-            <input type="text" name="username" placeholder="Enter username"/>
-            <input type="password" name="password" placeholder="Enter password"/>
+            </div>
+        </main>
 
-            <button type="submit" formaction="/login">Get access to your sleep track</button>
+        <footer>
+            <div>
+                <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/logout}"
+                   class="logout-create"> Log out </a>
 
-            <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
-        </form>
-    </main>
+            </div>
+        </footer>
 
-    <footer>
-        <div>
-            <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/logout}" class="logout-create"> Log out </a>
-            <span th:if="${session.currentUser != null}"> |  </span>
-            <a href="team12_createuser.html" th:href="@{/createuser}" class="logout-create">Create user </a>
-        </div>
-    </footer>
-
-</div>
+    </div>
+</form>
 </body>
 </html>
