@@ -31,7 +31,6 @@ public class Team1CategoriesMapper {
         }
     }
 
-    //A method which can create categories
     public static void updateCategory(ConnectionPool connectionPool, Team1Entities.Categories categories, Team1Entities.Quiz quiz) throws DatabaseException {
         //A method which can update a category
         String sql = "UPDATE lifehack_team_1_categories SET category_name = ? WHERE id = ?;";
@@ -52,21 +51,26 @@ public class Team1CategoriesMapper {
         }
     }
 
-    public static List<Team1Entities.Categories> categories(ConnectionPool connectionPool) throws DatabaseException{
+    public static List<Team1Entities.Categories> listOfCategories(ConnectionPool connectionPool, int id) throws DatabaseException, SQLException {
+        //A method which returns a list of categories with a quiz id
         List<Team1Entities.Categories> categoriesList = new ArrayList<>();
-        String sql = "SELECT * FROM * Categories";
+        String sql = "SELECT * FROM lifehack_team_1_categories WHERE quiz_id = ?";
 
         try(Connection connection = connectionPool.getConnection()){
-            try try (PreparedStatement ps = connection.prepareStatement(sql)){
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+                ps.setInt(1, id);
                 ResultSet rs = ps.executeQuery();
 
                 while(rs.next()){
-                    int quizId = rs.getInt("quiz_id");
+                    int category_id = rs.getInt("id");
                     String categoryName = rs.getString("category_name");
-                    Team1Entities.Categories categories = new Team1Entities.Categories(quizId, categoryName);
-                    //TODO: Spørg Thomas om vi skal lave en ny constructor i entitites for at kunne hente data ned fra db.
+                    Team1QuestionMapper questionMapper = new Team1QuestionMapper();
+                    List<Team1Entities.Questions> questions = questionMapper.listOfQuestions(connectionPool, category_id);
+                    Team1Entities.Categories categories = new Team1Entities.Categories(category_id, categoryName,questions);
+                    categoriesList.add(categories);
                 }
             }
         }
+        return categoriesList;
     }
 }

@@ -12,6 +12,7 @@ import app.persistence.Team1UsersMapper;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 public class Main {
@@ -24,10 +25,10 @@ public class Main {
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
-    public static void main(String[] args) throws DatabaseException {
-        Team1CategoriesMapper categoriesMapper = new Team1CategoriesMapper();
+    public static void main(String[] args) throws DatabaseException, SQLException {
+        Team1QuestionMapper qm = new Team1QuestionMapper();
 
-        categoriesMapper.updateCategory(connectionPool, new Team1Entities.Categories("Frontend", null), new Team1Entities.Quiz(8,"Programming", null));
+        qm.listOfQuestions(connectionPool, 1);
 
 
         // Initializing Javalin and Jetty webserver

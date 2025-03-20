@@ -5,7 +5,10 @@ import app.exceptions.DatabaseException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Team1QuestionMapper {
 
@@ -51,5 +54,28 @@ public class Team1QuestionMapper {
         } catch (SQLException ex) {
             throw new DatabaseException("Error updating answer in database", ex.getMessage());
         }
+    }
+
+    public static List<Team1Entities.Questions> listOfQuestions(ConnectionPool connectionPool, int id) throws DatabaseException, SQLException {
+        //A method that returns a list of questions with a category id
+        List<Team1Entities.Questions> questionsList = new ArrayList<>();
+        String sql = "SELECT * FROM lifehack_team_1_questions WHERE category_id = ?";
+
+        try(Connection connection = connectionPool.getConnection()){
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+                ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+
+                while(rs.next()){
+                    int question_id = rs.getInt("id");
+                    String question = rs.getString("question");
+                    String answer = rs.getString("answer");
+                    int point = rs.getInt("point");
+                    Team1Entities.Questions questions = new Team1Entities.Questions(question_id, question, answer, point);
+                    questionsList.add(questions);
+                }
+            }
+        }
+        return questionsList;
     }
 }
