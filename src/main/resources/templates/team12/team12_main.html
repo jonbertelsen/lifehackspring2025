@@ -9,7 +9,7 @@
 <body class="bg-custom">
 <div class="page-container">
     <header class="header-app">
-        <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png" th:href="@{//public/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
+        <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png" th:href="@{/public/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
     </header>
 
 
@@ -23,24 +23,28 @@
             <label for="sleep_end">Waking up at:</label>
             <input type="datetime-local" name="sleep_end" id="sleep_end" step="60" required>
 
-            <button type="submit" formaction="/calculate">Calculate Duration</button>
-
             <button type="reset">Clear</button>
 
+            <button type="button" id="calculate-btn">Calculate Duration</button>
+
             <div id="result"></div>
+
+            <button type="submit" formaction="/calculate">Register sleep</button>
+
+
         </div>
     </form>
 
     <script>
         function formatDateTime(dateTime) {
-            const date = dateTime.toISOString().split('T')[0];
-            const time = dateTime.toTimeString().split(' ')[0];
-            return ${date} ${time};
+            const date = dateTime.toISOString().split('T')[0]; // Get date in YYYY-MM-DD format
+            const time = dateTime.toTimeString().split(' ')[0]; // Get time in HH:MM:SS format
+            return `${date} ${time}`;
         }
 
         function calculateDuration() {
-            const startTime = document.getElementById('start-time').value;
-            const endTime = document.getElementById('end-time').value;
+            const startTime = document.getElementById('sleep_start').value;
+            const endTime = document.getElementById('sleep_end').value;
 
             if (!startTime || !endTime) {
                 document.getElementById('result').innerHTML = "<p style='color:red;'>Please enter both times.</p>";
@@ -56,23 +60,23 @@
             }
 
             const durationMs = endDate - startDate;
-            const hours = Math.floor(durationMs / (1000 * 60 * 60));
-            const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
+            const hours = Math.floor(durationMs / (1000 * 60 * 60)); // Calculate hours
+            const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60)); // Calculate remaining minutes
 
             const result = document.getElementById('result');
-            result.innerHTML =
-                <p>The time between <strong>${formatDateTime(startDate)}</strong> and <strong>${formatDateTime(endDate)}</strong> is:</p>
-
-            <p>${hours} hours, ${minutes} minutes</p>
-
-            ;
+            result.innerHTML = `
+        <p style='color:black;'>The time between <strong>${formatDateTime(startDate)}</strong> and <strong>${formatDateTime(endDate)}</strong> is:</p>
+        <p style='color:black;'>${hours} hours, ${minutes} minutes</p>
+    `;
         }
 
-        function clearForm() {
-            document.getElementById('start-time').value = '';
-            document.getElementById('end-time').value = '';
-            document.getElementById('result').innerHTML = '';
-        }
+        // Event listener for the Calculate button
+        document.getElementById('calculate-btn').addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent form submission (no page reload)
+            calculateDuration();
+        });
+
+
     </script>
 
 
