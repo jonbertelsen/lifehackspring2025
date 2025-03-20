@@ -32,7 +32,25 @@ public class Team10ExerciseMapper {
                 throw new DatabaseException("Error retrieving exercises", e.getMessage());
             }
         }
+    public static void addExercise(Team10Exercise exercise, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "INSERT INTO exercises (name, description) VALUES (?, ?)";
 
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, exercise.getName());
+            ps.setString(2, exercise.getDescription());
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1) {
+                throw new DatabaseException("Failed to insert exercise.");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Database error when adding exercise", e.getMessage());
+        }
     }
+
+
+
+}
 
 

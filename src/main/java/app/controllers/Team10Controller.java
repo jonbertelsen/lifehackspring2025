@@ -26,9 +26,15 @@ public class Team10Controller {
         app.get("/create-user", ctx-> ctx.render("team10/create-user.html"));
         app.post("/create-user", ctx -> handleCreateUser(ctx,connectionPool));
         app.get("/homepage", ctx -> ctx.render("team10/homepage.html"));
+        app.get("/admin", ctx -> showAdminPage(ctx));
+        app.post("/admin/add-exercise", ctx -> addExercise(ctx, connectionPool));
+
 
         app.get("/start-workout", ctx -> startWorkout(ctx, connectionPool));
         app.get("/workout-history", ctx -> workoutHistory(ctx, connectionPool));
+        app.get("/workout-history/{date}", ctx -> workoutHistoryByDate(ctx, connectionPool));
+
+
 
         app.post("/start-workout/{exerciseId}", ctx -> {
             Integer userId = ctx.sessionAttribute("user_id"); // Hent userId fra sessionen
@@ -52,6 +58,24 @@ public class Team10Controller {
 
 
     }
+
+    private static void workoutHistoryByDate(Context ctx, ConnectionPool connectionPool) {
+        String date = ctx.pathParam("date");
+        Integer userId = ctx.sessionAttribute("user_id");
+
+        if (userId == null) {
+            ctx.status(401).json(Map.of("message", "User not logged in."));
+            return;
+        }
+
+        try {
+            List<Team10Exercise> exerciseHistory = Team10TrainingSessionMapper.getExercisesByUserIdAndDate(userId, date, connectionPool);
+            ctx.json(exerciseHistory);
+        } catch (DatabaseException e) {
+            ctx.status(500).json(Map.of("message", "Error fetching workout history: " + e.getMessage()));
+        }
+    }
+
 
 
 private static void startWorkout(Context ctx, ConnectionPool connectionPool) {
@@ -82,22 +106,27 @@ private static void startWorkout(Context ctx, ConnectionPool connectionPool) {
         ctx.render("team10/index.html");
     }
 
-    // Login method
     private static void handleLogin(Context ctx, ConnectionPool connectionPool) {
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
 
-
-        //Check if the user is in the database and check what their role is
         try {
             Team10User user = Team10UserMapper.login(email, password, connectionPool);
-            ctx.sessionAttribute("user_id",user.getUserId());
-            ctx.redirect("/homepage");
-        }catch (DatabaseException e){
-            ctx.attribute("message",e.getMessage());
-            ctx.redirect("/login");
+            ctx.sessionAttribute("user_id", user.getUserId());
+            ctx.sessionAttribute("user_role", user.getRole());  // Store role in session
+
+            if ("admin".equals(user.getRole())) {
+                ctx.redirect("/admin");  // Redirect admins to admin panel
+            } else {
+                ctx.redirect("/homepage");
+            }
+        } catch (DatabaseException e) {
+            ctx.attribute("message", e.getMessage());
+            ctx.render("team10/login.html");
         }
     }
+
+
     private static void handleCreateUser(Context ctx, ConnectionPool connectionPool) {
         // Retrieve user information from the form
         String email = ctx.formParam("email");
@@ -119,6 +148,33 @@ private static void startWorkout(Context ctx, ConnectionPool connectionPool) {
             }
             // Stay on the create-user page if there is an error
             ctx.render("team10/create-user.html");
+        }
+    }
+    private static void showAdminPage(Context ctx) {
+        String role = ctx.sessionAttribute("user_role");
+
+        if (role == null || !"admin".equals(role)) {
+            ctx.redirect("/homepage");  // Redirect non-admins
+            return;
+        }
+
+        ctx.render("team10/admin.html");
+    }
+    private static void addExercise(Context ctx, ConnectionPool connectionPool) {
+        String role = ctx.sessionAttribute("user_role");
+
+        if (role == null || !"admin".equals(role)) {
+            ctx.status(403).json(Map.of("message", "Unauthorized"));
+            return;
+        }
+
+        Team10Exercise newExercise = ctx.bodyAsClass(Team10Exercise.class);
+
+        try {
+            Team10ExerciseMapper.addExercise(newExercise, connectionPool);
+            ctx.json(Map.of("message", "Exercise added successfully!"));
+        } catch (DatabaseException e) {
+            ctx.status(500).json(Map.of("message", "Error adding exercise: " + e.getMessage()));
         }
     }
 

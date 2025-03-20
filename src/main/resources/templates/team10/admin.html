@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Admin Panel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/team10/css/styles.css}">
+</head>
+
+<body class="admin-page">
+<div class="logo-background"></div>
+<header>
+    <img src="/team10/images/trainnow.png" class="logo">
+</header>
+
+<h1>Admin Panel - Add Exercise</h1>
+
+<form id="add-exercise-form">
+    <label for="exercise-name">Exercise Name:</label>
+    <input type="text" id="exercise-name" name="exercise-name" required>
+
+    <label for="exercise-description">Description:</label>
+    <textarea id="exercise-description" name="exercise-description" required></textarea>
+
+    <button type="submit">Add Exercise</button>
+</form>
+
+<p id="message"></p>
+
+<a href="/homepage">Back to Homepage</a>
+
+<script>
+    document.getElementById("add-exercise-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const exerciseName = document.getElementById("exercise-name").value;
+        const exerciseDescription = document.getElementById("exercise-description").value;
+
+        fetch("/admin/add-exercise", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: exerciseName, description: exerciseDescription })
+        })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("message").textContent = data.message;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("message").textContent = "Failed to add exercise.";
+            });
+    });
+</script>
+</body>
+</html>
+
