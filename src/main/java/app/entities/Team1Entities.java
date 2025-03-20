@@ -104,7 +104,7 @@ public class Team1Entities {
         }
 
         public Categories(String categoryName, List<Questions> questions) {
-            setCategoryName(categoryName);
+            this.categoryName = categoryName;
             this.questions = questions;
         }
 
