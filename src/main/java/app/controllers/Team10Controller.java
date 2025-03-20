@@ -12,6 +12,7 @@ import app.persistence.team10.Team10UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -30,11 +31,23 @@ public class Team10Controller {
         app.get("/workout-history", ctx -> workoutHistory(ctx, connectionPool));
 
         app.post("/start-workout/{exerciseId}", ctx -> {
-            String exerciseId = ctx.pathParam("exerciseId");  // Get the exerciseId from the path
+            Integer userId = ctx.sessionAttribute("user_id"); // Hent userId fra sessionen
 
+            if (userId == null) {
+                ctx.json(Map.of("message", "User not logged in."));
+                return;
+            }
 
-            // Process the workout logic here
-            ctx.json(Map.of("message", "Workout started for exercise " + exerciseId));
+            int exerciseId = Integer.parseInt(ctx.pathParam("exerciseId"));
+
+            try {
+                int sessionId = Team10TrainingSessionMapper.getOrCreateSession(userId, connectionPool);
+                Team10TrainingSessionExerciseMapper.addExerciseToSession(sessionId, exerciseId, connectionPool);
+
+                ctx.json(Map.of("message", "Workout startet for session ID: " + sessionId));
+            } catch (SQLException e) {
+                ctx.json(Map.of("message", "Fejl: " + e.getMessage()));
+            }
         });
 
 

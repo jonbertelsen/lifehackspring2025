@@ -36,4 +36,32 @@ public class Team10TrainingSessionMapper {
         }
         return exercises;
     }
+
+    public static int getOrCreateSession(int userId, ConnectionPool connectionPool) throws SQLException {
+        try (Connection connection = connectionPool.getConnection()) {
+            // Tjek om der findes en session for i dag
+            String checkSql = "SELECT session_id FROM training_sessions WHERE user_id = ? AND session_date = CURRENT_DATE";
+            PreparedStatement checkStmt = connection.prepareStatement(checkSql);
+            checkStmt.setInt(1, userId);
+            ResultSet rs = checkStmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("session_id"); // Returner eksisterende session
+            } else {
+                // Opret en ny session
+                String insertSql = "INSERT INTO training_sessions (user_id, session_date) VALUES (?, CURRENT_DATE)";
+                PreparedStatement insertStmt = connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
+                insertStmt.setInt(1, userId);
+                insertStmt.executeUpdate();
+
+                ResultSet generatedKeys = insertStmt.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Kunne ikke oprette session.");
+                }
+            }
+        }
+    }
 }
+

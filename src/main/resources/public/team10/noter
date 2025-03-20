@@ -2,4 +2,7 @@ for at få det vist frem så skriv det her på hjemmesiden efter du har kørt ma
 http://localhost:7070/team10
 
 Ting vi mangler:
-Få liste over training sessions
+Få vist tid og dato menu så man kan vælge imellem og se training sessions med de øvelser fra dagen
+admin side med menu til at tilføje exercises (Siden er en mulighed når man logger ind som admin)
+
+
