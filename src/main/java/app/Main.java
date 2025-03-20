@@ -2,6 +2,7 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
+import app.controllers.LifehackTeam08GameController;
 import app.controllers.TeamTeacherController;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
@@ -15,7 +16,10 @@ public class Main {
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/%s?currentSchema=public";
-    private static final String DB = "lifehackspring2025";
+//    private static final String DB = "lifehackspring2025";
+
+    // for testing
+    private static final String DB = "chicken_clicker";
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
@@ -33,9 +37,9 @@ public class Main {
 
         // Routing
 
-        app.get("/", ctx ->  ctx.render("index.html"));
-        TeamTeacherController.routes(app);
-
+        //app.get("/", ctx ->  ctx.render("index.html"));
+//        TeamTeacherController.routes(app);
+        LifehackTeam08GameController.Routes(app);
     }
 
 }

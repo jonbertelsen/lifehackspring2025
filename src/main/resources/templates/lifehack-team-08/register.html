@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="styles.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="register-container">
+    <h2>Create an Account</h2>
+    <form id="register-form" action="/register" method="POST">
+        <div class="input-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="input-group">
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+        </div>
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <p>Already have an account? <a href="/login">Login here</a></p>
+</div>
+
+<script>
+    document.getElementById("register-form").addEventListener("submit", function(event) {
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirm-password").value;
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            event.preventDefault(); // Prevent form submission
+        }
+    });
+</script>
+</body>
+</html>

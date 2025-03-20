@@ -1,4 +1,4 @@
-let eggs = 10000000000;
+let eggs = 0;
 let chickenFeedTier = 0;
 let predatorTier = 0;
 
