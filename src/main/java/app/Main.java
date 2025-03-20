@@ -2,6 +2,7 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
+import app.controllers.Team1Controller;
 import app.controllers.TeamTeacherController;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
@@ -34,6 +35,8 @@ public class Main {
         // Routing
 
         app.get("/", ctx ->  ctx.render("index.html"));
+        Team1Controller team1Controller = new Team1Controller(connectionPool);
+        team1Controller.routes(app);
         TeamTeacherController.routes(app);
     }
 
