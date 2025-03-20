@@ -69,12 +69,24 @@
     z-index: 1;
 }
 
-
 .egg-counter {
-    font-size: 24px;
-    margin: 20px;
-    user-select: none;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    display: flex;  /* Align image and text in a row */
+    align-items: center; /* Center them vertically */
+    font-size: 32px; /* Increase the font size */
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun font */
+    font-weight: bold;
+    color: #5a2d0c; /* Make it look more themed */
 }
+
+.egg-label {
+    width: 60px;  /* Adjust the size of the image */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 5px; /* Space between image and number */
+}
+
 
 .shop-window {
     display: none;
