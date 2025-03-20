@@ -7,23 +7,36 @@ body {
 }
 
 .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #eaffd4;
     padding: 20px;
     font-size: 2rem;
     font-weight: bold;
+    position: relative;
+}
+
+.logo{
+    height: 50px;
+    cursor: pointer;
+    position: absolute;
+    left: 20px;
+    transform: translateY(-50%);
 }
 
 h1 {
     margin: 0;
     font-size: 3rem;
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 5000px;
     gap: 50px;
 }
 
