@@ -52,4 +52,7 @@ public class HomeController {
             ctx.status(500).result("Error during login.");
         }
     }
+
+
+
 }
