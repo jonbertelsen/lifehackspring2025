@@ -58,7 +58,7 @@ public class Team05Mapper {
 
     public static int signUp(String email, int password, ConnectionPool connectionPool) throws DatabaseException {
 
-        String sql = "INSERT INTO users (email, name,password) VALUES (?,?,?) ON CONFLICT (email) DO NOTHING";
+        String sql = "INSERT INTO users (email,password) VALUES (?,?) ON CONFLICT (email) DO NOTHING";
         try (
                 Connection connection = connectionPool.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)
         ) {
@@ -74,7 +74,7 @@ public class Team05Mapper {
     }
 
     public static String login(String email, int password, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "SELECT email FROM users WHERE email = ? AND password = ?";
+        String sql = "SELECT email , password FROM users WHERE email = ? AND password = ?";
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -120,14 +120,29 @@ public class Team05Mapper {
         try(
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
-                ){
-                ps.setInt(1, typeId);
-                ps.setInt(2, duration);
-                ps.setString(3, extraNotes);
-                ps.setInt(4, workoutId);
+        ){
+            ps.setInt(1, typeId);
+            ps.setInt(2, duration);
+            ps.setString(3, extraNotes);
+            ps.setInt(4, workoutId);
 
         } catch (SQLException e) {
             throw new DatabaseException("Error editing workout log.", e.getMessage());
         }
     }
+
+    public static boolean userExists(String email, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT 1 FROM users WHERE email = ?";
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            return rs.next(); // Returnerer true hvis brugeren findes, ellers false
+        } catch (SQLException e) {
+            throw new DatabaseException("Error checking if user exists.", e.getMessage());
+        }
+    }
+
 }
