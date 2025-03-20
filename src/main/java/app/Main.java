@@ -41,7 +41,7 @@ public class Main {
         //TeamTeacherController.routes(app);
 
         //TODO connect javascript to make timer function,
-        //TODO error handling (getting movie wrong removes the counter and title until you guess right again)
+        //TODO show message if guess on the same movie
         //TODO implement winning condition
     }
 

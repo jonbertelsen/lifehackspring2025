@@ -35,7 +35,15 @@ public class Team6Controller {
             if (fixed(allMovies.get(i).getTitle()).equals(fixed(guess))) {
                 indexToRemove = i;
                 break;
-            }
+            } /*else {
+                for (int g = 0; g < guessedMovies.size(); i++) {
+                    if (fixed(guessedMovies.get(i).getTitle()).equals(fixed(guess))) {
+                        ctx.attribute("message", "You have already guessed that movie!");
+                        ctx.render("lifehack_team_6/game.html");
+                    }
+                    break;
+                }
+            }*/
         }
 
         if (indexToRemove != -1) {
