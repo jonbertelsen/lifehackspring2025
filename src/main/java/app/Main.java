@@ -3,6 +3,7 @@ package app;
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
 import app.controllers.TeamTeacherController;
+import app.controllers.lifehackTeam15Controller;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -34,7 +35,7 @@ public class Main {
         // Routing
 
         app.get("/", ctx ->  ctx.render("index.html"));
-        TeamTeacherController.routes(app);
+        lifehackTeam15Controller.team15Controller.routes(app);
 
     }
 

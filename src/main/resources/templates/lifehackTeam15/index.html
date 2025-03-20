@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meal-Dice</title>
+    <link rel="stylesheet" href="/public/lifehackTeam15/css/styles.css"/>
+    <script src="/public/lifehackTeam15/js/foodroulette.js"></script>
+
+</head>
+<body bgcolor="#FFFFFFF">
+    <header>
+        <imgLogo>
+            <img src="Logo.png">
+        </imgLogo>
+        <h1>Meal-Dice</h1>
+    </header>
+<h2> Cant decide what to eat?
+    Spin to find out. </h2>
+
+    <div class="button-container">
+        <button class="meal-button" onclick="playGif('protein-gif')">Protein</button>
+        <button class="meal-button" onclick="playGif('sides-gif')">Sides</button>
+    </div>
+    <!-- Kasser med Gif Roulette -->
+    <div class="gif-section">
+        <div class="gif-box">
+            <img id="protein-gif" class="hidden">
+            <p id="protein-result"></p>
+        </div>
+        <div class="gif-box">
+            <img id="sides-gif" class="hidden">
+            <p id="sides-result"></p>
+        </div>
+    </div>
+
+<h3> Recipes:</h3>
+
+    <div id="recipe-links" class="recipe-links-container">
+        <!-- Opskriftskasserne vil blive tilføjet her dynamisk -->
+    </div>
+
+
+
+
+</body>
+</html>
