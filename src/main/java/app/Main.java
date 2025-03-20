@@ -54,7 +54,7 @@ public class Main {
 
         // Register routes for Team05Controllers
         app.get("/workoutlog", team05Controllers::viewWorkoutlog);
-        app.post("/add-workout", ctx -> Team05Controllers.addWorkoutLog(ctx,connectionPool));
+        app.post("/add-workout", ctx -> Team05Controllers.addWorkoutlog(ctx,connectionPool));
         app.delete("/deleteworkoutlog", team05Controllers::deleteWorkoutLog);
         app.put("/editworkoutlog", team05Controllers::editWorkoutLog);
     }

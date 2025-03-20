@@ -1,126 +1,154 @@
-header{
-    border: 1px solid green;
-    background-color: #d0ae81;
-}
-
-
-main{
-    border: 1px solid blue;
-    background-color: #7a4a4a;
-    padding: 30px;
-    margin-top: 10px;
-}
-
-
-footer{
-    border: 1px solid green;
-    margin-top: 10px;
-    padding: 30px;
-
-}
-
-.uploadheader{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-#page{
-    border: 10px solid cyan;
-    width: 100%;
-    max-width: 800px;
-}
-
-.header-image{
-    width: 100%;
-    max-width: 800px;
-
-}
-
-/* Reset some default styles */
-body, h1, form, input, textarea, button {
+body {
+    font-family: Georgia, serif;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    background-color: #fff;
+    color: #222;
 }
 
+.container {
+    text-align: center;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+.headline {
+    font-size: 28px;
+    margin-top: 20px;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    margin: 20px 0;
+}
+
+.welcome-text {
+    font-size: 18px;
+    line-height: 1.6;
+    padding: 0 10px;
+}
+
+.divider {
+    margin: 40px;
+    border: none;
+    border-top: 2px solid #333;
+    width: 90%;
+}
+.divider1 {
+
+    margin: 40px auto;
+    border: none;
+    border-top: 2px solid #333;
+    width: 70%;
+
+}
+
+.form-container {
+    background-color: #000;
+    padding: 30px 20px;
+    border-radius: 8px;
+}
+
+.form-container input {
+    width: 80%;
+    padding: 12px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: lightgray;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s; /* Tilføjer en overgangseffekt */
+}
+
+/* Hover-effekt for "Sign Up"-knappen */
+.button-group button:first-child:hover {
+    background-color: #668aff;  /* Ændrer baggrundsfarven til grøn */
+    color: white; /* Ændrer tekstfarven */
+    transform: scale(1.05); /* Forstørrer knappen lidt */
+}
+
+/* Hover-effekt for "Sign In"-knappen */
+.button-group button:last-child:hover {
+    background-color: #4886ec;  /* Ændrer baggrundsfarven til blå */
+    color: white; /* Ændrer tekstfarven */
+    transform: scale(1.05); /* Forstørrer knappen lidt */
+}
+
+
+.footer {
+    font-size: 14px;
+    margin-top: 30px;
+}
+
+.billede{
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+
+
+}
+
+
+
+
+
+/******log*******/
+
+
+
+
+
+
 body {
-    background-color: #f4f4f4;
+    font-family: Georgia, serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 500px;
+    margin: auto;
     text-align: center;
     padding: 20px;
 }
 
-/* Header */
-header {
-    background-color: #e8c16c;
-    padding: 15px;
-}
-
-header img {
-    max-width: 200px;
-}
-
-/* Form container */
-.add-workout-form {
-    background: white;
-    width: 90%;
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.add-workout-form label {
-    display: block;
-    font-weight: bold;
-    margin: 10px 0 5px;
-}
-
-.add-workout-form input,
-.add-workout-form textarea {
-    width: 100%;
-    padding: 8px;
+h1 {
+    font-size: 32px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
 }
 
-.add-workout-form textarea {
-    resize: none;
+.divider {
+    width: 90%;
+    border: none;
+    border-top: 2px solid #222;
+    margin: 10px auto 30px;
 }
 
-.button {
+.add-button {
     background-color: black;
     color: white;
+    font-size: 20px;
+    padding: 15px 40px;
+    margin-top: 40px;
     border: none;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
     cursor: pointer;
-    width: 100%;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.button:hover {
-    background-color: #002244;
+.add-button:hover {
+    background-color: #444; /* Lidt lysere sort/grå farve ved hover */
+    transform: scale(1.05); /* Gør knappen lidt større ved hover */
 }
 
-/* Back link */
-.back-link {
-    display: inline-block;
-    margin-top: 15px;
-    text-decoration: none;
-    color: #e48f0e;
-    font-weight: bold;
-}
-
-.back-link:hover {
-    text-decoration: underline;
-}

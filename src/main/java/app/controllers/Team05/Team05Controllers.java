@@ -33,7 +33,7 @@
             }
         }
 
-        public void addWorkoutlog(Context ctx) {
+        public static void addWorkoutlog(Context ctx, ConnectionPool connectionPool) {
             try {
                 // Opret nødvendige mapper, hvis de ikke eksisterer
                 Path workoutDir = Path.of("files");
