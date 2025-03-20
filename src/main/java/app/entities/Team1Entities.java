@@ -3,7 +3,7 @@ package app.entities;
 import java.util.List;
 
 public class Team1Entities {
-    public class Questions {
+    public static class Questions {
         private int id;
         private String question;
         private String answer;
@@ -76,6 +76,7 @@ public class Team1Entities {
                 case 400:
                 case 500:
                     this.points = points;
+                    break;
                 default: throw new IllegalArgumentException("Invalid point value");
             }
         }
@@ -91,7 +92,7 @@ public class Team1Entities {
         }
     }
 
-    public class Categories {
+    public static class Categories {
         private int id;
         private String categoryName;
         private List<Questions> questions;
@@ -103,7 +104,7 @@ public class Team1Entities {
         }
 
         public Categories(String categoryName, List<Questions> questions) {
-            setCategoryName(categoryName);
+            this.categoryName = categoryName;
             this.questions = questions;
         }
 
@@ -154,7 +155,7 @@ public class Team1Entities {
         }
     }
 
-    public class Quiz {
+    public static class Quiz {
         private int id;
         private String title;
         private List<Categories> categories;
@@ -213,7 +214,7 @@ public class Team1Entities {
         }
     }
 
-    public class Users {
+    public static class Users {
         private int id;
         private String name;
         private String password;
