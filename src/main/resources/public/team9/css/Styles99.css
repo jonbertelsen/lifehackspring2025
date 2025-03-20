@@ -1,0 +1,102 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+}
+
+.page {
+    margin: 20px;
+    padding: 10px;
+}
+
+h1 {
+    color: #5c6bc0;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card-body {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.card-title {
+    color: #3f51b5;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-subtitle {
+    color: #9e9e9e;
+    font-size: 1rem;
+}
+
+.card-text {
+    font-size: 1.1rem;
+    color: #555;
+    margin-top: 10px;
+}
+
+.btn-group .btn {
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success {
+    background-color: #4caf50;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #f44336;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #45a049;
+}
+
+.btn-danger:hover {
+    background-color: #e53935;
+}
+
+.create-event-btn {
+    width: 60px;
+    height: 60px;
+    background-color: #4caf50; /* Grøn baggrund */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: none;
+    text-decoration: none;
+    margin: 20px auto;
+    cursor: pointer;
+}
+
+.create-event-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.1);
+}
