@@ -6,10 +6,12 @@ import app.persistence.Team6Mapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Team6Controller {
     private static List<Team6Movie> allMovies;
+    private static List<Team6Movie> guessedMovies = new ArrayList<>();
     private static int correctGuessCount = 0; // Counter variable
 
     public static void routes(Javalin app, ConnectionPool pool) {
@@ -37,9 +39,18 @@ public class Team6Controller {
                 break;
             }
         }
+        for (int i = 0; i < guessedMovies.size(); i++) {
+            if (fixed(guessedMovies.get(i).getTitle()).equals(fixed(guess))) {
+                top100counter(ctx);
+                ctx.attribute("message", "You have already guessed that movie!");
+                ctx.render("lifehack_team_6/game.html");
+                return;
+            }
+        }
 
         if (indexToRemove != -1) {
             rightAnswerMovie(ctx, allMovies.get(indexToRemove));
+            guessedMovies.add(allMovies.get(indexToRemove));
             allMovies.remove(indexToRemove);
             correctGuessCount++; // Increment counter
             top100counter(ctx); // Update the counter on the frontend
