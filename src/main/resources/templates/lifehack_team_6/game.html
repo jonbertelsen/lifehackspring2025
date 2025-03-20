@@ -6,28 +6,7 @@
     <link href="../../public/lifehack_team_6/css/styles.css" th:href="@{lifehack_team_6/css/styles.css}" rel="stylesheet"/>
 </head>
 <body>
-
-<header>
-    <p>IMDB GUESSR - Top 100 Movies</p>
-    <p class="timer">00:00</p>
-    <p class="counter" th:text="${counter}"></p> <!-- Display the counter -->
-</header>
-
-<script src="../../public/lifehack_team_6/javascript/script.js"></script>
-
-<div class="main-content">
-    <form method="post" action="/guess">
-        <div>
-            <input type="text" id="user-input" name="user-input" placeholder="Type your guess here">
-            <button type="submit" name = "user-input" formaction="/guess">Submit guess</button>
-        </div>
-    </form>
-    <div class="correct-guess-message">
-        <p>Movie details here! How?</p>
-    </div>
-
-</div>
-<div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"> </p></div>
+<p>IMDB GUESSR - Top 100 Movies</p>
 
 <div class="container">
     <span class="digit" id="hr">00</span>
@@ -44,6 +23,21 @@
     <button class="btn" id="stop">Stop</button>
     <button class="btn" id="reset">Reset</button>
 </div>
+
+<script src="../../public/lifehack_team_6/javascript/script.js"></script>
+
+<br><br><br><br><br><br><br>
+
+<form method="post" action="/guess">
+    <div class="game-box">
+        <h3 class="counter" th:text="${counter}">0/100</h3> <!-- Display the counter -->
+        <input type="text" id="user-input" name="user-input" placeholder="Type your guess here">
+        <button type="submit" name = "user-input" formaction="/guess">Submit guess</button>
+    </div>
+</form>
+
+
+<div><p class="movie-detail-txt" th:unless="${#strings.isEmpty(message)}" th:text="${message}"> </p></div>
 
 </body>
 </html>

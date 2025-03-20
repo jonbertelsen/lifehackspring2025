@@ -10,25 +10,30 @@ import java.util.List;
 
 public class Team6Controller {
     private static List<Team6Movie> allMovies;
-    private static int correctGuessCount = 0;
+    private static int correctGuessCount = 0; // Counter variable
 
     public static void routes(Javalin app, ConnectionPool pool) {
-        app.post("/list", ctx -> getMovieList(ctx, pool));
+        app.post("/list", ctx -> getMovieList(ctx, pool)); // Ensure correct route
         app.get("/startgame", ctx -> {
-            getMovieList(ctx, pool);
+            getMovieList(ctx, pool);  // Populate movie list when game starts
             ctx.render("lifehack_team_6/game.html");
         });
-        app.post("/guess", ctx -> checkGuess(ctx, pool));
+        app.post("/guess", ctx -> checkGuess(ctx, pool)); // Ensure correct route
     }
 
     private static void getMovieList(Context ctx, ConnectionPool pool) {
         allMovies = Team6Mapper.getTop100Movies(pool);
-        correctGuessCount = 0;
+        correctGuessCount = 0; // Reset counter when a new game starts
     }
 
     public static void checkGuess(Context ctx, ConnectionPool pool) {
         String guess = ctx.formParam("user-input");
-
+        System.out.println("User guess: " + guess);  // Debugging user input
+        if (allMovies == null || allMovies.isEmpty()) {
+            ctx.attribute("message", "No movies available to guess.");
+            ctx.render("lifehack_team_6/game.html");
+            return;
+        }
 
         int indexToRemove = -1;
         for (int i = 0; i < allMovies.size(); i++) {
@@ -41,19 +46,16 @@ public class Team6Controller {
         if (indexToRemove != -1) {
             rightAnswerMovie(ctx, allMovies.get(indexToRemove));
             allMovies.remove(indexToRemove);
-            correctGuessCount++;
+            correctGuessCount++; // Increment counter
             top100counter(ctx); // Update the counter on the frontend
 
             if (allMovies.isEmpty()) {
                 winner(ctx);
             }
         } else {
-            top100counter(ctx);
             ctx.attribute("message", "Incorrect guess! Try again.");
-            ctx.render("lifehack_team_6/game.html");
-
         }
-
+        ctx.render("lifehack_team_6/game.html");
     }
 
     private static void winner(Context ctx) {
@@ -63,13 +65,13 @@ public class Team6Controller {
 
     private static void rightAnswerMovie(Context ctx, Team6Movie team6Movie) {
         ctx.attribute("message", "Correct guess! Movie: " + team6Movie.toString());
+        top100counter(ctx); // Ensure counter is updated
         ctx.render("lifehack_team_6/game.html");
     }
 
     private static void top100counter(Context ctx) {
         String counterText = correctGuessCount + "/100";
         ctx.attribute("counter", counterText);
-        ctx.render("lifehack_team_6/game.html");
     }
 
     private static String fixed(String input) {
