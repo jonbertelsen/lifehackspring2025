@@ -177,5 +177,4 @@ private static void startWorkout(Context ctx, ConnectionPool connectionPool) {
             ctx.status(500).json(Map.of("message", "Error adding exercise: " + e.getMessage()));
         }
     }
-
 }
