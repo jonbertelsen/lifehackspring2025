@@ -13,7 +13,7 @@ public class Team6Controller {
     private static int correctGuessCount = 0; // Counter variable
 
     public static void routes(Javalin app, ConnectionPool pool) {
-        app.post("/list", ctx -> getMovieList(ctx, pool)); // Ensure correct route
+        //app.post("/list", ctx -> getMovieList(ctx, pool)); // Ensure correct route
         app.get("/startgame", ctx -> {
             getMovieList(ctx, pool);  // Populate movie list when game starts
             ctx.render("lifehack_team_6/game.html");
@@ -62,7 +62,7 @@ public class Team6Controller {
     }
 
     private static void rightAnswerMovie(Context ctx, Team6Movie team6Movie) {
-        ctx.attribute("message", "Correct guess! Movie: " + team6Movie.toString());
+        ctx.attribute("message", team6Movie.toString());
         ctx.render("lifehack_team_6/game.html");
     }
 
