@@ -5,8 +5,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 public class ThymeleafConfig
 {
-    public static TemplateEngine templateEngine()
-    {
+    public static TemplateEngine templateEngine() {
         TemplateEngine templateEngine = new TemplateEngine();
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setPrefix("templates/"); // assuming templates are in resources/templates/

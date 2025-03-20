@@ -2,7 +2,7 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
-import app.controllers.TeamTeacherController;
+import app.controllers.Team21Controller;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -19,8 +19,7 @@ public class Main {
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
 
 
         // Initializing Javalin and Jetty webserver
@@ -33,8 +32,8 @@ public class Main {
 
         // Routing
 
-        app.get("/", ctx ->  ctx.render("index.html"));
-        TeamTeacherController.routes(app);
+        app.get("/", ctx ->  ctx.render("/team21/index.html"));
+        Team21Controller.routes(app, connectionPool);
 
     }
 
