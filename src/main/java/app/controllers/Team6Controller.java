@@ -64,7 +64,7 @@ public class Team6Controller {
     }
 
     private static void rightAnswerMovie(Context ctx, Team6Movie team6Movie) {
-        ctx.attribute("message", "Correct guess! Movie: " + team6Movie.toString());
+        ctx.attribute("message", "Correct guess!"+"\n" + team6Movie.toString());
         top100counter(ctx); // Ensure counter is updated
         ctx.render("lifehack_team_6/game.html");
     }

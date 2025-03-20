@@ -35,11 +35,9 @@
         <button type="submit" name = "user-input" formaction="/guess">Submit guess</button>
     </div>
 </form>
-<div class="correct-guess-message">
-    <p>Movie details here! How?</p>
-</div>
 
-<div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"> </p></div>
+
+<div><p class="movie-detail-txt" th:unless="${#strings.isEmpty(message)}" th:text="${message}"> </p></div>
 
 </body>
 </html>
