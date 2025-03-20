@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Calculator</title>
-  <link href="../../public/lifehack-team-17/css/calculator.css" th:href="@{/lifehack-team-17/css/calculator.css}" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <link href="../../public/lifehack-team-17/css/calculator.css" th:href="@{/lifehack-team-17/css/calculator.css}"
+          rel="stylesheet"/>
+    <script></script>
 </head>
 
 
@@ -11,45 +13,41 @@
 
 <div>
 
-  <header>
-    <a>
-      <img src="../../public/lifehack-team-17/images/sugarLogo.png" th:src="@{/lifehack-team-17/images/sugarLogo.png}"/>
-    </a>
+    <header>
+        <a>
+            <img src="../../public/lifehack-team-17/images/sugarLogo.png"
+                 th:src="@{/lifehack-team-17/images/sugarLogo.png}"/>
+        </a>
 
-  </header>
-
-
-  <div class="redirect_button">
-    <a href="calculator.html">Lommeregner</a>
-    <a href="consequences.html" th:href="@{/consequence}">Konsekvenser</a>
-  </div>
+    </header>
 
 
-  <div class="content">
-    <label for="sodas">Tilføj en sodavand:</label>
-
-    <select class="dropdown" id="sodas" name="sodas">
-      <option th:each="sodas : ${sodas}" th:value="${sodas.name}" th:text="${sodas.name + ' - ' + sodas.liter}"></option>
-
-    </select>
-
-    <button id="addButton">Tilføj</button>
-
-    <p>Tilføjet sodavande</p>
-    <ul id="addedSodasList"></ul>
-    <p id="totalCalories">Total kalorier: 0 kcal</p>
-  </div>
+    <div class="redirect_button">
+        <a >Lommeregner</a>
+        <a href="consequences.html" th:href="@{/consequence}">Konsekvenser</a>
+    </div>
 
 
+    <div class="content">
+        <label for="sodas">Tilføj en sodavand:</label>
 
-  <div class="footer">
-    <p>Dette er en footer</p>
-  </div>
+        <select class="dropdown" id="sodas" name="sodas">
+            <option th:each="sodas : ${sodas}" th:value="${sodas.name}"
+                    th:text="${sodas.name + ' - ' + sodas.liter}"></option>
+
+        </select>
+
+        <button id="addButton">Tilføj</button>
+
+        <p>Tilføjet sodavande</p>
+        <ul id="addedSodasList"></ul>
+        <p id="totalCalories">Total kalorier: 0 kcal</p>
+
+    </div>
+        <div class="footer">
+            <p>Dette er en footer</p>
+        </div>
 
 </div>
-
-
-
-
 </body>
 </html>

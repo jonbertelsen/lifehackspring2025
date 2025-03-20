@@ -16,7 +16,7 @@ public class LifeHackTeam17Mapper {
     public ArrayList<Soda> getSodaFromDataBase(ConnectionPool connectionPool) {
         ArrayList<Soda> sodaList = new ArrayList<>();
 
-        String sql = "SELECT * FROM \"Lifehack_Team_17_Soda\" ORDER BY name";
+        String sql = "SELECT * FROM \"lifehack_team_17_soda\" ORDER BY name";
         //Creates the connection between server and software
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)){
@@ -24,8 +24,8 @@ public class LifeHackTeam17Mapper {
             ResultSet rs = ps.executeQuery();
             //As long as the server still has another row of data we will go through them to get the data and use it to make object with it
             while(rs.next()) {
-                String name = rs.getString("Name");
-                float liter = rs.getFloat("Liter");
+                String name = rs.getString("name");
+                float liter = rs.getFloat("liter");
                 sodaList.add(new Soda(name, liter));
             }
 
