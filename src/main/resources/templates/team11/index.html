@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../public/team11/css/styles.css" th:href="@{/team11/css/styles.css}" rel="stylesheet"/>
+    <title>Told Beregner</title>
+</head>
+<body>
+
+<h1>Told Beregner</h1>
+<div class="global">
+
+
+    <form th:action="@{/team11/index}" method="post">
+        <div class="Import_Country">
+            <label for="imp_country">Import Country:</label><br>
+            <select id="imp_country" name="imp_country" required>
+                <option value=""disabled selected>Vælg import land</option>
+                <option value="Denmark">Danmark</option>
+                <option value="Germany"disabled >Tyskland "Coming soon!"</option>
+                <option value="USA"disabled >USA "Coming soon!"</option>
+                <option value="Japan"disabled >Japan "Coming soon!"</option>
+            </select>
+            <br>
+        </div>
+
+        <div class="Export_Country">
+            <label for="ex_country">Export Country:</label><br>
+            <select id="ex_country" name="ex_country" required>
+                <option value="" disabled selected>Vælg export land</option>
+                <option value="Denmark">Danmark</option>
+                <option value="Germany">Tyskland</option>
+                <option value="USA">USA</option>
+                <option value="Japan">Japan</option>
+            </select>
+            <br>
+        </div>
+
+        <div class="Category">
+            <p></p>
+            <label for="category">Vare Kategori:</label><br>
+            <select id="category" name="category" required>
+                <option value="" disabled selected>Vælg kategori</option>
+                <option value="Electronics">Elektronik</option>
+                <option value="Clothes">Tøj</option>
+                <option value="Food">Mad</option>
+                <option value="Furnitures">Møbler</option>
+                <option value="Cars">Biler</option>
+            </select>
+            <br>
+        </div>
+
+        <p></p>
+        <div>
+        <label for="p-price">Indtast varens CIF-pris:</label><br>
+        <input type="text" id="p-price" name="price" required>
+            <span class="currency-label">DKK</span>
+        </div>
+        <p></p>
+<div class="button">
+        <button type="submit">Beregn</button>
+</div>
+        <p></p>
+        <div class="CalulatedPrice">
+        <label for="Calculated-p">Beregnet pris:</label><br>
+        <input type="text" id="Calculated-p" th:value="${calculatedPrice}" readonly >
+        <span class="currency-label">DKK</span>
+        <br>
+        </div>
+    </form>
+
+</div>
+
+
+</body>
+</html>
