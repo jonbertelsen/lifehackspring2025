@@ -66,8 +66,6 @@ input[type="password"] {
     justify-content: space-between;
 }
 
-
-/* Add hover effects */
 .button-login:hover {
     opacity: 0.9;
 }

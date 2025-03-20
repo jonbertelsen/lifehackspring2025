@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Mail Reminders - Dashboard</title>
+    <!--- Ref style og js --->
     <link th:href="@{/lifehackTeam3/css/styleslifehackTeam3Dashboard.css}" rel="stylesheet"/>
     <script th:src="@{/lifehackTeam3/js/dashboard.js}"></script>
 </head>
 <body class="dashboard-page">
 <header class="top-nav">
     <div class="logo-container">
+        <!--- logo --->
         <img th:src="@{/lifehackTeam3/images/logoimg.png}" alt="logo"/>
     </div>
     <div class="user-info">
+        <!--- Logged in as hvor username er gemt som sessionAttribute--->
         <p>Logged in as: <span th:text="${username}"></span></p>
         <div class="logout-button">
             <form method="post" th:action="@{/lifehackTeam3/logout}">
@@ -51,11 +54,10 @@
             <button type="submit" class="tilmeld-btn toggle-btn">Tilmeld</button>
         </form>
     </div>
-     <form method="post" th:action="@{/lifehackTeam3/sendReminder}">
-            <button type="submit" class="send-reminder-button"> Send påmindelser nu</button>
-        </form>
-
-
+    <!--- Sender mail til knyttet user email. Får at afmelde sig skal man slette sig selv i databasen. Spørg jon om dette.--->
+    <form method="post" th:action="@{/lifehackTeam3/sendReminder}">
+        <button type="submit" class="send-reminder-button"> Send påmindelser nu</button>
+    </form>
 </main>
 </body>
 </html>

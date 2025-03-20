@@ -4,12 +4,15 @@
     <title>Mail Reminder Service</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--- Styling ref --->
     <link th:href="@{/lifehackTeam3/css/styleslifehackTeam3.css}" rel="stylesheet"/>
 </head>
 <body>
+<!--- logo --->
 <div class="login-page-container">
     <img th:src="@{/lifehackTeam3/images/logoimg.png}" alt="logo"/>
 
+    <!--- Login som sender /lifehackTeam3/login som post metode--->
     <form method="post" th:action="@{/lifehackTeam3/login}">
         <label for="username">Username:</label>
         <input type="text" name="username" id="username" required/>
@@ -18,6 +21,7 @@
 
         <div class="button-container">
             <button type="submit" class="button-frontpage">Login</button>
+            <!--- Gateway til at lave en account--->
             <button type="button" class="button-frontpage" onclick="window.location.href='/lifehackTeam3/signup'">Create
                 account
             </button>

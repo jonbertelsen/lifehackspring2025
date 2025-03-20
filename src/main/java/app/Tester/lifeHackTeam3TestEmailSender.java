@@ -1,11 +1,12 @@
 package app.Tester;
+
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
 import java.util.Properties;
 
-public class TestEmailSender {
+public class lifeHackTeam3TestEmailSender {
     private static final String SMTP_HOST = "smtp.gmail.com"; // Din SMTP-server
     private static final String SMTP_USER = "lifehackspring2025team3@gmail.com";
     private static final String SMTP_PASSWORD = "chuf kdvn rspe svkt"; // App password

@@ -8,7 +8,9 @@ public class TeamTeacherController {
 
     public static void routes(Javalin app) {
         app.get("/team-teacher/index", ctx -> teamTeacherFrontHome(ctx));
-    };
+    }
+
+    ;
 
     private static void teamTeacherFrontHome(@NotNull Context ctx) {
         ctx.render("team-teacher/index.html");
