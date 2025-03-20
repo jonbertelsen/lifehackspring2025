@@ -9,10 +9,9 @@
 <body>
 <div class="page-container">
     <header>
-        <h1>Welcome to Sleep tracker</h1>
-        <a href="team12_index.html" th:href="@{/}">
-            <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png" alt="Sleep Tracker Logo">
-        </a>
+        <a href="team12_index.html" th:href="@{/}"> </a>
+            <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png" th:href="@{//public/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
+        <h1>Welcome to your dashboard, <span th:text="${session.currentUser.username}"></span> </h1>
     </header>
 
     <main>

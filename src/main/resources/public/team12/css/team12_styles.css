@@ -4,7 +4,8 @@ h1, h2, h3, h4, h5, h6, p {
     color: #c3c3c3;
 }
 
-/* For editing purposes, delete when done */
+/* For editing purposes, delete when done
+
 header {
     border: solid red 1px;
     padding: 5px;
@@ -20,7 +21,7 @@ footer {
     padding: 5px;
 
 }
-
+*/
 
 .bg-custom {
     background-color: #1e2363;

@@ -9,7 +9,7 @@
 <body class="bg-custom">
 <div class="page-container">
     <header class="header-app">
-        <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png" alt="Sleep Tracker Logo">
+        <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png" th:href="@{//public/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
     </header>
 
 
@@ -26,7 +26,6 @@
             <button type="submit" formaction="/calculate">Calculate Duration</button>
 
             <button type="reset">Clear</button>
-
 
             <div id="result"></div>
         </div>
@@ -76,9 +75,10 @@
         }
     </script>
 
+
     <footer class="footer-app">
-        <a href="/logout" class="footer-btn">Logout</a>
-        <a href="/team12_main" class="footer-btn">Dashboard</a>
+        <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/logout}"> Log out </a>
+        <a th:if="${session.currentUser != null}" href="team12_dashboard.html" th:href="@{/dashboard}"> Dashboard </a>
     </footer>
 </div>
 </body>

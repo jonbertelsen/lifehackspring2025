@@ -21,6 +21,7 @@ public class Team12Controller {
         app.post("/createuser", ctx -> createUser(ctx, connectionPool));
 
         app.post("/calculate", ctx -> sleep(ctx, connectionPool));
+        app.get("/dashboard", ctx -> ctx.render("/team12/team12_dashboard.html"));
     }
 
     private static void createUser(Context ctx, ConnectionPool connectionPool) {
