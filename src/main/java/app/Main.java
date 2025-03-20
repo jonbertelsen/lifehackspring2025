@@ -40,9 +40,6 @@ public class Main {
 
         //TeamTeacherController.routes(app);
 
-        //TODO connect javascript to make timer function,
-        //TODO show message if guess on the same movie
-        //TODO implement winning condition
     }
 
 }

@@ -9,6 +9,9 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO connect javascript to make timer function correctly
+//TODO implement winning condition
+
 public class Team6Controller {
     private static List<Team6Movie> allMovies;
     private static List<Team6Movie> guessedMovies = new ArrayList<>();
