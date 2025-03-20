@@ -10,7 +10,6 @@ import java.util.List;
 import static app.Main.connectionPool;
 
 public class Team14Controller {
-
     public static void getMovies(Context ctx) {
         String mainGenre = ctx.queryParam("main-genre");
 
