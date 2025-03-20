@@ -26,7 +26,9 @@ public class Team10Controller {
         app.get("/create-user", ctx-> ctx.render("team10/create-user.html"));
         app.post("/create-user", ctx -> handleCreateUser(ctx,connectionPool));
         app.get("/homepage", ctx -> ctx.render("team10/homepage.html"));
+
         app.get("/admin", ctx -> showAdminPage(ctx));
+        app.get("/add-exercise",ctx-> ctx.render("team10/admin.html"));
         app.post("/admin/add-exercise", ctx -> addExercise(ctx, connectionPool));
 
 
@@ -158,8 +160,10 @@ private static void startWorkout(Context ctx, ConnectionPool connectionPool) {
             return;
         }
 
-        ctx.render("team10/admin.html");
+        ctx.render("team10/homepage-admin.html");
     }
+
+
     private static void addExercise(Context ctx, ConnectionPool connectionPool) {
         String role = ctx.sessionAttribute("user_role");
 
