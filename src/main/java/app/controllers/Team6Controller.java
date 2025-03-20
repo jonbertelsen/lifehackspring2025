@@ -10,12 +10,12 @@ import java.util.List;
 
 public class Team6Controller {
     private static List<Team6Movie> allMovies;
-    private static int correctGuessCount = 0; // Counter variable
+    private static int correctGuessCount = 0;
 
     public static void routes(Javalin app, ConnectionPool pool) {
-        app.post("/list", ctx -> getMovieList(ctx, pool)); // Ensure correct route
+        app.post("/list", ctx -> getMovieList(ctx, pool));
         app.get("/startgame", ctx -> {
-            getMovieList(ctx, pool);  // Populate movie list when game starts
+            getMovieList(ctx, pool);
             ctx.render("lifehack_team_6/game.html");
         });
         app.post("/guess", ctx -> checkGuess(ctx, pool));
@@ -41,7 +41,7 @@ public class Team6Controller {
         if (indexToRemove != -1) {
             rightAnswerMovie(ctx, allMovies.get(indexToRemove));
             allMovies.remove(indexToRemove);
-            correctGuessCount++; // Increment counter
+            correctGuessCount++;
             top100counter(ctx); // Update the counter on the frontend
 
             if (allMovies.isEmpty()) {
