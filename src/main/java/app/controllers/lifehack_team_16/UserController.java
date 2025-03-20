@@ -6,6 +6,9 @@ import app.persistence.lifehack_team_16.ConnectionPool;
 import app.persistence.lifehack_team_16.UserMapper;
 import io.javalin.http.Context;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserController {
@@ -18,20 +21,6 @@ public class UserController {
     }
 
     //TODO Make this if we have time
-   /* public static void createUser(Context ctx, ConnectionPool connectionPool) {
-        String userName = ctx.formParam("userName");
-        String password1 = ctx.formParam("password1");
-        String password2 = ctx.formParam("password2");
-
-            if (password1.equals(password2)) {
-            try{
-                UserMapper.createUser(userName, password1);
-            } catch (Exception e) {
-
-            }
-
-            }
-    } */
 
         public static void login(Context ctx) throws DatabaseException{
             String userName = ctx.formParam("userName");
@@ -56,5 +45,30 @@ public class UserController {
             }
 
         }
+
+
+    public static void createUser(Context ctx, ConnectionPool connectionPool){
+        String username = ctx.formParam("username");
+        String password1 = ctx.formParam("password1");
+        String password2 = ctx.formParam("password2");
+
+
+        if (password1.equals(password2))
+        {
+
+            try {
+                UserMapper.createuser(username, password1, connectionPool);
+                ctx.attribute("message", "Du er hermed oprettet med brugernavn: " + username + ". Nu skal du logge på.");
+                ctx.render("lifehack_team_16/index.html");
+            } catch (DatabaseException e) {
+                ctx.attribute("message", "Dit brugernavn findes allerede. Prøv igen, eller log ind");
+                ctx.render("createuser.html");
+            }
+        } else {
+            ctx.attribute("message", "Dine to passwords matcher ikke! Prøv igen");
+            ctx.render("createuser.html");
+        }
+
+    }
 
 }

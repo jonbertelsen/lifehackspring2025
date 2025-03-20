@@ -7,7 +7,7 @@ public class WaterLogController {
 
     public static void addWater(Context ctx, WaterLog waterLog){
         waterLog.setWaterMl(waterLog.getWaterMl() + 250);
-        updateWaterLog(waterLog);
+        //updateWaterLog(waterLog);
         ctx.attribute("waterMl", waterLog.getWaterMl());
         ctx.render("login.html");
     }

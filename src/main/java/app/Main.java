@@ -10,13 +10,15 @@ import io.javalin.rendering.template.JavalinThymeleaf;
 
 import java.util.logging.Logger;
 
+import static app.controllers.lifehack_team_16.UserController.createUser;
+
 public class Main {
     private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/%s?currentSchema=public";
-    private static final String DB = "lifehack_team_16_waterlog";
+    private static final String DB = "lifehack_team_16";
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
     private static final UserController userController = new UserController(connectionPool);
@@ -32,8 +34,7 @@ public class Main {
         }).start(7070);
 
         // Routing
-        app.get("/", ctx ->  ctx.render("index.html"));
-        TeamTeacherController.routes(app);
+       app.get("/", ctx ->  ctx.render("lifehack_team_16/index.html"));
 
 
         //SignIn endpoints
@@ -43,8 +44,10 @@ public class Main {
             ctx.sessionAttribute("error", null); // Nulstil error efter visning
             ctx.render("signIn.html");
         });
+        app.get("createuser", ctx -> ctx.render("lifehack_team_16/createuser.html"));
+        app.post("createuser", ctx -> createUser(ctx, connectionPool));
+        app.get("/user/signIn", ctx -> ctx.redirect("lifehack_team_16/signIn"));
 
-        app.get("/user/signIn", ctx -> ctx.redirect("/signIn"));
 
     }
 

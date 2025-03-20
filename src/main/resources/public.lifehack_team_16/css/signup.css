@@ -1,0 +1,26 @@
+.generic-form{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.generic-form button{
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    background-color: darkgreen;
+    color: white;
+}
+
+.generic-form button:hover{
+    background-color: lightgreen;
+}
+
+.generic-form input[type=text], .generic-form input[type=password]{
+    padding: 10px;
+    font-size: 1.2rem;
+}
+
+.input-large{
+    width: 300px;
+}
