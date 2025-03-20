@@ -7,8 +7,10 @@ public class LifehackTeam08User {
     private String username;
     private String password;
     private BigInteger eggs;
+    private int chickenFeedtier;
+    private int predatorTier;
 
-    public LifehackTeam08User(int id, String username, String password, BigInteger eggs){
+    public LifehackTeam08User(int id, String username, String password, BigInteger eggs, int chickenFeedtier, int predatorTier){
         this.id = id;
         this.username = username;
         this.password = password;
@@ -48,7 +50,12 @@ public class LifehackTeam08User {
         this.eggs = eggs;
     }
 
+    public int getChickenFeedTier() { return chickenFeedtier; }
+
+    public int getPredatorTier() { return predatorTier; }
+
     @Override
+
     public String toString(){
         return "LifehackTeam08User{" + "id=" + id + ", username='" + username +  ", eggs=" + eggs + '}';
     }

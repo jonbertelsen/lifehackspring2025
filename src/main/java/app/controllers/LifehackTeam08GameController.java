@@ -7,6 +7,9 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 
 import java.math.BigInteger;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class LifehackTeam08GameController {
 
@@ -14,8 +17,13 @@ public class LifehackTeam08GameController {
             "postgres", "postgres", "jdbc:postgresql://localhost:5432/%s?currentSchema=public", "chicken_clicker"
     );
     private static final LifehackTeam08UserMapper userMapper = new LifehackTeam08UserMapper(connectionPool);
+    private static LifehackTeam08GameController controller = new LifehackTeam08GameController();
 
     public static void Routes(Javalin app) {
+
+        app.before(ctx -> controller.loadUserDataOnStartup(ctx));
+        app.after(ctx -> controller.shutdownUpdate(ctx));
+
         app.get("/", ctx ->  ctx.render("lifehack-team-08/login.html"));
         app.get("/login", LifehackTeam08GameController::loginPage);
         app.post("/login", LifehackTeam08GameController::loginUser);
@@ -80,5 +88,36 @@ public class LifehackTeam08GameController {
         ctx.redirect("/login");
     }
 
+
+
+    public void shutdownUpdate(Context ctx) {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("Server shutting down. Updating user data...");
+            LifehackTeam08User user = ctx.sessionAttribute("user"); // Get the logged-in user
+
+            if (user != null) {
+                userMapper.updateUserStats(user.getId(), user.getEggs(), user.getChickenFeedTier(), user.getPredatorTier());
+                System.out.println("Updated user: " + user.getUsername());
+            } else {
+                System.out.println("No user session found during shutdown.");
+            }
+        }));
+    }
+
+
+    public void loadUserDataOnStartup(Context ctx) {
+        LifehackTeam08User user = ctx.sessionAttribute("user");
+
+        if (user != null) {
+            LifehackTeam08User updatedUser = userMapper.getUserById(user.getId()); // Get latest data from DB
+            ctx.sessionAttribute("user", updatedUser);
+            System.out.println("Loaded user: " + updatedUser.getUsername() +
+                    ", Eggs: " + updatedUser.getEggs() +
+                    ", Chicken Feed Tier: " + updatedUser.getChickenFeedTier() +
+                    ", Predator Tier: " + updatedUser.getPredatorTier());
+        } else {
+            System.out.println("No user session found at startup.");
+        }
+    }
 
 }
