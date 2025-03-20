@@ -10,6 +10,28 @@
     width: 25%;
 }
 
+.flex-box-center{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.category-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+
+}
+
+.category-button:hover {
+    background-color: #45a049;
+}
+
 
 body {
     font-family: Arial, sans-serif;
