@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="../../public/lifehack_team_1/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link href="../../public/lifehack_team_1/css/styles.css" th:href="@{/lifehack_team_1/css/styles.css}" rel="stylesheet"/>
     <title>question</title>
 </head>
 <body>
@@ -17,13 +17,13 @@
 </header>
 <div class="game_position">
     <!--fix variables-->
-    <h2 class="category" th:text="${category.title}">category</h2>
-    <h2 class="point" th:text="${category.title}">0</h2>
+    <!--<h2 class="category" th:text="${question.title}">category</h2>-->
+    <h2 class="point" th:text="${question.points}">0</h2>
     <div class="qa">
-        <H1 class="question" th:text="${category.title}">question</H1>
+        <H1 class="question" th:text="${question.question}">question</H1>
         <div class="line"></div>
         <button id="answer_button" onclick="revealAnswer()">reveal answer</button>
-        <H1 id="answer" class="hide" th:text="${category.title}">answer</H1>
+        <H1 id="answer" class="hide" th:text="${question.answer}">answer</H1>
         <script>
             function revealAnswer() {
                 var element = document.getElementById("answer_button");
