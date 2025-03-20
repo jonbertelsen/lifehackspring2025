@@ -47,7 +47,7 @@ public class LifehackTeam08GameController {
     }
 
     public static void registerPage(Context ctx) {
-        ctx.render("lifehack-team-08/register.html");
+        ctx.render("/lifehack-team-08/register.html");
     }
 
     public static void registerUser(Context ctx) {
