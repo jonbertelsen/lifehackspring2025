@@ -81,4 +81,38 @@ public static Team4ProfileEntity addProfile(ConnectionPool connectionPool ,Team4
         throw new DatabaseException(msg, e.getMessage());
     }
 }
+
+
+public static List<Team4ProfileEntity> searchProfiles(String query, ConnectionPool connectionPool) throws DatabaseException {
+                List<Team4ProfileEntity> profiles = new ArrayList<>();
+                String sql = "SELECT color, species, bio, name, age " +
+                                "FROM profile " +
+                                "WHERE name ILIKE ? OR bio ILIKE ? " +
+                               "ORDER BY species DESC";
+            try (Connection connection = connectionPool.getConnection();
+                 PreparedStatement ps = connection.prepareStatement(sql)) {
+
+                        String pattern = "%" + query + "%";
+                       ps.setString(1, pattern);
+                        ps.setString(2, pattern);
+
+                                try (ResultSet rs = ps.executeQuery()) {
+                                while (rs.next()) {
+                                       Team4ProfileEntity profileEntity = new Team4ProfileEntity(
+                            rs.getInt("color"),
+                                                       rs.getInt("species"),
+                                                       rs.getString("bio"),
+                                                        rs.getString("name"),
+                                                       rs.getInt("age")
+                                                        );
+                                        profiles.add(profileEntity);
+                                   }
+                           }
+                   } catch (SQLException e) {
+                        throw new DatabaseException(e.getMessage());
+                   }
+              return profiles;
+            }
+
 }
+
