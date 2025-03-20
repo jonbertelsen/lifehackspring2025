@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public class LifehackTeam08GameController {
 
@@ -22,7 +23,7 @@ public class LifehackTeam08GameController {
     public static void Routes(Javalin app) {
 
         app.before(ctx -> controller.loadUserDataOnStartup(ctx));
-        app.after(ctx -> controller.shutdownUpdate(ctx));
+
 
         app.get("/", ctx ->  ctx.render("lifehack-team-08/login.html"));
         app.get("/login", LifehackTeam08GameController::loginPage);
@@ -31,6 +32,10 @@ public class LifehackTeam08GameController {
         app.post("/lifehack-team-08/register", LifehackTeam08GameController::registerUser);
         app.get("/lifehack-team-08/index", LifehackTeam08GameController::gamePage);
         app.get("/lifehack-team-08/logout", LifehackTeam08GameController::logout);
+
+        app.events(event -> {
+            event.serverStopping(() -> controller.shutdownUpdate());
+        });
     }
 
     public static void loginPage(Context ctx) {
@@ -88,36 +93,37 @@ public class LifehackTeam08GameController {
         ctx.redirect("/login");
     }
 
+    public void shutdownUpdate() {
+        System.out.println("⚠️ Server shutting down. Updating all user data...");
 
+        List<LifehackTeam08User> users = userMapper.getAllUsers(); // Get all users from DB
+        for (LifehackTeam08User user : users) {
+            userMapper.updateUserStats(user.getId(), user.getEggs(), user.getChickenFeedTier(), user.getPredatorTier());
+            System.out.println("✅ Saved user: " + user.getUsername() + " - Eggs: " + user.getEggs());
+        }
 
-    public void shutdownUpdate(Context ctx) {
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            System.out.println("Server shutting down. Updating user data...");
-            LifehackTeam08User user = ctx.sessionAttribute("user"); // Get the logged-in user
-
-            if (user != null) {
-                userMapper.updateUserStats(user.getId(), user.getEggs(), user.getChickenFeedTier(), user.getPredatorTier());
-                System.out.println("Updated user: " + user.getUsername());
-            } else {
-                System.out.println("No user session found during shutdown.");
-            }
-        }));
+        System.out.println("✅ All user data has been saved successfully!");
     }
+
+
 
 
     public void loadUserDataOnStartup(Context ctx) {
         LifehackTeam08User user = ctx.sessionAttribute("user");
 
         if (user != null) {
-            LifehackTeam08User updatedUser = userMapper.getUserById(user.getId()); // Get latest data from DB
-            ctx.sessionAttribute("user", updatedUser);
-            System.out.println("Loaded user: " + updatedUser.getUsername() +
-                    ", Eggs: " + updatedUser.getEggs() +
-                    ", Chicken Feed Tier: " + updatedUser.getChickenFeedTier() +
-                    ", Predator Tier: " + updatedUser.getPredatorTier());
+            LifehackTeam08User updatedUser = userMapper.getUserById(user.getId());
+
+            if (updatedUser != null) {
+                ctx.sessionAttribute("user", updatedUser);
+                System.out.println("✅ User loaded: " + updatedUser.getUsername() + " - Eggs: " + updatedUser.getEggs());
+            } else {
+                System.out.println("❌ ERROR: User ID not found in database.");
+            }
         } else {
-            System.out.println("No user session found at startup.");
+            System.out.println("⚠ No user in session on startup.");
         }
     }
+
 
 }

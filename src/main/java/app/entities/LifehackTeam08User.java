@@ -7,7 +7,7 @@ public class LifehackTeam08User {
     private String username;
     private String password;
     private BigInteger eggs;
-    private int chickenFeedtier;
+    private int chickenFeedTier;
     private int predatorTier;
 
     public LifehackTeam08User(int id, String username, String password, BigInteger eggs, int chickenFeedtier, int predatorTier){
@@ -15,6 +15,8 @@ public class LifehackTeam08User {
         this.username = username;
         this.password = password;
         this.eggs = eggs;
+        this.chickenFeedTier = chickenFeedtier;
+        this.predatorTier = predatorTier;
 
     }
 
@@ -50,9 +52,17 @@ public class LifehackTeam08User {
         this.eggs = eggs;
     }
 
-    public int getChickenFeedTier() { return chickenFeedtier; }
+    public int getChickenFeedTier() { return chickenFeedTier; }
 
     public int getPredatorTier() { return predatorTier; }
+
+    public void setChickenFeedTier(int chickenFeedtier) {
+        this.chickenFeedTier = chickenFeedtier;
+    }
+
+    public void setPredatorTier(int predatorTier) {
+        this.predatorTier = predatorTier;
+    }
 
     @Override
 
