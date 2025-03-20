@@ -99,3 +99,8 @@ body {
 .dashboard-page .tilmeld-btn:hover {
     background: #43a047;
 }
+
+.afmeld-btn {
+    background: #d32f2f !important;
+    color: white !important;
+}
