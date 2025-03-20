@@ -31,4 +31,5 @@ public class Team7Controller {
         ctx.attribute("joke", joke);
         ctx.render("team7_frontpage.html");
     }
+
 }
