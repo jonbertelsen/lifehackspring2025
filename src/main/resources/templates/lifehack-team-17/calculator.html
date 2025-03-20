@@ -3,51 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
-    <link href="../../public/lifehack-team-17/css/calculator.css" th:href="@{/lifehack-team-17/css/calculator.css}"
-          rel="stylesheet"/>
+    <link href="../../public/lifehack-team-17/css/consequences.css" th:href="@{/lifehack-team-17/css/consequences.css}" rel="stylesheet"/>
     <script></script>
 </head>
 
 
 <body>
 
-<div>
 
-    <header>
-        <a>
-            <img src="../../public/lifehack-team-17/images/sugarLogo.png"
-                 th:src="@{/lifehack-team-17/images/sugarLogo.png}"/>
-        </a>
+<img th:src="@{/lifehack-team-17/images/dentistcover.png}" src="../../public/lifehack-team-17/images/dentistcover.png" class="background-image" />
 
-    </header>
-
-
-    <div class="redirect_button">
-        <a >Lommeregner</a>
-        <a href="consequences.html" th:href="@{/consequence}">Konsekvenser</a>
-    </div>
-
+<header class="top-bar">
+    <a href="calculator.html" th:href="@{/calculator}" class="top-button">Lommeregner</a>
+    <a href="consequences.html" th:href="@{/consequence}" class="top-button">Konsekvenser</a>
+</header>
 
     <div class="content">
         <label for="sodas">Tilføj en sodavand:</label>
 
         <select class="dropdown" id="sodas" name="sodas">
-            <option th:each="sodas : ${sodas}" th:value="${sodas.name}"
-                    th:text="${sodas.name + ' - ' + sodas.liter}"></option>
-
+            <option
+                    th:each="sodas : ${sodas}" th:value="${sodas.name}"
+                    th:text="${sodas.name + ' - ' + sodas.liter}">
+            </option>
         </select>
-
-        <button id="addButton">Tilføj</button>
-
-        <p>Tilføjet sodavande</p>
-        <ul id="addedSodasList"></ul>
-        <p id="totalCalories">Total kalorier: 0 kcal</p>
-
     </div>
-        <div class="footer">
-            <p>Dette er en footer</p>
-        </div>
 
-</div>
+    <main class="content">
+        <section class="box">
+            <h2>Navn</h2>
+            <p>
+                Coca Cola<br>
+            </p>
+        </section>
+
+        <section class="box">
+            <h2>Liter</h2>
+            <p>
+                5 Liter <br>
+            </p>
+        </section>
+    </main>
+
 </body>
 </html>
