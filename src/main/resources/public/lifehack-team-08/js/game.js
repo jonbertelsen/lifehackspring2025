@@ -1,4 +1,4 @@
-let eggs = 0;
+let eggs = 50000;
 let chickenFeedTier = 0;
 let predatorTier = 0;
 
@@ -111,7 +111,7 @@ function buyItem(item) {
 
             // Create a new predator image
             let predator = document.createElement("img");
-            predator.src = `../../public/lifehack-team-08/images/predator${predatorTier}.png`;
+            predator.src = `/lifehack-team-08/images/predator${predatorTier}.png`;
             predator.id = "predator-img";
             predator.classList.add("predatorImg");
 
@@ -124,9 +124,9 @@ function buyItem(item) {
             let positions = [
                 { top: "365px", left: "600px" },
                 { top: "275px", right: "350px" },
-                { bottom: "-180px", left: "550px" },
-                { bottom: "-255px", right: "50px" },
-                { bottom: "-245px", left: "750px" }
+                { bottom: "-235px", left: "550px" },
+                { bottom: "-310px", right: "50px" },
+                { bottom: "-310px", left: "750px" }
             ];
 
             let pos = positions[predatorTier - 1]; // Get position for the current tier
