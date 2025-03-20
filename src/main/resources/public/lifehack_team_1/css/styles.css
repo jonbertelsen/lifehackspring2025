@@ -27,7 +27,7 @@ header{
     margin-right: 3vw;
     margin-left: 3vw;
 
-    background: cyan;
+    background: sandybrown;
     width: 100%;
     max-width: 10em;
     height: 5em;
@@ -63,8 +63,8 @@ header{
     height: 49vh;
     flex: 1;
 }
-.question_rows > a  {
-    background: cyan;
+.question_rows > form  {
+    background: sandybrown;
     border-radius: var(--rounded_corner_size);
 
     margin: 3%;
@@ -75,8 +75,14 @@ header{
     justify-content: center;
     align-items: center;
 }
-.question_rows > a > h1 {
+.question_rows > form > button {
     font-size: 1.5em;
+    width: 100%;
+    height: 100%;
+    border: none;
+    color: black;
+    background: none;
+
 }
 
 .qa{
