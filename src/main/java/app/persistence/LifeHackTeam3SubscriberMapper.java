@@ -1,18 +1,14 @@
 package app.persistence;
 
+import app.exceptions.LifeHackTeam3DatabaseException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import app.entities.LifeHackTeam3Subscriber;
-import app.exceptions.LifeHackTeam3DatabaseException;
 
 
 public class LifeHackTeam3SubscriberMapper {
-
 
 
     public void addNewSubscriber(ConnectionPool connectionPool, String email, String username, String password) throws LifeHackTeam3DatabaseException {
@@ -36,9 +32,6 @@ public class LifeHackTeam3SubscriberMapper {
     }
 
 
-
-
-
     public int getUserIdFromEmail(ConnectionPool connectionPool, String email) throws LifeHackTeam3DatabaseException {
         String sql = "SELECT user_id FROM users_lifehack_team_3 WHERE user_email = ?;";
 
@@ -49,7 +42,7 @@ public class LifeHackTeam3SubscriberMapper {
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                return (rs.getInt("user_id"));
+                    return (rs.getInt("user_id"));
 
                 } else {
                     throw new LifeHackTeam3DatabaseException(null, "Could not get user id from database");
@@ -100,9 +93,6 @@ public class LifeHackTeam3SubscriberMapper {
             throw new LifeHackTeam3DatabaseException(ex, "Could not remove subscriber from reminder.");
         }
     }
-
-
-
 
 
     // De to metoder der kører koden
