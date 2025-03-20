@@ -100,14 +100,14 @@ public class LifehackTeam08GameController {
             LifehackTeam08User updatedUser = userMapper.getUserById(user.getId());
 
             if (updatedUser != null) {
-                // Send the data to the front-end as JSON
+                // Send the data to the front-end as JSON (Thanks ChatGPT)
                 ctx.json(new Object() {
                     public final BigInteger eggs = updatedUser.getEggs();
                     public final int chickenFeedTier = updatedUser.getChickenFeedTier();
                     public final int predatorTier = updatedUser.getPredatorTier();
                 });
             } else {
-                // If no user data is found, send empty values
+
                 ctx.json(new Object() {
                     public final BigInteger eggs = BigInteger.ZERO;
                     public final int chickenFeedTier = 0;

@@ -83,7 +83,7 @@ function buyItem(item) {
             alert("Not enough eggs!");
         }
     }
-    else if (item === 'predator') {
+    else if (item === 'predator') { /* Decides what picture etc for predator */
         if (predatorTier >= 5) { // Max level now 5
             document.getElementById("buy-predator").classList.add("disabled-button");
             document.getElementById("buy-predator").disabled = true;
@@ -145,14 +145,14 @@ function buyItem(item) {
         }
     }
 }
-
+/* Save game implementation */
 document.getElementById("saveButton").addEventListener("click", function() {
-    // Update the hidden input fields with current values
+
     document.getElementById("eggs").value = eggs;
     document.getElementById("chickenFeedTier").value = chickenFeedTier;
     document.getElementById("predatorTier").value = predatorTier;
 
-    // Send data asynchronously using fetch
+    // Send data asynchronously using fetch (Thanks ChatGPT)
     fetch('/lifehack-team-08/save', {
         method: 'POST',
         body: new FormData(document.getElementById("saveForm"))
@@ -184,7 +184,7 @@ window.addEventListener('load', function() {
             document.getElementById("upgrade-text-1").textContent = `Upgrade ${chickenFeedTier}/5 - ${Math.pow(chickenFeedTier + 1, 2) * 50} eggs`;
             document.getElementById("upgrade-text-2").textContent = `Upgrade ${predatorTier}/5 - ${Math.pow(predatorTier + 1, 2) * 100} eggs`;
 
-            // Optionally, start egg gain if the predator tier is greater than 0
+
             if (predatorTier > 0) {
                 startEggGain();
                 loadPredatorImage(predatorTier); // Load the predator image based on the saved tier
