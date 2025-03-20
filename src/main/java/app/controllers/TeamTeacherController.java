@@ -30,12 +30,14 @@ public class TeamTeacherController {
         TeamTeacherEntitiy philosophicalAnswer = TeamTeacherMapper.getPhilosophicalAnswer(input, connectionPool);
         ctx.attribute("quote", philosophicalAnswer.getQuote());
         ctx.attribute("philosopher", philosophicalAnswer.getPhilosopher());
+        ctx.attribute("philosopherImage", philosophicalAnswer.getPicture());
+        ctx.render("teamteachers/index.html");
         /*
         // Her søges og hentes fra datamapper - indtil da hardcodes et citat. Tænker også at vi kan gemme billedenavn i db
         ctx.attribute("quote", "Det uundersøgte liv er ikke værd at leve.");
         ctx.attribute("philosopher", "Socrates");*/
-        ctx.attribute("philosopherImage", "socrates.webp");
-        ctx.render("teamteachers/index.html");
+
+
     }
 
 
