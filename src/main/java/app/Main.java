@@ -26,10 +26,6 @@ public class Main {
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
     public static void main(String[] args) throws DatabaseException, SQLException {
-        Team1QuestionMapper qm = new Team1QuestionMapper();
-
-        qm.listOfQuestions(connectionPool, 1);
-
 
         // Initializing Javalin and Jetty webserver
 
