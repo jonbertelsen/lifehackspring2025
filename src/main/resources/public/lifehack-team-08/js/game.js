@@ -1,7 +1,6 @@
-let eggs = 1000;
+let eggs = 0;
 let chickenFeedTier = 0;
 let predatorTier = 0;
-let eggGainInterval = null;
 
 
 /* Clicking the chicken increases egg gain */
@@ -12,6 +11,7 @@ function incrementCounter() {
 
     let egg = document.createElement('div');
     egg.classList.add('egg');
+
     // Egg falling
     let chickenBox = document.querySelector('.chicken-box');
     egg.style.left = `${chickenBox.offsetLeft + chickenBox.offsetWidth / 2 - 25}px`;
