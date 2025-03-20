@@ -14,11 +14,9 @@ import java.util.Properties;
 import java.util.Random;
 
 public class LifeHackTeam3MailSender {
-    private static final String SMTP_HOST = "smtp.gmail.com"; // Udskift med din SMTP-server
+    private static final String SMTP_HOST = "smtp.gmail.com"; // Din SMTP-server
     private static final String SMTP_USER = "lifehackspring2025team3@gmail.com";
     private static final String SMTP_PASSWORD = "chuf kdvn rspe svkt"; // app password
-    // mail password "lifehackteam3";
-
 
     private final ConnectionPool connectionPool;
 
@@ -26,41 +24,55 @@ public class LifeHackTeam3MailSender {
         this.connectionPool = connectionPool;
     }
 
+    /**
+     * Sender påmindelser til alle brugere (hentet fra users-tabellen).
+     */
     public void sendReminders() {
         List<String> emails = getAllEmails();
+        System.out.println("[sendReminders] Fundne emails: " + emails);
         for (String email : emails) {
-            List<String> reminders = getUserReminders(email);
-            for (String reminder : reminders) {
-                List<String> messages = getReminderMessages(reminder);
-                if (!messages.isEmpty()) {
-                    String message = getRandomMessage(messages);
-                    sendEmail(email, "Din daglige reminder!", message);
-                }
-            }
+            sendReminderForUser(email);
         }
     }
 
+    /**
+     * Henter alle unikke bruger-emailadresser fra users-tabellen.
+     */
     private List<String> getAllEmails() {
         List<String> emails = new ArrayList<>();
-        String sql = "SELECT DISTINCT email FROM mail_info_lifehack_team_3";
+        String sql = "SELECT DISTINCT user_email FROM users_lifehack_team_3";
 
-        try (Connection conn = connectionPool.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+        try (Connection conn = connectionPool.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                emails.add(rs.getString("email"));
+                String email = rs.getString("user_email");
+                emails.add(email);
             }
-
         } catch (SQLException e) {
+            System.err.println("[getAllEmails] Fejl: " + e.getMessage());
             e.printStackTrace();
         }
+        System.out.println("[getAllEmails] Returnerer: " + emails);
         return emails;
     }
 
+    /**
+     * Henter de påmindelser, som en given bruger er tilmeldt.
+     * Vi antager, at der findes en mapping-tabel 'reminder_subscriber_lifehack_team_3'
+     * som bruger user_id fra users-tabellen.
+     */
     private List<String> getUserReminders(String email) {
         List<String> reminders = new ArrayList<>();
-        String sql = "SELECT r.reminder_name " + "FROM mail_info_lifehack_team_3 mi " + "JOIN reminder_subscriber_lifehack_team_3 rs ON mi.mail_id = rs.mail_id " + "JOIN reminders_lifehack_team_3 r ON rs.reminder_id = r.reminder_id " + "WHERE mi.email = ?";
+        String sql = "SELECT r.reminder_name " +
+                "FROM users_lifehack_team_3 u " +
+                "JOIN reminder_subscriber_lifehack_team_3 rs ON u.user_id = rs.mail_id " +
+                "JOIN reminders_lifehack_team_3 r ON rs.reminder_id = r.reminder_id " +
+                "WHERE u.user_email = ?";
 
-        try (Connection conn = connectionPool.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = connectionPool.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, email);
             try (ResultSet rs = ps.executeQuery()) {
@@ -68,29 +80,40 @@ public class LifeHackTeam3MailSender {
                     reminders.add(rs.getString("reminder_name"));
                 }
             }
-
         } catch (SQLException e) {
+            System.err.println("[getUserReminders] Fejl for email " + email + ": " + e.getMessage());
             e.printStackTrace();
         }
+        System.out.println("[getUserReminders] Reminders for " + email + ": " + reminders);
         return reminders;
     }
 
+
+    /**
+     * Henter de beskeder (descriptions), der hører til en given reminder.
+     */
     private List<String> getReminderMessages(String reminderName) {
         List<String> messages = new ArrayList<>();
-        String sql = "SELECT d.description " + "FROM reminders_lifehack_team_3 r " + "JOIN reminders_description_lifehack_team_3 d ON r.reminder_id = d.reminder_id " + "WHERE r.reminder_name = ?";
+        String sql = "SELECT d.description " +
+                "FROM reminders_lifehack_team_3 r " +
+                "JOIN reminders_description_lifehack_team_3 d ON r.reminder_id = d.reminder_id " +
+                "WHERE r.reminder_name = ?";
 
-        try (Connection conn = connectionPool.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = connectionPool.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, reminderName);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    messages.add(rs.getString("description"));
+                    String description = rs.getString("description");
+                    messages.add(description);
                 }
             }
-
         } catch (SQLException e) {
+            System.err.println("[getReminderMessages] Fejl for reminder " + reminderName + ": " + e.getMessage());
             e.printStackTrace();
         }
+        System.out.println("[getReminderMessages] Beskeder for " + reminderName + ": " + messages);
         return messages;
     }
 
@@ -99,6 +122,9 @@ public class LifeHackTeam3MailSender {
         return messages.get(random.nextInt(messages.size()));
     }
 
+    /**
+     * Afsender en email via SMTP.
+     */
     private void sendEmail(String to, String subject, String text) {
         Properties props = new Properties();
         props.put("mail.smtp.host", SMTP_HOST);
@@ -119,9 +145,31 @@ public class LifeHackTeam3MailSender {
             message.setSubject(subject);
             message.setText(text);
             Transport.send(message);
+            System.out.println("[sendEmail] Email sendt til: " + to);
         } catch (MessagingException e) {
+            System.err.println("[sendEmail] Fejl under afsendelse til " + to + ": " + e.getMessage());
             e.printStackTrace();
         }
     }
-}
 
+    /**
+     * Sender påmindelser til en enkelt bruger baseret på brugerens email.
+     */
+    public void sendReminderForUser(String email) {
+        System.out.println("[sendReminderForUser] Sender reminder for bruger: " + email);
+        List<String> reminders = getUserReminders(email);
+        if(reminders.isEmpty()){
+            System.out.println("[sendReminderForUser] Ingen reminders fundet for " + email);
+        }
+        for (String reminder : reminders) {
+            List<String> messages = getReminderMessages(reminder);
+            if (!messages.isEmpty()) {
+                String message = getRandomMessage(messages);
+                System.out.println("[sendReminderForUser] Sender reminder email til " + email + " med besked: " + message);
+                sendEmail(email, "Din daglige reminder!", message);
+            } else {
+                System.out.println("[sendReminderForUser] Ingen beskeder fundet for reminder: " + reminder);
+            }
+        }
+    }
+}

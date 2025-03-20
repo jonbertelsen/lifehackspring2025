@@ -8,11 +8,12 @@ import io.javalin.http.Context;
 import java.util.Map;
 
 import app.persistence.LifeHackTeam3SubscriberMapper;
+import app.persistence.LifeHackTeam3MailSender;
 
 public class LifehackTeam3Controller {
     private static final String TEAM_PREFIX = "/lifehackTeam3";
     private static LifeHackTeam3SubscriberMapper subscriberMapper = new LifeHackTeam3SubscriberMapper();
-
+    private static LifeHackTeam3MailSender mailSender;
 
     public static void routes(Javalin app) {
         // Redirect from root to /login
@@ -37,6 +38,8 @@ public class LifehackTeam3Controller {
         app.post(TEAM_PREFIX + "/tilmeld", ctx -> handleTilmeld(ctx));
         app.post(TEAM_PREFIX + "/afmeld", ctx -> handleAfmeld(ctx));
 
+        //Send reminder
+        app.post(TEAM_PREFIX + "/sendReminder", ctx -> handleSendReminder(ctx));
     }
 
     private static void redirect(Context ctx) {
@@ -138,4 +141,14 @@ public class LifehackTeam3Controller {
         ctx.redirect(TEAM_PREFIX + "/dashboard");
     }
 
+    private static void handleSendReminder(Context ctx) {
+        String email = ctx.sessionAttribute("email");
+        if (email != null) {
+            LifeHackTeam3MailSender mailSender = new LifeHackTeam3MailSender(ConnectionPool.getInstance());
+            mailSender.sendReminderForUser(email);
+            ctx.redirect(TEAM_PREFIX + "/dashboard");
+        } else {
+            ctx.redirect(TEAM_PREFIX + "/login");
+        }
+    }
 }

@@ -106,3 +106,17 @@ body {
     background: #d32f2f !important;
     color: white !important;
 }
+
+.send-reminder-button {
+        background: linear-gradient(to right, #4A90E2, #357ABD); /* Smooth blue gradient */
+        color: white; /* White text */
+        border: none; /* Remove border */
+        padding: 10px 20px; /* Add padding */
+        font-size: 16px;
+        cursor: pointer; /* Make it clickable */
+        border-radius: 5px; /* Rounded corners */
+    }
+
+    .send-reminder-button:hover {
+        background: linear-gradient(to right, #357ABD, #2B5EA2); /* Darker hover effect */
+    }
