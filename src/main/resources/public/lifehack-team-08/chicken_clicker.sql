@@ -2,6 +2,7 @@
 -- Please log an issue at https://github.com/pgadmin-org/pgadmin4/issues/new/choose if you find any bugs, including reproduction steps.
 BEGIN;
 
+
 CREATE TABLE IF NOT EXISTS public.lifehack_team_08_upgrades
 (
     upgrade_id serial NOT NULL,
@@ -17,6 +18,8 @@ CREATE TABLE IF NOT EXISTS public.lifehack_team_08_users
     username character varying(50) COLLATE pg_catalog."default" NOT NULL,
     password character varying(255) COLLATE pg_catalog."default" NOT NULL,
     eggs bigint NOT NULL DEFAULT 0,
+    chicken_feed_tier integer NOT NULL DEFAULT 0,
+    predator_tier integer NOT NULL DEFAULT 0,
     CONSTRAINT lifehack_team_08_users_pkey PRIMARY KEY (user_id),
     CONSTRAINT lifehack_team_08_users_username_key UNIQUE (username)
     );

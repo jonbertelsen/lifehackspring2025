@@ -1,4 +1,4 @@
-let eggs = 50000;
+let eggs = 0;
 let chickenFeedTier = 0;
 let predatorTier = 0;
 let eggGainInterval = null;
