@@ -195,11 +195,18 @@ ol {
     z-index: 0; /* SVG stays behind */
 }
 
-.speech-bubble-right {
+.speech-buble-right {
     transform: scaleX(-1);
     transform: rotate(-60deg);
     z-index: 0; /* SVG stays behind */
 }
+
+.speech-bubble-right {
+    width: 100%;
+    height: auto;  /* Maintains aspect ratio */
+    max-width: 800px; /* Prevents it from being too large */
+}
+
 
 /* Position textarea on top of SVG */
 .speech-textarea {
