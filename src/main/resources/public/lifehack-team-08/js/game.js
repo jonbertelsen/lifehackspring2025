@@ -3,6 +3,8 @@ let chickenFeedTier = 0;
 let predatorTier = 0;
 let eggGainInterval = null;
 
+
+/* Clicking the chicken increases egg gain */
 function incrementCounter() {
     let eggGain = chickenFeedTier + 1; // 1 by default, increases with feed upgrades
     eggs += eggGain;
@@ -16,6 +18,7 @@ function incrementCounter() {
     egg.style.top = `px`;
 
     document.body.appendChild(egg);
+
 
     egg.addEventListener('animationend', () => {
         egg.remove();
@@ -38,6 +41,7 @@ function closeShop() {
     document.getElementById("shop-window").style.display = "none";
 }
 
+/* Upgraded gain for eggs */
 function startEggGain() {
     // Clear existing interval to prevent stacking
     if (eggGainInterval) clearInterval(eggGainInterval);

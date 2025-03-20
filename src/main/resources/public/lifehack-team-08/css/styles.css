@@ -169,28 +169,30 @@
 }
 
 .egg{
-    position: absolute;
+    position: fixed;
     width: 50px;
     height: 50px;
     background-image: url('../images/egg.png');
     background-size: cover;
-    animation: fall 3s linear forwards;
+    animation: fall 2s linear forwards;
 }
 
 
-
+/* Egg fall animation */
 @keyframes fall {
     from {
         transform: translateY(0);
     }
     to {
-        transform: translateY(100vh);
+        transform: translateY(calc(100vh - 100px));
     }
     }
 
 .jump{
     animation: jump 0.3s ease forwards;
 }
+
+/* Chicken jump animation */
 @keyframes jump {
     0% {
         transform: translateY(0);
