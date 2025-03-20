@@ -1,6 +1,7 @@
 let eggs = 50000;
 let chickenFeedTier = 0;
 let predatorTier = 0;
+let eggGainInterval = null;
 
 
 /* Clicking the chicken increases egg gain */
