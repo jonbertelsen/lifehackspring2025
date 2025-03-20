@@ -10,12 +10,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Team4ProfilMapper {
+public class Team4ProfileMapper {
 
 private ConnectionPool connectionPool;
 
 
-public Team4ProfilMapper(ConnectionPool connectionPool) {
+public Team4ProfileMapper(ConnectionPool connectionPool) {
     this.connectionPool = connectionPool;
 }
 
