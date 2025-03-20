@@ -4,6 +4,7 @@ import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
 import app.controllers.TeamTeacherController;
 import app.exceptions.LifeHackTeam3DatabaseException;
+import app.controllers.LifehackTeam3Controller;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -22,6 +23,7 @@ public class Main {
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
     private static LifeHackTeam3SubscriberMapper subscriberMapper = new LifeHackTeam3SubscriberMapper();
 
+    
     public static void main(String[] args) {
 
 
@@ -49,6 +51,10 @@ public class Main {
         }
 
 
+=======
+    public static void main(String[] args)
+    {
+
         // Initializing Javalin and Jetty webserver
 
         Javalin app = Javalin.create(config -> {
@@ -59,8 +65,15 @@ public class Main {
 
         // Routing
 
+
         app.get("/", ctx -> ctx.render("index.html"));
         TeamTeacherController.routes(app);
+
+        app.get("/", ctx ->  ctx.render("index.html"));
+        //TeamTeacherController.routes(app);
+        LifehackTeam3Controller.routes(app);
+
+
 
 
     }

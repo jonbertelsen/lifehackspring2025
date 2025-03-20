@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Mail Reminders - Dashboard</title>
+    <link th:href="@{/lifehackTeam3/css/styleslifehackTeam3Dashboard.css}" rel="stylesheet"/>
+</head>
+<body class="dashboard-page">
+<header class="top-nav">
+    <div class="logo-container">
+        <img th:src="@{/lifehackTeam3/images/logoimg.png}" alt="logo"/>
+    </div>
+
+    <div class="user-info">
+        <p>Logged in as: <span th:text="${username}"></span></p>
+
+        <div class="logout-button">
+            <form method="post" th:action="@{/lifehackTeam3/logout}">
+                <button type="submit" class="Logout">Logout</button>
+            </form>
+
+    </div>
+</header>
+
+<main class="content">
+    <h2>Påmindelser</h2>
+
+    <!-- Reminder1 -->
+    <div class="reminder-item">
+        <span>Træning &amp; Sundhed</span>
+        <button class="tilmeld-btn">Tilmeld</button>
+    </div>
+
+    <!-- Reminder2 -->
+    <div class="reminder-item">
+        <span>Ta' en skive</span>
+        <button class="tilmeld-btn">Tilmeld</button>
+    </div>
+
+    <!-- Reminder3 -->
+    <div class="reminder-item">
+        <span>Rygestop</span>
+        <button class="tilmeld-btn">Tilmeld</button>
+    </div>
+</main>
+</body>
+</html>
