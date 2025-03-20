@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<title>lifehack</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="/public/team05/css05/styles05.css" th:href="@{/public/team05/css05/styles05.css}" rel="stylesheet"/>
+<head>
+    <title>Lifehack</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/team05/css05/styles05.css" th:href="@{/team05/css05/styles05.css}" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
     <h1 class="headline">Sweat Today, Success Tomorrow</h1>
 
-    <img class="billede" src="../../../../../Untitled.png"/>
+    <img class="billede" src="/team05/css05/Untitled.png"/>
 
     <p class="welcome-text">
-        Welcome to your workout log! Here, you can effortlessly add your workouts, track your progress and stay motivated on your fitness journey. Let's crush those goals together
+        Welcome to your workout log! Here, you can effortlessly add your workouts, track your progress, and stay motivated on your fitness journey. Let's crush those goals together.
     </p>
 
     <hr class="divider" />
     <hr class="divider1" />
 
     <div class="form-container">
-        <form>
-            <input type="email" placeholder="Email" required />
-            <input type="password" placeholder="password" required />
+        <form action="/authenticate" method="post">
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Password" required />
+
             <div class="button-group">
-                <button type="submit">Sign Up</button>
-                <button type="button">Sign In</button>
+                <button type="submit" name="action" value="signup">Sign Up</button>
+                <button type="submit" name="action" value="signin">Sign In</button>
             </div>
         </form>
     </div>
+
 
     <hr class="divider1" />
     <hr class="divider" />
 
     <footer class="footer">
-        <p>© 2025 workoutLog. Alle rettigheder forbeholdes.</p>
+        <p>&copy; 2025 workoutLog. Alle rettigheder forbeholdes.</p>
         <p>Email: kontakt@workoutlog.dk</p>
         <p>Telefon: +45 [Telefonnummer]</p>
     </footer>
