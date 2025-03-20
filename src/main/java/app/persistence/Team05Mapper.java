@@ -2,7 +2,6 @@ package app.persistence;
 
 import app.entities.Team05.Workout;
 import app.exceptions.DatabaseException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +13,7 @@ public class Team05Mapper {
     //Retrieves all workout logs from the workoutlog table.
     public static List<Workout> getAllWorkoutLog(ConnectionPool ConnectionPool) throws DatabaseException {
         List<Workout> workouts = new ArrayList<>();
-        String sql = "SELECT * FROM workoutlog";
+        String sql = "SELECT id, type_id, duration, current_date, extra_notes FROM workoutlog";
 
         try (Connection conn = ConnectionPool.getConnection();  // Sørg for, at connection poolen er korrekt brugt
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -23,16 +22,15 @@ public class Team05Mapper {
             while (rs.next()) {
                 Workout workout = new Workout(
                         rs.getInt("id"),
-                        rs.getString("email"),
                         rs.getInt("type_id"),
                         rs.getInt("duration"),
-                        rs.getDate("date"),
-                        rs.getString("extra_Notes")
+                        rs.getDate("current_date"),
+                        rs.getString("extra_notes")
                 );
                 workouts.add(workout);
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Error retrieving newsletters", e.getMessage());
+            throw new DatabaseException("Error retrieving workout logs", e.getMessage());
         }
         return workouts;
     }

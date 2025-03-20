@@ -54,7 +54,7 @@ public class HomeController {
 
                 if (userEmail != null) {
                     ctx.sessionAttribute("user", userEmail);  // Gem bruger i session
-                    ctx.redirect("/team05/log.html");  // Redirect til log.html
+                    ctx.redirect("/team05/log");  // Redirect til log.html
                 } else {
                     ctx.status(400).result("Incorrect email or password.");
                 }

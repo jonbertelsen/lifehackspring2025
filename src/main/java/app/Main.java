@@ -43,12 +43,12 @@ public class Main {
         app.post("/authenticate", homeController::authenticate);
 
         // Hvis login er succesfuldt, omdiriger til log.html
-        app.get("/team05/log.html", ctx -> {
+        app.get("team05/log", ctx -> {
             ctx.render("team05/log.html");  // Sørg for at filen er i den rigtige mappe
         });
 
         // Rute for upload.html
-        app.get("/upload.html", ctx -> {
+        app.get("/upload", ctx -> {
             ctx.render("team05/upload.html");  // Sørg for at filen er i den rigtige mappe
         });
 

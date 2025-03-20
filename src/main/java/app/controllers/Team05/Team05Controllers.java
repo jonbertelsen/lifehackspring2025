@@ -25,14 +25,21 @@
         //This method fetches all workout logs from the database and sends them to the view (team05/log.html).
         public void viewWorkoutlog(Context ctx) {
             try {
+                // Hent workout logs fra databasen
                 List<Workout> workoutLog = Team05Mapper.getAllWorkoutLog(connectionPool);
-                ctx.attribute("workout", workoutLog);
+
+                // Log hvad der er hentet
+                System.out.println("Antal logs hentet: " + workoutLog.size());
+
+                // Send workout logs til Thymeleaf
+                ctx.attribute("workout", workoutLog);  // Sørg for at listen er korrekt sendt til Thymeleaf
                 ctx.render("team05/log.html");
             } catch (DatabaseException e) {
                 LOGGER.severe("Error retrieving workout log: " + e.getMessage());
                 ctx.result("An error occurred while retrieving the workout log.");
             }
         }
+
 
         //This method adds a new workout log. It validates the incoming data,
         // handles directory creation for file storage (if necessary),and inserts the workout log into the database.
@@ -66,12 +73,12 @@
                 }
 
                 // Opret workout objekt
-                Workout newWorkout = new Workout(0, Integer.parseInt(type_id), Integer.parseInt(duration), java.sql.Date.valueOf(publishedDate), extraNotes);
+                Workout newWorkout = new Workout(1,Integer.parseInt(type_id), Integer.parseInt(duration), java.sql.Date.valueOf(publishedDate), extraNotes);
 
                 // Indsæt i databasen
                 Team05Mapper.creatWorkout(newWorkout, connectionPool);
 
-                ctx.redirect("team05/log.html");
+                ctx.redirect("/workoutlog");
             } catch (IOException e) {
                 ctx.status(500).result("Server error while creating directory.");
             } catch (DatabaseException e) {

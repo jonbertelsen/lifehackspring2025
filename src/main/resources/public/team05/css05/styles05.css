@@ -109,32 +109,33 @@ body {
 
 
 
-body {
-    font-family: Georgia, serif;
-    background-color: white;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    max-width: 500px;
-    margin: auto;
-    text-align: center;
+/* Styling for workout container */
+.workout-container {
+    display: flex;
+    flex-direction: column; /* Sørger for, at logs vises vertikalt */
+    gap: 20px; /* Mellemrum mellem hver log */
     padding: 20px;
 }
 
-h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
+/* Styling for individual workout log */
+.workout-log {
+    background-color: #f9f9f9; /* Lys grå baggrund for hver log */
+    border: 1px solid #ddd; /* Tynd grå kant rundt om hver log */
+    padding: 15px;
+    border-radius: 8px; /* Rundede hjørner */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Let skygge for at give dybde */
 }
 
-.divider {
-    width: 90%;
-    border: none;
-    border-top: 2px solid #222;
-    margin: 10px auto 30px;
+/* Styling for labels and values in the workout log */
+.workout-log p {
+    margin: 5px 0; /* Afstand mellem linjer */
 }
 
+.workout-log strong {
+    color: #333; /* Mørk farve for labels */
+}
+
+/* Styling for the "Add Workout" button (already defined) */
 .add-button {
     background-color: black;
     color: white;
@@ -148,7 +149,6 @@ h1 {
 }
 
 .add-button:hover {
-    background-color: #444; /* Lidt lysere sort/grå farve ved hover */
-    transform: scale(1.05); /* Gør knappen lidt større ved hover */
+    background-color: #444;
+    transform: scale(1.05);
 }
-

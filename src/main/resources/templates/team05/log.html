@@ -8,13 +8,35 @@
 
 <body>
 
+
 <div class="container">
   <h1>Your workout log</h1>
   <hr class="divider" />
 
   <!-- Ændret knappen til et link -->
-  <a href="/upload.html" class="add-button">Add Workout</a>
+  <a href="/upload" class="add-button">Add Workout</a>
 </div>
+
+<div th:if="${#lists.isEmpty(workout)}">
+  <p>Der er ingen workout logs tilgængelige.</p>
+</div>
+
+<div th:if="${!#lists.isEmpty(workout)}">
+
+  <p>Antal workout logs: <span th:text="${workout.size()}"></span></p>
+
+  <div class="workout-container">
+    <th:block th:each="log : ${workout}">
+      <div class="workout-log">
+        <p><strong>Type ID:</strong> <span th:text="${log.type_id}"></span></p>
+        <p><strong>Varighed:</strong> <span th:text="${log.duration}"></span> minutter</p>
+        <p><strong>Dato:</strong> <span th:text="${log.date}"></span></p>
+        <p><strong>Ekstra noter:</strong> <span th:text="${log.extraNotes}"></span></p>
+      </div>
+    </th:block>
+  </div>
+</div>
+
 
 </body>
 </html>
