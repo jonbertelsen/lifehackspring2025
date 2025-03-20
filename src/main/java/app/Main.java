@@ -2,6 +2,7 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
+import app.controllers.Team7Controller;
 import app.controllers.TeamTeacherController;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
@@ -34,6 +35,7 @@ public class Main {
 
         app.get("/", ctx ->  ctx.render("index.html"));
         TeamTeacherController.routes(app);
+        Team7Controller.add(app, connectionPool);
 
     }
 

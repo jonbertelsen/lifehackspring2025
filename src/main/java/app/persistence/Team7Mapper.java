@@ -37,4 +37,20 @@ public class Team7Mapper {
             throw new DatabaseException("DB fejl", e.getMessage());
         }
     }
+
+   public static int subscribe(String email, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "INSERT INTO team_7_subscribe (email) VALUES (?)";
+
+        try(
+            Connection connection = connectionPool.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+        ) {
+            ps.setString(1, email);
+            return ps.executeUpdate();
+        }catch(SQLException e){
+            String msg = "It failed";
+            throw new DatabaseException(msg, e.getMessage());
+        }
+   }
+
 }
