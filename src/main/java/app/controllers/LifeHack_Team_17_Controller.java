@@ -26,8 +26,8 @@ public class LifeHack_Team_17_Controller {
 
 
     public static void routes(Javalin app) {
-        app.get("calculator", ctx -> team17Calculator(ctx));
-        app.get("consequence", ctx -> team17Consequence(ctx));
+        app.get("/calculator", ctx -> team17Calculator(ctx));
+        app.get("/consequence", ctx -> team17Consequence(ctx));
         app.get("/get-sodas", ctx -> getSodas(ctx));  // Endpoint to fetch sodas as JSON
     }
 

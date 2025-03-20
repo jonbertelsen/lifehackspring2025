@@ -34,11 +34,10 @@ public class Main {
         }).start(7070);
 
         // Routing
-        LifeHack_Team_17_Controller lifeHack_team_17_controller = new LifeHack_Team_17_Controller(connectionPool);
 
-        //app.get("/", ctx ->  ctx.render("index.html"));
-        app.get("/", ctx -> lifeHack_team_17_controller.home(ctx));
-        app.get("/calculator", ctx -> lifeHack_team_17_controller.home(ctx));
+
+        app.get("/", ctx ->  ctx.render("index.html"));
+
 
 
         TeamTeacherController.routes(app);
