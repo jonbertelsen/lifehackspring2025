@@ -16,6 +16,15 @@
     flex-wrap: wrap;
 }
 
+.flex-box-center-with-m{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: black;
+    color: black;
+}
+
 .category-button {
     display: inline-block;
     padding: 10px 20px;
@@ -152,7 +161,20 @@ body {
 
 .info-box {
     position: fixed; /* Gør boksen fast på skærmen */
-    top: 20%; /* Juster placeringen op eller ned */
+    top: 10%; /* Juster placeringen op eller ned */
+    right: 20px; /* Placer boksen i højre side af skærmen */
+    width: 250px; /* Fast bredde til boksen */
+    padding: 20px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    background-color: #fff;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-box2{
+    position: fixed; /* Gør boksen fast på skærmen */
+    top: 60%; /* Juster placeringen op eller ned */
     right: 20px; /* Placer boksen i højre side af skærmen */
     width: 250px; /* Fast bredde til boksen */
     padding: 20px;

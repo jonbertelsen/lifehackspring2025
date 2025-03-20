@@ -21,7 +21,6 @@ public class Team7Category {
         return categoryNames;
     }
 
-
     @Override
     public String toString() {
         return "Team7Category{" +
