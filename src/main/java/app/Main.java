@@ -3,12 +3,8 @@ package app;
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
 import app.controllers.TeamTeacherController;
-import app.entities.Team1Entities;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
-import app.persistence.Team1CategoriesMapper;
-import app.persistence.Team1QuestionMapper;
-import app.persistence.Team1UsersMapper;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 

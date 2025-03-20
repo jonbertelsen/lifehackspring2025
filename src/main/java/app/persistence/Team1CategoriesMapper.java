@@ -41,9 +41,9 @@ public class Team1CategoriesMapper {
             ps.setString(1, categories.getCategoryName());
             ps.setInt(2, quiz.getId());
 
-            int rowsCreated = ps.executeUpdate();
+            int rowsAffected = ps.executeUpdate();
 
-            if (rowsCreated == 0) {
+            if (rowsAffected == 0) {
                 throw new DatabaseException("Could not update the category");
             }
         } catch (SQLException ex) {
