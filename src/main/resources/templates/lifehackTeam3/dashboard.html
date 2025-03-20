@@ -3,48 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Mail Reminders - Dashboard</title>
-
-    <!--- external assets --->
     <link th:href="@{/lifehackTeam3/css/styleslifehackTeam3Dashboard.css}" rel="stylesheet"/>
     <script th:src="@{/lifehackTeam3/js/dashboard.js}"></script>
-
 </head>
 <body class="dashboard-page">
 <header class="top-nav">
     <div class="logo-container">
         <img th:src="@{/lifehackTeam3/images/logoimg.png}" alt="logo"/>
     </div>
-
     <div class="user-info">
         <p>Logged in as: <span th:text="${username}"></span></p>
-
         <div class="logout-button">
             <form method="post" th:action="@{/lifehackTeam3/logout}">
                 <button type="submit" class="Logout">Logout</button>
             </form>
-
         </div>
+    </div>
 </header>
 
 <main class="content">
     <h2>Påmindelser</h2>
 
-    <!-- Reminder1 -->
+    <!-- Reminder 1: Træning & Sundhed -->
     <div class="reminder-item">
         <span>Træning &amp; Sundhed</span>
-        <button class="tilmeld-btn">Tilmeld</button>
+        <form method="post" class="reminder-form">
+            <input type="hidden" name="reminderId" value="traening_reminder"/>
+            <!-- Starttilstand: Tilmeld (grøn) -->
+            <button type="submit" class="tilmeld-btn toggle-btn">Tilmeld</button>
+        </form>
     </div>
 
-    <!-- Reminder2 -->
+    <!-- Reminder 2: Ta' en skive -->
     <div class="reminder-item">
         <span>Ta' en skive</span>
-        <button class="tilmeld-btn">Tilmeld</button>
+        <form method="post" class="reminder-form">
+            <input type="hidden" name="reminderId" value="skive_reminder"/>
+            <button type="submit" class="tilmeld-btn toggle-btn">Tilmeld</button>
+        </form>
     </div>
 
-    <!-- Reminder3 -->
+    <!-- Reminder 3: Stop rygning -->
     <div class="reminder-item">
-        <span>Rygestop</span>
-        <button class="tilmeld-btn">Tilmeld</button>
+        <span>Stop rygning</span>
+        <form method="post" class="reminder-form">
+            <input type="hidden" name="reminderId" value="rygning_reminder"/>
+            <button type="submit" class="tilmeld-btn toggle-btn">Tilmeld</button>
+        </form>
     </div>
 </main>
 </body>
