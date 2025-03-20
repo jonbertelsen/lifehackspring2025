@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 
 public class Team12Controller {
 
+    // Configures routes for the application
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
         app.get("/", ctx -> ctx.render("/team12/team12_index.html"));
         app.post("/login", ctx -> login(ctx, connectionPool));
@@ -23,7 +24,7 @@ public class Team12Controller {
         app.post("/calculate", ctx -> sleep(ctx, connectionPool));
         app.get("/dashboard", ctx -> ctx.render("/team12/team12_dashboard.html"));
     }
-
+    // Handles user creation and adds the user to the database
     private static void createUser(Context ctx, ConnectionPool connectionPool) {
         String username = ctx.formParam("username");
         String password1 = ctx.formParam("password1");
@@ -43,12 +44,12 @@ public class Team12Controller {
             ctx.render("/team12/team12_createuser.html");
         }
     }
-
+    // Logs out the user by invalidating the session
     private static void logout(Context ctx) {
         ctx.req().getSession().invalidate();
         ctx.redirect("/");
     }
-
+    // Handles login requests and validates user credentials
     public static void login(Context ctx, ConnectionPool connectionPool) {
         String username = ctx.formParam("username");
         String password = ctx.formParam("password");
@@ -76,7 +77,7 @@ public class Team12Controller {
             ctx.render("/team12/team12_index.html");
         }
     }
-
+    // Processes sleep data and saves it to the database
     private static void sleep(Context ctx, ConnectionPool connectionPool) {
         Team12User currentUser = ctx.sessionAttribute("currentUser");
         String sleepStartString = ctx.formParam("sleep_start").replace('T', ' ') + ":00"; // Add seconds

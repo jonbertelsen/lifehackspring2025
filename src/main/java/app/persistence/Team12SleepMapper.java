@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 
 public class Team12SleepMapper {
 
+    // Saves sleep data (user ID, start time, end time) to the database
     public static void saveSleepData(int userId, Timestamp sleepStart, Timestamp sleepEnd, ConnectionPool connectionPool) throws Team12DatabaseException {
         String sql = "INSERT INTO team12_sleep_records (user_id, sleep_start, sleep_end) VALUES (?, ?, ?)";
 

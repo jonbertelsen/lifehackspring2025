@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 
 public class Team12UserMapper {
 
+        // Authenticates the user by verifying username and password from the database
     public static Team12User login(String username, String password, ConnectionPool connectionPool) throws Team12DatabaseException {
         String sql = "select * from team12_users where username=? and password_hash=?";
 
@@ -33,7 +34,7 @@ public class Team12UserMapper {
             throw new Team12DatabaseException("DB fejl", e.getMessage());
         }
     }
-
+    // Creates a new user by inserting username and password into the database
     public static void createUser(String username, String password, ConnectionPool connectionPool) throws Team12DatabaseException {
         String sql = "insert into team12_users (username, password_hash) values (?,?)";
 
