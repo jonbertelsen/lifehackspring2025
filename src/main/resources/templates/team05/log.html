@@ -29,6 +29,7 @@
     <th:block th:each="log : ${workout}">
       <div class="workout-log">
         <p><strong>Type ID:</strong> <span th:text="${log.type_id}"></span></p>
+        <p><strong>Type:</strong> <span th:text="${log.type}"></span></p>
         <p><strong>Varighed:</strong> <span th:text="${log.duration}"></span> minutter</p>
         <p><strong>Dato:</strong> <span th:text="${log.date}"></span></p>
         <p><strong>Ekstra noter:</strong> <span th:text="${log.extraNotes}"></span></p>

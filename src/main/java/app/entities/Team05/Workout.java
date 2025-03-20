@@ -6,14 +6,16 @@ public class Workout {
     private int id;
     private String email;
     private int type_id;
+    private String type;
     private int duration;
     private Date date;
     private String extraNotes;
 
-    public Workout(int id, String email, int type_id, int duration, Date date, String extraNotes) {
+    public Workout(int id, int type_id, String type, int duration, Date date, String extraNotes) {
         this.id = id;
         this.email = email;
         this.type_id = type_id;
+        this.type = type;
         this.duration = duration;
         this.date = date;
         this.extraNotes = extraNotes;
@@ -25,6 +27,7 @@ public class Workout {
         this.duration = duration;
         this.date = date;
     }
+
 
     public int getId() {
         return id;
@@ -48,6 +51,11 @@ public class Workout {
 
     public String getExtraNotes() {
         return extraNotes;
+    }
+
+
+    public String getType() {
+        return type;
     }
 
     @Override

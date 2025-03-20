@@ -13,7 +13,8 @@ public class Team05Mapper {
     //Retrieves all workout logs from the workoutlog table.
     public static List<Workout> getAllWorkoutLog(ConnectionPool ConnectionPool) throws DatabaseException {
         List<Workout> workouts = new ArrayList<>();
-        String sql = "SELECT id, type_id, duration, current_date, extra_notes FROM workoutlog";
+        String sql = "SELECT id, workoutlog.type_id, type, duration, current_date, extra_notes FROM workoutlog " +
+                "JOIN type ON workoutlog.type_id = type.type_id";
 
         try (Connection conn = ConnectionPool.getConnection();  // Sørg for, at connection poolen er korrekt brugt
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -23,6 +24,7 @@ public class Team05Mapper {
                 Workout workout = new Workout(
                         rs.getInt("id"),
                         rs.getInt("type_id"),
+                        rs.getString("type"),
                         rs.getInt("duration"),
                         rs.getDate("current_date"),
                         rs.getString("extra_notes")
@@ -34,6 +36,7 @@ public class Team05Mapper {
         }
         return workouts;
     }
+
     //Inserts a new workout log into the workoutlog table.
     public static void creatWorkout(Workout workout, ConnectionPool myConnectionPool) throws DatabaseException {
         String sql = "INSERT INTO workoutlog (type_id, duration, date, extra_notes) VALUES (?, ?,CURRENT_DATE,?)";
