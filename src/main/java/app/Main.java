@@ -25,11 +25,11 @@ public class Main {
 
 
     public static void main(String[] args) {
-
-
+   
+/*
         //TODO sæt denne så det er en knap der gør det når man signer up  i starten
         try {
-            subscriberMapper.addNewSubscriber(connectionPool, "jonas.outzen.j@gmail.com", "faster_jones", "1234");
+            subscriberMapper.addNewUser(connectionPool, "jonas.outzen.j@gmail.com", "faster_jones", "1234");
         } catch (LifeHackTeam3DatabaseException e) {
             System.out.println(e.getMessage());
         }
@@ -44,11 +44,11 @@ public class Main {
         }
 
         //TODO når der trykkes afmeld skal denne kode køres
-        try {
+         try {
             subscriberMapper.executeRemoveSubscriberFromReminder(connectionPool, "jonas.outzen.j@gmail.com", 2);
         } catch (LifeHackTeam3DatabaseException e) {
             throw new RuntimeException(e);
-        }
+        } */
 
         // Initializing Javalin and Jetty webserver
         Javalin app = Javalin.create(config -> {
@@ -59,8 +59,8 @@ public class Main {
 
         // Routing
 
-        app.get("/", ctx -> ctx.render("index.html"));
-        TeamTeacherController.routes(app);
+        //app.get("/", ctx -> ctx.render("index.html"));
+        //TeamTeacherController.routes(app);
 
         app.get("/", ctx -> ctx.render("index.html"));
         //TeamTeacherController.routes(app);

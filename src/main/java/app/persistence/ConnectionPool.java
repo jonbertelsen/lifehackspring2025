@@ -109,4 +109,8 @@ public class ConnectionPool {
 
         return new HikariDataSource(config);
     }
+
+    public static ConnectionPool getInstance() {
+        return instance;
+    }
 }
