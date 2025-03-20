@@ -66,6 +66,9 @@ public class HomeController {
             ctx.status(500).result("Error during authentication.");
         }
     }
+
+
+
 }
 
 //Denne controller håndterer både brugerens login og tilmelding. Afhængig af den handling,
