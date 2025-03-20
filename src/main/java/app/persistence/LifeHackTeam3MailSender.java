@@ -1,18 +1,23 @@
 package app.persistence;
 
-import java.sql.*;
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
-import jakarta.mail.*;
-import jakarta.mail.internet.*;
 
 public class LifeHackTeam3MailSender {
     private static final String SMTP_HOST = "smtp.gmail.com"; // Udskift med din SMTP-server
     private static final String SMTP_USER = "lifehackspring2025team3@gmail.com";
     private static final String SMTP_PASSWORD = "chuf kdvn rspe svkt"; // app password
-            // mail password "lifehackteam3";
+    // mail password "lifehackteam3";
 
 
     private final ConnectionPool connectionPool;
@@ -39,9 +44,7 @@ public class LifeHackTeam3MailSender {
         List<String> emails = new ArrayList<>();
         String sql = "SELECT DISTINCT email FROM mail_info_lifehack_team_3";
 
-        try (Connection conn = connectionPool.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        try (Connection conn = connectionPool.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 emails.add(rs.getString("email"));
@@ -55,14 +58,9 @@ public class LifeHackTeam3MailSender {
 
     private List<String> getUserReminders(String email) {
         List<String> reminders = new ArrayList<>();
-        String sql = "SELECT r.reminder_name " +
-                "FROM mail_info_lifehack_team_3 mi " +
-                "JOIN reminder_subscriber_lifehack_team_3 rs ON mi.mail_id = rs.mail_id " +
-                "JOIN reminders_lifehack_team_3 r ON rs.reminder_id = r.reminder_id " +
-                "WHERE mi.email = ?";
+        String sql = "SELECT r.reminder_name " + "FROM mail_info_lifehack_team_3 mi " + "JOIN reminder_subscriber_lifehack_team_3 rs ON mi.mail_id = rs.mail_id " + "JOIN reminders_lifehack_team_3 r ON rs.reminder_id = r.reminder_id " + "WHERE mi.email = ?";
 
-        try (Connection conn = connectionPool.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = connectionPool.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, email);
             try (ResultSet rs = ps.executeQuery()) {
@@ -79,13 +77,9 @@ public class LifeHackTeam3MailSender {
 
     private List<String> getReminderMessages(String reminderName) {
         List<String> messages = new ArrayList<>();
-        String sql = "SELECT d.description " +
-                "FROM reminders_lifehack_team_3 r " +
-                "JOIN reminders_description_lifehack_team_3 d ON r.reminder_id = d.reminder_id " +
-                "WHERE r.reminder_name = ?";
+        String sql = "SELECT d.description " + "FROM reminders_lifehack_team_3 r " + "JOIN reminders_description_lifehack_team_3 d ON r.reminder_id = d.reminder_id " + "WHERE r.reminder_name = ?";
 
-        try (Connection conn = connectionPool.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = connectionPool.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, reminderName);
             try (ResultSet rs = ps.executeQuery()) {

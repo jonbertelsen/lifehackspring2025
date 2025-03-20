@@ -33,6 +33,7 @@ public class LifehackTeam3Controller {
     private static void redirect(Context ctx) {
         ctx.redirect(TEAM_PREFIX + "/login");
     }
+
     private static void showLoginPage(Context ctx) {
         ctx.render("lifehackTeam3/index.html");
     }
