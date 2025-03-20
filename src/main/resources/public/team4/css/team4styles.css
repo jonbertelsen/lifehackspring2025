@@ -15,8 +15,139 @@ html, body {
 .content-wrap {
     flex: 1; /* Skubber footeren ned, hvis der er lidt indhold */
 }
-
 .container {
+    max-width: 700px;
+    width: 100%;
+    margin-top: 120px; /* Afstand fra header */
+    text-align: center;
+    flex-grow: 1;
+}
+
+/* Header */
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+.nav-links li {
+    margin: 0 15px;
+}
+.nav-links a {
+    text-decoration: none;
+    color: black;
+}
+.nav-links .active {
+    font-weight: bold;
+}
+
+/*------------Your Account Page------------*/
+/* Indhold */
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+    width: 100%;
+}
+/* Profilbillede */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.upload-label {
+    font-size: 14px;
+    color: blue;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+.image-preview {
+    width: 100px;
+    height: 100px;
+    background: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+.image-preview img {
+    width: 80px;
+}
+/* Bio sektion */
+.bio-section {
+    width: 60%;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    border: 1px solid black;
+    padding: 5px;
+}
+/* Formular */
+.account-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid black;
+}
+
+.change-password {
+    font-size: 12px;
+    color: blue;
+    margin-top: 5px;
+}
+
+.cta-button {
+    background: #ff00c8;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Slet konto */
+.delete-account {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.delete-account a {
+    color: blue;
+}
+
+
+/*------------Login Page-----------*/
+.login-container {
     max-width: 600px;
     margin: 50px auto;
     display: flex;
@@ -25,8 +156,7 @@ html, body {
     justify-content: center;
     flex-grow: 1;
 }
-
-.logo-frontpage {
+.logo-login-page {
     display: flex;
     justify-content: center; /* Centrerer logoet horisontalt */
     align-items: center; /* Centrerer det vertikalt, hvis nødvendigt */
@@ -35,7 +165,7 @@ html, body {
     padding-bottom: 25px;
 }
 
-.logo-frontpage img {
+.logo-login-page img {
     max-width: 100%; /* Sikrer, at logoet ikke bliver for stort */
     height: auto; /* Bevarer billedets proportioner */
 }
@@ -98,7 +228,7 @@ html, body {
     object-fit: cover;
     border-radius: 5px;
 }
-
+/*---------Footer---------*/
 .footer {
     text-align: center;
     padding: 20px;
