@@ -1,5 +1,7 @@
 package app.entities;
 
+import java.util.Objects;
+
 public class Team4ProfileEntity {
 
     private int color;
@@ -31,6 +33,15 @@ public class Team4ProfileEntity {
         this.bio = bio;
         this.name = name;
         this.age = age;
+    }
+
+    public Team4ProfileEntity(int color, int species, String bio, String name, int age, String email) {
+        this.color = color;
+        this.species = species;
+        this.bio = bio;
+        this.name = name;
+        this.age = age;
+        this.email = email;
     }
 
     //Getter methods
@@ -75,5 +86,16 @@ public class Team4ProfileEntity {
     public String toString() {
         return "Color: " + this.color + " Species: " + this.species + " Bio: " + this.bio +
                 " Name: " + this.name + " Age: " + this.age + " Image: " + this.image + " Email: " + this.email + " ID: " + this.id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Team4ProfileEntity that)) return false;
+        return color == that.color && species == that.species && age == that.age && Objects.equals(bio, that.bio) && Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, species, bio, name, age);
     }
 }

@@ -12,107 +12,159 @@ import java.util.List;
 
 public class Team4ProfileMapper {
 
-private ConnectionPool connectionPool;
+    private ConnectionPool connectionPool;
 
 
-public Team4ProfileMapper(ConnectionPool connectionPool) {
-    this.connectionPool = connectionPool;
-}
+    public Team4ProfileMapper(ConnectionPool connectionPool) {
+        this.connectionPool = connectionPool;
+    }
 
-public List<Team4ProfileEntity> getAllProfiles() {
+    public List<Team4ProfileEntity> getAllProfiles() {
 
-    List<Team4ProfileEntity> profiles = new ArrayList<>();
+        List<Team4ProfileEntity> profiles = new ArrayList<>();
 
-    String sql = "SELECT name, age, bio, species, color " +
-            "FROM profile " +
-            "ORDER BY species";
+        String sql = "SELECT name, age, bio, species, color " +
+                "FROM profile " +
+                "ORDER BY species";
 
-    //Tries resource closes connection automatically
-    try(Connection connection = connectionPool.getConnection()){
-        try(PreparedStatement ps = connection.prepareStatement(sql)) {
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
-                String name = rs.getString("name");
-                int age  = rs.getInt("age");
-                String bio = rs.getString("bio");
-                int species = rs.getInt("species");
-                int color = rs.getInt("color");
-                profiles.add(new Team4ProfileEntity(color,species,bio,name, age));
+        //Tries resource closes connection automatically
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    String name = rs.getString("name");
+                    int age = rs.getInt("age");
+                    String bio = rs.getString("bio");
+                    int species = rs.getInt("species");
+                    int color = rs.getInt("color");
+                    profiles.add(new Team4ProfileEntity(color, species, bio, name, age));
+                }
             }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return profiles;
+    }
+
+    public static Team4ProfileEntity addProfile(ConnectionPool connectionPool, Team4ProfileEntity team4ProfileEntity) throws DatabaseException {
+        String sql = "INSERT INTO profile (color, species, bio, name, age, image, email, password) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING id";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setInt(1, team4ProfileEntity.getColor());
+            ps.setInt(2, team4ProfileEntity.getSpecies());
+            ps.setString(3, team4ProfileEntity.getBio());
+            ps.setString(4, team4ProfileEntity.getName());
+            ps.setInt(5, team4ProfileEntity.getAge());
+            ps.setString(6, team4ProfileEntity.getImage());
+            ps.setString(7, team4ProfileEntity.getEmail());
+            ps.setString(8, team4ProfileEntity.getPassword());
+
+            try (var rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int generatedId = rs.getInt("id");
+
+                    return new Team4ProfileEntity(team4ProfileEntity.getColor(), team4ProfileEntity.getSpecies(),
+                            team4ProfileEntity.getBio(), team4ProfileEntity.getName(), team4ProfileEntity.getAge(),
+                            team4ProfileEntity.getImage(), team4ProfileEntity.getEmail(), team4ProfileEntity.getPassword(), generatedId);
+
+                } else {
+                    throw new DatabaseException("Der skete en fejl ved oprettelse af bruger, ingen ID returneret.");
+                }
+            }
+        } catch (SQLException e) {
+            String msg = "Fejl ved tilføjelse af ny bruger. Prøv igen.";
+            throw new DatabaseException(msg, e.getMessage());
+        }
+    }
+
+    public static List<Team4ProfileEntity> searchProfiles(String query, ConnectionPool connectionPool) throws DatabaseException {
+        List<Team4ProfileEntity> profiles = new ArrayList<>();
+        String sql = "SELECT color, species, bio, name, age " +
+                "FROM profile " +
+                "WHERE name ILIKE ? OR bio ILIKE ? " +
+                "ORDER BY species DESC";
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            String pattern = "%" + query + "%";
+            ps.setString(1, pattern);
+            ps.setString(2, pattern);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Team4ProfileEntity profileEntity = new Team4ProfileEntity(
+                            rs.getInt("color"),
+                            rs.getInt("species"),
+                            rs.getString("bio"),
+                            rs.getString("name"),
+                            rs.getInt("age")
+                    );
+                    profiles.add(profileEntity);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e.getMessage());
+        }
+        return profiles;
+    }
+
+    public static boolean deleteProfile(ConnectionPool connectionPool, String email) throws DatabaseException {
+
+        boolean deleteSuccess = false;
+        String sql = "DELETE FROM profile WHERE email = ? ";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, email);
+                int rowThatIsAffected = ps.executeUpdate();  //executeUpdate(); is for DELETE, UPDATE, CREATE
+                if (rowThatIsAffected == 1) {
+                    deleteSuccess = true;
+                } else {
+                    throw new DatabaseException("Profile with email " + email + "could not be deleted");
+                }
+            } catch (DatabaseException e) {
+                throw new RuntimeException(e);
+            }
+
+        } catch (SQLException e) {
+            throw new DatabaseException("error", e.getMessage());
+
         }
 
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
+        return deleteSuccess;
     }
-    return profiles;
-}
 
-public static Team4ProfileEntity addProfile(ConnectionPool connectionPool ,Team4ProfileEntity team4ProfileEntity) throws DatabaseException {
-    String sql = "INSERT INTO profile (color, species, bio, name, age, image, email, password) " +
-                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING id";
 
-    try(
-            Connection connection = connectionPool.getConnection();
-            PreparedStatement ps = connection.prepareStatement(sql)
-            ) {
-                ps.setInt(1, team4ProfileEntity.getColor());
-                ps.setInt(2, team4ProfileEntity.getSpecies());
-                ps.setString(3, team4ProfileEntity.getBio());
-                ps.setString(4, team4ProfileEntity.getName());
-                ps.setInt(5, team4ProfileEntity.getAge());
-                ps.setString(6, team4ProfileEntity.getImage());
-                ps.setString(7, team4ProfileEntity.getEmail());
-                ps.setString(8, team4ProfileEntity.getPassword());
+    public Team4ProfileEntity updateProfile(ConnectionPool connectionPool, Team4ProfileEntity profile) {
 
-                try(var rs = ps.executeQuery()){
-                    if(rs.next()){
-                        int generatedId = rs.getInt("id");
+        String sql = "UPDATE profile " +
+                "SET color = ?, species = ?, bio = ?, name = ?, age = ? " +
+                "WHERE email = ?";
 
-                        return new Team4ProfileEntity(team4ProfileEntity.getColor(), team4ProfileEntity.getSpecies(),
-                                    team4ProfileEntity.getBio(), team4ProfileEntity.getName(), team4ProfileEntity.getAge(),
-                                    team4ProfileEntity.getImage(), team4ProfileEntity.getEmail(), team4ProfileEntity.getPassword(), generatedId );
-
-                    } else {
-                        throw new DatabaseException("Der skete en fejl ved oprettelse af bruger, ingen ID returneret.");
-                    }
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, profile.getColor());
+                ps.setInt(2, profile.getSpecies());
+                ps.setString(3, profile.getBio());
+                ps.setString(4, profile.getName());
+                ps.setInt(5, profile.getAge());
+                ps.setString(6, profile.getEmail());
+                int rowThatIsAffected = ps.executeUpdate();  //executeUpdate(); is for DELETE, UPDATE, CREATE
+                if (rowThatIsAffected == 1) {
+                    return profile;
                 }
-    } catch (SQLException e){
-        String msg = "Fejl ved tilføjelse af ny bruger. Prøv igen.";
-        throw new DatabaseException(msg, e.getMessage());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return profile;
     }
 }
-
-
-public static List<Team4ProfileEntity> searchProfiles(String query, ConnectionPool connectionPool) throws DatabaseException {
-                List<Team4ProfileEntity> profiles = new ArrayList<>();
-                String sql = "SELECT color, species, bio, name, age " +
-                                "FROM profile " +
-                                "WHERE name ILIKE ? OR bio ILIKE ? " +
-                               "ORDER BY species DESC";
-            try (Connection connection = connectionPool.getConnection();
-                 PreparedStatement ps = connection.prepareStatement(sql)) {
-
-                        String pattern = "%" + query + "%";
-                       ps.setString(1, pattern);
-                        ps.setString(2, pattern);
-
-                                try (ResultSet rs = ps.executeQuery()) {
-                                while (rs.next()) {
-                                       Team4ProfileEntity profileEntity = new Team4ProfileEntity(
-                            rs.getInt("color"),
-                                                       rs.getInt("species"),
-                                                       rs.getString("bio"),
-                                                        rs.getString("name"),
-                                                       rs.getInt("age")
-                                                        );
-                                        profiles.add(profileEntity);
-                                   }
-                           }
-                   } catch (SQLException e) {
-                        throw new DatabaseException(e.getMessage());
-                   }
-              return profiles;
-            }
-
-}
-

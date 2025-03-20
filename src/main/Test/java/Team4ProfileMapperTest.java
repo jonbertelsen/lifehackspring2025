@@ -1,6 +1,7 @@
 import app.entities.Team4ProfileEntity;
+import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
-import app.persistence.Team4ProfilMapper;
+import app.persistence.Team4ProfileMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Team4ProfilMapperTest {
+public class Team4ProfileMapperTest {
 
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgres";
@@ -20,13 +21,13 @@ public class Team4ProfilMapperTest {
     private static final String DB = "lifehackspring2025";
 
     private static  ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
-    private static Team4ProfilMapper profilMapper;
+    private static Team4ProfileMapper profileMapper;
 
     @BeforeAll
     public static void setUpClass() {
         try {
             connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
-            profilMapper = new Team4ProfilMapper(connectionPool);
+            profileMapper = new Team4ProfileMapper(connectionPool);
             try (Connection testConnection = connectionPool.getConnection())
             {
                 try (Statement stmt = testConnection.createStatement())
@@ -70,9 +71,10 @@ public class Team4ProfilMapperTest {
 
                 // Insert rows
                 stmt.execute("INSERT INTO test.profile VALUES " +
-                        "(6, 3, 'Cute dog', 'Doggo', 4), " +
-                        "(21, 3, 'Cute cat', 'asdsd', 8), " +
-                        "(5, 3, 'Sad chicken', 'Nugget', 12)");
+                        "(1, 101, 'Loves to bark and play fetch.', 'Doggo', 5, 'doggo@example.com'), " +
+                        "(2, 202, 'Graceful and agile, enjoys napping in sunbeams.', 'Kitty', 3, 'kitty@example.com'), " +
+                        "(3, 303, 'Chirpy and energetic, loves flying around.', 'Birdie', 2, 'birdie@example.com'), " +
+                        "(4, 404, 'Small but mighty, always on the move.', 'Hammy', 1, 'hammy@example.com')");
 
 
                 // Set sequence to continue from the largest member_id
@@ -85,86 +87,42 @@ public class Team4ProfilMapperTest {
 
     //Connection is all good
     @Test
-    void testConnection() throws SQLException {
+    void testConnection() throws SQLException { //Test is successful
         //assertFalse to make test fail
         assertNotNull(connectionPool.getConnection());
     }
 
     @Test
-    void getAllProfiles() {
-        List<Team4ProfileEntity> profiles = profilMapper.getProfiles();
+    void getAllProfiles() { //Test is successful whhen Team4ProfileEntity object has equals has been overiden
+        List<Team4ProfileEntity> profiles = profileMapper.getAllProfiles();
         assertEquals(3, profiles.size());
         //Change either expected size to 4 or more,
         //Change any of the informatons for the "new" members that are being compared to the old ones
-        assertEquals(profiles.get(0), new Team4ProfileEntity(6, 3, "Cute dog", "Doggo", 4));
-        assertEquals(profiles.get(1), new Team4ProfileEntity(21, 3, "Cute cat", "asdsd", 8));
-        assertEquals(profiles.get(2), new Team4ProfileEntity(5, 3, "Sad chicken", "Nugget", 12));
+        assertEquals(profiles.get(0), new Team4ProfileEntity(1, 101, "Loves to bark and play fetch.", "Doggo", 5));
+        assertEquals(profiles.get(1), new Team4ProfileEntity(2, 202, "Graceful and agile, enjoys napping in sunbeams.", "Kitty", 3));
+        assertEquals(profiles.get(2), new Team4ProfileEntity(3, 303, "Chirpy and energetic, loves flying around.", "Birdie", 2));
     }
 
-
-    /*
-
-    @Test
-    void getMemberById() throws DatabaseException {
-        //Change the memberId, or change the name to make the test fail
-        assertEquals(new Member(3, "Peter Hansen","Ahlegårdsvejen 7",3700,"Rønne","m",2002), memberMapper.getMemberById(3));
-    }
+/*
 
     @Test
-    void deleteMember() throws DatabaseException {
+    //Test will fail because test data does not have email parameter
+    void deleteProfile() throws DatabaseException {
+        List<Team4ProfileEntity> profiles = profileMapper.getAllProfiles();
         //Change the size, you delete one (3 - 1), if the size isn't 2 it will fail
-        assertTrue(memberMapper.deleteMember(2));
-        assertEquals(2, memberMapper.getAllMembers().size());
+        assertTrue(profileMapper.deleteProfile(connectionPool, "doggo@example.com"));
+        assertEquals(3, profileMapper.getAllProfiles().size());
     }
 
-    @Test
-    void insertMember() throws DatabaseException, IllegalInputException {
-        Member m1 = memberMapper.insertMember(new Member("Jon Snow","Wintherfell 3", 3760, "Gudhjem", "m", 1992));
-        assertNotNull(m1);
-        //Change the size, you add one (3 + 1), if the size isn't 4 it will fail
-        assertEquals(4, memberMapper.getAllMembers().size());
-        assertEquals(m1, memberMapper.getMemberById(4));
-    }
 
     @Test
     void updateMember() throws DatabaseException {
-        boolean result = memberMapper.updateMember(new Member(2, "Jens Kofoed","Agrevej 5",3760,"Gudhjem","m",1999));
-        assertTrue(result);
-        //To make this test fail: change the memberId or just make something up in the expected values below
-        Member m1 = memberMapper.getMemberById(2);
-        assertEquals(1999, m1.getYear());
-        assertEquals(3, memberMapper.getAllMembers().size());
+        profileMapper.updateProfile(connectionPool, new Team4ProfileEntity(2, 3760,"Gudhjem","m",1999));
+        int x = profileMapper.getAllProfiles().size();
+        assertEquals(x, 3);
     }
 
-
-    @Test
-    void deleteTwoMembers() throws DatabaseException {
-        //assertTrue instead of assertEquals because these are operations
-        assertTrue(memberMapper.deleteMember(1));
-        assertTrue(memberMapper.deleteMember(2));
-        assertEquals(1, memberMapper.getAllMembers().size());
-    }
-
-
-    @Test
-    void deleteMemberUnknownId() throws DatabaseException {
-        //Expecting an error to be thrown, and that the error is a DatabaseException(Our own exception)
-        //Lambda expression () are the empty parameters, and after the arrows come the body of code to be executed
-        assertThrows(DatabaseException.class, () -> memberMapper.deleteMember(12312));
-    }
-
-    @Test
-    void insertMemberIllegalGender() throws DatabaseException {
-        assertThrows(IllegalInputException.class, () -> memberMapper.insertMember(
-                //gender 'x' throws an error which in turn makes the test pass, whereas m/k makes the test fail
-                new Member("Jon Snow","Wintherfell 3", 3760, "Gudhjem", "y", 1992)));
-    }
-
-
-
-}
 */
-
 
 
 }

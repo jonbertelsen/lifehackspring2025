@@ -1,6 +1,7 @@
 package app.controllers;
 
 import app.entities.Team4ProfileEntity;
+import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.Team4ProfileMapper;
 import io.javalin.Javalin;
@@ -23,7 +24,7 @@ private static ConnectionPool connectionPool;
         ctx.render("teat4/index.html");
     }
 
-    public static void searchProfile(Context ctx, ConnectionPool connectionPool) {
+    public static void searchProfile(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
         String query = ctx.queryParam("query");
         if (query == null || query.trim().isEmpty()){
             String msg = "Søgefeltet må ikke være tomt!";
