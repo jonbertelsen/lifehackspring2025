@@ -51,5 +51,7 @@ public class LifeHackTeam17Mapper {
             int baseCalories = sodaCalories.getOrDefault(soda.getName(), 0); // Default to 0 if soda name is not found
             return baseCalories * (int) soda.getLiter();
         }
+
+        //I just needed to add something different
     }
 
