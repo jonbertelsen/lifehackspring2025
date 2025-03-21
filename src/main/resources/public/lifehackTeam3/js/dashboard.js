@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 route = "/lifehackTeam3/tilmeld"
             } else {
                 route = "/lifehackTeam3/afmeld"
+
             }
             // Lav et POST kald med reminderId som parameter
             fetch(route, {
