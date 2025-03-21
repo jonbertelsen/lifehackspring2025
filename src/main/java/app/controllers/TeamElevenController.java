@@ -20,9 +20,6 @@ public class TeamElevenController {
 
         ctx.attribute("calculatedPrice", calculatedPrice);
 
-        // LOGGING: Tjekker hvad der bliver vist som resultat
-        System.out.println("🖥️ Displaying calculated price: " + calculatedPrice);
-
         ctx.render("team11/index.html");
     }
 
@@ -49,44 +46,20 @@ public class TeamElevenController {
                 ctx.render("team11/index.html");
             }
 
-            // LOGGING: Efter oversættelse fra dansk til engelsk
-            if ("Danmark".equalsIgnoreCase(imp_country)) {
-                imp_country = "Denmark";
-            }
-            if ("Tyskland".equalsIgnoreCase(imp_country)) {
-                imp_country = "Germany";
-            }
-            if ("Japan".equalsIgnoreCase(imp_country)) {
-                imp_country = "Japan";
-            }
-            if ("USA".equalsIgnoreCase(imp_country)) {
-                imp_country = "USA";
-            }
-            if ("Danmark".equalsIgnoreCase(ex_country)) {
-                ex_country = "Denmark";
-            }
-            if ("Tyskland".equalsIgnoreCase(ex_country)) {
-                ex_country = "Germany";
-            }
-            if ("Japan".equalsIgnoreCase(ex_country)) {
-                ex_country = "Japan";
-            }
-            if ("USA".equalsIgnoreCase(ex_country)) {
-                ex_country = "USA";
-            }
-
-            if ("Biler".equalsIgnoreCase(category)) {
-                category = "Cars";
-            }
-            if ("Elektronik".equalsIgnoreCase(category)) {
-                category = "Electronics";
-            }
-            if ("Møbler".equalsIgnoreCase(category)) {
-                category = "Furniture";
-            }
-            if ("Mad".equalsIgnoreCase(category)) {
-                category = "Food";
-            }
+            // Translates the danish frontend input to english, so it cooperates with the naming in DB.
+            //Eventually another method, probably translating within SQL will be used.
+            if ("Danmark".equalsIgnoreCase(imp_country)) {imp_country = "Denmark";}
+            if ("Tyskland".equalsIgnoreCase(imp_country)) { imp_country = "Germany"; }
+            if ("Japan".equalsIgnoreCase(imp_country)) { imp_country = "Japan"; }
+            if ("USA".equalsIgnoreCase(imp_country)) { imp_country = "USA"; }
+            if ("Danmark".equalsIgnoreCase(ex_country)) { ex_country = "Denmark"; }
+            if ("Tyskland".equalsIgnoreCase(ex_country)) { ex_country = "Germany"; }
+            if ("Japan".equalsIgnoreCase(ex_country)) { ex_country = "Japan"; }
+            if ("USA".equalsIgnoreCase(ex_country)) { ex_country = "USA"; }
+            if ("Biler".equalsIgnoreCase(category)) { category = "Cars"; }
+            if ("Elektronik".equalsIgnoreCase(category)) { category = "Electronics"; }
+            if ("Møbler".equalsIgnoreCase(category)) { category = "Furniture"; }
+            if ("Mad".equalsIgnoreCase(category)) {category = "Food";}
 
             System.out.println("🌍 Translated country: " + imp_country);
             System.out.println("🌍 Translated country: " + ex_country);
@@ -94,17 +67,8 @@ public class TeamElevenController {
 
             double price = Double.parseDouble(priceInput);
 
-            try {
-                // LOGGING: Efter værdierne er hentet fra databasen via mapperen
-                double tariffRate = Team11Mapper.getTariffRate(ex_country, category);
-                System.out.println("🛢️ Tariff Rate from mapper: " + tariffRate);
-
+            try { double tariffRate = Team11Mapper.getTariffRate(ex_country, category);
                 double vatRate = Team11Mapper.getVatRate(imp_country);
-                System.out.println("💰 VAT Rate from mapper: " + vatRate);
-
-                // LOGGING: Lige før beregning for at sikre, at værdier er korrekte
-                System.out.println("💡 Tariff Rate used in calculation: " + tariffRate);
-                System.out.println("💡 VAT Rate used in calculation: " + vatRate);
 
                 // Beregner told
                 double tariffAmount = calculateTariff(price, tariffRate);
@@ -126,32 +90,25 @@ public class TeamElevenController {
 
 
                     ctx.sessionAttribute("calculatedPrice", String.format("%.2f", finalPrice));
-                    ctx.redirect("/team11/index");
-
-            } catch (NumberFormatException e) {
-                ctx.attribute("error", "Prisen skal være et gyldigt tal");
-                System.err.println("❌ Error parsing price: " + e.getMessage()); // LOGGING
-                ctx.render("team11/index.html");
-                return;
-            }
-
-        } catch (Exception e) {
-            ctx.attribute("error", "Der opstod en fejl ved beregningen");
-            System.err.println("❌ General error: " + e.getMessage()); // LOGGING
-            ctx.render("team11/index.html");
-        }
+                    ctx.redirect("/team11/index"); }
+            catch (NumberFormatException e) { ctx.attribute("error", "Prisen skal være et gyldigt tal");
+                System.err.println(" Error parsing price: " + e.getMessage());
+                ctx.render("team11/index.html"); return; }
+        } catch (Exception e) { ctx.attribute("error", "Der opstod en fejl ved beregningen");
+            System.err.println("General error: " + e.getMessage());
+            ctx.render("team11/index.html"); }
     }
 
-    private static double calculateTariff(double price, double tariffRate) {
-        // LOGGING: Tjekker værdierne i tariff-beregningen
-
-        /* if(price >= 1200) {System.out.println("📊 Calculating tariff with price: " + price + ", tariffRate: " + tariffRate);
-        return price * (tariffRate / 100);}
-        else{System.out.println("Import is free of tariff because start value is below 1200kr.");  return price; }  */
-       System.out.println("📊 Calculating tariff with price: " + price + ", tariffRate: " + tariffRate);
-        return price * (tariffRate / 100);
+    //Calculates the value of tariff
+    private static double calculateTariff(double price, double tariffRate)
+    { if(price >= 1200) { return price * (tariffRate / 100 + 1); }
+         else{ return price; }
+        //Udgangspunkt før rettelse:
+       //System.out.println("📊 Calculating tariff with price: " + price + ", tariffRate: " + tariffRate);
+       // return price * (tariffRate / 100);
     }
 
+    //Calculats the VATamount, after tariffs have been added to the original price.
     private static double calculateVat(double priceAfterTariff, double vatRate) {
         // LOGGING: Tjekker værdierne i moms-beregningen
         System.out.println("📊 Calculating VAT with priceAfterTariff: " + priceAfterTariff + ", vatRate: " + vatRate);
