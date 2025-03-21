@@ -2,6 +2,10 @@
     width: 100%;
 }
 
+.container {
+    word-wrap: break-word;
+}
+
 #quote {
     display: block;
     margin: auto;
@@ -16,8 +20,10 @@
 }
 
 #excuse-field {
-    width: 30%;
-    height: 100px;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    min-height: 100px;
     padding: 12px 20px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -28,8 +34,12 @@
     display: block;
     margin: 0 auto;
     margin-top: 50px;
-    overflow: auto;
+    overflow: visible;
     font-family: Roboto, serif;
+    line-height: 1.5;
+    font-size: 16px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 #instruction {
@@ -41,23 +51,40 @@
 
 .button-container {
     display: flex;
-    justify-content: center; /* Centers buttons horizontally */
+    justify-content: center; /* Centers buttons horizontally by default */
     gap: 10px; /* Adds space between buttons */
     margin-top: 20px; /* Moves buttons down */
 }
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    .button-container {
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: center; /* Center buttons horizontally within the column */
+    }
+}
+
+/* Optional: Adjust button width and spacing for very small screens */
+@media (max-width: 400px) {
+    .button-container {
+        gap: 5px;
+    }
+    button {
+        width: 100%; /* Make buttons full width */
+    }
+}
+
 button {
     padding: 10px 20px;
     font-size: 16px;
     color: white;
     background-color: black;
-    border-radius: 10px; /* Adjust the value for more or less rounding */
-    border: none; /* Optional: Removes default button border */
+    border-radius: 10px;
+    border: none;
 }
 
 button:hover {
-    background-color: #FFE5E5; /* Darker blue on hover */
+    background-color: #FFE5E5;
     color: black;
-    stroke-width: 0;
 }
-
 
