@@ -7,8 +7,28 @@
     margin-top: 30px;
     padding: 10px;
     font-size: 1.9rem;
-    width: 25%;
+    width: 100%;
+    border-radius: 5px;
+    max-width: 1120px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    text-align: center;
+    height: auto;
+    min-height: 50px;
+    white-space: normal;
+    word-wrap: break-word;
+    resize: vertical;
+    overflow: hidden;
+
 }
+
+@media (max-width: 600px) {
+    #JokeField {
+        font-size: 14px; /* Reduce text size on smaller screens */
+        padding: 8px; /* Slightly reduce padding */
+    }
+}
+
 
 .flex-box-center{
     display: flex;
@@ -17,12 +37,13 @@
 }
 
 .flex-box-center-with-m{
-    margin-top: 20px;
+    margin-top: 50px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     background-color: black;
     color: black;
+
 }
 
 .category-button {
@@ -34,7 +55,6 @@
     border-radius: 5px;
     font-size: 16px;
     text-align: center;
-
 }
 
 .category-button:hover {
@@ -89,10 +109,9 @@ body {
 }
 
 .category-box {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    border: 1px solid #000;
+    justify-content: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+
 }
 
 /****** prøv lykken ******/
@@ -177,6 +196,21 @@ body {
     background-color: #fff;
     text-align: left;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-box-frontpages{
+
+    position: fixed; /* Gør boksen fast på skærmen */
+    top: 2%; /* Juster placeringen op eller ned */
+    right: 20px; /* Placer boksen i højre side af skærmen */
+    width: 250px; /* Fast bredde til boksen */
+    padding: 20px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    background-color: #fff;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
 }
 
 .info-box2{
