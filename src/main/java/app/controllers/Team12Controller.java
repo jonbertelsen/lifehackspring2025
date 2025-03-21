@@ -16,15 +16,15 @@ public class Team12Controller {
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
         app.get("/", ctx -> ctx.render("/team12/team12_index.html"));
         app.post("/login", ctx -> login(ctx, connectionPool));
-        app.get("/team12_main", ctx -> ctx.render("/team12/team12_main.html"));
+        app.get("/home", ctx -> ctx.render("/team12/team12_home.html")); // Fixed
         app.get("/logout", ctx -> logout(ctx));
         app.get("/createuser", ctx -> ctx.render("/team12/team12_createuser.html"));
         app.post("/createuser", ctx -> createUser(ctx, connectionPool));
 
         app.post("/calculate", ctx -> sleep(ctx, connectionPool));
         app.get("/dashboard", ctx -> ctx.render("/team12/team12_dashboard.html"));
-        app.get("/home", ctx -> ctx.render("/team12/team12_main"));
     }
+
     // Handles user creation and adds the user to the database
     private static void createUser(Context ctx, ConnectionPool connectionPool) {
         String username = ctx.formParam("username");
@@ -45,11 +45,13 @@ public class Team12Controller {
             ctx.render("/team12/team12_createuser.html");
         }
     }
+
     // Logs out the user by invalidating the session
     private static void logout(Context ctx) {
         ctx.req().getSession().invalidate();
         ctx.redirect("/");
     }
+
     // Handles login requests and validates user credentials
     public static void login(Context ctx, ConnectionPool connectionPool) {
         String username = ctx.formParam("username");
@@ -70,7 +72,7 @@ public class Team12Controller {
             ctx.sessionAttribute("currentUser", user);
             System.out.println("User logged in successfully: " + user.getUsername());
 
-            ctx.redirect("/team12_main");
+            ctx.redirect("/home"); // Fixed redirect
 
         } catch (Team12DatabaseException e) {
             System.out.println("Database error: " + e.getMessage());
@@ -78,6 +80,7 @@ public class Team12Controller {
             ctx.render("/team12/team12_index.html");
         }
     }
+
     // Processes sleep data and saves it to the database
     private static void sleep(Context ctx, ConnectionPool connectionPool) {
         Team12User currentUser = ctx.sessionAttribute("currentUser");
@@ -91,13 +94,13 @@ public class Team12Controller {
 
             Team12SleepMapper.saveSleepData(currentUser.getUserId(), sleepStart, sleepEnd, connectionPool);
             ctx.attribute("message", "Sleep data recorded for " + currentUser.getUsername());
-            ctx.render("/team12/team12_main.html");
+            ctx.render("/team12/team12_home.html");
         } catch (Team12DatabaseException e) {
             ctx.attribute("message", "Failed to record sleep data, please try again.");
-            ctx.render("/team12/team12_main.html");
+            ctx.render("/team12/team12_home.html");
         } catch (IllegalArgumentException e) {
             ctx.attribute("message", "Invalid date format. Please use the correct format.");
-            ctx.render("/team12/team12_main.html");
+            ctx.render("/team12/team12_home.html");
         }
     }
 }
