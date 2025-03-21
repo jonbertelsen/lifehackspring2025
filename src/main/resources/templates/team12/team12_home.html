@@ -15,7 +15,7 @@
 
             <label for="sleep_start" class="text-silver">Going to sleep at:</label>
             <input type="datetime-local" name="sleep_start" id="sleep_start" step="60" required>
-
+            <p></p>
             <label for="sleep_end" class="text-silver">Waking up at:</label>
             <input type="datetime-local" name="sleep_end" id="sleep_end" step="60" required>
 
@@ -25,7 +25,7 @@
 
             <div id="result"></div>
 
-            <button type="submit" formaction="/calculate">Register sleep</button>
+            <button type="submit" formaction="/calculate">Register your sleep</button>
 
 
         </div>
@@ -61,8 +61,9 @@
 
             const result = document.getElementById('result');
             result.innerHTML = `
-        <p style='color:black;'>The time between <strong>${formatDateTime(startDate)}</strong> and <strong>${formatDateTime(endDate)}</strong> is:</p>
-        <p style='color:black;'>${hours} hours, ${minutes} minutes</p>
+        <p style='color:black;'>Sleeping at: <strong>${formatDateTime(startDate)}</strong></p>
+        <p style='color:black;'>Waking up at:<strong>${formatDateTime(endDate)}</strong></p>
+        <p style='color:black;'>Results in ${hours} hours, ${minutes} minutes of sleep</p>
     `;
         }
 
