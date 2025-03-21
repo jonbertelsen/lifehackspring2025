@@ -14,8 +14,9 @@ public class Team14Controller {
         String mainGenre = ctx.queryParam("main-genre");
 
         try {
-            List<Team14Entity> movies = Team14Mapper.getMovies(connectionPool, mainGenre);
+            List<Team14Entity> movies = Team14Mapper.getMovies(connectionPool);
             ctx.json(movies);
+            movies.forEach(System.out::println);
         } catch (DatabaseException e) {
             ctx.status(500).result("Error retrieving movies");
         }

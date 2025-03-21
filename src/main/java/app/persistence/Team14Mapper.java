@@ -14,27 +14,17 @@ import java.util.List;
 import static app.Main.connectionPool;
 
 public class Team14Mapper {
-    public static void movieHandler(Context ctx){
-        String mainGenre = ctx.formParam("main-genre");
-        try {
-            getMovies(connectionPool, mainGenre);
-        } catch (DatabaseException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static List<Team14Entity> getMovies(ConnectionPool connectionPool, String genre) throws DatabaseException {
+    public static List<Team14Entity> getMovies(ConnectionPool connectionPool) throws DatabaseException {
         List<Team14Entity> movies = new ArrayList<>();
         String sql =
-                "SELECT title, duration, director, platform\n " +
+                "SELECT title, duration, director, platform, main_genre\n " +
                 "FROM public.movie\n " +
                 "inner join public.platform using(movie_id)\n " +
                 "inner join public.main_genre using(movie_id)\n " +
-                "WHERE main_genre.main_genre ilike ? ORDER BY imdb_score DESC LIMIT 5";
+                "ORDER BY imdb_score DESC";
         try (Connection connection = connectionPool.getConnection()){
             try (PreparedStatement ps = connection.prepareStatement(sql)){
 
-                ps.setString(1, genre);
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
@@ -42,13 +32,15 @@ public class Team14Mapper {
                     int duration = rs.getInt("duration");
                     String director = rs.getString("director");
                     String platform = rs.getString("platform");
-                    Team14Entity movie = new Team14Entity(title, duration, director, platform);
+                    String main_genre = rs.getString("main_genre");
+                    Team14Entity movie = new Team14Entity(title, duration, director, platform, main_genre);
                     movies.add(movie);
                 }
             }
         }catch (SQLException EX){
             EX.printStackTrace();
         }
+        movies.forEach(System.out::println);
         return movies;
     }
 }
