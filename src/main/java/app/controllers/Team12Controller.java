@@ -16,7 +16,7 @@ public class Team12Controller {
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
         app.get("/", ctx -> ctx.render("/team12/team12_index.html"));
         app.post("/login", ctx -> login(ctx, connectionPool));
-        app.get("/home", ctx -> ctx.render("/team12/team12_home.html")); // Fixed
+        app.get("/tracker", ctx -> ctx.render("/team12/team12_tracker.html")); // Fixed
         app.get("/logout", ctx -> logout(ctx));
         app.get("/createuser", ctx -> ctx.render("/team12/team12_createuser.html"));
         app.post("/createuser", ctx -> createUser(ctx, connectionPool));
@@ -72,7 +72,7 @@ public class Team12Controller {
             ctx.sessionAttribute("currentUser", user);
             System.out.println("User logged in successfully: " + user.getUsername());
 
-            ctx.redirect("/home"); // Fixed redirect
+            ctx.redirect("/tracker"); // Fixed redirect
 
         } catch (Team12DatabaseException e) {
             System.out.println("Database error: " + e.getMessage());
@@ -94,13 +94,13 @@ public class Team12Controller {
 
             Team12SleepMapper.saveSleepData(currentUser.getUserId(), sleepStart, sleepEnd, connectionPool);
             ctx.attribute("message", "Sleep data recorded for " + currentUser.getUsername());
-            ctx.render("/team12/team12_home.html");
+            ctx.render("/team12/team12_tracker.html");
         } catch (Team12DatabaseException e) {
             ctx.attribute("message", "Failed to record sleep data, please try again.");
-            ctx.render("/team12/team12_home.html");
+            ctx.render("/team12/team12_tracker.html");
         } catch (IllegalArgumentException e) {
             ctx.attribute("message", "Invalid date format. Please use the correct format.");
-            ctx.render("/team12/team12_home.html");
+            ctx.render("/team12/team12_tracker.html");
         }
     }
 }
