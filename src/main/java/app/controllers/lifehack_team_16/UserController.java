@@ -29,7 +29,7 @@ public class UserController {
             String password = ctx.formParam("password");
 
             //Create user with username and password from UserMapper
-            User user = UserMapper.Signin(userName, password);
+            User user = UserMapper.Signin(userName, password, connectionPool);
 
             try {
 
@@ -61,7 +61,7 @@ public class UserController {
         {
 
             try {
-                UserMapper.createuser(username, password1);
+                UserMapper.createuser(username, password1, connectionPool);
                 ctx.attribute("message", "Du er hermed oprettet med brugernavn: " + username + ". Nu skal du logge på.");
                 ctx.render("lifehack_team_16/index.html");
             } catch (DatabaseException e) {

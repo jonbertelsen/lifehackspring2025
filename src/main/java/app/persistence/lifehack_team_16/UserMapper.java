@@ -18,7 +18,7 @@ public class UserMapper {
         this.connectionPool = connectionPool;
     }
 
-    public static User Signin(String username, String password) throws DatabaseException{
+    public static User Signin(String username, String password, ConnectionPool connectionPool) throws DatabaseException{
 
         String query = "SELECT * FROM lifehack_team_16_users WHERE username = ? AND password = ?";
 
@@ -43,7 +43,7 @@ public class UserMapper {
         }
     }
 
-    public static void createuser(String userName, String password) throws DatabaseException
+    public static void createuser(String userName, String password, ConnectionPool connectionPool) throws DatabaseException
     {
         String sql = "insert into lifehack_team_16_users (username, password) values (?,?)";
 
