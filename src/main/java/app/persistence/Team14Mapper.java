@@ -17,9 +17,8 @@ public class Team14Mapper {
     public static List<Team14Entity> getMovies(ConnectionPool connectionPool) throws DatabaseException {
         List<Team14Entity> movies = new ArrayList<>();
         String sql =
-                "SELECT title, duration, director, platform, main_genre\n " +
+                "SELECT title, duration, director, main_genre\n " +
                 "FROM public.movie\n " +
-                "inner join public.platform using(movie_id)\n " +
                 "inner join public.main_genre using(movie_id)\n " +
                 "ORDER BY imdb_score DESC";
         try (Connection connection = connectionPool.getConnection()){
@@ -31,9 +30,8 @@ public class Team14Mapper {
                     String title = rs.getString("title");
                     int duration = rs.getInt("duration");
                     String director = rs.getString("director");
-                    String platform = rs.getString("platform");
                     String main_genre = rs.getString("main_genre");
-                    Team14Entity movie = new Team14Entity(title, duration, director, platform, main_genre);
+                    Team14Entity movie = new Team14Entity(title, duration, director, main_genre);
                     movies.add(movie);
                 }
             }
