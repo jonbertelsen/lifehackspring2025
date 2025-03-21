@@ -23,6 +23,7 @@ public class Team12Controller {
 
         app.post("/calculate", ctx -> sleep(ctx, connectionPool));
         app.get("/dashboard", ctx -> ctx.render("/team12/team12_dashboard.html"));
+        app.get("/home", ctx -> ctx.render("/team12/team12_main"));
     }
     // Handles user creation and adds the user to the database
     private static void createUser(Context ctx, ConnectionPool connectionPool) {

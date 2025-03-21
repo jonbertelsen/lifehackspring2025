@@ -37,7 +37,7 @@ footer {
     right: 0;
     bottom: 0;
     width: 100%;
-    background-color: #101a4d;
+    background-color: #1e2363;
     color: #c3c0d6;
     padding: 10px;
 }
@@ -123,10 +123,6 @@ body {
     border: none;
 }
 
-/**** create and logout styles *****/
-.logout-create {
-    color: white;
-}
 
 /**** styles to calculate time ****** */
 
