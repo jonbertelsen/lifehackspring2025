@@ -89,10 +89,9 @@ body {
 }
 
 .category-box {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    border: 1px solid #000;
+    justify-content: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+
 }
 
 /****** prøv lykken ******/
