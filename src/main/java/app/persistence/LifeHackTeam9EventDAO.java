@@ -1,5 +1,6 @@
 package app.persistence;
 import app.entities.LifeHackTeam9Event;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,28 +12,34 @@ public class LifeHackTeam9EventDAO {
     public LifeHackTeam9EventDAO(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
-
     // JOIN EVENT
-    public void joinEvent(int eventId, String userName) throws SQLException {
-        try (Connection conn = connectionPool.getConnection()) {
-            String sql = "INSERT INTO event_participants (event_id, user_name) VALUES (?, ?)";
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setInt(1, eventId);
-                stmt.setString(2, userName);
-                stmt.executeUpdate();
-            }
+    public void joinEvent(int eventId, String userName) {
+        String sql = "INSERT INTO team_9_participation (event_id, user_name) VALUES (?, ?)";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, eventId);
+            ps.setString(2, userName);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
-
     // LEAVE EVENT
-    public void leaveEvent(int eventId, String userName) throws SQLException {
-        try (Connection conn = connectionPool.getConnection()) {
-            String sql = "DELETE FROM event_participants WHERE event_id = ? AND user_name = ?";
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setInt(1, eventId);
-                stmt.setString(2, userName);
-                stmt.executeUpdate();
-            }
+    public void leaveEvent(int eventId, String userName) {
+        String sql = "DELETE FROM team_9_participation WHERE event_id = ? AND user_name = ?";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, eventId);
+            ps.setString(2, userName);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

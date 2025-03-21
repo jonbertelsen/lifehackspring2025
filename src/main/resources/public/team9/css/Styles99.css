@@ -82,7 +82,7 @@ h1 {
 .create-event-btn {
     width: 60px;
     height: 60px;
-    background-color: #4caf50; /* Grøn baggrund */
+    background-color: #4caf50;
     border-radius: 50%;
     display: flex;
     justify-content: center;
