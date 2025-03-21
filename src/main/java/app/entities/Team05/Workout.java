@@ -13,7 +13,6 @@ public class Workout {
 
     public Workout(int id, int type_id, String type, int duration, Date date, String extraNotes) {
         this.id = id;
-        this.email = email;
         this.type_id = type_id;
         this.type = type;
         this.duration = duration;
@@ -60,12 +59,14 @@ public class Workout {
 
     @Override
     public String toString() {
-        return "WorkoutLog{" +
+        return "Workout{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", type_id=" + type_id +
+                ", type='" + type + '\'' +
                 ", duration=" + duration +
                 ", date=" + date +
+                ", extraNotes='" + extraNotes + '\'' +
                 '}';
     }
 }

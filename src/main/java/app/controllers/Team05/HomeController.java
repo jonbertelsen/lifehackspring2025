@@ -41,7 +41,7 @@ public class HomeController {
                 } else {
                     int result = Team05Mapper.signUp(email, passwordInt, connectionPool);
                     if (result == 1) {
-                        ctx.status(200).redirect("/team05/log.html");  // Redirect til log.html
+                        ctx.status(200).redirect("/workoutlog");  // Redirect til log.html
                     } else {
                         ctx.status(400).result("Sign-up failed.");
                     }
@@ -54,7 +54,7 @@ public class HomeController {
 
                 if (userEmail != null) {
                     ctx.sessionAttribute("user", userEmail);  // Gem bruger i session
-                    ctx.redirect("/team05/log");  // Redirect til log.html
+                    ctx.redirect("/workoutlog");  // Redirect til log.html
                 } else {
                     ctx.status(400).result("Incorrect email or password.");
                 }

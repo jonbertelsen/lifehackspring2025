@@ -57,7 +57,11 @@ public class Main {
 
 
         // Register routes for Team05Controllers
-        app.delete("/deleteworkoutlog", team05Controllers::deleteWorkoutLog);
-        app.put("/editworkoutlog", team05Controllers::editWorkoutLog);
+        app.post("/deleteworkoutlog", team05Controllers::deleteWorkoutLog);
+
+        app.get("/editworkoutlog/{id}", team05Controllers::editWorkoutLog);
+        app.post("/editworkoutlog", team05Controllers::editWorkoutLog);
+
+
     }
 }

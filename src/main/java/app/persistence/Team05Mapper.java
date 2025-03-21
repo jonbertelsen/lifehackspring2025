@@ -13,7 +13,7 @@ public class Team05Mapper {
     //Retrieves all workout logs from the workoutlog table.
     public static List<Workout> getAllWorkoutLog(ConnectionPool ConnectionPool) throws DatabaseException {
         List<Workout> workouts = new ArrayList<>();
-        String sql = "SELECT id, workoutlog.type_id, type, duration, current_date, extra_notes FROM workoutlog " +
+        String sql = "SELECT id, workoutlog.type_id, type, duration, date, extra_notes FROM workoutlog \n" +
                 "JOIN type ON workoutlog.type_id = type.type_id";
 
         try (Connection conn = ConnectionPool.getConnection();  // Sørg for, at connection poolen er korrekt brugt
@@ -26,7 +26,7 @@ public class Team05Mapper {
                         rs.getInt("type_id"),
                         rs.getString("type"),
                         rs.getInt("duration"),
-                        rs.getDate("current_date"),
+                        rs.getDate("date"),
                         rs.getString("extra_notes")
                 );
                 workouts.add(workout);
@@ -39,7 +39,7 @@ public class Team05Mapper {
 
     //Inserts a new workout log into the workoutlog table.
     public static void creatWorkout(Workout workout, ConnectionPool myConnectionPool) throws DatabaseException {
-        String sql = "INSERT INTO workoutlog (type_id, duration, date, extra_notes) VALUES (?, ?,CURRENT_DATE,?)";
+        String sql = "INSERT INTO workoutlog (type_id, duration, date, extra_notes) VALUES (?, ?, ?, ?);";
 
         try (
                 Connection connection = myConnectionPool.getConnection();  // Brug connection poolen
@@ -48,7 +48,8 @@ public class Team05Mapper {
 
             ps.setInt(1, workout.getType_id());
             ps.setInt(2, workout.getDuration());
-            ps.setDate(3, new java.sql.Date(workout.getDate().getTime()));
+            ps.setDate(3, new java.sql.Date(workout.getDate().getTime())); // Sætter datoen korrekt
+            ps.setString(4, workout.getExtraNotes());
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 1) {
@@ -121,8 +122,8 @@ public class Team05Mapper {
     }
 
     public static void editWorkoutLog(int workoutId, int typeId, int duration, String extraNotes, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "UPDATE workoutlog" +
-                "SET type_id = ?, duration = ?, extra_notes = ?" +
+        String sql = "UPDATE workoutlog " +
+                "SET workoutlog.type_id = ?, duration = ?, extra_notes = ? " +
                 "WHERE id = ?";
 
         try(
@@ -134,10 +135,14 @@ public class Team05Mapper {
             ps.setString(3, extraNotes);
             ps.setInt(4, workoutId);
 
+            ps.executeUpdate();  // Husk at køre opdateringen
+
         } catch (SQLException e) {
             throw new DatabaseException("Error editing workout log.", e.getMessage());
         }
     }
+
+
 
     public static boolean userExists(String email, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "SELECT 1 FROM users WHERE email = ?";
@@ -152,5 +157,35 @@ public class Team05Mapper {
             throw new DatabaseException("Error checking if user exists.", e.getMessage());
         }
     }
+
+    public static Workout getWorkoutById(int workoutId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT id, workoutlog.type_id, type, duration, date, extra_notes " +
+                "FROM workoutlog " +
+                "JOIN type ON workoutlog.type_id = type.type_id WHERE id = ?";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, workoutId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new Workout(
+                        rs.getInt("id"),
+                        rs.getInt("type_id"),
+                        rs.getString("type"),
+                        rs.getInt("duration"),
+                        rs.getDate("date"),
+                        rs.getString("extra_notes")
+                );
+            } else {
+                throw new DatabaseException("Workout not found for ID: " + workoutId);
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Error retrieving workout", e.getMessage());
+        }
+    }
+
+
 
 }

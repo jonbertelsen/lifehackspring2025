@@ -8,7 +8,6 @@
 
 <body>
 
-
 <div class="container">
   <h1>Your workout log</h1>
   <hr class="divider" />
@@ -33,11 +32,16 @@
         <p><strong>Varighed:</strong> <span th:text="${log.duration}"></span> minutter</p>
         <p><strong>Dato:</strong> <span th:text="${log.date}"></span></p>
         <p><strong>Ekstra noter:</strong> <span th:text="${log.extraNotes}"></span></p>
+
+        <!-- Knappen, der leder til redigeringssiden -->
+        <a href="#" th:href="@{/editworkoutlog/{id}(id=${log.id})}" class="edit-button">Edit</a>
+
+        </a>
       </div>
     </th:block>
   </div>
-</div>
 
+</div>
 
 </body>
 </html>
