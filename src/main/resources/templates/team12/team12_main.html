@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../public/team12/css/team12_styles.css" th:href="@{/team12/css/team12_styles.css}" rel="stylesheet"/>
 </head>
-<body class="bg-custom">
 <div class="page-container">
 
 
@@ -14,10 +13,10 @@
         <div class="calculate-container">
             <h2>Calculate your sleep</h2>
 
-            <label for="sleep_start" class="goingToSleep">Going to sleep at:</label>
+            <label for="sleep_start" class="text-silver">Going to sleep at:</label>
             <input type="datetime-local" name="sleep_start" id="sleep_start" step="60" required>
 
-            <label for="sleep_end" class="wakingUpAt">Waking up at:</label>
+            <label for="sleep_end" class="text-silver">Waking up at:</label>
             <input type="datetime-local" name="sleep_end" id="sleep_end" step="60" required>
 
             <button type="reset">Clear</button>
@@ -78,8 +77,8 @@
 
 
     <footer class="footer-app">
-        <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/logout}"> Log out </a>
-        <a th:if="${session.currentUser != null}" href="team12_dashboard.html" th:href="@{/dashboard}"> Dashboard </a>
+        <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/logout}" class="text-silver"> Log out </a>
+        <a th:if="${session.currentUser != null}" href="team12_dashboard.html" th:href="@{/dashboard}" class="text-silver"> Dashboard </a>
     </footer>
 </div>
 </body>

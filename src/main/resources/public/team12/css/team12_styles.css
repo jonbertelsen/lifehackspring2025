@@ -27,9 +27,6 @@ footer {
     background-color: #1e2363;
 }
 
-.text-custom {
-    color:orange;
-}
 
 .footer-app {
     display: flex;
@@ -181,13 +178,9 @@ button {
 }
 
 
-.goingToSleep {
+.text-silver {
     color: #c3c0d6;
 }
-.wakingUpAt {
-    color: #c3c0d6;
-}
-
 
 /*** style dashboard ***/
 .dashboard{
