@@ -12,7 +12,7 @@ public class Team11Mapper {
         try (Connection connection = ConnectionPool.getInstance(
                 "postgres", // Username
                 "postgres", // Password
-                "jdbc:postgresql://localhost:5432/lifehackspring2025", // PostgreSQL URL
+                "jdbc:postgresql://localhost:5432/%s?currentSchema=public", // PostgreSQL URL
                 "lifehackspring2025" // DB name
         ).getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
