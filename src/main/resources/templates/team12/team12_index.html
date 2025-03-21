@@ -11,8 +11,8 @@
     <header>
         <h1>Welcome to Sleep tracker</h1>
         <a href="team12_index.html" th:href="@{/}">
-            <img class="logo" src="/public/team12/images/SleepTrackerLogo.png"
-                 th:href="@{/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
+            <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png"
+                 th:src="@{/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
         </a>
     </header>
 
@@ -22,7 +22,7 @@
             <input type="text" name="username" placeholder="Enter username"/>
             <input type="password" name="password" placeholder="Enter password"/>
 
-            <button type="submit" formaction="/login">Get access to your sleep track</button>
+            <button type="submit" formaction="/login">Start tracking your sleep</button>
 
             <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
         </form>

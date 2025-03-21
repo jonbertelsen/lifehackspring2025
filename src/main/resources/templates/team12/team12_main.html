@@ -8,19 +8,16 @@
 </head>
 <body class="bg-custom">
 <div class="page-container">
-    <header class="header-app">
-        <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png" th:href="@{/public/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
-    </header>
 
 
     <form method="post">
         <div class="calculate-container">
-            <h2>Time Duration Calculator</h2>
+            <h2>Calculate your sleep</h2>
 
-            <label for="sleep_start">Going to sleep at:</label>
+            <label for="sleep_start" class="goingToSleep">Going to sleep at:</label>
             <input type="datetime-local" name="sleep_start" id="sleep_start" step="60" required>
 
-            <label for="sleep_end">Waking up at:</label>
+            <label for="sleep_end" class="wakingUpAt">Waking up at:</label>
             <input type="datetime-local" name="sleep_end" id="sleep_end" step="60" required>
 
             <button type="reset">Clear</button>

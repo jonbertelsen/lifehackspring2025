@@ -13,7 +13,7 @@
         <header>
             <a href="team12_index.html" th:href="@{/}"> </a>
             <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png"
-                 th:href="@{/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
+                 th:src="@{/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
             <h1>Welcome to your dashboard, <span th:text="${session.currentUser.username}"></span></h1>
             <h2> Det var meningen vi skulle have graf med data fra databasen</h2>
         </header>
@@ -21,7 +21,7 @@
         <main>
             <div class="dashboard">
                 <img src="../../public/team12/images/sleepGraphEks.png"
-                     th:href="@{//public/team12/images/sleepGraphEks.png}" alt="Sleep Graph Eks">
+                     th:src="@{/team12/images/sleepGraphEks.png}" alt="Sleep Graph Eks">
 
             </div>
         </main>
