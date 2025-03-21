@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<title>Newsletters</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../../public/team12/css/team12_styles.css" th:href="@{/team12/css/team12_styles.css}" rel="stylesheet"/>
-
+<head>
+    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../public/team12/css/team12_styles.css" th:href="@{/team12/css/team12_styles.css}" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -20,9 +21,8 @@
 
         <main>
             <div class="dashboard">
-                <img src="../../public/team12/images/sleepGraphEks.png"
-                     th:src="@{/team12/images/sleepGraphEks.png}" alt="Sleep Graph Eks">
-
+                <!-- The Canvas Element where the chart will be rendered -->
+                <canvas id="sleepChart"></canvas>
             </div>
         </main>
 
@@ -33,5 +33,67 @@
 
     </div>
 </form>
+
+<!-- JavaScript to handle data fetching and rendering the bar chart -->
+<script>
+    document.addEventListener("DOMContentLoaded", async function() {
+        try {
+            // Fetch sleep data from backend
+            const response = await fetch('/api/sleep-data');
+            if (!response.ok) {
+                throw new Error('Failed to fetch sleep data');
+            }
+
+            const sleepData = await response.json();
+
+            // Log the fetched data to console
+            console.log("Fetched Sleep Data:", sleepData);
+
+            if (!Array.isArray(sleepData) || sleepData.length === 0) {
+                console.error("No valid sleep data found.");
+                return; // Exit if no data
+            }
+
+            // Process the data for Chart.js
+            const labels = sleepData.map(record => {
+                const sleepDate = new Date(record.sleepStart); // Convert Unix timestamp to Date
+                return sleepDate.toLocaleDateString(); // Format to a readable date (e.g., MM/DD/YYYY)
+            });
+
+            const sleepDurations = sleepData.map(record => record.sleepDuration); // Extract sleep duration
+
+            // Log the processed labels and data
+            console.log("Labels:", labels);
+            console.log("Sleep Durations:", sleepDurations);
+
+            // Create the chart
+            const ctx = document.getElementById('sleepChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Sleep Duration (hours)',
+                        data: sleepDurations,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+        } catch (error) {
+            console.error('Error loading sleep data:', error);
+        }
+    });
+</script>
 </body>
 </html>

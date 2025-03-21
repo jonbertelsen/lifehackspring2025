@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.entitites.Team12SleepRecords;
 import app.entitites.Team12User;
 import app.exceptions.Team12DatabaseException;
 import app.persistence.ConnectionPool;
@@ -9,6 +10,8 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Map;
 
 public class Team12Controller {
 
@@ -23,7 +26,20 @@ public class Team12Controller {
 
         app.post("/calculate", ctx -> sleep(ctx, connectionPool));
         app.get("/dashboard", ctx -> ctx.render("/team12/team12_dashboard.html"));
+
+        // NEW API to fetch sleep data
+        app.get("/api/sleep-data", ctx -> getSleepData(ctx, connectionPool));
     }
+
+    private static void getSleepData(Context ctx, ConnectionPool connectionPool) {
+        try {
+            List<Team12SleepRecords> sleepRecords = Team12SleepMapper.getAllSleepRecords(connectionPool);
+            ctx.json(sleepRecords); // Send data as JSON
+        } catch (Team12DatabaseException e) {
+            ctx.status(500).json(Map.of("error", "Failed to fetch sleep data"));
+        }
+    }
+
 
     // Handles user creation and adds the user to the database
     private static void createUser(Context ctx, ConnectionPool connectionPool) {
@@ -103,4 +119,9 @@ public class Team12Controller {
             ctx.render("/team12/team12_tracker.html");
         }
     }
+
+
+
+
+
 }

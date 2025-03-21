@@ -190,3 +190,9 @@ button {
     margin-top: 100px;
     margin-bottom: 200px;
 }
+
+/**** Dashboard graph styling *****/
+#sleepChart {
+    width: 100%;   /* Makes the chart width responsive */
+    height: 500px; /* Adjust height as per your need */
+}
