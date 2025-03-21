@@ -19,7 +19,7 @@ public class Team12Controller {
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
         app.get("/", ctx -> ctx.render("/team12/team12_index.html"));
         app.post("/login", ctx -> login(ctx, connectionPool));
-        app.get("/tracker", ctx -> ctx.render("/team12/team12_tracker.html")); // Fixed
+        app.get("/tracker", ctx -> ctx.render("/team12/team12_tracker.html"));
         app.get("/logout", ctx -> logout(ctx));
         app.get("/createuser", ctx -> ctx.render("/team12/team12_createuser.html"));
         app.post("/createuser", ctx -> createUser(ctx, connectionPool));
@@ -28,18 +28,26 @@ public class Team12Controller {
         app.get("/dashboard", ctx -> ctx.render("/team12/team12_dashboard.html"));
 
         // NEW API to fetch sleep data
-        app.get("/api/sleep-data", ctx -> getSleepData(ctx, connectionPool));
-    }
+        app.get("/api/sleep-data", ctx -> {
+            Team12User currentUser = ctx.sessionAttribute("currentUser");
 
-    private static void getSleepData(Context ctx, ConnectionPool connectionPool) {
-        try {
-            List<Team12SleepRecords> sleepRecords = Team12SleepMapper.getAllSleepRecords(connectionPool);
-            ctx.json(sleepRecords); // Send data as JSON
-        } catch (Team12DatabaseException e) {
-            ctx.status(500).json(Map.of("error", "Failed to fetch sleep data"));
-        }
-    }
+            if (currentUser != null) {
+                try {
+                    // Fetch sleep data for the logged-in user
+                    List<Team12SleepRecords> userSleepData = Team12SleepMapper.getSleepDataByUserId(currentUser.getUserId(), connectionPool);
 
+                    // Send the sleep data as JSON response
+                    ctx.json(userSleepData);
+                } catch (Team12DatabaseException e) {
+                    // Log error and return a detailed error message
+                    ctx.status(500).result("Failed to fetch sleep data from the database: " + e.getMessage());
+                    System.out.println("Error in database: " + e.getMessage());
+                }
+            } else {
+                ctx.status(401).result("User not logged in");
+            }
+        });
+    }
 
     // Handles user creation and adds the user to the database
     private static void createUser(Context ctx, ConnectionPool connectionPool) {
@@ -120,8 +128,21 @@ public class Team12Controller {
         }
     }
 
+    // Fetches all sleep records for the logged-in user
+    private static void getSleepData(Context ctx, ConnectionPool connectionPool) {
+        Team12User currentUser = ctx.sessionAttribute("currentUser");
 
-
-
-
+        if (currentUser != null) {
+            try {
+                // Fetch sleep data for the logged-in user
+                List<Team12SleepRecords> sleepRecords = Team12SleepMapper.getSleepDataByUserId(currentUser.getUserId(), connectionPool);
+                ctx.json(sleepRecords); // Send data as JSON
+            } catch (Team12DatabaseException e) {
+                ctx.status(500).json(Map.of("error", "Failed to fetch sleep data"));
+                System.out.println("Error fetching sleep data: " + e.getMessage());
+            }
+        } else {
+            ctx.status(401).json(Map.of("error", "User not logged in"));
+        }
+    }
 }

@@ -57,5 +57,7 @@ public class Team12UserMapper {
             throw new Team12DatabaseException(msg, e.getMessage());
         }
     }
+
+
 }
 

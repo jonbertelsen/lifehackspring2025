@@ -35,29 +35,38 @@ public class Team12SleepMapper {
         }
     }
 
-    public static List<Team12SleepRecords> getAllSleepRecords(ConnectionPool connectionPool) throws Team12DatabaseException {
+    public static List<Team12SleepRecords> getSleepDataByUserId(int userId, ConnectionPool connectionPool) throws Team12DatabaseException {
+        String sql = "SELECT record_id, user_id, sleep_start, sleep_end, sleep_duration, created_at FROM team12_sleep_records WHERE user_id = ?";
         List<Team12SleepRecords> sleepRecords = new ArrayList<>();
-        String sql = "SELECT user_id, sleep_start, sleep_end FROM team12_sleep_records";
 
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                System.out.println("No sleep records found for user ID: " + userId);
+            }
 
             while (rs.next()) {
-                int userId = rs.getInt("user_id");
-                Timestamp sleepStart = rs.getTimestamp("sleep_start");
-                Timestamp sleepEnd = rs.getTimestamp("sleep_end");
-
-                double sleepDuration = (sleepEnd.getTime() - sleepStart.getTime()) / (1000.0 * 60 * 60); // Convert to hours
-
-                sleepRecords.add(new Team12SleepRecords(0, userId, sleepStart, sleepStart, sleepEnd, sleepDuration, ""));
+                Team12SleepRecords record = new Team12SleepRecords(
+                        rs.getInt("record_id"),
+                        rs.getInt("user_id"),
+                        rs.getTimestamp("sleep_start"),
+                        rs.getTimestamp("sleep_end"),
+                        rs.getDouble("sleep_duration"),
+                        rs.getString("created_at")  // Use the correct column name here
+                );
+                sleepRecords.add(record);
             }
         } catch (SQLException e) {
-            throw new Team12DatabaseException("Database error while fetching sleep data", e.getMessage());
+            System.out.println("Error fetching sleep data for user ID: " + userId);
+            System.out.println("Error in database: " + e.getMessage());
+            throw new Team12DatabaseException("Error fetching sleep data for user ID: " + userId);
         }
 
         return sleepRecords;
     }
-
 
 }

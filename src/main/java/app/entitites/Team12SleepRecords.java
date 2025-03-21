@@ -6,16 +6,14 @@ import java.time.LocalDateTime;
 public class Team12SleepRecords {
     private int recordId;
     private int userId;
-    private Timestamp sleepDate;
     private Timestamp sleepStart;
     private Timestamp sleepEnd;
     private double sleepDuration;
     private String createAt;
 
-    public Team12SleepRecords(int recordId, int userId, Timestamp sleepDate, Timestamp sleepStart, Timestamp sleepEnd, double sleepDuration, String createAt) {
+    public Team12SleepRecords(int recordId, int userId, Timestamp sleepStart, Timestamp sleepEnd, double sleepDuration, String createAt) {
         this.recordId = recordId;
         this.userId = userId;
-        this.sleepDate = sleepDate;
         this.sleepStart = sleepStart;
         this.sleepEnd = sleepEnd;
         this.sleepDuration = sleepDuration;
@@ -36,14 +34,6 @@ public class Team12SleepRecords {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public Timestamp getSleepDate() {
-        return sleepDate;
-    }
-
-    public void setSleepDate(Timestamp sleepDate) {
-        this.sleepDate = sleepDate;
     }
 
     public Timestamp getSleepStart() {
