@@ -1,0 +1,190 @@
+html body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: deepskyblue;
+}
+
+h1 {
+    margin-top: 25px;
+    color: white;
+}
+
+.indexTextBox1 {
+    color: white;
+    font-size: 14px;
+    margin-top: 40px;
+}
+
+.indexButton {
+    padding: 12px;
+    padding-left: 40px;
+    padding-right: 40px;
+    color: white;
+    background-color: dodgerblue;
+    border-radius: 16px;
+    border-color: dodgerblue;
+    font-size: 16px;
+    margin-top: 14px;
+    text-decoration: none;
+
+
+}
+
+.indexForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.indexForm button:hover {
+    background-color: royalblue;
+}
+
+.indexSignIn {
+    font-size: 10px;
+    color: white;
+    margin-top: 2px;
+}
+
+.indexTextBox2 {
+    color: white;
+    margin-top: 40px;
+    font-size: 12px;
+}
+
+.indexTextBox3 {
+    margin-top: 50px;
+    color: white;
+}
+
+.indexTextBox4 {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    background-color: lightskyblue;
+    font-size: 8px;
+    padding: 10px;
+}
+
+/*  createuser.html  */
+
+.input_boxes {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    margin-top: 100px;
+    border-spacing: 20px;
+}
+
+.createUsername {
+    padding: 10px;
+}
+
+.password1 {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.password2 {
+    margin-top: 3px;
+    padding: 10px;
+}
+
+.createButton {
+    margin-top: 15px;
+    background-color: dodgerblue;
+    color: white;
+    padding: 6px;
+
+
+
+    /* ------------------------- Home page ------------------------------------------*/
+
+    header {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .stayHydrated {
+        color: white;
+        margin-left: 70px;
+        font-family: "Verdana Pro Semibold";
+    }
+
+    .profile {
+        margin-left: 70px;
+        margin-top: 15px;
+        width: 7%;
+        height: 7%;
+    }
+
+    .notification {
+        margin-left: 6px;
+        margin-top: 12px;
+        width: 9%;
+        height: 10%;
+    }
+
+    .welcomeWaterLog {
+        font-size: 14px;
+        margin-top: 70px;
+        color: white;
+        font-family: "Verdana Pro Semibold";
+    }
+
+    .variables {
+        display: flex;
+        flex-direction: row;
+        margin-top: 30px;
+        font-family: "Verdana Pro Semibold";
+        color: white;
+    }
+
+    .consumed {
+
+        font-size: 10px;
+    }
+
+    .dailyGoal {
+        margin-left: 12px;
+        font-size: 10px;
+    }
+
+    .addWater-container {
+        font-family: "Verdana Pro Semibold";
+        display: flex;
+        flex-direction: row;
+        border-style: solid;
+        background-color: skyblue;
+        border-color: skyblue;
+        margin-top: 60px;
+        padding: 4px;
+        padding-right: 60px;
+
+    }
+
+    .addWater-container img {
+        margin-top: 1px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .addWater-container p {
+        margin-left: 30px;
+        font-size: 10px;
+    }
+
+    .smiley {
+        margin-top: 30px;
+    }
+
+    footer p {
+        font-family: "Verdana Pro Semibold";
+        color: white;
+        font-size: 12px;
+
+    }

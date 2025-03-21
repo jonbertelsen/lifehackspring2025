@@ -4,7 +4,9 @@ import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
 import app.controllers.TeamTeacherController;
 import app.controllers.lifehack_team_16.UserController;
+import app.controllers.lifehack_team_16.WaterLogController;
 import app.persistence.lifehack_team_16.ConnectionPool;
+import app.persistence.lifehack_team_16.WaterLogMapper;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
@@ -19,6 +21,7 @@ public class Main {
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/%s?currentSchema=public";
     private static final String DB = "lifehack_team_16";
+    private static int user_id;
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
     private static final UserController userController = new UserController(connectionPool);

@@ -4,7 +4,9 @@ import app.entities.lifehack_team_16.User;
 import app.exceptions.DatabaseException;
 import app.persistence.lifehack_team_16.ConnectionPool;
 import app.persistence.lifehack_team_16.UserMapper;
+import app.persistence.lifehack_team_16.WaterLogMapper;
 import io.javalin.http.Context;
+import app.controllers.lifehack_team_16.WaterLogController;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +24,7 @@ public class UserController {
 
     //TODO Make this if we have time
 
-        public static void login(Context ctx) throws DatabaseException{
+        public static int login(Context ctx) throws DatabaseException{
             String userName = ctx.formParam("userName");
             String password = ctx.formParam("password");
 
@@ -45,7 +47,7 @@ public class UserController {
             } catch (Exception e) {
                 throw new DatabaseException("Database failed getting information: "+ e);
             }
-
+            return 0;
         }
 
 

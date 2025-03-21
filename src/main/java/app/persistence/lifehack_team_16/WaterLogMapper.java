@@ -47,8 +47,7 @@ public class WaterLogMapper {
         }
     }
 
-    public static boolean updateWaterLog(WaterLog waterLog) throws DatabaseException {
-        boolean result = false;
+    public static void updateWaterLog(WaterLog waterLog) throws DatabaseException {
         String sql = "UPDATE lifehack_team_16_waterlog SET water_ml = 250";
 
         try (Connection connection = connectionPool.getConnection();
@@ -58,7 +57,6 @@ public class WaterLogMapper {
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected == 1) {
-                result = true;
             } else {
                 throw new DatabaseException("WaterLog with id: " + waterLog.getWaterLogId() + "could not be updated");
             }
@@ -66,7 +64,6 @@ public class WaterLogMapper {
             throw new DatabaseException("Could not insert member in database");
         }
 
-        return result;
     }
 
     public static WaterLog getWaterLogByUserId(int userId) throws DatabaseException {
