@@ -2,20 +2,20 @@ package app.controllers;
 
 import app.exceptions.LifeHackTeam3DatabaseException;
 import app.persistence.ConnectionPool;
+import app.persistence.LifeHackTeam3MailSender;
+import app.persistence.LifeHackTeam3SubscriberMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
 import java.util.Map;
 
-import app.persistence.LifeHackTeam3SubscriberMapper;
-import app.persistence.LifeHackTeam3MailSender;
-
-public class LifehackTeam3Controller {
+public class LifeHackTeam3Controller {
     private static final String TEAM_PREFIX = "/lifehackTeam3";
     private static LifeHackTeam3SubscriberMapper subscriberMapper = new LifeHackTeam3SubscriberMapper();
     private static LifeHackTeam3MailSender mailSender;
 
     public static void routes(Javalin app) {
+
         // Redirect from root to /login
         app.get(TEAM_PREFIX, ctx -> redirect(ctx));
 
@@ -54,6 +54,7 @@ public class LifehackTeam3Controller {
         String username = ctx.formParam("username");
         String password = ctx.formParam("password");
 
+        //Kalder verifyUser til at validere login
         try {
             boolean validUser = subscriberMapper.verifyUserCredentials(ConnectionPool.getInstance(), username, password);
             if (validUser) {
@@ -81,6 +82,7 @@ public class LifehackTeam3Controller {
         String password = ctx.formParam("password");
 
         try {
+            //Kalder metode addNewuser og tilføjer new user til database
             subscriberMapper.addNewUser(ConnectionPool.getInstance(), email, username, password);
         } catch (LifeHackTeam3DatabaseException e) {
             System.out.println(e.getMessage());
@@ -95,6 +97,7 @@ public class LifehackTeam3Controller {
         ctx.redirect(TEAM_PREFIX + "/login");
     }
 
+    //Session attribute som bliver sendt til dashboard page, netop så der kan stå "Logged in as" {user}
     private static void showDashboardPage(Context ctx) {
         String username = ctx.sessionAttribute("username");
         if (username == null) {
@@ -112,6 +115,7 @@ public class LifehackTeam3Controller {
             String email = ctx.sessionAttribute("email");
             String reminderId = ctx.formParam("reminderId");
 
+            //Kalder executeAddSub method til "tilmeld"
             if (email != null && reminderId != null) {
                 subscriberMapper.executeAddSubscriberToReminder(ConnectionPool.getInstance(), email, reminderId);
                 System.out.println("User " + email + " subscribed to " + reminderId);

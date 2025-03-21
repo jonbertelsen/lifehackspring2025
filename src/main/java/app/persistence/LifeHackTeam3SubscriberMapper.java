@@ -12,9 +12,7 @@ public class LifeHackTeam3SubscriberMapper {
 
 
     public void addNewUser(ConnectionPool connectionPool, String email, String username, String password) throws LifeHackTeam3DatabaseException {
-        String sql = "INSERT INTO users_lifehack_team_3 (user_email, user_name, user_password) " +
-                "VALUES (?, ?, ?) " +
-                "ON CONFLICT (user_email) DO NOTHING;";
+        String sql = "INSERT INTO users_lifehack_team_3 (user_email, user_name, user_password) " + "VALUES (?, ?, ?) " + "ON CONFLICT (user_email) DO NOTHING;";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -35,8 +33,7 @@ public class LifeHackTeam3SubscriberMapper {
     public int getUserIdFromEmail(ConnectionPool connectionPool, String email) throws LifeHackTeam3DatabaseException {
         String sql = "SELECT user_id FROM users_lifehack_team_3 WHERE user_email = ?;";
 
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (Connection connection = connectionPool.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setString(1, email);
 
@@ -56,8 +53,7 @@ public class LifeHackTeam3SubscriberMapper {
     public int getReminderIdFromReminderName(ConnectionPool connectionPool, String reminderName) throws LifeHackTeam3DatabaseException {
         String sql = "SELECT reminder_id FROM reminders_lifehack_team_3 WHERE reminder_name = ?;";
 
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (Connection connection = connectionPool.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setString(1, reminderName);
 
@@ -75,9 +71,7 @@ public class LifeHackTeam3SubscriberMapper {
     }
 
 
-
-    public void addSubscriberToReminder(ConnectionPool connectionPool, int reminder_id, int mailIdFromEmail) throws
-            LifeHackTeam3DatabaseException {
+    public void addSubscriberToReminder(ConnectionPool connectionPool, int reminder_id, int mailIdFromEmail) throws LifeHackTeam3DatabaseException {
 
         String sql = "INSERT INTO reminder_subscriber_lifehack_team_3 (reminder_id, mail_id) VALUES (?, ?);";
 
@@ -120,8 +114,7 @@ public class LifeHackTeam3SubscriberMapper {
     public String getEmailFromUsername(ConnectionPool connectionPool, String username) throws LifeHackTeam3DatabaseException {
         String sql = "SELECT user_email FROM users_lifehack_team_3 WHERE user_name = ?;";
 
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (Connection connection = connectionPool.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setString(1, username);
 
@@ -151,11 +144,9 @@ public class LifeHackTeam3SubscriberMapper {
         addSubscriberToReminder(connectionPool, reminderId, userId);
     }
 
-    public boolean verifyUserCredentials(ConnectionPool connectionPool, String username, String password)
-            throws LifeHackTeam3DatabaseException {
+    public boolean verifyUserCredentials(ConnectionPool connectionPool, String username, String password) throws LifeHackTeam3DatabaseException {
         String sql = "SELECT user_id FROM users_lifehack_team_3 WHERE user_name = ? AND user_password = ?;";
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (Connection connection = connectionPool.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, username);
             ps.setString(2, password);
             try (ResultSet rs = ps.executeQuery()) {

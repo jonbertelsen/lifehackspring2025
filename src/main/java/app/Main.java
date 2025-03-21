@@ -2,9 +2,7 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
-import app.controllers.LifehackTeam3Controller;
-import app.controllers.TeamTeacherController;
-import app.exceptions.LifeHackTeam3DatabaseException;
+import app.controllers.LifeHackTeam3Controller;
 import app.persistence.ConnectionPool;
 import app.persistence.LifeHackTeam3SubscriberMapper;
 import io.javalin.Javalin;
@@ -36,7 +34,7 @@ public class Main {
         // Routing
         app.get("/", ctx -> ctx.render("index.html"));
         //TeamTeacherController.routes(app);
-        LifehackTeam3Controller.routes(app);
+        LifeHackTeam3Controller.routes(app);
 
 
     }

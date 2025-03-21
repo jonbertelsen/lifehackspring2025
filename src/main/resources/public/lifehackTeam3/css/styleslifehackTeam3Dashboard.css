@@ -108,15 +108,15 @@ body {
 }
 
 .send-reminder-button {
-        background: linear-gradient(to right, #4A90E2, #357ABD); /* Smooth blue gradient */
-        color: white; /* White text */
-        border: none; /* Remove border */
-        padding: 10px 20px; /* Add padding */
-        font-size: 16px;
-        cursor: pointer; /* Make it clickable */
-        border-radius: 5px; /* Rounded corners */
-    }
+    background: linear-gradient(to right, #4A90E2, #357ABD);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
 
-    .send-reminder-button:hover {
-        background: linear-gradient(to right, #357ABD, #2B5EA2); /* Darker hover effect */
-    }
+.send-reminder-button:hover {
+    background: linear-gradient(to right, #357ABD, #2B5EA2);
+}
