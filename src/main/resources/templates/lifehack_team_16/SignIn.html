@@ -10,7 +10,7 @@
     <div class="signIn-items">
         <h2>Sign in</h2>
         <p th:if="${error}" style="color: red;">[[${error}]]</p>
-        <form th:action="@{/user/signIn}" method="post">
+        <form th:action="@{/user/SignIn}" method="post">
             <label for="username">Username</label>:
             <input type="text" id="username" name="username" autofocus="autofocus"/><br/>
             <label for="password">Password</label>:

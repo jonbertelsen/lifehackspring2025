@@ -13,7 +13,7 @@ import java.util.List;
 
 public class UserController {
 
-    ConnectionPool connectionPool;
+   private static ConnectionPool connectionPool;
 
     //Dependency injection
     public UserController(ConnectionPool connectionPool){
@@ -33,11 +33,13 @@ public class UserController {
 
                 //Compares if User data from input equals User data from database
                     if(user.getUserName().equals(userName) && user.getPassword().equals(password)) {
-                        ctx.render("HomePage.html");
+                        ctx.render("lifehack_team_16/HomePage.html");
+                        ctx.attribute("waterMl", WaterLogMapper.getWaterLogByUserId(user.getUserId()));
+                        return user.getUserId();
                     }
                     else {
                     ctx.sessionAttribute("error", "Wrong username or password");
-                    ctx.render("SignIn.html");
+                    ctx.render("lifehack_team_16/SignIn.html");
                 }
                 //
             } catch (Exception e) {
@@ -47,7 +49,7 @@ public class UserController {
         }
 
 
-    public static void createUser(Context ctx, ConnectionPool connectionPool){
+    public static void createUser(Context ctx){
         String username = ctx.formParam("username");
         String password1 = ctx.formParam("password1");
         String password2 = ctx.formParam("password2");
@@ -57,7 +59,7 @@ public class UserController {
         {
 
             try {
-                UserMapper.createuser(username, password1, connectionPool);
+                UserMapper.createuser(username, password1);
                 ctx.attribute("message", "Du er hermed oprettet med brugernavn: " + username + ". Nu skal du logge på.");
                 ctx.render("lifehack_team_16/index.html");
             } catch (DatabaseException e) {

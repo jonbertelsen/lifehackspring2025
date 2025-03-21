@@ -5,6 +5,7 @@ import app.exceptions.DatabaseException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -19,7 +20,7 @@ public class UserMapper {
 
     public static User Signin(String username, String password) throws DatabaseException{
 
-        String query = "SELECT * FROM users WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM lifehack_team_16_users WHERE username = ? AND password = ?";
 
         try(Connection connection = connectionPool.getConnection()){
             try(PreparedStatement ps = connection.prepareStatement(query)){
@@ -27,16 +28,22 @@ public class UserMapper {
 
                 ps.setString(1, username);
                 ps.setString(2, password);
-                int userId = ps.executeQuery().getInt("user_id");
 
-                User user = new User(userId, username, password);
-                return user;
+                ResultSet rs = ps.executeQuery();
+                if(rs.next()){
+                    int userId = rs.getInt("user_id");
+                    return new User(userId, username, password);
+                } else {
+                    throw new DatabaseException("Fejl i login. Prøv igen");
+                }
+
             }
         } catch (SQLException e) {
             throw new DatabaseException("Could not get user " + e);
         }
     }
-    public static void createuser(String userName, String password, ConnectionPool connectionPool) throws DatabaseException
+
+    public static void createuser(String userName, String password) throws DatabaseException
     {
         String sql = "insert into lifehack_team_16_users (username, password) values (?,?)";
 

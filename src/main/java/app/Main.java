@@ -38,16 +38,20 @@ public class Main {
 
 
         //SignIn endpoints
-        app.post("/user/signIn", ctx -> userController.login(ctx));
-        app.get("/signIn", ctx -> {
+        app.post("/user/SignIn", ctx -> user_id = userController.login(ctx));
+       /* app.get("SignIn", ctx -> {
             ctx.attribute("error", ctx.sessionAttribute("error"));
             ctx.sessionAttribute("error", null); // Nulstil error efter visning
-            ctx.render("signIn.html");
+            ctx.render("lifehack_team_16/SignIn.html");
         });
-        app.get("createuser", ctx -> ctx.render("lifehack_team_16/createuser.html"));
-        app.post("createuser", ctx -> createUser(ctx, connectionPool));
-        app.get("/user/signIn", ctx -> ctx.redirect("lifehack_team_16/signIn"));
 
+        */
+
+
+        app.get("createuser", ctx -> ctx.render("lifehack_team_16/createuser.html"));
+        app.post("createuser", ctx -> createUser(ctx));
+        app.get("SignIn", ctx -> ctx.render("lifehack_team_16/SignIn.html"));
+        app.post("addWater", ctx -> WaterLogController.addWater(ctx, WaterLogMapper.getWaterLogByUserId(user_id)));
 
     }
 
