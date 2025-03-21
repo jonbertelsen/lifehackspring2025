@@ -24,7 +24,6 @@
             <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png"
                  th:src="@{/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
             <h1>Welcome to your dashboard, <span th:text="${session.currentUser.username}"></span></h1>
-            <h2> Det var meningen vi skulle have graf med data fra databasen</h2>
         </header>
 
         <main>
@@ -69,10 +68,32 @@
                         responsive: true,
                         scales: {
                             x: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                ticks: {
+                                    color: 'white', // Customize X-axis label color
+                                    font: {
+                                        size: 14, // Font size for X-axis labels
+                                    }
+                                }
                             },
                             y: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                ticks: {
+                                    color: 'white', // Customize Y-axis label color
+                                    font: {
+                                        size: 14, // Font size for Y-axis labels
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: 'white', // Customize legend label color
+                                    font: {
+                                        size: 16, // Font size for the legend labels
+                                    }
+                                }
                             }
                         }
                     }
