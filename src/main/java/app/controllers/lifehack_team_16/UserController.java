@@ -25,11 +25,12 @@ public class UserController {
     //TODO Make this if we have time
 
         public static int login(Context ctx) throws DatabaseException{
-            String userName = ctx.formParam("userName");
+            String userName = ctx.formParam("username");
             String password = ctx.formParam("password");
 
             //Create user with username and password from UserMapper
             User user = UserMapper.Signin(userName, password, connectionPool);
+            ctx.sessionAttribute("currentUser", user);
 
             try {
 

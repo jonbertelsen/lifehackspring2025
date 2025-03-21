@@ -2,6 +2,7 @@ package app.persistence.lifehack_team_16;
 
 import app.entities.lifehack_team_16.User;
 import app.exceptions.DatabaseException;
+import io.javalin.http.Context;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,30 +19,33 @@ public class UserMapper {
         this.connectionPool = connectionPool;
     }
 
-    public static User Signin(String username, String password, ConnectionPool connectionPool) throws DatabaseException{
+
+    public static User Signin(String username, String password, ConnectionPool connectionPool) throws DatabaseException {
+
 
         String query = "SELECT * FROM lifehack_team_16_users WHERE username = ? AND password = ?";
 
-        try(Connection connection = connectionPool.getConnection()){
-            try(PreparedStatement ps = connection.prepareStatement(query)){
-
-
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, username);
                 ps.setString(2, password);
 
                 ResultSet rs = ps.executeQuery();
-                if(rs.next()){
+
+                if (rs.next()) {
                     int userId = rs.getInt("user_id");
                     return new User(userId, username, password);
                 } else {
+                    System.out.println("No user found with these credentials.");
                     throw new DatabaseException("Fejl i login. Prøv igen");
                 }
-
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Could not get user " + e);
+            System.out.println("SQL Exception: " + e.getMessage());
+            throw new DatabaseException("Could not get user: " + e);
         }
     }
+
 
     public static void createuser(String userName, String password, ConnectionPool connectionPool) throws DatabaseException
     {

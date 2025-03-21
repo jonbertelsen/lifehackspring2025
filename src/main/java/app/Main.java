@@ -5,7 +5,9 @@ import app.config.ThymeleafConfig;
 import app.controllers.TeamTeacherController;
 import app.controllers.lifehack_team_16.UserController;
 import app.controllers.lifehack_team_16.WaterLogController;
+import app.entities.lifehack_team_16.User;
 import app.persistence.lifehack_team_16.ConnectionPool;
+import app.persistence.lifehack_team_16.UserMapper;
 import app.persistence.lifehack_team_16.WaterLogMapper;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -20,40 +22,41 @@ public class Main {
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/%s?currentSchema=public";
-    private static final String DB = "lifehack_team_16";
+    private static final String DB = "lifehack_team_16_waterlog";
     private static int user_id;
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
     private static final UserController userController = new UserController(connectionPool);
-    public static void main(String[] args)
-    {
+
+    public static void main(String[] args) {
 
 
         // Initializing Javalin and Jetty webserver
         Javalin app = Javalin.create(config -> {
             config.staticFiles.add("/public.lifehack_team_16");
-            config.jetty.modifyServletContextHandler(handler ->  handler.setSessionHandler(SessionConfig.sessionConfig()));
+            config.jetty.modifyServletContextHandler(handler -> handler.setSessionHandler(SessionConfig.sessionConfig()));
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
         }).start(7070);
 
         // Routing
-       app.get("/", ctx ->  ctx.render("lifehack_team_16/index.html"));
+        app.get("/", ctx -> ctx.render("lifehack_team_16/index.html"));
 
 
         //SignIn endpoints
-        app.post("/user/SignIn", ctx -> user_id = userController.login(ctx));
-       /* app.get("SignIn", ctx -> {
-            ctx.attribute("error", ctx.sessionAttribute("error"));
-            ctx.sessionAttribute("error", null); // Nulstil error efter visning
-            ctx.render("lifehack_team_16/SignIn.html");
+        app.get("SignIn", ctx -> ctx.render("lifehack_team_16/SignIn.html"));
+        app.post("/SignIn", ctx -> {
+            String username = ctx.formParam("username");
+            String password = ctx.formParam("password");
+
+            User user = UserMapper.Signin(username, password, connectionPool);
+
+            ctx.sessionAttribute("currentUser", user);
+            ctx.redirect("/homepage");
         });
 
-        */
-
-
+        app.get("homepage", ctx -> ctx.render("lifehack_team_16/HomePage.html"));
         app.get("createuser", ctx -> ctx.render("lifehack_team_16/createuser.html"));
         app.post("createuser", ctx -> createUser(ctx));
-        app.get("SignIn", ctx -> ctx.render("lifehack_team_16/SignIn.html"));
         app.post("addWater", ctx -> WaterLogController.addWater(ctx, WaterLogMapper.getWaterLogByUserId(user_id)));
 
     }
