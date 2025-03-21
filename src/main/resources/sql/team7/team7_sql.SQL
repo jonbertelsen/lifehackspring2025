@@ -2,6 +2,11 @@
 -- Please log an issue at https://github.com/pgadmin-org/pgadmin4/issues/new/choose if you find any bugs, including reproduction steps.
 BEGIN;
 
+DROP TABLE IF EXISTS public.team_7_admin CASCADE;
+DROP TABLE IF EXISTS public.team_7_category CASCADE;
+DROP TABLE IF EXISTS public.team_7_joke CASCADE;
+DROP TABLE IF EXISTS public.team_7_subscribe CASCADE;
+
 
 CREATE TABLE IF NOT EXISTS public.team_7_admin
 (
