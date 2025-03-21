@@ -198,6 +198,21 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.info-box-frontpages{
+
+    position: fixed; /* Gør boksen fast på skærmen */
+    top: 2%; /* Juster placeringen op eller ned */
+    right: 20px; /* Placer boksen i højre side af skærmen */
+    width: 250px; /* Fast bredde til boksen */
+    padding: 20px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    background-color: #fff;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+
 .info-box2{
     position: fixed; /* Gør boksen fast på skærmen */
     top: 60%; /* Juster placeringen op eller ned */
