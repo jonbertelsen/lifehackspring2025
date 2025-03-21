@@ -4,6 +4,7 @@ import app.entities.Team7Admin;
 import app.exceptions.DatabaseException;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class Team7Mapper {
@@ -73,5 +74,20 @@ public class Team7Mapper {
         return firstName;
    }
 
+    public static ArrayList<String> selectAllJokes(ConnectionPool connectionPool ) throws DatabaseException {
+        ArrayList<String> JokeNames = new ArrayList<>();
+        String sql = "SELECT joke_names FROM team_7_joke";
+        try(Connection connection = connectionPool.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            while (rs.next()) {
+                String row = rs.getString("joke_names");
+                JokeNames.add(row);
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return JokeNames;
+    }
 
 }
