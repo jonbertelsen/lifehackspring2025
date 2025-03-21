@@ -51,6 +51,8 @@ public class Team7Mapper {
         }
    }
 
+   // make a list with Team7Jokes Select * Joke return list for loop
+
    public static String getJoke1ById(ConnectionPool connectionPool, int id ) throws DatabaseException{
         String sql = "select joke_names from team_7_joke where joke_id = ?";
         String firstName = null;

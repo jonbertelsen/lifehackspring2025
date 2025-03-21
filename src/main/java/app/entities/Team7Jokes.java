@@ -1,11 +1,11 @@
 package app.entities;
 
 public class Team7Jokes {
-    private int categoryId;
+    private int Id;
     private String jokeNames;
 
-    public Team7Jokes(int categoryId, String jokeNames) {
-        this.categoryId = categoryId;
+    public Team7Jokes(int Id, String jokeNames) {
+        this.Id = Id;
         this.jokeNames = jokeNames;
     }
 
@@ -13,8 +13,8 @@ public class Team7Jokes {
         this.jokeNames = jokeNames;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public int getId() {
+        return Id;
     }
 
     public String getJokeNames() {
@@ -24,7 +24,7 @@ public class Team7Jokes {
     @Override
     public String toString() {
         return "Team7Jokes{" +
-                "categoryId=" + categoryId +
+                "categoryId=" + Id +
                 ", jokeNames='" + jokeNames + '\'' +
                 '}';
     }
