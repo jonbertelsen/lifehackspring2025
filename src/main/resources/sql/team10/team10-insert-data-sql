@@ -1,0 +1,29 @@
+BEGIN;
+
+-- Insert sample users (Regular users and admins)
+INSERT INTO team10_users (email, password, role) VALUES
+('user1@example.com', 'hashedpassword1', 'user'),
+('user2@example.com', 'hashedpassword2', 'user'),
+('admin1@example.com', 'hashedpassword3', 'admin');
+
+-- Insert sample exercises
+INSERT INTO exercises (name, description) VALUES
+('Push-Up', 'A basic upper-body exercise using body weight.'),
+('Squat', 'A lower-body strength exercise that works your thighs and glutes.'),
+('Plank', 'An isometric core strength exercise that involves maintaining a position similar to a push-up.');
+
+-- Insert sample training sessions
+INSERT INTO training_sessions (user_id, session_date) VALUES
+(1, '2025-03-18'),
+(2, '2025-03-17'),
+(1, '2025-03-16');
+
+-- Insert sample training session exercises (Linking sessions with exercises)
+INSERT INTO training_session_exercises (session_id, exercise_id) VALUES
+(1, 1), -- Session 1 includes Push-Up
+(1, 2), -- Session 1 includes Squat
+(2, 3), -- Session 2 includes Plank
+(3, 1), -- Session 3 includes Push-Up
+(3, 3); -- Session 3 includes Plank
+
+COMMIT;

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sleeptracker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../public/team12/css/team12_styles.css" th:href="@{/team12/css/team12_styles.css}" rel="stylesheet"/>
+</head>
+<div class="page-container">
+
+    <form method="post">
+        <div class="calculate-container">
+            <h2>Calculate & Register your sleep</h2>
+
+            <label for="sleep_start" class="text-silver">Going to sleep at:</label>
+            <input type="datetime-local" name="sleep_start" id="sleep_start" step="60" required>
+            <p></p>
+            <label for="sleep_end" class="text-silver">Waking up at:</label>
+            <input type="datetime-local" name="sleep_end" id="sleep_end" step="60" required>
+
+            <button type="reset">Clear</button>
+
+            <button type="button" id="calculate-btn">Calculate Duration</button>
+
+            <div id="result"></div>
+
+            <button type="submit" formaction="/team12/calculate">Register your sleep</button>
+
+
+        </div>
+    </form>
+
+    <script>
+        function formatDateTime(dateTime) {
+            const date = dateTime.toISOString().split('T')[0]; // Get date in YYYY-MM-DD format
+            const time = dateTime.toTimeString().split(' ')[0]; // Get time in HH:MM:SS format
+            return `${date} ${time}`;
+        }
+
+        function calculateDuration() {
+            const startTime = document.getElementById('sleep_start').value;
+            const endTime = document.getElementById('sleep_end').value;
+
+            if (!startTime || !endTime) {
+                document.getElementById('result').innerHTML = "<p style='color:red;'>Please enter both times.</p>";
+                return;
+            }
+
+            const startDate = new Date(startTime);
+            const endDate = new Date(endTime);
+
+            if (endDate <= startDate) {
+                document.getElementById('result').innerHTML = "<p style='color:red;'>End time must be after start time.</p>";
+                return;
+            }
+
+            const durationMs = endDate - startDate;
+            const hours = Math.floor(durationMs / (1000 * 60 * 60)); // Calculate hours
+            const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60)); // Calculate remaining minutes
+
+            const result = document.getElementById('result');
+            result.innerHTML = `
+        <p style='color:black;'>Sleeping at: <strong>${formatDateTime(startDate)}</strong></p>
+        <p style='color:black;'>Waking up at:<strong>${formatDateTime(endDate)}</strong></p>
+        <p style='color:black;'>Results in ${hours} hours, ${minutes} minutes of sleep</p>
+    `;
+        }
+
+        // Event listener for the Calculate button
+        document.getElementById('calculate-btn').addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent form submission (no page reload)
+            calculateDuration();
+        });
+
+
+    </script>
+
+
+    <footer class="footer-app">
+        <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/team12/logout}" class="text-silver"> Log out </a>
+        <a th:if="${session.currentUser != null}" href="team12_dashboard.html" th:href="@{/team12/dashboard}" class="text-silver"> Dashboard </a>
+    </footer>
+</div>
+</body>
+</html>

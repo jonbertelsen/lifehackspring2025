@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../public/team12/css/team12_styles.css" th:href="@{/team12/css/team12_styles.css}" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* Custom styles for the chart size */
+        #sleepChart {
+            width: 100%;   /* Makes the chart responsive */
+            height: 500px; /* Adjust height as needed */
+        }
+    </style>
+</head>
+
+<body>
+<form>
+    <div class="page-container">
+        <header>
+            <a href="team12_index.html" th:href="@{/team12}"> </a>
+            <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png"
+                 th:src="@{/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
+            <h1>Welcome to your dashboard, <span th:text="${session.currentUser.username}"></span></h1>
+        </header>
+
+        <main>
+            <div class="dashboard">
+                <!-- The Canvas Element where the chart will be rendered -->
+                <canvas id="sleepChart"></canvas>
+            </div>
+        </main>
+
+        <footer class="footer-app">
+            <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/team12/logout}" class="text-silver"> Log out </a>
+            <a th:if="${session.currentUser != null}" href="team12_tracker.html" th:href="@{/team12/tracker}" class="text-silver"> Track some sleep </a>
+        </footer>
+
+    </div>
+</form>
+
+<!-- JavaScript to handle data fetching and rendering the bar chart -->
+<script>
+    // Assuming the data is fetched from /team12/sleep-data
+    fetch('/team12/sleep-data')
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                const labels = data.map(record => new Date(record.sleepStart).toLocaleDateString());
+                const durations = data.map(record => record.sleepDuration);
+
+                const ctx = document.getElementById('sleepChart').getContext('2d');
+                const sleepChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Sleep Duration (hours)',
+                            data: durations,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: 'white', // Customize X-axis label color
+                                    font: {
+                                        size: 14, // Font size for X-axis labels
+                                    }
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: 'white', // Customize Y-axis label color
+                                    font: {
+                                        size: 14, // Font size for Y-axis labels
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: 'white', // Customize legend label color
+                                    font: {
+                                        size: 16, // Font size for the legend labels
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                console.log("No sleep data available.");
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching sleep data:', error);
+        });
+</script>
+
+</body>
+</html>
