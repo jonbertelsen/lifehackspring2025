@@ -4,12 +4,9 @@ import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
 import app.controllers.Team1Controller;
 import app.controllers.TeamTeacherController;
-import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
-
-import java.sql.SQLException;
 import java.util.logging.Logger;
 
 public class Main {
@@ -22,25 +19,21 @@ public class Main {
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
-    public static void main(String[] args) throws DatabaseException, SQLException {
+    public static void main(String[] args) {
 
         // Initializing Javalin and Jetty webserver
 
         Javalin app = Javalin.create(config -> {
             config.staticFiles.add("/public");
-            config.jetty.modifyServletContextHandler(handler ->  handler.setSessionHandler(SessionConfig.sessionConfig()));
+            config.jetty.modifyServletContextHandler(handler -> handler.setSessionHandler(SessionConfig.sessionConfig()));
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
         }).start(7070);
 
         // Routing
 
-        app.get("/", ctx ->  ctx.render("index.html"));
+        app.get("/", ctx -> ctx.render("index.html"));
         Team1Controller team1Controller = new Team1Controller(connectionPool);
         team1Controller.routes(app);
-        TeamTeacherController.routes(app);
-    }
         TeamTeacherController.routes(app, connectionPool);
-
-
-
+    }
 }
