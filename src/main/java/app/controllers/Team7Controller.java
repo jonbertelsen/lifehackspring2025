@@ -13,7 +13,7 @@ import java.util.Random;
 public class Team7Controller {
     public static void add(Javalin app, ConnectionPool connectionPool) {
         app.get("/Jokes", ctx -> Jokes(ctx, connectionPool));
-        app.post("/login", ctx -> ctx.render("team7_frontpage.html"));
+        //app.post("/login", ctx -> ctx.render("team7_frontpage.html"));
     }
 
     private static  void Jokes(@NotNull Context ctx, ConnectionPool connectionPool) throws DatabaseException {

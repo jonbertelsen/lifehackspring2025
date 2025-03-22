@@ -1,4 +1,5 @@
 package app.persistence;
+
 import app.entities.Soda;
 
 import java.sql.Connection;
@@ -16,10 +17,11 @@ public class LifeHackTeam17Mapper {
     public ArrayList<Soda> getSodaFromDataBase(ConnectionPool connectionPool) {
         ArrayList<Soda> sodaList = new ArrayList<>();
 
-        String sql = "SELECT * FROM \"lifehack_team_17_soda\" ORDER BY name";
+        String sql = "SELECT * FROM lifehack_team_17_soda ORDER BY name";
         //Creates the connection between server and software
-        try(Connection connection = connectionPool.getConnection();
-            PreparedStatement ps = connection.prepareStatement(sql)){
+        try(
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)){
 
             ResultSet rs = ps.executeQuery();
             //As long as the server still has another row of data we will go through them to get the data and use it to make object with it
@@ -54,4 +56,6 @@ public class LifeHackTeam17Mapper {
 
         //I just needed to add something different
     }
+
+
 
