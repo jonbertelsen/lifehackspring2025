@@ -3,10 +3,9 @@ package app;
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
 
-
-
 import app.controllers.Team1Controller;
 import app.controllers.Team2Controller;
+import app.controllers.Team4Controller;
 import app.controllers.Team6Controller;
 import app.controllers.Team7Controller;
 import app.controllers.LifehackTeam08GameController;
@@ -41,7 +40,7 @@ public class Main {
             config.jetty.modifyServletContextHandler(handler -> handler.setSessionHandler(SessionConfig.sessionConfig()));
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
         }).start(7070);
-      
+    }      
         // Frontpage
         app.get("/", ctx ->  ctx.render("index.html"));
       
@@ -57,6 +56,10 @@ public class Main {
         Team2Controller.setConnectionPool(connectionPool);
         app.get("/team2/index", ctx ->  ctx.render("team2/index.html"));
 
+        // Team04
+        app.get("/", ctx -> ctx.render("team4login");
+        app.post("/login", Team4Controller::handleLogin);
+  
         // Team06
         Team6Controller.routes(app, connectionPool);
       
