@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Train Now</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/team10/css/styles.css" th:href="@{/team10/css/styles.css}" rel="stylesheet"/>
+
+</head>
+
+<body class="start-page">
+<div class="logo-background"></div>
+<header>
+    <img src="/team10/images/trainnow.png" alt="trainnow.png" class="logo">
+
+</header>
+
+<h1>Welcome to Train Now</h1>
+
+<h2>Ready to start your workout?</h2>
+
+<a th:href="@{/login}" class="login-link">Login</a>
+<a th:href="@{/create-user}" class="login-link">Create user</a>
+
+
+</body>
+</html>
