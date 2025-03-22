@@ -2,8 +2,15 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
+
 import app.controllers.Team1Controller;
+import app.controllers.Team2Controller;
+import app.controllers.Team7Controller;
+import app.controllers.Team10Controller;
+import app.controllers.Team12Controller;
+
 import app.controllers.TeamTeacherController;
+
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -29,11 +36,31 @@ public class Main {
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
         }).start(7070);
 
-        // Routing
 
-        app.get("/", ctx -> ctx.render("index.html"));
+      
+        // Frontpage
+        app.get("/", ctx ->  ctx.render("index.html"));
+      
+        // Philosophers
+        TeamTeacherController.routes(app, connectionPool);
+      
+        // Team01
         Team1Controller team1Controller = new Team1Controller(connectionPool);
         team1Controller.routes(app);
-        TeamTeacherController.routes(app, connectionPool);
+      
+        // Team02
+        Team2Controller.routes(app);
+        Team2Controller.setConnectionPool(connectionPool);
+        app.get("/team2/index", ctx ->  ctx.render("team2/index.html"));
+
+        // Team07
+        Team7Controller.add(app, connectionPool);
+      
+        // Team10
+        Team10Controller.routes(app, connectionPool);
+
+        // Team12
+        Team12Controller.addRoutes(app, connectionPool);
+
     }
 }
