@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Train Now</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/team10/css/styles.css" th:href="@{/team10/css/styles.css}" rel="stylesheet"/>
+
+</head>
+
+<body class="login-page">
+<div class="logo-background"></div>
+<header>
+    <img src="/team10/images/trainnow.png" class="logo">
+
+</header>
+
+<h1>Welcome, please login!</h1>
+
+<form method="post">
+
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" placeholder="email"/>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="password"/>
+    <button type="submit" formaction="/login">Login</button>
+
+</form>
+
+
+
+</div>
+
+</body>
+</html>
