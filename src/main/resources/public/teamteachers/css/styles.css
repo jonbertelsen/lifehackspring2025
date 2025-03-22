@@ -1,12 +1,17 @@
 /* Teacher css goes here */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@300..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 :root {
     /* Set base font and colors */
-    --font-family: sans-serif;
-    --font-size: 16px;
+
+    --font-family: "Cormorant Garamond", serif;
+    --font-size: 18px;
+    --h1-font-size: 3rem;
+    --h1-font-size-mobile: 2rem;
     --text-color: #333;
     --bg-color: #fff;
     --primary-color: #007bff;
     --secondary-color: #6c757d;
+
 }
 
 /* CSS Reset */
@@ -31,6 +36,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+h1 {
+    font-size: var(--h1-font-size);
 }
 
 img {
@@ -67,7 +76,7 @@ ol {
     grid-template-rows:  1fr;
     gap: 20px; /* Space between squares */
     max-width: 800px;
-    margin: 50px auto; /* Centering */
+    /*  margin: 50px auto; Centering */
 }
 
 .grid-item {
@@ -112,7 +121,7 @@ ol {
 
 .ask-form textarea {
     width: 100%; /* Adjust width to fit container */
-    max-width: 250px; /* Optional: limit max width */
+    max-width: 350px; /* Optional: limit max width */
     height: 100px; /* Adjust height */
     resize: none; /* Prevent resizing (optional) */
     padding: 20px;
@@ -121,7 +130,8 @@ ol {
 
 .ask-form button {
     padding: 10px;
-    margin-top: 20px;
+    font-size: 1.5rem;
+    margin-top: 40px;
     border: 1px solid silver;
     border-radius: 8px;
     background-color: var(--bg-color);
@@ -133,6 +143,11 @@ ol {
     color: white;
 }
 
+.ionic-column{
+    width: 200px;
+    height: 400px
+}
+
 .words-of-wisdom {
     display: flex;
     flex-direction: column;
@@ -142,35 +157,39 @@ ol {
 
 .words-of-wisdom-quote {
     font-style: italic;
-    font-size: var(--font-size);
+    font-size: 60px;
 }
 
 .words-of-wisdom-quote::before {
     content: "“"; /* Left double quotation mark */
-    font-size: 1.5em;
+    font-size: 60px;
     padding-right: 5px;
     color: gray;
 }
 
-.words-of-wisdom-quote::after {
+.words-of-wisdom-quotes::after {
     content: "”"; /* Right double quotation mark */
-    font-size: 1.5rem;
+    font-size: 30px;
+    padding-left: 5px;
     color: gray;
 }
 
 .quote-wrapper {
-    position: absolute;
-    padding: 20px;
-    max-width: 250px;
-    margin-top: 40px;
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 55px;
+    padding: 10px;
 
 }
 
 .philosopher {
-    /*position: absolute;*/
     margin-top: 30px;
     text-align: center;
-    max-width: 250px;
+    max-width: 400px;
+    font-size: 30px;
 }
 
 .philosopher-image {
@@ -195,11 +214,13 @@ ol {
     z-index: 0; /* SVG stays behind */
 }
 
-.speech-bubble-right {
+.rotate-speech-bubble-right {
     transform: scaleX(-1);
     transform: rotate(-60deg);
     z-index: 0; /* SVG stays behind */
 }
+
+
 
 /* Position textarea on top of SVG */
 .speech-textarea {
@@ -210,8 +231,7 @@ ol {
     top: 85px;
     background: transparent; /* Keep transparent to show SVG */
     border: none;
-    font-size: 16px;
-    font-family: Arial, sans-serif;
+    font-size: 1.5rem;
     z-index: 1; /* Ensure textarea is above the SVG */
     resize: none;
     outline: none;
@@ -225,6 +245,59 @@ ol {
     left: 75px;
     color: rgba(0, 0, 0, 0.5);
     text-align: center;
-    width: 100px;
+    width: 150px;
     height: 100px;
 }
+
+
+
+.speech-bubble-container {
+    width: 100%; /* Ensures it takes full width of its parent */
+    max-width: 400px; /* Adjust to limit max scaling */
+    height: auto; /* Allows proportional scaling */
+    display: flex;
+    flex-direction: column;
+
+}
+
+.speech-bubble-right {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.text-container {
+    font-size: 40px; /* Makes text scale with viewport width */
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.cls-1 {
+    fill: #eeeeee;
+}
+
+/* When screen width is 600px or less, stack elements vertically */
+@media (max-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* Single column layout */
+        grid-template-rows: auto;   /* Let rows adjust to content */
+    }
+
+    h1 {
+        font-size: var(--h1-font-size-mobile);
+    }
+
+    .ionic-column{
+        transform: rotate(90deg);
+        width: 200px;
+        transition: ease-in-out 0.2s;
+    }
+
+    .flex-container-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
