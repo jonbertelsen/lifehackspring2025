@@ -3,13 +3,11 @@ package app;
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
 
-
-
-
 import app.controllers.Team1Controller;
 import app.controllers.Team2Controller;
 import app.controllers.Team6Controller;
 import app.controllers.Team7Controller;
+import app.controllers.LifehackTeam08GameController;
 import app.controllers.Team10Controller;
 import app.controllers.Team12Controller;
 
@@ -62,11 +60,15 @@ public class Main {
         // Team07
         Team7Controller.add(app, connectionPool);
       
+         // Team08
+         LifehackTeam08GameController.Routes(app);
+      
         // Team10
         Team10Controller.routes(app, connectionPool);
 
+
+
         // Team12
         Team12Controller.addRoutes(app, connectionPool);
-
-    }
+   }
 }
