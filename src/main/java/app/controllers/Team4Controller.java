@@ -15,6 +15,20 @@ public class Team4Controller {
 private static ConnectionPool connectionPool;
 
 
+    public static void handleLogin(Context ctx) {
+        String email = ctx.formParam("email");
+        String password = ctx.formParam("password");
+
+        if (email != null && password != null && !email.isEmpty() && !password.isEmpty()) {
+            ctx.sessionAttribute("email", email);
+            ctx.redirect("/index");
+        } else {
+            ctx.redirect("/login?error=Invalid credentials");
+        }
+    }
+
+
+
     public static void routes(Javalin app, ConnectionPool connectionPool) {
         app.get("/team4", ctx -> team4Home(ctx));
         app.post("/team4", ctx -> searchProfile(ctx, connectionPool));

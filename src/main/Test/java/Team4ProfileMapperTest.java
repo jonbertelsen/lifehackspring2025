@@ -70,12 +70,11 @@ public class Team4ProfileMapperTest {
                 stmt.execute("SELECT setval('test.id', COALESCE((SELECT MAX(id) FROM test.profile), 1), false)");
 
                 // Insert rows
-                stmt.execute("INSERT INTO test.profile VALUES " +
-                        "(1, 101, 'Loves to bark and play fetch.', 'Doggo', 5, 'doggo@example.com'), " +
+                stmt.execute("INSERT INTO test.profile (color, species, bio, name, age, email) " +
+                        "VALUES (1, 101, 'Loves to bark and play fetch.', 'Doggo', 5, 'doggo@example.com'), " +
                         "(2, 202, 'Graceful and agile, enjoys napping in sunbeams.', 'Kitty', 3, 'kitty@example.com'), " +
                         "(3, 303, 'Chirpy and energetic, loves flying around.', 'Birdie', 2, 'birdie@example.com'), " +
                         "(4, 404, 'Small but mighty, always on the move.', 'Hammy', 1, 'hammy@example.com')");
-
 
                 // Set sequence to continue from the largest member_id
                 stmt.execute("SELECT setval('test.id', COALESCE((SELECT MAX(id)+1 FROM test.profile), 1), false)");
@@ -95,7 +94,7 @@ public class Team4ProfileMapperTest {
     @Test
     void getAllProfiles() { //Test is successful whhen Team4ProfileEntity object has equals has been overiden
         List<Team4ProfileEntity> profiles = profileMapper.getAllProfiles();
-        assertEquals(3, profiles.size());
+        assertEquals(4, profiles.size());
         //Change either expected size to 4 or more,
         //Change any of the informatons for the "new" members that are being compared to the old ones
         assertEquals(profiles.get(0), new Team4ProfileEntity(1, 101, "Loves to bark and play fetch.", "Doggo", 5));
@@ -103,7 +102,7 @@ public class Team4ProfileMapperTest {
         assertEquals(profiles.get(2), new Team4ProfileEntity(3, 303, "Chirpy and energetic, loves flying around.", "Birdie", 2));
     }
 
-/*
+
 
     @Test
     //Test will fail because test data does not have email parameter
@@ -113,16 +112,6 @@ public class Team4ProfileMapperTest {
         assertTrue(profileMapper.deleteProfile(connectionPool, "doggo@example.com"));
         assertEquals(3, profileMapper.getAllProfiles().size());
     }
-
-
-    @Test
-    void updateMember() throws DatabaseException {
-        profileMapper.updateProfile(connectionPool, new Team4ProfileEntity(2, 3760,"Gudhjem","m",1999));
-        int x = profileMapper.getAllProfiles().size();
-        assertEquals(x, 3);
-    }
-
-*/
 
 
 }

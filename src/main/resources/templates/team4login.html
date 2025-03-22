@@ -11,33 +11,43 @@
     <div class="content-wrap">
         <div class="login-container">
             <div class="logo-login-page">
-                <img src="../public/team4/images/logo_big.png" alt="OnlyPaws Logo">
+                <img th:src="@{/team4/images/logo_big.png}" src="/team4/images/cat.jpg" alt="paw image">
+
             </div>
             <p class="subtitle">Join OnlyPaws! The dating app where you can fill the need for your filthy addiction to
                 other cute paws.</p>
 
             <div class="login-box">
                 <p>Log in / create account to see other members</p>
-                <input type="email" placeholder="email">
-                <input type="password" placeholder="password">
-                <a href="#" class="forgot">Forgot your password?</a>
+                <form th:action="@{/login}" method="post">
+                <input type="email" placeholder="email" required>
+                <input type="password" placeholder="password" required>
                 <button class="cta-button">See all the paws</button>
+                    <a href="#" class="forgot">Forgot your password?</a>
+
+                </form>
             </div>
 
             <div class="image-grid">
-                <img src="../public/team4/images/cat.jpg" alt="paw image">
-                <img src="../public/team4/images/dog.jpg" alt="paw image">
-                <img src="../public/team4/images/elefant.jpg" alt="paw image">
-                <img src="../public/team4/images/hamster.jpg" alt="paw image">
-                <img src="../public/team4/images/rabbit.jpg" alt="paw image">
-                <img src="../public/team4/images/dog.jpg" alt="paw image">
+                <img th:src="@{/team4/images/cat.jpg}" src="/team4/images/cat.jpg" alt="paw image">
+                <img th:src="@{/team4/images/dog.jpg}" src="/team4/images/dog.jpg" alt="paw image">
+                <img th:src="@{/team4/images/elefant.jpg}" src="/team4/images/elefant.jpg" alt="paw image">
+                <img th:src="@{/team4/images/hamster.jpg}" src="/team4/images/hamster.jpg" alt="paw image">
+                <img th:src="@{/team4/images/rabbit.jpg}" src="/team4/images/rabbit.jpg" alt="paw image">
+                <img th:src="@{/team4/images/dog.jpg}" src="/team4/images/dog.jpg" alt="paw image">
+            </div>
             </div>
         </div>
     </div>
 
+
     <footer class="footer">
-        © Team4
+        © Team4 OnlyPaws 2025
     </footer>
+
 </div>
+
+
 </body>
+
 </html>
