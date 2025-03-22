@@ -39,6 +39,7 @@ public class Main {
         team1Controller.routes(app);
         TeamTeacherController.routes(app);
     }
+        TeamTeacherController.routes(app, connectionPool);
 
 
 
