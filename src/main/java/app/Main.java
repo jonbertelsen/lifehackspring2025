@@ -3,9 +3,12 @@ package app;
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
 
+
+
 import app.controllers.Team2Controller;
 import app.controllers.Team7Controller;
 import app.controllers.Team10Controller;
+import app.controllers.Team12Controller;
 import app.controllers.TeamTeacherController;
 
 import app.persistence.ConnectionPool;
@@ -24,6 +27,7 @@ public class Main {
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
+
     public static void main(String[] args) {
 
         // Initializing Javalin and Jetty webserver
@@ -33,7 +37,6 @@ public class Main {
             config.jetty.modifyServletContextHandler(handler -> handler.setSessionHandler(SessionConfig.sessionConfig()));
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
         }).start(7070);
-
 
       
         // Frontpage
@@ -54,6 +57,8 @@ public class Main {
         // Team10
         Team10Controller.routes(app, connectionPool);
 
+        // Team12
+        Team12Controller.addRoutes(app, connectionPool);
     }
 
 }
