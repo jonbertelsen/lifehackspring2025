@@ -20,7 +20,7 @@
 <form>
     <div class="page-container">
         <header>
-            <a href="team12_index.html" th:href="@{/}"> </a>
+            <a href="team12_index.html" th:href="@{/team12}"> </a>
             <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png"
                  th:src="@{/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
             <h1>Welcome to your dashboard, <span th:text="${session.currentUser.username}"></span></h1>
@@ -34,8 +34,8 @@
         </main>
 
         <footer class="footer-app">
-            <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/logout}" class="text-silver"> Log out </a>
-            <a th:if="${session.currentUser != null}" href="team12_tracker.html" th:href="@{/tracker}" class="text-silver"> Track some sleep </a>
+            <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/team12/logout}" class="text-silver"> Log out </a>
+            <a th:if="${session.currentUser != null}" href="team12_tracker.html" th:href="@{/team12/tracker}" class="text-silver"> Track some sleep </a>
         </footer>
 
     </div>
@@ -43,8 +43,8 @@
 
 <!-- JavaScript to handle data fetching and rendering the bar chart -->
 <script>
-    // Assuming the data is fetched from '/api/sleep-data'
-    fetch('/api/sleep-data')
+    // Assuming the data is fetched from /team12/sleep-data
+    fetch('/team12/sleep-data')
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {

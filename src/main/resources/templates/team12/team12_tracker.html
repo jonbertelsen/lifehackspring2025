@@ -24,7 +24,7 @@
 
             <div id="result"></div>
 
-            <button type="submit" formaction="/calculate">Register your sleep</button>
+            <button type="submit" formaction="/team12/calculate">Register your sleep</button>
 
 
         </div>
@@ -77,8 +77,8 @@
 
 
     <footer class="footer-app">
-        <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/logout}" class="text-silver"> Log out </a>
-        <a th:if="${session.currentUser != null}" href="team12_dashboard.html" th:href="@{/dashboard}" class="text-silver"> Dashboard </a>
+        <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/team12/logout}" class="text-silver"> Log out </a>
+        <a th:if="${session.currentUser != null}" href="team12_dashboard.html" th:href="@{/team12/dashboard}" class="text-silver"> Dashboard </a>
     </footer>
 </div>
 </body>

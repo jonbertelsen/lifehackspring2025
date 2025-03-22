@@ -31,10 +31,7 @@ public class Main {
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
         }).start(7070);
 
-        // Routing
         Team12Controller.addRoutes(app, connectionPool);
-        //TeamTeacherController.routes(app);
-
     }
 
 }

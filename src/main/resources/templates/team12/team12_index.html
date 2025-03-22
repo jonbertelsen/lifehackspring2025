@@ -10,7 +10,7 @@
 <div class="page-container">
     <header>
         <h1>Welcome to Sleep Tracker</h1>
-        <a href="team12_index.html" th:href="@{/}">
+        <a href="team12_index.html" th:href="@{/team12}">
             <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png"
                  th:src="@{/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
         </a>
@@ -23,7 +23,7 @@
             <input type="text" name="username" placeholder="Enter username"/>
             <input type="password" name="password" placeholder="Enter password"/>
 
-            <button type="submit" formaction="/login">Start tracking your sleep</button>
+            <button type="submit" formaction="/team12/login">Start tracking your sleep</button>
 
             <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
         </form>
@@ -31,9 +31,9 @@
 
     <footer class>
         <div>
-            <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/logout}" class="text-silver"> Log out </a>
+            <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/team12/logout}" class="text-silver"> Log out </a>
             <span th:if="${session.currentUser != null}"> |  </span>
-            <a href="team12_createuser.html" th:href="@{/createuser}" class="text-silver">Create user </a>
+            <a href="team12_createuser.html" th:href="@{/team12/createuser}" class="text-silver">Create user </a>
         </div>
     </footer>
 

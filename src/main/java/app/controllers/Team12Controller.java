@@ -16,15 +16,18 @@ import java.util.Map;
 public class Team12Controller {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
+        // Can't get it to run properly without the "/" root for now. Won't jump straight to /team12 on start
         app.get("/", ctx -> ctx.render("/team12/team12_index.html"));
-        app.post("/login", ctx -> login(ctx, connectionPool));
-        app.get("/tracker", ctx -> ctx.render("/team12/team12_tracker.html"));
-        app.get("/logout", Team12Controller::logout);
-        app.get("/createuser", ctx -> ctx.render("/team12/team12_createuser.html"));
-        app.post("/createuser", ctx -> createUser(ctx, connectionPool));
-        app.post("/calculate", ctx -> sleep(ctx, connectionPool));
-        app.get("/dashboard", ctx -> ctx.render("/team12/team12_dashboard.html"));
-        app.get("/api/sleep-data", ctx -> fetchSleepData(ctx, connectionPool));
+        app.get("/team12", ctx -> ctx.render("/team12/team12_index.html"));
+        app.post("/team12/login", ctx -> login(ctx, connectionPool));
+        app.get("/team12/tracker", ctx -> ctx.render("/team12/team12_tracker.html"));
+        app.get("/team12/logout", Team12Controller::logout);
+        app.get("/team12/createuser", ctx -> ctx.render("/team12/team12_createuser.html"));
+        app.post("/team12/createuser", ctx -> createUser(ctx, connectionPool));
+        app.post("/team12/calculate", ctx -> sleep(ctx, connectionPool));
+        app.get("/team12/dashboard", ctx -> ctx.render("/team12/team12_dashboard.html"));
+        app.get("/team12/sleep-data", ctx -> fetchSleepData(ctx, connectionPool));
+
     }
 
     private static void createUser(Context ctx, ConnectionPool connectionPool) {
@@ -50,7 +53,7 @@ public class Team12Controller {
 
     private static void logout(Context ctx) {
         ctx.req().getSession().invalidate();
-        ctx.redirect("/");
+        ctx.redirect("/team12");
     }
 
     private static void login(Context ctx, ConnectionPool connectionPool) {
@@ -67,7 +70,7 @@ public class Team12Controller {
             }
 
             ctx.sessionAttribute("currentUser", user);
-            ctx.redirect("/tracker");
+            ctx.redirect("/team12/tracker");
         } catch (Team12DatabaseException e) {
             ctx.attribute("message", "Login failed. Please try again.");
             ctx.render("/team12/team12_index.html");

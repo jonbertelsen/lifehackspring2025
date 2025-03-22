@@ -9,7 +9,7 @@
 <body>
 <div class="page-container">
     <header>
-        <a href="team12_index.html" th:href="@{/}">
+        <a href="team12_index.html" th:href="@{/team12}">
             <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png"
                  th:src="@{/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">        </a>
     </header>
@@ -22,13 +22,13 @@
         <input type="password" name="password1" placeholder=" Enter password"/>
         <input type="password" name="password2" placeholder=" Enter password again"/>
 
-        <button type="submit" formaction="/createuser">Create profile</button>
+        <button type="submit" formaction="/team12/createuser">Create profile</button>
 
         <div><p th:text="${message}"></p></div>
     </form>
 
     <div >
-        <a href="team12_index.html" th:href="@{/}" class="text-silver"> Back to login page </a>
+        <a href="team12_index.html" th:href="@{/team12}" class="text-silver"> Back to login page </a>
     </div>
 
 </div>
