@@ -35,8 +35,8 @@ public class Main {
         Team2Controller.setConnectionPool(connectionPool);
 
         // Routing
-
-        app.get("/", ctx ->  ctx.render("team2/index.html"));
+        app.get("/", ctx -> ctx.render("index.html"));
+        app.get("/team2/index", ctx ->  ctx.render("team2/index.html"));
         TeamTeacherController.routes(app);
         Team2Controller.routes(app);
 
