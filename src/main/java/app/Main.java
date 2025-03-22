@@ -33,9 +33,16 @@ public class Main {
 
         // Routing
 
-        app.get("/", ctx -> ctx.render("/index.html"));
-        TeamTeacherController.routes(app);
+        // Frontpage
+        app.get("/", ctx ->  ctx.render("index.html"));
+      
+        // Philosophers
+        TeamTeacherController.routes(app, connectionPool);
+      
+        // Team10
         Team10Controller.routes(app, connectionPool);
+
+      
 
     }
 
