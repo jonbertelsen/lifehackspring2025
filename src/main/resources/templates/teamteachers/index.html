@@ -33,37 +33,46 @@
             <button class="button" type="submit" formaction="/philosophers">Gør mig vis</button>
         </form>
 
-        <div class="grid-item">
+        <div class="grid-item flex-container-column">
             <img class="ionic-column" src="../../public/teamteachers/images/greek-ionic-column.svg" alt="Ionic Column"
                  th:src="@{/teamteachers/images/greek-ionic-column.svg}"/>
         </div>
 
-        <div class="words-of-wisdom">
-            <svg th:if="${not #strings.isEmpty(quote)}" class="speech-buble-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 718.64 620.32">
-                <defs>
-                    <style>
-                        .cls-1 {
-                            fill: #eeeeee;
-                        }
-                    </style>
-                </defs>
-                <g id="Capa_1" data-name="Capa 1">
+        <div class="grid-item speech-bubble-container">
+            <svg class="speech-bubble-right" xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 718.64 620.32" preserveAspectRatio="xMidYMid meet"
+                 width="100%" height="100%">
+
+                <!-- Group for transforming the speech bubble -->
+                <g transform="translate(359.32, 310.16) scale(-1.0,1.0) translate(-359.32, -310.16)">
+                    <!-- Speech bubble shape -->
                     <path class="cls-1"
                           d="m166.38,571.97l11.67,5.91c54.88,27.75,117.57,42.44,181.26,42.44,198.13,0,359.33-139.14,359.33-310.15S557.45,0,359.32,0,0,139.14,0,310.17c0,71.08,28.62,140.57,80.59,195.64l5.29,5.61.24,7.7c.88,27.66-4.08,65.16-28.66,101.2,47.08-.75,90.41-33.54,98.69-40.17l10.22-8.18Z"/>
                 </g>
-            </svg>
 
-            <div class="quote-wrapper">
-                <span class="words-of-wisdom-quote" th:if="${not #strings.isEmpty(quote)}" th:text="${quote}"></span>
-                <div class="philosopher" th:if="${not #strings.isEmpty(philosopher)}" th:text="${philosopher}"></div>
-            </div>
+                <!-- Text remains upright and untransformed -->
+                <g>
+                    <foreignObject x="50" y="100" width="620" height="420">
+                        <div class="quote-wrapper">
+                            <p class="words-of-wisdom-quote text-container" th:if="${not #strings.isEmpty(quote)}"
+                               th:text="${quote}"></p>
+                            <div class="philosopher" th:if="${not #strings.isEmpty(philosopher)}"
+                                 th:text="${philosopher}"></div>
+                        </div>
+                    </foreignObject>
+                </g>
+            </svg>
 
             <div class="words-of-wisdom-portait">
                 <img class="philosopher-image" src="../../public/teamteachers/images/socrates.webp" alt="Socrates"
                      th:src="@{'/teamteachers/images/' + ${philosopherImage}}" th:if="${not #strings.isEmpty(quote)}"/>
             </div>
+
+
         </div>
+
     </div>
+
 
 
 </div>
@@ -71,38 +80,5 @@
 </body>
 </html>
 
-<svg class="speech-bubble-right" xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 718.64 620.32" preserveAspectRatio="xMidYMid meet">
-    <defs>
-        <style>
-            .cls-1 { fill: #eeeeee; }
-            .text-container {
-                font-family: Arial, sans-serif;
-                font-size: 4vw;
-                text-align: center;
-                width: 80%;
-                height: 80%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                overflow: hidden;
-                word-wrap: break-word;
-            }
-        </style>
-    </defs>
-    <g id="Capa_1" data-name="Capa 1">
-        <!-- Speech bubble shape -->
-        <path class="cls-1"
-              d="m166.38,571.97l11.67,5.91c54.88,27.75,117.57,42.44,181.26,42.44,198.13,0,359.33-139.14,359.33-310.15S557.45,0,359.32,0,0,139.14,0,310.17c0,71.08,28.62,140.57,80.59,195.64l5.29,5.61.24,7.7c.88,27.66-4.08,65.16-28.66,101.2,47.08-.75,90.41-33.54,98.69-40.17l10.22-8.18Z"/>
-    </g>
-    <!-- Dynamic text container -->
-    <foreignObject x="50" y="100" width="620" height="420">
-        <div xmlns="http://www.w3.org/1999/xhtml" class="text-container">
-            <p id="dynamic-text"> <div class="quote-wrapper">
-            <span class="words-of-wisdom-quote text-container" th:if="${not #strings.isEmpty(quote)}" th:text="${quote}"></span>
-            <div class="philosopher" th:if="${not #strings.isEmpty(philosopher)}" th:text="${philosopher}"></div>
-        </div></p>
-        </div>
-    </foreignObject>
-</svg>
+
 
