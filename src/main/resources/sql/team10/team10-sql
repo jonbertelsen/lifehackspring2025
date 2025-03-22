@@ -1,0 +1,35 @@
+BEGIN;
+
+-- Users table (Both regular users and admins)
+CREATE TABLE team10_users (
+    user_id SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL CHECK (role IN ('user', 'admin'))
+);
+
+-- Exercises table (Training exercises)
+CREATE TABLE exercises (
+    exercise_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT
+);
+
+-- Training sessions table (Connects to users)
+CREATE TABLE training_sessions (
+    session_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    session_date DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES team10_users(user_id) ON DELETE CASCADE
+);
+
+-- Junction table for training sessions and exercises (Many-to-Many)
+CREATE TABLE training_session_exercises (
+    session_id INT NOT NULL,
+    exercise_id INT NOT NULL,
+    PRIMARY KEY (session_id, exercise_id),
+    FOREIGN KEY (session_id) REFERENCES training_sessions(session_id) ON DELETE CASCADE,
+    FOREIGN KEY (exercise_id) REFERENCES exercises(exercise_id) ON DELETE CASCADE
+);
+
+COMMIT;
