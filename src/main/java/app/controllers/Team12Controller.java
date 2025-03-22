@@ -16,8 +16,7 @@ import java.util.Map;
 public class Team12Controller {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
-        // Can't get it to run properly without the "/" root for now. Won't jump straight to /team12 on start
-        app.get("/", ctx -> ctx.render("/team12/team12_index.html"));
+        // app.get("/", ctx -> ctx.render("/team12/team12_index.html"));
         app.get("/team12", ctx -> ctx.render("/team12/team12_index.html"));
         app.post("/team12/login", ctx -> login(ctx, connectionPool));
         app.get("/team12/tracker", ctx -> ctx.render("/team12/team12_tracker.html"));
