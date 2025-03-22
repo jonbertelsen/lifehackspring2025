@@ -13,7 +13,7 @@
     <h1>Welcome to MovieMatch</h1>
 </header>
 <main>
-    <div class="question-container">
+    <form class="question-container" action="/index" method="GET">
         <h3>Pick main genre</h3>
         <div class="main-genre-questions">
             <div>
@@ -184,8 +184,8 @@
             </div>
         </div>
 
-        <button type="button" onclick="getMovies()">Search</button>
-    </div>
+        <button type="submit">Search</button>
+    </form>
 
     <div class="movie-feed">
         <h1>Top 5 movie recommendation</h1>
@@ -206,7 +206,5 @@
         </table>
     </div>
 </main>
-
-
 </body>
 </html>

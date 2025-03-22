@@ -14,15 +14,17 @@ import java.util.List;
 import static app.Main.connectionPool;
 
 public class Team14Mapper {
-    public static List<Team14Entity> getMovies(ConnectionPool connectionPool) throws DatabaseException {
+    public static List<Team14Entity> getMovies(ConnectionPool connectionPool, String mainGenre) throws DatabaseException {
         List<Team14Entity> movies = new ArrayList<>();
-        String sql =
-                "SELECT title, duration, director, main_genre\n " +
-                "FROM public.movie\n " +
-                "inner join public.main_genre using(movie_id)\n " +
+        String sql = "SELECT title, duration, director, main_genre " +
+                "FROM public.movie " +
+                "INNER JOIN public.main_genre USING(movie_id) " +
+                "WHERE main_genre = ? " +
                 "ORDER BY imdb_score DESC";
-        try (Connection connection = connectionPool.getConnection()){
-            try (PreparedStatement ps = connection.prepareStatement(sql)){
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, mainGenre);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -30,15 +32,15 @@ public class Team14Mapper {
                     String title = rs.getString("title");
                     int duration = rs.getInt("duration");
                     String director = rs.getString("director");
-                    String main_genre = rs.getString("main_genre");
-                    Team14Entity movie = new Team14Entity(title, duration, director, main_genre);
+                    String genre = rs.getString("main_genre");
+                    Team14Entity movie = new Team14Entity(title, duration, director, genre);
                     movies.add(movie);
                 }
             }
-        }catch (SQLException EX){
-            EX.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseException("Error executing query");
         }
-        movies.forEach(System.out::println);
         return movies;
     }
 }

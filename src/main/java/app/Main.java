@@ -4,6 +4,7 @@ import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
 import app.controllers.Team14Controller;
 import app.controllers.TeamTeacherController;
+import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.Team14Mapper;
 import io.javalin.Javalin;
@@ -39,5 +40,6 @@ public class Main {
         TeamTeacherController.routes(app);
 
         Team14Controller.registerRoutes(app);
+
     }
 }
