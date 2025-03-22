@@ -10,4 +10,8 @@ public class DatabaseException extends Exception {
   public DatabaseException(String message) {
     super(message);
   }
+
+    public DatabaseException(String dbFejl, String message) {
+        super(message + dbFejl );
+    }
 }

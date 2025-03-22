@@ -25,9 +25,9 @@ public class LifehackTeam08GameController {
         app.get("/lifehack-team-08/load-game", LifehackTeam08GameController::loadUserData);
 
 
-        app.get("/", ctx ->  ctx.render("lifehack-team-08/login.html"));
-        app.get("/login", LifehackTeam08GameController::loginPage);
-        app.post("/login", LifehackTeam08GameController::loginUser);
+        app.get("/team8", ctx ->  ctx.render("lifehack-team-08/login.html"));
+     //   app.get("/login", LifehackTeam08GameController::loginPage);
+     //   app.post("/login", LifehackTeam08GameController::loginUser);
         app.get("/lifehack-team-08/register", LifehackTeam08GameController::registerPage);
         app.post("/lifehack-team-08/register", LifehackTeam08GameController::registerUser);
         app.get("/lifehack-team-08/index", LifehackTeam08GameController::gamePage);

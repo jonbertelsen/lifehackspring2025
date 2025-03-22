@@ -21,8 +21,8 @@ public class Team10Controller {
     //Routing
     public static void routes(Javalin app,ConnectionPool connectionPool) {
         app.get("/team10", ctx -> home(ctx));
-        app.get("/login", ctx -> ctx.render("team10/login.html"));
-        app.post("/login", ctx -> handleLogin(ctx,connectionPool));
+   //     app.get("/login", ctx -> ctx.render("team10/login.html"));
+   //     app.post("/login", ctx -> handleLogin(ctx,connectionPool));
         app.get("/create-user", ctx-> ctx.render("team10/create-user.html"));
         app.post("/create-user", ctx -> handleCreateUser(ctx,connectionPool));
         app.get("/homepage", ctx -> ctx.render("team10/homepage.html"));
