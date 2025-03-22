@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Start Workout</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/team10/css/styles.css" th:href="@{/team10/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="logo-background"></div>
+<header>
+    <img src="/team10/images/trainnow.png" class="logo">
+</header>
+
+<h1>Start your workout!</h1>
+<div class="exercises-container">
+    <div th:each="exercise : ${exercises}" class="exercise-item">
+        <h3 th:text="${exercise.name}"></h3>
+        <p th:text="${exercise.description}"></p>
+        <!-- Add a data-id attribute to each button to identify the exercise -->
+        <button class="start-workout-btn" th:data-id="${exercise.exerciseId}">Start Workout</button>
+    </div>
+</div>
+
+<a href="/homepage">Back to Homepage</a>
+
+<!-- Add JavaScript -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const workoutButtons = document.querySelectorAll('.start-workout-btn');
+
+        workoutButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                const exerciseId = button.getAttribute('data-id'); // Get the exerciseId from the button's data attribute
+
+                // Send an AJAX request to the server to start the workout
+                fetch(`/start-workout/${exerciseId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ exerciseId: exerciseId }) // Send the exerciseId to the server
+                })
+                    .then(response => response.json()) // Parse the response as JSON
+                    .then(data => {
+                        console.log(data);
+                        // Handle the response (e.g., show a success message or update the page)
+                        alert('Workout started: ' + data.message);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('There was an error starting the workout.');
+                    });
+            });
+        });
+    });
+</script>
+</body>
+
+</html>

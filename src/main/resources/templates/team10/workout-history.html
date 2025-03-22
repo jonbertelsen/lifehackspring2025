@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Workout History</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/team10/css/styles.css}">
+</head>
+
+<body class="workout-history-page">
+<div class="logo-background"></div>
+<header>
+    <img src="/team10/images/trainnow.png" class="logo">
+</header>
+
+<h1>Your Workout History</h1>
+
+<!-- Date Picker -->
+<label for="workout-date">Select Date:</label>
+<input type="date" id="workout-date">
+<button id="view-sessions">View Training Sessions</button>
+
+<!-- Workout History Table -->
+<div id="workout-history">
+    <p>Select a date to see training sessions.</p>
+</div>
+
+<a href="/homepage">Back to Homepage</a>
+
+<script>
+    document.getElementById("view-sessions").addEventListener("click", function () {
+        const selectedDate = document.getElementById("workout-date").value;
+        if (!selectedDate) {
+            alert("Please select a date.");
+            return;
+        }
+
+        fetch(`/workout-history/${selectedDate}`)
+            .then(response => response.json())
+            .then(data => {
+                let historyDiv = document.getElementById("workout-history");
+                historyDiv.innerHTML = "";
+
+                if (data.length === 0) {
+                    historyDiv.innerHTML = "<p>No training sessions found for this date.</p>";
+                } else {
+                    let table = `<table>
+                                        <thead>
+                                            <tr>
+                                                <th>Exercise Name</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>`;
+
+                    data.forEach(exercise => {
+                        table += `<tr>
+                                        <td>${exercise.name}</td>
+                                        <td>${exercise.description}</td>
+                                      </tr>`;
+                    });
+
+                    table += `</tbody></table>`;
+                    historyDiv.innerHTML = table;
+                }
+            })
+            .catch(error => console.error("Error fetching training sessions:", error));
+    });
+</script>
+
+</body>
+</html>
+
+
