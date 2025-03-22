@@ -1,21 +1,13 @@
 package app.exceptions;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.SQLException;
 
-public class DatabaseException extends Exception
-{
-    private static final Logger LOGGER = Logger.getLogger(DatabaseException.class.getName());
+public class DatabaseException extends Exception {
+  public DatabaseException(SQLException cause, String message) {
+    super(message, cause);
+  }
 
-    public DatabaseException(String userMessage)
-    {
-        super(userMessage);
-        LOGGER.log(Level.WARNING, userMessage);
-    }
-
-    public DatabaseException(String userMessage, String systemMessage) {
-        super(userMessage);
-        LOGGER.log(Level.WARNING, userMessage);
-        LOGGER.log(Level.WARNING, "errorMessage: " + systemMessage);
-    }
+  public DatabaseException(String message) {
+    super(message);
+  }
 }
