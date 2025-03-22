@@ -5,6 +5,8 @@ import app.persistence.Team14Mapper;
 import app.exceptions.DatabaseException;
 import io.javalin.http.Context;
 import io.javalin.Javalin;
+
+import java.util.HashMap;
 import java.util.List;
 
 import static app.Main.connectionPool;
@@ -15,7 +17,9 @@ public class Team14Controller {
 
         try {
             List<Team14Entity> movies = Team14Mapper.getMovies(connectionPool, mainGenre);
-            ctx.render("/src/main/resources/templates/team14/index.html");
+            ctx.render("team14/index.html", new HashMap<String, Object>() {{
+                put("movies", movies);
+            }});
         } catch (DatabaseException e) {
             ctx.status(500).result("Error retrieving movies");
         }
