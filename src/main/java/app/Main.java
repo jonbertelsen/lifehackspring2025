@@ -39,7 +39,7 @@ public class Main {
         }).start(7070);
 
         // Routing
-        app.get("/", ctx -> ctx.render("lifehack_team_16/index.html"));
+        app.get("/team_16", ctx -> ctx.render("lifehack_team_16/index.html"));
 
 
         //SignIn endpoints
