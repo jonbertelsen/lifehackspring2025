@@ -25,6 +25,7 @@ public class Workout {
         this.type_id = type_id;
         this.duration = duration;
         this.date = date;
+        this.extraNotes = extraNotes;
     }
 
 
