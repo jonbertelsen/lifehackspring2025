@@ -2,9 +2,12 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
+
 import app.controllers.Team2Controller;
+import app.controllers.Team7Controller;
 import app.controllers.Team10Controller;
 import app.controllers.TeamTeacherController;
+
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -23,7 +26,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         // Initializing Javalin and Jetty webserver
 
         Javalin app = Javalin.create(config -> {
@@ -32,7 +34,7 @@ public class Main {
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
         }).start(7070);
 
-        Team2Controller.setConnectionPool(connectionPool);
+
       
         // Frontpage
         app.get("/", ctx ->  ctx.render("index.html"));
@@ -41,10 +43,13 @@ public class Main {
         TeamTeacherController.routes(app, connectionPool);
       
         // Team02
-      
-        app.get("/team2/index", ctx ->  ctx.render("team2/index.html"));
-        TeamTeacherController.routes(app);
+            
         Team2Controller.routes(app);
+        Team2Controller.setConnectionPool(connectionPool);
+        app.get("/team2/index", ctx ->  ctx.render("team2/index.html"));
+
+        // Team07
+        Team7Controller.add(app, connectionPool);
       
         // Team10
         Team10Controller.routes(app, connectionPool);
