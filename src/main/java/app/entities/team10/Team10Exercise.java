@@ -5,6 +5,10 @@ public class Team10Exercise {
     private String name;
     private String description;
 
+    // ✅ Default constructor (needed for JSON deserialization)
+    public Team10Exercise() {
+    }
+
     public Team10Exercise(int exerciseId, String name, String description) {
         this.exerciseId = exerciseId;
         this.name = name;
@@ -26,3 +30,4 @@ public class Team10Exercise {
         return "Exercise: " + name + " - " + description;
     }
 }
+

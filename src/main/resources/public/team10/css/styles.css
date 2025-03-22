@@ -1,3 +1,45 @@
+/* General page styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #E8FFFC;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+}
+
+/* Header and logo */
+header {
+    text-align: center;
+}
+
+.logo {
+    display: block;
+    margin: 10px auto;
+    width: 150px;
+    height: auto;
+    position: relative;
+    top: -50px;
+}
+
+.logo-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url('../../team10/images/trainnow.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0.1;
+    width: 80vw;
+    height: 80vh;
+    z-index: -1;
+}
+
+/* Headings and text */
 h1 {
     text-align: center;
     font-size: 3rem;
@@ -12,19 +54,75 @@ p {
     color: #78009E;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #E8FFFC;
-    position: relative;
+/* Form container */
+.form-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
 }
 
-a.login-link {
+/* Form elements */
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: left;
+    color: #333;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: white;
+    color: black;
+}
+
+textarea {
+    resize: vertical;
+    height: 80px;
+}
+
+/* Buttons */
+button {
+    margin-top: 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Message styling */
+#message {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
+}
+
+/* Back link */
+a.back-link {
     font-size: 1.8rem;
     font-weight: bold;
     color: black;
@@ -33,59 +131,11 @@ a.login-link {
     display: inline-block;
 }
 
-a.login-link:hover {
+a.back-link:hover {
     color: #444;
 }
 
-.logo {
-    display: block;
-    margin: 10px auto;
-    width: 150px;
-    height: auto;
-    position: relative;
-    top: -50px;
-}
-
-header {
-    text-align: center; /* Center everything inside the header */
-}
-
-
-.logo-background {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: url('../../team10/images/trainnow.png') no-repeat center center;
-    background-size: contain;
-    opacity: 0.1;
-    width: 80vw;
-    height: 80vh;
-    z-index: -1;
-}
-.options-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.option-button {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-    background-color: #78009E;
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-.option-button:hover {
-    background-color: #5a0075;
-}
-
-
+/* Exercise items */
 .exercises-container {
     display: flex;
     flex-wrap: wrap;
@@ -111,6 +161,7 @@ header {
     color: #555;
 }
 
+/* Start workout button */
 .start-workout-btn {
     background-color: #4CAF50;
     color: white;
@@ -120,9 +171,82 @@ header {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
+    width: 100%;
 }
 
 .start-workout-btn:hover {
     background-color: #45a049;
 }
+.option-button {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    background-color: #78009E;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s;
+}
 
+.option-button:hover {
+    background-color: #5a0075;
+}
+.options-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+a.login-link {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+}
+
+a.login-link:hover {
+    color: #444;
+}
+#workout-history table {
+    width: 60%; /* Adjust width as needed */
+    max-width: 500px; /* Prevents it from being too wide */
+    margin: 20px auto; /* Centers the table */
+    border-collapse: collapse;
+}
+
+#workout-history th,
+#workout-history td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    white-space: nowrap; /* Prevents text from wrapping */
+}
+
+#workout-history th {
+    background-color: #78009E;
+    color: white;
+    text-align: center;
+}
+/* Make the date picker and button narrower */
+#workout-date {
+    width: 200px; /* Adjust width */
+    padding: 8px;
+    font-size: 1rem;
+}
+
+#view-sessions {
+    width: 220px; /* Adjust width */
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #78009E; /* Your button color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#view-sessions:hover {
+    background-color: #5a0075;
+}
