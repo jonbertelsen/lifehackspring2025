@@ -12,8 +12,6 @@ import io.javalin.rendering.template.JavalinThymeleaf;
 import java.util.logging.Logger;
 
 public class Main {
-    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
-
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/%s?currentSchema=public";
@@ -59,8 +57,9 @@ public class Main {
         // Register routes for Team05Controllers
         app.post("/deleteworkoutlog", team05Controllers::deleteWorkoutLog);
 
-        app.get("/editworkoutlog/{id}", team05Controllers::editWorkoutLog);
-        app.post("/editworkoutlog", team05Controllers::editWorkoutLog);
+        app.get("/editworkoutlog/{id}", team05Controllers::showEditWorkoutPage);
+        app.post("/editworkoutlog/{id}", team05Controllers::editWorkoutLog);
+
 
 
     }

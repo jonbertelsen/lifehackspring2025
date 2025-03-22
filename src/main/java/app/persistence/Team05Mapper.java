@@ -123,7 +123,7 @@ public class Team05Mapper {
 
     public static void editWorkoutLog(int workoutId, int typeId, int duration, String extraNotes, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "UPDATE workoutlog " +
-                "SET workoutlog.type_id = ?, duration = ?, extra_notes = ? " +
+                "SET type_id = ?, duration = ?, extra_notes = ? " +
                 "WHERE id = ?";
 
         try(
@@ -141,8 +141,6 @@ public class Team05Mapper {
             throw new DatabaseException("Error editing workout log.", e.getMessage());
         }
     }
-
-
 
     public static boolean userExists(String email, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "SELECT 1 FROM users WHERE email = ?";
@@ -185,7 +183,4 @@ public class Team05Mapper {
             throw new DatabaseException("Error retrieving workout", e.getMessage());
         }
     }
-
-
-
 }

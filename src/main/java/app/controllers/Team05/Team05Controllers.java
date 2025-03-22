@@ -12,7 +12,6 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 public class Team05Controllers {
@@ -119,7 +118,20 @@ public class Team05Controllers {
 
             // Hent opdaterede data fra formularen (POST-anmodning)
             int typeId = Integer.parseInt(ctx.formParam("type_id"));
-            int duration = Integer.parseInt(ctx.formParam("duration"));
+            String durationStr = ctx.formParam("duration");
+            if (durationStr == null || durationStr.isEmpty()) {
+                ctx.status(400).result("Duration is missing or invalid.");
+                return;
+            }
+
+            int duration;
+            try {
+                duration = Integer.parseInt(durationStr);
+            } catch (NumberFormatException e) {
+                ctx.status(400).result("Duration must be a valid number.");
+                return;
+            }
+
             String extraNotes = ctx.formParam("extra_notes");
 
             // Kald metoden for at opdatere workout-loggen
@@ -141,6 +153,6 @@ public class Team05Controllers {
         int workoutId = Integer.parseInt(ctx.pathParam("id")); // Henter ID fra URL
         Workout workout = Team05Mapper.getWorkoutById(workoutId, connectionPool); // Hent workout fra DB
         ctx.attribute("workout", workout); // Sender workout-data til Thymeleaf
-        ctx.render("edit_workout.html"); // Render HTML-siden
+        ctx.render("team05/edit_workout.html");// Render HTML-siden
     }
 }
