@@ -22,7 +22,7 @@ public class Main {
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/%s?currentSchema=public";
-    private static final String DB = "lifehackspring2025";
+    private static final String DB = "lifehack_team_16_waterlog";
     private static int user_id;
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
@@ -39,7 +39,7 @@ public class Main {
         }).start(7070);
 
         // Routing
-        app.get("/team_16", ctx -> ctx.render("lifehack_team_16/index.html"));
+        app.get("/", ctx -> ctx.render("lifehack_team_16/index.html"));
 
 
         //SignIn endpoints
