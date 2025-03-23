@@ -15,7 +15,7 @@ public class Main {
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/%s?currentSchema=public";
-    private static final String DB = "workoutlog";
+    private static final String DB = "lifehackspring2025";
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
@@ -31,7 +31,9 @@ public class Main {
 
         // Routing
 
-        app.get("/", ctx -> ctx.render("team05/index05.html"));
+        app.get("/", ctx -> ctx.redirect("/workoutlogger"));
+        app.get("/workoutlogger", ctx -> ctx.render("team05/index05.html"));
+
 
         // Create instances of the controllers
         HomeController homeController = new HomeController(connectionPool);
