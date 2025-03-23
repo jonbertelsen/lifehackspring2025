@@ -36,6 +36,11 @@
         <!-- Knappen, der leder til redigeringssiden -->
         <a href="#" th:href="@{/editworkoutlog/{id}(id=${log.id})}" class="edit-button">Edit</a>
 
+        <form th:action="@{/deleteworkoutlog/{id}(id=${log.id})}" method="post">
+          <input type="hidden" name="_method" value="DELETE"/>
+          <button type="submit" class="delete-button">Delete</button>
+        </form>
+
         </a>
       </div>
     </th:block>

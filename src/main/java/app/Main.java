@@ -55,14 +55,10 @@ public class Main {
         app.post("/add-workout", ctx -> Team05Controllers.addWorkoutlog(ctx, connectionPool));
         app.get("/workoutlog", team05Controllers::viewWorkoutlog);
 
-
-        // Register routes for Team05Controllers
-        app.post("/deleteworkoutlog", team05Controllers::deleteWorkoutLog);
-
         app.get("/editworkoutlog/{id}", team05Controllers::showEditWorkoutPage);
         app.post("/editworkoutlog/{id}", team05Controllers::editWorkoutLog);
 
-
+        app.post("/deleteworkoutlog/{id}", team05Controllers::deleteWorkoutLog);
 
     }
 }
