@@ -17,11 +17,16 @@ public class LifeHack_Team_17_Controller {
         LifeHack_Team_17_Controller.connectionPool = connectionPool;
     }
 
+    public static void setConnectionPool(ConnectionPool connectionPool) {
+        LifeHack_Team_17_Controller.connectionPool = connectionPool;
+    }
+
+
+
     public static void home(Context ctx) {
         LifeHackTeam17Mapper lifeHackTeam17Mapper = new LifeHackTeam17Mapper();
         List<Soda> sodas = lifeHackTeam17Mapper.getSodaFromDataBase(connectionPool);
         ctx.attribute("sodas", sodas);  // Pass soda data to frontend
-        ctx.render("lifehack-team-17/calculator.html");  // Render the calculator page
     }
 
 
@@ -32,6 +37,7 @@ public class LifeHack_Team_17_Controller {
     }
 
     private static void team17Calculator(@NotNull Context ctx) {
+        home(ctx);
         ctx.render("lifehack-team-17/calculator.html");  // Render calculator page
     }
 

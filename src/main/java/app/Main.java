@@ -24,6 +24,7 @@ public class Main {
     public static void main(String[] args)
     {
 
+        LifeHack_Team_17_Controller.setConnectionPool(connectionPool);
 
         // Initializing Javalin and Jetty webserver
 
