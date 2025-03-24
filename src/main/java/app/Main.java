@@ -2,16 +2,21 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
+
+
+
 import app.controllers.Team1Controller;
 import app.controllers.Team2Controller;
 import app.controllers.Team4Controller;
 import app.controllers.Team6Controller;
 import app.controllers.Team7Controller;
 import app.controllers.LifehackTeam08GameController;
+import app.controllers.LifeHackTeam9Controller;
 import app.controllers.Team10Controller;
 import app.controllers.Team12Controller;
 import app.controllers.Team14Controller;
 import app.controllers.LifeHack_Team_17_Controller;
+
 import app.controllers.TeamTeacherController;
 
 import app.persistence.ConnectionPool;
@@ -31,6 +36,7 @@ public class Main {
     public static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
     public static void main(String[] args) {
+
 
         // Initializing Javalin and Jetty webserver
 
@@ -66,6 +72,9 @@ public class Main {
       
          // Team08
          LifehackTeam08GameController.Routes(app);
+
+        // Team09
+        LifeHackTeam9Controller.addRoutes(app, connectionPool);
       
         // Team10
         Team10Controller.routes(app, connectionPool);
@@ -80,4 +89,3 @@ public class Main {
 
    }
 }
-
