@@ -14,6 +14,7 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+
     <data-source source="LOCAL" name="skole@localhost" uuid="fcac7628-51d2-4ccc-9196-0c77ea81843d">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
@@ -39,6 +40,7 @@
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
     <data-source source="LOCAL" name="lifehackspring2025@localhost" uuid="e1293aa6-ec82-4807-a6d4-12db69b371c5">
+
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>

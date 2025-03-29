@@ -2,6 +2,7 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
+
 import app.controllers.Team1Controller;
 import app.controllers.Team2Controller;
 import app.controllers.LifeHackTeam3Controller;
@@ -14,6 +15,7 @@ import app.controllers.Team7Controller;
 import app.controllers.LifehackTeam08GameController;
 import app.controllers.LifeHackTeam9Controller;
 import app.controllers.Team10Controller;
+import app.controllers.TeamElevenController;
 import app.controllers.Team12Controller;
 import app.controllers.Team14Controller;
 import app.controllers.lifehackTeam15Controller;
@@ -35,9 +37,8 @@ public class Main {
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
-
-
     public static void main(String[] args) {
+
 
         // Initializing Javalin and Jetty webserver
         Javalin app = Javalin.create(config -> {
@@ -73,9 +74,6 @@ public class Main {
         // Routing
      
         app.get("/workoutlogger", ctx -> ctx.render("team05/index05.html"));
-
-
-
 
         // Create instances of the controllers
         HomeController homeController = new HomeController(connectionPool);
@@ -116,6 +114,10 @@ public class Main {
       
         // Team10
         Team10Controller.routes(app, connectionPool);
+      
+        // Team11
+        app.get("/team11", ctx ->  ctx.render("team11-index.html"));
+        TeamElevenController.routes(app);
 
         // Team12
         Team12Controller.addRoutes(app, connectionPool);
