@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Conversions</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../public/team21/css/styles.css" th:href="@{/team21/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body class="container">
+<a th:href="@{/team21/index}">
+    <h1 class="title">Simple Unit Converter</h1>
+</a>
+<h2 style="text-align: center;">Conversions</h2>
+<table class ="all-data-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Unit</th>
+        <th>Output Value</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="conversion : ${conversions}">
+        <td th:text="${conversion.id}"></td>
+        <td th:text="${conversion.units}"></td>
+        <td th:text="${conversion.value}"></td>
+        <td th:text="${conversion.date}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

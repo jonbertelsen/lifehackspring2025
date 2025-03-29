@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit Workout</title>
+  <meta charset="UTF-8">
+  <link href="/public/team05/css05/edit.css" th:href="@{/team05/css05/edit.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="container">
+  <h1>Edit Workout</h1>
+
+  <!-- Formular til at redigere workout-loggen -->
+  <form th:action="@{/editworkoutlog/{id}(id=${workout.id})}" method="post">
+    <!-- Skjult ID for workout-loggen, den er hentet fra URL'en -->
+    <input type="hidden" name="id" th:value="${workout.id}">
+
+    <label for="type_id">Type:</label>
+    <input type="number" id="type_id" name="type_id" th:value="${workout.type_id}" required>
+
+    <label for="duration">Duration (minutes):</label>
+    <input type="number" id="duration" name="duration" th:value="${workout.duration}" required>
+
+    <label for="extraNotes">Notes:</label>
+    <textarea id="extraNotes" name="extra_notes" th:text="${workout.extraNotes}"></textarea>
+
+    <button type="submit">Save Changes</button>
+  </form>
+
+
+</div>
+
+</body>
+</html>

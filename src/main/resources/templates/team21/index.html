@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>UnitConverter</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../public/team21/css/styles.css" th:href="@{/team21/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body class="container">
+<h1 class="title">Simple Unit Converter</h1>
+<form action="/team21/index" method="post">
+    <input type="number" name="value" placeholder="Enter value" step="any" required/>
+    <select name="unitType">
+        <option th:value="km-to-mi" th:selected="${unitType == 'km-to-mi'}">Kilometers to Miles</option>
+        <option th:value="mi-to-km" th:selected="${unitType == 'mi-to-km'}">Miles to Kilometers</option>
+        <option th:value="km-to-ff" th:selected="${unitType == 'km-to-ff'}">Kilometers to Football Fields</option>
+        <option th:value="ff-to-km" th:selected="${unitType == 'ff-to-km'}">Football Fields to Kilometers</option>
+    </select>
+    <button class="button-style" type="submit" formaction="/convert">Convert</button>
+</form>
+<p th:if="${result != null}" th:text="'Result: ' + ${result}"></p>
+<form method="post" action="/alldata">
+    <button class="show-data-button" type="submit" formaction="/alldata">Show all data</button>
+</form>
+</body>
+</html>

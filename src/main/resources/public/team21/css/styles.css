@@ -1,0 +1,61 @@
+body.container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+
+h1.title {
+    margin: 5px;
+    padding: 8px;
+    font-size: 140px;
+}
+.button-style{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 16px;
+}
+.button-style:hover{
+    background-color: #45a049;
+    transform: scale(1.03);
+}
+.show-data-button{
+    background-color: purple;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 16px;
+}
+.show-data-button:hover{
+    background-color: #3c1900;
+    transform: scale(1.03);
+}
+
+.all-data-table{
+    border-collapse: collapse;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-width: 400px;
+}
+
+.all-data-table td, .task-table th{
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.all-data-table tr:nth-child(even){
+    background-color: silver;
+}
