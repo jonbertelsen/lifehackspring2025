@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<title>index</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../../public/team12/css/team12_styles.css" th:href="@{/team12/css/team12_styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="page-container">
+    <header>
+        <h1>Welcome to Sleep Tracker</h1>
+        <a href="team12_index.html" th:href="@{/team12}">
+            <img class="logo" src="../../public/team12/images/SleepTrackerLogo.png"
+                 th:src="@{/team12/images/SleepTrackerLogo.png}" alt="Sleep Tracker Logo">
+        </a>
+        <br>
+    </header>
+
+    <main>
+
+        <form class="generic-form" method="post">
+            <input type="text" name="username" placeholder="Enter username"/>
+            <input type="password" name="password" placeholder="Enter password"/>
+
+            <button type="submit" formaction="/team12/login">Start tracking your sleep</button>
+
+            <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
+        </form>
+    </main>
+
+    <footer class>
+        <div>
+            <a th:if="${session.currentUser != null}" href="team12_index.html" th:href="@{/team12/logout}" class="text-silver"> Log out </a>
+            <span th:if="${session.currentUser != null}"> |  </span>
+            <a href="team12_createuser.html" th:href="@{/team12/createuser}" class="text-silver">Create user </a>
+        </div>
+    </footer>
+
+</div>
+</body>
+</html>

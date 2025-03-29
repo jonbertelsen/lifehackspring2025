@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieMatch</title>
+    <link rel="stylesheet" href="/src/main/resources/team14.css/styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Welcome to MovieMatch</h1>
+</header>
+<main>
+    <form class="question-container" action="/index" method="GET">
+        <h3>Pick main genre</h3>
+        <div class="main-genre-questions">
+            <div>
+                <label for="action">Action</label>
+                <input name="main-genre" type="radio" id="action" value="action">
+            </div>
+
+            <div>
+                <label for="comedy">Comedy</label>
+                <input name="main-genre" type="radio" id="comedy" value="comedy">
+            </div>
+
+            <div>
+                <label for="drama">Drama</label>
+                <input name="main-genre" type="radio" id="drama" value="drama">
+            </div>
+
+            <div>
+                <label for="horror">Horror</label>
+                <input name="main-genre" type="radio" id="horror" value="horror">
+            </div>
+
+            <div>
+                <label for="sci-fi">Sci-fi</label>
+                <input name="main-genre" type="radio" id="sci-fi" value="sci-fi">
+            </div>
+        </div>
+
+        <h3>Pick sub genre</h3>
+        <div class="sub-genre">
+            <div>
+                <label for="sub-action">Action</label>
+                <input name="sub-genre" type="checkbox" id="sub-action" value="sub-action">
+            </div>
+
+            <div>
+                <label for="sub-adventure">Adventure</label>
+                <input name="sub-genre" type="checkbox" id="sub-adventure" value="sub-adventure">
+            </div>
+
+            <div>
+                <label for="sub-animation">Animation</label>
+                <input name="sub-genre" type="checkbox" id="sub-animation" value="sub-animation">
+            </div>
+
+            <div>
+                <label for="sub-biography">Biography</label>
+                <input name="sub-genre" type="checkbox" id="sub-biography" value="sub-biography">
+            </div>
+
+            <div>
+                <label for="sub-comedy">Comedy</label>
+                <input name="sub-genre" type="checkbox" id="sub-comedy" value="sub-comedy">
+            </div>
+
+            <div>
+                <label for="sub-crime">Crime</label>
+                <input name="sub-genre" type="checkbox" id="sub-crime" value="sub-crime">
+            </div>
+
+            <div>
+                <label for="sub-drama">Drama</label>
+                <input name="sub-genre" type="checkbox" id="sub-drama" value="sub-drama">
+            </div>
+
+            <div>
+                <label for="sub-family">Family</label>
+                <input name="sub-genre" type="checkbox" id="sub-family" value="sub-family">
+            </div>
+
+            <div>
+                <label for="sub-fantasy">Fantasy</label>
+                <input name="sub-genre" type="checkbox" id="sub-fantasy" value="sub-fantasy">
+            </div>
+
+            <div>
+                <label for="sub-film-noir">Film-Noir</label>
+                <input name="sub-genre" type="checkbox" id="sub-film-noir" value="sub-film-noir">
+            </div>
+
+            <div>
+                <label for="sub-history">History</label>
+                <input name="sub-genre" type="checkbox" id="sub-history" value="sub-history">
+            </div>
+
+            <div>
+                <label for="sub-horror">Horror</label>
+                <input name="sub-genre" type="checkbox" id="sub-horror" value="sub-horror">
+            </div>
+
+            <div>
+                <label for="sub-music">Music</label>
+                <input name="sub-genre" type="checkbox" id="sub-music" value="sub-music">
+            </div>
+
+            <div>
+                <label for="sub-mystery">Mystery</label>
+                <input name="sub-genre" type="checkbox" id="sub-mystery" value="sub-mystery">
+            </div>
+
+            <div>
+                <label for="sub-romance">Romance</label>
+                <input name="sub-genre" type="checkbox" id="sub-romance" value="sub-romance">
+            </div>
+
+            <div>
+                <label for="sub-sci-fi">Sci-Fi</label>
+                <input name="sub-genre" type="checkbox" id="sub-sci-fi" value="sub-sci-fi">
+            </div>
+
+            <div>
+                <label for="sub-thriller">Thriller</label>
+                <input name="sub-genre" type="checkbox" id="sub-thriller" value="sub-thriller">
+            </div>
+
+            <div>
+                <label for="sub-war">War</label>
+                <input name="sub-genre" type="checkbox" id="sub-war" value="sub-war">
+            </div>
+
+            <div>
+                <label for="sub-western">Western</label>
+                <input name="sub-genre" type="checkbox" id="sub-western" value="sub-western">
+            </div>
+        </div>
+
+        <h3>Pick duration</h3>
+        <div class="duration">
+            <label for="duration">Duration</label>
+            <input name="duration" type="text" id="duration" placeholder="Enter max duration">
+        </div>
+
+        <h3>Pick platform</h3>
+        <div class="platform">
+            <div>
+                <label for="netflix">Netflix</label>
+                <input type="checkbox" name="platform" id="netflix" value="netflix">
+            </div>
+
+            <div>
+                <label for="amazon-prime">Amazon Prime</label>
+                <input type="checkbox" name="platform" id="amazon-prime" value="amazon-prime">
+            </div>
+
+            <div>
+                <label for="hulu">Hulu</label>
+                <input type="checkbox" name="platform" id="hulu" value="hulu">
+            </div>
+
+            <div>
+                <label for="disney-plus">Disney+</label>
+                <input type="checkbox" name="platform" id="disney-plus" value="disney-plus">
+            </div>
+
+            <div>
+                <label for="hbo-max">HBO Max</label>
+                <input type="checkbox" name="platform" id="hbo-max" value="hbo-max">
+            </div>
+
+            <div>
+                <label for="paramount-plus">Paramount+</label>
+                <input type="checkbox" name="platform" id="paramount-plus" value="paramount-plus">
+            </div>
+
+            <div>
+                <label for="apple-tv-plus">Apple TV+</label>
+                <input type="checkbox" name="platform" id="apple-tv-plus" value="apple-tv-plus">
+            </div>
+        </div>
+
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="movie-feed">
+        <h1>Top 5 movie recommendation</h1>
+
+        <table class="movies">
+            <tr>
+                <th>Title</th>
+                <th>Duration</th>
+                <th>Director</th>
+                <th>Platform</th>
+            </tr>
+            <tr th:each="Team14Entity : ${movies}">
+                <td th:text="${Team14Entity.title}"></td>
+                <td th:text="${Team14Entity.duration}"></td>
+                <td th:text="${Team14Entity.director}"></td>
+                <td th:text="${Team14Entity.platform}"></td>
+            </tr>
+        </table>
+    </div>
+</main>
+</body>
+</html>
