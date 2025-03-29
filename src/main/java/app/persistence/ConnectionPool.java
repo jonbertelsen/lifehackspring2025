@@ -39,11 +39,7 @@ public class  ConnectionPool {
             synchronized (ConnectionPool.class) {
                 if (instance == null) {  // Double-checked locking
                     if (System.getenv("DEPLOYED") != null) {
-                        ds = createHikariConnectionPool(
-                                System.getenv("JDBC_USER"),
-                                System.getenv("JDBC_PASSWORD"),
-                                System.getenv("JDBC_CONNECTION_STRING"),
-                                System.getenv("JDBC_DB"));
+                        ds = createHikariConnectionPool(System.getenv("JDBC_USER"), System.getenv("JDBC_PASSWORD"), System.getenv("JDBC_CONNECTION_STRING"), System.getenv("JDBC_DB"));
                     } else {
                         ds = createHikariConnectionPool(user, password, url, db);
                     }
@@ -108,5 +104,9 @@ public class  ConnectionPool {
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
         return new HikariDataSource(config);
+    }
+
+    public static ConnectionPool getInstance() {
+        return instance;
     }
 }

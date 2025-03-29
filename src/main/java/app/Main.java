@@ -2,9 +2,10 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
-
 import app.controllers.Team1Controller;
 import app.controllers.Team2Controller;
+import app.controllers.LifeHackTeam3Controller;
+import app.persistence.LifeHackTeam3SubscriberMapper;
 import app.controllers.Team4Controller;
 import app.controllers.Team05.HomeController;
 import app.controllers.Team05.Team05Controllers;
@@ -32,11 +33,11 @@ public class Main {
     private static final String URL = "jdbc:postgresql://localhost:5432/%s?currentSchema=public";
     private static final String DB = "lifehackspring2025";
 
-    public static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
+    private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
+
+
 
     public static void main(String[] args) {
-
-        LifeHack_Team_17_Controller.setConnectionPool(connectionPool);
 
         // Initializing Javalin and Jetty webserver
         Javalin app = Javalin.create(config -> {
@@ -58,6 +59,10 @@ public class Main {
         // Team02
         Team2Controller.routes(app);
         Team2Controller.setConnectionPool(connectionPool);
+
+        // Team03
+        LifeHack_Team_17_Controller.setConnectionPool(connectionPool);
+        LifeHackTeam3Controller.routes(app);
 
         // Team04
         app.get("/team4", ctx -> ctx.render("team4login"));
