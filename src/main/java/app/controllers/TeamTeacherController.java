@@ -1,8 +1,8 @@
 package app.controllers;
 
-import app.entities.TeamTeacherEntitiy;
+import app.entities.teamteacher.TeamTeacherQuote;
 import app.persistence.ConnectionPool;
-import app.persistence.TeamTeacherMapper;
+import app.persistence.teamteacher.TeamTeacherMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +23,7 @@ public class TeamTeacherController {
 
     private static void ask(@NotNull Context ctx, ConnectionPool connectionPool) {
         String input = ctx.formParam("ask");
-        TeamTeacherEntitiy philosophicalAnswer = TeamTeacherMapper.getPhilosophicalAnswer(input, connectionPool);
+        TeamTeacherQuote philosophicalAnswer = TeamTeacherMapper.getPhilosophicalAnswer(input, connectionPool);
         ctx.attribute("quote", philosophicalAnswer.getQuote());
         ctx.attribute("philosopher", philosophicalAnswer.getPhilosopher());
         ctx.attribute("philosopherImage", philosophicalAnswer.getPicture());

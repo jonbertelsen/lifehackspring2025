@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <link href="../../public/team17/css/consequences.css" th:href="@{/team17/css/consequences.css}" rel="stylesheet"/>
+    <script></script>
+</head>
+
+
+<body>
+
+
+<img th:src="@{/team17/images/sugar.jpg}" src="../../public/team17/images/sugar.jpg" class="background-image" />
+
+<header class="top-bar">
+    <a href="calculator.html" th:href="@{/calculator}" class="top-button">Lommeregner</a>
+    <a href="consequences.html" th:href="@{/consequence}" class="top-button">Konsekvenser</a>
+</header>
+
+    <div class="content">
+        <label for="team17Sodas">Tilføj en sodavand:</label>
+
+        <select class="dropdown" id="team17Sodas" name="team17Sodas">
+            <option
+                    th:each="team17Sodas : ${team17Sodas}" th:value="${team17Sodas.name}"
+                    th:text="${team17Sodas.name + ' - ' + team17Sodas.liter}">
+            </option>
+        </select>
+    </div>
+
+    <main class="content">
+        <section class="box">
+            <h2>Navn</h2>
+            <p>
+                Coca Cola<br>
+            </p>
+        </section>
+
+        <section class="box">
+            <h2>Liter</h2>
+            <p>
+                5 Liter <br>
+            </p>
+        </section>
+    </main>
+
+</body>
+</html>

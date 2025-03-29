@@ -3,26 +3,26 @@
 <head>
   <title>Edit Workout</title>
   <meta charset="UTF-8">
-  <link href="/public/team05/css05/edit.css" th:href="@{/team05/css05/edit.css}" rel="stylesheet"/>
+  <link href="/team05/css/edit.css" th:href="@{/team05/css/edit.css}" rel="stylesheet"/>
 </head>
 <body>
 
 <div class="container">
   <h1>Edit Workout</h1>
 
-  <!-- Formular til at redigere workout-loggen -->
-  <form th:action="@{/editworkoutlog/{id}(id=${workout.id})}" method="post">
-    <!-- Skjult ID for workout-loggen, den er hentet fra URL'en -->
-    <input type="hidden" name="id" th:value="${workout.id}">
+  <!-- Formular til at redigere team05Workout-loggen -->
+  <form th:action="@{/editworkoutlog/{id}(id=${team05Workout.id})}" method="post">
+    <!-- Skjult ID for team05Workout-loggen, den er hentet fra URL'en -->
+    <input type="hidden" name="id" th:value="${team05Workout.id}">
 
     <label for="type_id">Type:</label>
-    <input type="number" id="type_id" name="type_id" th:value="${workout.type_id}" required>
+    <input type="number" id="type_id" name="type_id" th:value="${team05Workout.type_id}" required>
 
     <label for="duration">Duration (minutes):</label>
-    <input type="number" id="duration" name="duration" th:value="${workout.duration}" required>
+    <input type="number" id="duration" name="duration" th:value="${team05Workout.duration}" required>
 
     <label for="extraNotes">Notes:</label>
-    <textarea id="extraNotes" name="extra_notes" th:text="${workout.extraNotes}"></textarea>
+    <textarea id="extraNotes" name="extra_notes" th:text="${team05Workout.extraNotes}"></textarea>
 
     <button type="submit">Save Changes</button>
   </form>

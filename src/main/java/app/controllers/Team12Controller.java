@@ -1,11 +1,11 @@
 package app.controllers;
 
-import app.entitites.Team12SleepRecords;
-import app.entitites.Team12User;
+import app.entities.team12.Team12SleepRecords;
+import app.entities.team12.Team12User;
 import app.exceptions.Team12DatabaseException;
 import app.persistence.ConnectionPool;
-import app.persistence.Team12SleepMapper;
-import app.persistence.Team12UserMapper;
+import app.persistence.team12.Team12SleepMapper;
+import app.persistence.team12.Team12UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
@@ -42,10 +42,10 @@ public class Team12Controller {
 
         try {
             Team12UserMapper.createUser(username, password1, connectionPool);
-            ctx.attribute("message", "User created successfully. Please log in.");
+            ctx.attribute("message", "Team05User created successfully. Please log in.");
             ctx.render("/team12/team12_index.html");
         } catch (Team12DatabaseException e) {
-            ctx.attribute("message", "User already exists. Try again or log in.");
+            ctx.attribute("message", "Team05User already exists. Try again or log in.");
             ctx.render("/team12/team12_createuser.html");
         }
     }
@@ -79,7 +79,7 @@ public class Team12Controller {
     private static void sleep(Context ctx, ConnectionPool connectionPool) {
         Team12User currentUser = ctx.sessionAttribute("currentUser");
         if (currentUser == null) {
-            ctx.attribute("message", "User not logged in.");
+            ctx.attribute("message", "Team05User not logged in.");
             ctx.render("/team12/team12_tracker.html");
             return;
         }
@@ -101,7 +101,7 @@ public class Team12Controller {
     private static void fetchSleepData(Context ctx, ConnectionPool connectionPool) {
         Team12User currentUser = ctx.sessionAttribute("currentUser");
         if (currentUser == null) {
-            ctx.status(401).json(Map.of("error", "User not logged in"));
+            ctx.status(401).json(Map.of("error", "Team05User not logged in"));
             return;
         }
 

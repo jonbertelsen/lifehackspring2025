@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Team10TrainingSession {
     private int sessionId;
-    private int userId;  // Reference to User
+    private int userId;  // Reference to Team05User
     private Date sessionDate;
     private List<Integer> exerciseIds;  // List of Exercise IDs
-    private int userSessionId;  // User performing the session
+    private int userSessionId;  // Team05User performing the session
 
     public Team10TrainingSession(int sessionId, int userId, Date sessionDate, List<Integer> exerciseIds, int userSessionId) {
         this.sessionId = sessionId;
@@ -36,6 +36,6 @@ public class Team10TrainingSession {
 
     @Override
     public String toString() {
-        return "Training Session ID: " + sessionId + ", User ID: " + userId + ", Date: " + sessionDate;
+        return "Training Session ID: " + sessionId + ", Team05User ID: " + userId + ", Date: " + sessionDate;
     }
 }

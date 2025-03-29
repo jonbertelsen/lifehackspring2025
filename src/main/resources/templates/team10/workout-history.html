@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{/team10/css/styles.css}">
 </head>
 
-<body class="workout-history-page">
+<body class="team05Workout-history-page">
 <div class="logo-background"></div>
 <header>
     <img src="/team10/images/trainnow.png" class="logo">
@@ -17,12 +17,12 @@
 <h1>Your Workout History</h1>
 
 <!-- Date Picker -->
-<label for="workout-date">Select Date:</label>
-<input type="date" id="workout-date">
+<label for="team05Workout-date">Select Date:</label>
+<input type="date" id="team05Workout-date">
 <button id="view-sessions">View Training Sessions</button>
 
-<!-- Workout History Table -->
-<div id="workout-history">
+<!-- Team05Workout History Table -->
+<div id="team05Workout-history">
     <p>Select a date to see training sessions.</p>
 </div>
 
@@ -30,16 +30,16 @@
 
 <script>
     document.getElementById("view-sessions").addEventListener("click", function () {
-        const selectedDate = document.getElementById("workout-date").value;
+        const selectedDate = document.getElementById("team05Workout-date").value;
         if (!selectedDate) {
             alert("Please select a date.");
             return;
         }
 
-        fetch(`/workout-history/${selectedDate}`)
+        fetch(`/team05Workout-history/${selectedDate}`)
             .then(response => response.json())
             .then(data => {
-                let historyDiv = document.getElementById("workout-history");
+                let historyDiv = document.getElementById("team05Workout-history");
                 historyDiv.innerHTML = "";
 
                 if (data.length === 0) {

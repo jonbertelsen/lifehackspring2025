@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlyPaws - Login</title>
+    <link href="../../public/team04/css/team4styles.css" th:href="@{/team04/css/team4styles.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="page-container">
+    <div class="content-wrap">
+        <div class="login-container">
+            <div class="logo-login-page">
+                <img th:src="@{/team04/images/logo_big.png}" src="/team04/images/cat.jpg" alt="paw image">
+
+            </div>
+            <p class="subtitle">Join OnlyPaws! The dating app where you can fill the need for your filthy addiction to
+                other cute paws.</p>
+
+            <div class="login-box">
+                <p>Log in / create account to see other members</p>
+                <form th:action="@{/login}" method="post">
+                <input type="email" placeholder="email" required>
+                <input type="password" placeholder="password" required>
+                <button class="cta-button">See all the paws</button>
+                    <a href="#" class="forgot">Forgot your password?</a>
+
+                </form>
+            </div>
+
+            <div class="image-grid">
+                <img th:src="@{/team04/images/cat.jpg}" src="/team04/images/cat.jpg" alt="paw image">
+                <img th:src="@{/team04/images/dog.jpg}" src="/team04/images/dog.jpg" alt="paw image">
+                <img th:src="@{/team04/images/elefant.jpg}" src="/team04/images/elefant.jpg" alt="paw image">
+                <img th:src="@{/team04/images/hamster.jpg}" src="/team04/images/hamster.jpg" alt="paw image">
+                <img th:src="@{/team04/images/rabbit.jpg}" src="/team04/images/rabbit.jpg" alt="paw image">
+                <img th:src="@{/team04/images/dog.jpg}" src="/team04/images/dog.jpg" alt="paw image">
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="footer">
+        © Team4 OnlyPaws 2025
+    </footer>
+
+</div>
+
+
+</body>
+
+</html>

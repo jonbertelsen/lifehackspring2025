@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<title>Frontpage</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../public/team16/css/index.css" th:href="@{/team16/css/index.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<header>
+    <h1>Water Log</h1>
+</header>
+
+<form class="index.Button" method="post">
+    <div class="input_boxes">
+    <input class="createUsername" type="text" name="username" placeholder="Enter your username"/>
+    <input class="password1" type="password" name="password1" placeholder="Enter your password"/>
+    <input class="password2" type="password" name="password2" placeholder="Enter your password again"/>
+
+        <button type="submit" class="indexButton" th:formaction="@{createuser}">Create team16User</button>
+    <div><p th:text="${message}"></p></div>
+    </div>
+</form>
+
+</body>
+</html>

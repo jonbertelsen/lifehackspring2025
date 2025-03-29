@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--fix variables-->
+    <link href="../../public/team01/css/styles.css" th:href="@{/team01/css/styles.css}"
+          rel="stylesheet"/>
+    <script src="../../public/team01/js/js.js" th:src="@{/team01/js/js.js}"></script>
+    <title>game</title>
+</head>
+<body>
+<header>
+    <div class="flex-box" id="fields">
+
+        <div class="player_block" id="addplayer_field">
+            <p>add new team</p>
+            <button onclick="addPlayer()">+</button>
+        </div>
+    </div>
+</header>
+<div class="game_position">
+    <div class=question_columns>
+        <!--variables may differ-->
+        <div th:each="category : ${category_list}">
+            <h1 class="title" th:text="${category.categoryName}">title</h1>
+            <div class=question_rows>
+                <form method="get" th:each="question : ${category.questions}">
+                    <button type="submit" th:formaction="@{/team01/question/{id}(id=${question.id})} ">
+                        <h1 th:text="${question.points}">0</h1>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <!--placeholder name-->
+    <h1> not jeopardy</h1>
+</footer>
+</body>
+</html>

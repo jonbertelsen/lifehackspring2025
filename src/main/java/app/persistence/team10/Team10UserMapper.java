@@ -28,7 +28,7 @@ public class Team10UserMapper
             {
                 String role = rs.getString("role"); // Retrieve the role from the database
                     int id = rs.getInt("user_id");
-                    // Return a User object with the role
+                    // Return a Team05User object with the role
                     return new Team10User(id, email, password, role);
                 } else {
                     throw new DatabaseException("Error in login. Try again"); // Incorrect password

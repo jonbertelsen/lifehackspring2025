@@ -3,26 +3,9 @@ package app;
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
 
-import app.controllers.Team1Controller;
-import app.controllers.Team2Controller;
-import app.controllers.LifeHackTeam3Controller;
-import app.persistence.LifeHackTeam3SubscriberMapper;
-import app.controllers.Team4Controller;
-import app.controllers.Team05.HomeController;
-import app.controllers.Team05.Team05Controllers;
-import app.controllers.Team6Controller;
-import app.controllers.Team7Controller;
-import app.controllers.LifehackTeam08GameController;
-import app.controllers.LifeHackTeam9Controller;
-import app.controllers.Team10Controller;
-import app.controllers.TeamElevenController;
-import app.controllers.Team12Controller;
-import app.controllers.Team14Controller;
-import app.controllers.lifehackTeam15Controller;
-import app.controllers.lifehack_team_16.Team16Controller;
-import app.controllers.LifeHack_Team_17_Controller;
-import app.controllers.Team21Controller;
-import app.controllers.TeamTeacherController;
+import app.controllers.*;
+import app.controllers.Team08Controller;
+import app.controllers.Team16Controller;
 
 import app.persistence.ConnectionPool;
 
@@ -54,85 +37,59 @@ public class Main {
         TeamTeacherController.routes(app, connectionPool);
       
         // Team01
-        Team1Controller team1Controller = new Team1Controller(connectionPool);
+        Team01Controller team1Controller = new Team01Controller(connectionPool);
         team1Controller.routes(app);
       
         // Team02
-        Team2Controller.routes(app);
-        Team2Controller.setConnectionPool(connectionPool);
+        Team02Controller.routes(app);
+        Team02Controller.setConnectionPool(connectionPool);
 
         // Team03
-        LifeHack_Team_17_Controller.setConnectionPool(connectionPool);
-        LifeHackTeam3Controller.routes(app);
+        Team17Controller.setConnectionPool(connectionPool);
+        Team03Controller.routes(app);
 
         // Team04
         app.get("/team4", ctx -> ctx.render("team4login"));
-        app.post("/login", Team4Controller::handleLogin);
+        app.post("/login", Team04Controller::handleLogin);
       
-      // Team05
-      
-        // Routing
-     
-        app.get("/workoutlogger", ctx -> ctx.render("team05/index05.html"));
-
-        // Create instances of the controllers
-        HomeController homeController = new HomeController(connectionPool);
+        // Team05
         Team05Controllers team05Controllers = new Team05Controllers(connectionPool);
-
-        // Route for at håndtere login og signup
-        app.post("/authenticate", homeController::authenticate);
-
-        // Hvis login er succesfuldt, omdiriger til log.html
-        app.get("team05/log", ctx -> {
-            ctx.render("team05/log.html");  // Sørg for at filen er i den rigtige mappe
-        });
-
-        // Rute for upload.html
-        app.get("/upload", ctx -> {
-            ctx.render("team05/upload.html");  // Sørg for at filen er i den rigtige mappe
-        });
-
-        app.post("/add-workout", ctx -> Team05Controllers.addWorkoutlog(ctx, connectionPool));
-        app.get("/workoutlog", team05Controllers::viewWorkoutlog);
-
-        app.get("/editworkoutlog/{id}", team05Controllers::showEditWorkoutPage);
-        app.post("/editworkoutlog/{id}", team05Controllers::editWorkoutLog);
-
-        app.post("/deleteworkoutlog/{id}", team05Controllers::deleteWorkoutLog);
+        team05Controllers.routes(app);
 
         // Team06
-        Team6Controller.routes(app, connectionPool);
+        Team06Controller.routes(app, connectionPool);
       
         // Team07
-        Team7Controller.add(app, connectionPool);
+        Team07Controller.add(app, connectionPool);
       
          // Team08
-         LifehackTeam08GameController.Routes(app);
+         Team08Controller.Routes(app);
 
         // Team09
-        LifeHackTeam9Controller.addRoutes(app, connectionPool);
+        Team09Controller.addRoutes(app, connectionPool);
       
         // Team10
         Team10Controller.routes(app, connectionPool);
       
         // Team11
         app.get("/team11", ctx ->  ctx.render("team11-index.html"));
-        TeamElevenController.routes(app);
+        Team11Controller.routes(app);
 
         // Team12
         Team12Controller.addRoutes(app, connectionPool);
         
         // Team14
-        Team14Controller.registerRoutes(app);
+        Team14Controller.registerRoutes(app, connectionPool);
       
         // Team15
-        lifehackTeam15Controller.team15Controller.routes(app);
+        Team15Controller.team15Controller.routes(app);
 
         // Team16
-        Team16Controller.routes(app);
+        Team16Controller team16Controller = new Team16Controller(connectionPool);
+        team16Controller.routes(app);
      
         // Team17
-        LifeHack_Team_17_Controller.routes(app);
+        Team17Controller.routes(app);
 
         // Team21
         app.get("/team21", ctx ->  ctx.render("/team21/index.html"));

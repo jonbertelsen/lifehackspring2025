@@ -1,7 +1,6 @@
 package app.persistence.team10;
 
 import app.entities.team10.Team10Exercise;
-import app.entities.team10.Team10TrainingSession;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 

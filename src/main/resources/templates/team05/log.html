@@ -3,30 +3,30 @@
 <title>lifehack</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="/public/team05/css05/styles05.css" th:href="@{/team05/css05/styles05.css}" rel="stylesheet"/>
+<link href="/team05/css/styles05.css" th:href="@{/team05/css/styles05.css}" rel="stylesheet"/>
 </head>
 
 <body>
 
 <div class="container">
-  <h1>Your workout log</h1>
+  <h1>Your team05Workout log</h1>
   <hr class="divider" />
 
   <!-- Ændret knappen til et link -->
   <a href="/upload" class="add-button">Add Workout</a>
 </div>
 
-<div th:if="${#lists.isEmpty(workout)}">
-  <p>Der er ingen workout logs tilgængelige.</p>
+<div th:if="${#lists.isEmpty(team05Workout)}">
+  <p>Der er ingen team05Workout logs tilgængelige.</p>
 </div>
 
-<div th:if="${!#lists.isEmpty(workout)}">
+<div th:if="${!#lists.isEmpty(team05Workout)}">
 
-  <p>Antal workout logs: <span th:text="${workout.size()}"></span></p>
+  <p>Antal team05Workout logs: <span th:text="${team05Workout.size()}"></span></p>
 
-  <div class="workout-container">
-    <th:block th:each="log : ${workout}">
-      <div class="workout-log">
+  <div class="team05Workout-container">
+    <th:block th:each="log : ${team05Workout}">
+      <div class="team05Workout-log">
         <p><strong>Type ID:</strong> <span th:text="${log.type_id}"></span></p>
         <p><strong>Type:</strong> <span th:text="${log.type}"></span></p>
         <p><strong>Varighed:</strong> <span th:text="${log.duration}"></span> minutter</p>

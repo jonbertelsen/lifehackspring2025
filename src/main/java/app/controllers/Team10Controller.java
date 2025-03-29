@@ -1,7 +1,6 @@
 package app.controllers;
 
 import app.entities.team10.Team10Exercise;
-import app.entities.team10.Team10TrainingSession;
 import app.entities.team10.Team10User;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
@@ -42,7 +41,7 @@ public class Team10Controller {
             Integer userId = ctx.sessionAttribute("user_id"); // Hent userId fra sessionen
 
             if (userId == null) {
-                ctx.json(Map.of("message", "User not logged in."));
+                ctx.json(Map.of("message", "Team05User not logged in."));
                 return;
             }
 
@@ -52,7 +51,7 @@ public class Team10Controller {
                 int sessionId = Team10TrainingSessionMapper.getOrCreateSession(userId, connectionPool);
                 Team10TrainingSessionExerciseMapper.addExerciseToSession(sessionId, exerciseId, connectionPool);
 
-                ctx.json(Map.of("message", "Workout startet for session ID: " + sessionId));
+                ctx.json(Map.of("message", "Team05Workout startet for session ID: " + sessionId));
             } catch (SQLException e) {
                 ctx.json(Map.of("message", "Fejl: " + e.getMessage()));
             }
@@ -66,7 +65,7 @@ public class Team10Controller {
         Integer userId = ctx.sessionAttribute("user_id");
 
         if (userId == null) {
-            ctx.status(401).json(Map.of("message", "User not logged in."));
+            ctx.status(401).json(Map.of("message", "Team05User not logged in."));
             return;
         }
 
@@ -138,7 +137,7 @@ private static void startWorkout(Context ctx, ConnectionPool connectionPool) {
         try {
             // Create the new user in the database
             Team10UserMapper.createUser(email, password, connectionPool);
-            ctx.attribute("message", "User created successfully!");
+            ctx.attribute("message", "Team05User created successfully!");
             ctx.redirect("/login"); // Redirect to login page after successful user creation
         } catch (DatabaseException e) {
             // If the email is already in use, display an error message

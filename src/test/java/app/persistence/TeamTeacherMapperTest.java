@@ -1,6 +1,7 @@
 package app.persistence;
 
-import app.entities.TeamTeacherEntitiy;
+import app.entities.teamteacher.TeamTeacherQuote;
+import app.persistence.teamteacher.TeamTeacherMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -116,8 +117,8 @@ class TeamTeacherMapperTest {
     void getPhilosophicalAnswer() {
         String expectedQuote = "Vi er, hvad vi gentagne gange gør. Fortræffelighed er derfor ikke en handling, men en vane.";
         String expectedPhilosopher = "Aristoteles";
-        TeamTeacherEntitiy teamTeacherEntitiy = TeamTeacherMapper.getPhilosophicalAnswer("Hvad er sandhed?", connectionPool);
-        assertEquals(expectedQuote,teamTeacherEntitiy.getQuote() );
+        TeamTeacherQuote teamTeacherQuote = TeamTeacherMapper.getPhilosophicalAnswer("Hvad er sandhed?", connectionPool);
+        assertEquals(expectedQuote, teamTeacherQuote.getQuote() );
         assertEquals(expectedPhilosopher, expectedPhilosopher);
     }
 

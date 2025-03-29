@@ -1,9 +1,9 @@
 package app.controllers;
 
-import app.entities.Team21Conversion;
+import app.entities.team21.Team21Conversion;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
-import app.persistence.Team21ConverterMapper;
+import app.persistence.team21.Team21ConverterMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
