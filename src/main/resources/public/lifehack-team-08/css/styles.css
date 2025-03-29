@@ -1,0 +1,254 @@
+.shopContainer{
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+}
+.shop-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.shop-content p {
+    margin: 0;
+    white-space: nowrap;
+}
+
+.shopsign{
+    position: absolute;
+    width: 15%;
+    max-width: 15%;
+    height: auto;
+    right: 0;
+    top: 10px;
+    margin-right: 200px;
+    margin-top: 50px;
+
+}
+
+.shop-box {
+    position: fixed;
+    width: 15%;
+    max-width: 15%;
+    height: 15%;
+    max-height: 15%;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    top: 50px;
+    right: 0;
+    margin-right: 205px;
+    margin-top: 25px;
+
+
+}
+
+@media (max-width: 768px) {
+    .chicken-box, .shop-box {
+        width: 150px;
+        height: 150px;
+    }
+
+    .shop-window {
+        width: 80%;
+        height: 70%;
+    }
+}
+
+.chicken-box {
+    position: absolute;
+    width: 250px;
+    height: 400px;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    top: 150px;
+    left: 180px;
+    z-index: 1;
+}
+
+.egg-counter {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    display: flex;  /* Align image and text in a row */
+    align-items: center; /* Center them vertically */
+    font-size: 32px; /* Increase the font size */
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun font */
+    font-weight: bold;
+    color: #5a2d0c; /* Make it look more themed */
+}
+
+.egg-label {
+    width: 60px;  /* Adjust the size of the image */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 5px; /* Space between image and number */
+}
+
+
+.shop-window {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; /* Adjust based on your image */
+    height: 600px;
+    background-image: url('../images/openShop.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none; /* Remove border */
+    box-shadow: none; /* Remove shadow if not needed */
+    text-align: center;
+    padding: 50px;
+    z-index: 1000; /* Keep it above other elements */
+}
+
+.shop-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.shop-content p {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.upgrade-info {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.shop-window button {
+    background-color: lightgreen;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+#close-button {
+    position: absolute;
+    bottom: 80px; /* Adjust this to match the scroll image */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px; /* Adjust width based on your image */
+    height: 40px; /* Adjust height based on your image */
+    background-image: url('../images/closeShop.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px white;
+}
+
+
+.chickenImg{
+    position: relative;
+    left: 135px;
+    top: 80px;
+    height: auto;
+    max-width: 300px;
+    transition: transform 0.3s ease;
+}
+
+.egg{
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background-image: url('../images/egg.png');
+    background-size: cover;
+    animation: fall 2s linear forwards;
+}
+
+
+/* Egg fall animation */
+@keyframes fall {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(calc(100vh - 100px));
+    }
+    }
+
+.jump{
+    animation: jump 0.3s ease forwards;
+}
+
+/* Chicken jump animation */
+@keyframes jump {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); / Move up slightly */
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+#saveButton {
+    background-color: #ffbb33;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+#saveButton::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease-in-out;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+}
+
+#saveButton:hover {
+    background-color: #ff8c00;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+#saveButton:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+#saveButton:active {
+    transform: scale(0.98);
+}
+
+#saveButton:focus {
+    outline: none;
+}
