@@ -7,8 +7,7 @@ import java.util.EnumSet;
 
 public class SessionConfig
 {
-    public static SessionHandler sessionConfig()
-    {
+    public static SessionHandler sessionConfig() {
         SessionHandler sessionHandler = new SessionHandler();
         sessionHandler.setUsingCookies(true);
         sessionHandler.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));

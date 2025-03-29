@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<title>lifehack</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/public/team05/css05/styles05.css" th:href="@{/team05/css05/styles05.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Your workout log</h1>
+  <hr class="divider" />
+
+  <!-- Ændret knappen til et link -->
+  <a href="/upload" class="add-button">Add Workout</a>
+</div>
+
+<div th:if="${#lists.isEmpty(workout)}">
+  <p>Der er ingen workout logs tilgængelige.</p>
+</div>
+
+<div th:if="${!#lists.isEmpty(workout)}">
+
+  <p>Antal workout logs: <span th:text="${workout.size()}"></span></p>
+
+  <div class="workout-container">
+    <th:block th:each="log : ${workout}">
+      <div class="workout-log">
+        <p><strong>Type ID:</strong> <span th:text="${log.type_id}"></span></p>
+        <p><strong>Type:</strong> <span th:text="${log.type}"></span></p>
+        <p><strong>Varighed:</strong> <span th:text="${log.duration}"></span> minutter</p>
+        <p><strong>Dato:</strong> <span th:text="${log.date}"></span></p>
+        <p><strong>Ekstra noter:</strong> <span th:text="${log.extraNotes}"></span></p>
+
+        <!-- Knappen, der leder til redigeringssiden -->
+        <a href="#" th:href="@{/editworkoutlog/{id}(id=${log.id})}" class="edit-button">Edit</a>
+
+        <form th:action="@{/deleteworkoutlog/{id}(id=${log.id})}" method="post">
+          <input type="hidden" name="_method" value="DELETE"/>
+          <button type="submit" class="delete-button">Delete</button>
+        </form>
+
+        </a>
+      </div>
+    </th:block>
+  </div>
+
+</div>
+
+</body>
+</html>

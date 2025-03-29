@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HomePage</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/index.css" th:href="@{/css/index.css}" rel="stylesheet"/>
+</head>
+<header>
+    <p class="stayHydrated"> Stay hydrated</p>
+
+    <img class="profile" src="../public/images/profile.png" th:src="@{/images/profile.png}"/>
+
+    <img class="notification" src="../public/images/notification.png" th:src="@{/images/notification.png}" />
+
+</header>
+
+<p class="welcomeWaterLog"> Welcome to your waterlog!</p>
+ <p th:text="${user_id}"></p>
+<body>
+
+<div class="Container">
+
+    <p th:text="${waterMl}"></p>
+
+    <form action="/addWater" method="post">
+
+        <label for="Water">Email</label>
+        <input type="text" id="Water" name="Water" placeholder="Water"/>
+        <button type="submit">Add Water</button>
+
+    </form>
+
+</div>
+
+<div class="variables">
+    <p class="consumed">Consumed: <br> variable_consumed</p>
+
+    <p class="dailyGoal">Daily Goal: <br> variable_dailyGoal</p>
+</div>
+
+<div class="addWater-container">
+    <img src="../public/images/addWater.png" th:src="@{/images/addWater.png}"/>
+    <p>Add Water</p>
+</div>
+<div><p th:text="${waterMl}"></p></div>
+
+<div>
+    <button type="submit" class="indexButton" th:formaction="@{addWater}">add water</button>
+</div>
+
+<img class="smiley" src="../public/images/smiley.png" th:src="@{/images/smiley.png}" width="90px"/>
+
+
+<footer>
+    <p> Keep track!</p>
+</footer>
+</body>
+</html>
