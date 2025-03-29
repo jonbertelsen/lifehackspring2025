@@ -1,0 +1,85 @@
+/* Basis CSS for layout */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Container for at centrere formularen */
+.container {
+    max-width: 600px;
+    margin: 0 auto; /* Centrerer containeren horisontalt */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px; /* Giver plads øverst på siden */
+}
+
+/* Stil for overskriften */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Formularens styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Label styling */
+label {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Input og tekstområde */
+input[type="number"], textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+}
+
+textarea {
+    resize: vertical; /* Tillader at ændre størrelse vertikalt */
+}
+
+/* Button styling */
+button {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #0c0c0c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0e4cdd;
+}
+
+/* Responsiv design for små skærme */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    input[type="number"], textarea {
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+}

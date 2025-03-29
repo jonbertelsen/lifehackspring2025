@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload workout</title>
+    <link href="team05/css05/upload.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="uploadheader">
+    <h1>Log your workout</h1>
+</div>
+<div class="add-workout-form">
+    <form method="post" action="/add-workout">
+        <label for="type_id">Type of workout</label>
+        <select id="type_id" name="type_id">
+            <option value="1">Cardio</option>
+            <option value="2">Interval</option>
+            <option value="3">Strength</option>
+            <option value="4">Pilates</option>
+            <option value="5">Yoga</option>
+            <option value="6">Calisthenics</option>
+            <option value="7">Powerlifting</option>
+            <option value="8">Cycling</option>
+            <option value="9">Walk or Hike</option>
+        </select>
+
+        <label for="date">Date of workout:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="duration">Duration (minutes):</label>
+        <input type="number" id="duration" name="duration" min="1" step="1" required>
+
+        <label for="extra_notes">Extra notes (intensity, location, etc?)</label>
+        <textarea id="extra_notes" name="extra_notes" rows="3"></textarea>
+
+        <button class="button" type="submit">Add workout to my log</button>
+    </form>
+</div>
+</body>
+</html>
