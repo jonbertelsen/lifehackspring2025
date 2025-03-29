@@ -15,6 +15,7 @@ import app.controllers.LifeHackTeam9Controller;
 import app.controllers.Team10Controller;
 import app.controllers.Team12Controller;
 import app.controllers.Team14Controller;
+import app.controllers.lifehackTeam15Controller;
 import app.controllers.lifehack_team_16.Team16Controller;
 import app.controllers.LifeHack_Team_17_Controller;
 import app.controllers.Team21Controller;
@@ -69,6 +70,8 @@ public class Main {
         app.get("/workoutlogger", ctx -> ctx.render("team05/index05.html"));
 
 
+
+
         // Create instances of the controllers
         HomeController homeController = new HomeController(connectionPool);
         Team05Controllers team05Controllers = new Team05Controllers(connectionPool);
@@ -114,10 +117,13 @@ public class Main {
         
         // Team14
         Team14Controller.registerRoutes(app);
+      
+        // Team15
+        lifehackTeam15Controller.team15Controller.routes(app);
 
         // Team16
         Team16Controller.routes(app);
-      
+     
         // Team17
         LifeHack_Team_17_Controller.routes(app);
 
