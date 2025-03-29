@@ -19,6 +19,7 @@ import app.controllers.LifeHack_Team_17_Controller;
 
 import app.controllers.TeamTeacherController;
 
+import app.controllers.lifehack_team_16.Team16Controller;
 import app.persistence.ConnectionPool;
 
 import io.javalin.Javalin;
@@ -83,6 +84,9 @@ public class Main {
         
         // Team14
         Team14Controller.registerRoutes(app);
+
+        // Team16
+        Team16Controller.routes(app);
       
         // Team17
         LifeHack_Team_17_Controller.routes(app);
