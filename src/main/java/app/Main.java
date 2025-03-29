@@ -17,6 +17,7 @@ import app.controllers.Team12Controller;
 import app.controllers.Team14Controller;
 import app.controllers.lifehack_team_16.Team16Controller;
 import app.controllers.LifeHack_Team_17_Controller;
+import app.controllers.Team21Controller;
 import app.controllers.TeamTeacherController;
 
 import app.persistence.ConnectionPool;
@@ -42,7 +43,6 @@ public class Main {
             config.jetty.modifyServletContextHandler(handler -> handler.setSessionHandler(SessionConfig.sessionConfig()));
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
         }).start(7070);
-
 
         // Frontpage
         app.get("/", ctx ->  ctx.render("index.html"));
@@ -120,6 +120,10 @@ public class Main {
       
         // Team17
         LifeHack_Team_17_Controller.routes(app);
+
+        // Team21
+        app.get("/team21", ctx ->  ctx.render("/team21/index.html"));
+        Team21Controller.routes(app, connectionPool);
 
    }
 }
