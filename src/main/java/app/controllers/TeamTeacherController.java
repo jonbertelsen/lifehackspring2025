@@ -10,11 +10,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class TeamTeacherController {
 
-
-
-
-
-
     public static void routes(Javalin app, ConnectionPool connectionPool) {
         app.get("/philosophers", ctx -> philosophersHome(ctx));
         app.post("/philosophers", ctx -> ask(ctx, connectionPool));
