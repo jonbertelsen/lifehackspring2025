@@ -22,9 +22,7 @@ import app.controllers.TeamTeacherController;
 import app.persistence.ConnectionPool;
 
 import io.javalin.Javalin;
-import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.template.JavalinThymeleaf;
-import java.util.logging.Logger;
 
 public class Main {
     private static final String USER = "postgres";
@@ -95,9 +93,7 @@ public class Main {
         app.post("/editworkoutlog/{id}", team05Controllers::editWorkoutLog);
 
         app.post("/deleteworkoutlog/{id}", team05Controllers::deleteWorkoutLog);
-      
-      
-  
+
         // Team06
         Team6Controller.routes(app, connectionPool);
       
@@ -112,6 +108,7 @@ public class Main {
       
         // Team10
         Team10Controller.routes(app, connectionPool);
+
         // Team12
         Team12Controller.addRoutes(app, connectionPool);
         
