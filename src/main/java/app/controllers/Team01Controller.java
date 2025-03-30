@@ -22,14 +22,9 @@ public class Team01Controller {
 
     // Defines the routes for the application
     public static void routes(Javalin app) {
-        app.get("/lifehack_team_1/showMenu", ctx -> showMenu(ctx));
-        app.get("/lifehack_team_1/quiz", ctx -> showGame(ctx));
-        app.get("/lifehack_team_1/question/{id}", ctx -> showQuestion(ctx));
-    }
-
-    // Renders the index page
-    private static void team1Controller(@NotNull Context ctx) {
-        ctx.render("team-1controller/index.html");
+        app.get("/team01/showMenu", ctx -> showMenu(ctx));
+        app.get("/team01/quiz", ctx -> showGame(ctx));
+        app.get("/team01/question/{id}", ctx -> showQuestion(ctx));
     }
 
 
@@ -116,7 +111,7 @@ public class Team01Controller {
 
     // Displays the menu page
     public static void showMenu(Context ctx) {
-        ctx.render("lifehack_team_1/menu.html");
+        ctx.render("team01/menu.html");
     }
 
     // Displays the game page with a list of categories
@@ -124,7 +119,7 @@ public class Team01Controller {
         try {
             List<Team01Entity.Categories> categories = Team01CategoriesMapper.listOfCategories(connectionPool, 1);
             ctx.attribute("category_list", categories);
-            ctx.render("lifehack_team_1/game.html");
+            ctx.render("team01/game.html");
         } catch (Exception ex) {
             ex.printStackTrace(); // Log the exception
         }
@@ -136,7 +131,7 @@ public class Team01Controller {
             int questionId = Integer.parseInt(ctx.pathParam("id"));
             Team01Entity.Questions questions = Team01QuestionMapper.getQuestionById(connectionPool, questionId);
             ctx.attribute("question", questions);
-            ctx.render("lifehack_team_1/question.html");
+            ctx.render("team01/question.html");
         } catch (Exception ex) {
             ex.printStackTrace(); // Log the exception
         }

@@ -3,13 +3,23 @@
 <title>Newsletters</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+<link href="../public/main-page/css/styles.css" th:href="@{main-page/css/styles.css}" rel="stylesheet"/>
 </head>
 
 <body>
-    <h1>Lifehack spring 2025</h1>
-    <p>We have high expectations</p>
-<p>Det er her at Jon samler alle projekter i weekenden</p>
+<div class="pagewrapper">
+    <header>
+        <img class="logo" th:src="@{/main-page/images/lifehacklogo.png}" alt="logo"/>
+    </header>
+    <h1>Spring 2025</h1>
+    <form class="card-grid" method="get">
+        <div class="card" th:each="site : ${lifehackSites}">
+            <img class="card-image" th:src="@{${site.thumbnail}}"></img>
+            <div class="card-title" th:text="${site.title}"></div>
+            <button class="card-cta" type="submit" th:formaction="${site.url}" th:text="${site.cta}"></button>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

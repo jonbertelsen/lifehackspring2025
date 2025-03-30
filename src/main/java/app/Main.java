@@ -31,7 +31,8 @@ public class Main {
         }).start(7070);
 
         // Frontpage
-        app.get("/", ctx ->  ctx.render("index.html"));
+        MainController mainController = new MainController();
+        mainController.routes(app, connectionPool);
       
         // Philosophers
         TeamTeacherController.routes(app, connectionPool);
@@ -49,8 +50,8 @@ public class Main {
         Team03Controller.routes(app);
 
         // Team04
-        app.get("/team4", ctx -> ctx.render("team4login"));
-        app.post("/login", Team04Controller::handleLogin);
+        app.get("/team4", ctx -> ctx.render("team04/team4login.html"));
+        app.post("team04/login", Team04Controller::handleLogin);
       
         // Team05
         Team05Controllers team05Controllers = new Team05Controllers(connectionPool);
